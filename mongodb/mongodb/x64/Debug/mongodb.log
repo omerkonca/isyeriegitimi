@@ -1,0 +1,2 @@
+﻿  mongodb.cpp
+C:\Users\omerk\Desktop\isyeriegitimi\mongodb\mongodb\mongodb.cpp(3,10): fatal  error C1083: içerme dosyası açılamıyor: 'mongocxx/client.hpp': No such file or directory
