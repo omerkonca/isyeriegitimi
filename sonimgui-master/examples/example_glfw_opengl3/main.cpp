@@ -179,7 +179,8 @@ int main(int, char**)
             ImPlot::SetupAxisScale(ImAxis_X1, ImPlotScale_Time);
             ImPlot::SetupAxisLimits(ImAxis_X1, now, now + 24 * 3600);
             for (int i = 0; i < 10; ++i) {
-                double x[2] = { now, now + 24 * 3600 };S
+                double x[2] = { now, now + 24 * 3600 };
+
                 double y[2] = { 0,i / 9.0 };
                 ImGui::PushID(i);
                 ImPlot::PlotLine("##Line", x, y, 2);
