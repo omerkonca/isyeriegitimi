@@ -144,8 +144,9 @@ int main(int, char**)
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+       // ImPlot::ShowDemoWindow();
 
-        int bar_data[10] = { 0,1,2,3,4,5,6,7,8,9 };
+       /* int bar_data[10] = { 0,1,2,3,4,5,6,7,8,9 };
         float x_data[13] = { 0.1,1.1,2.1,3.2,4.2,5.2,6.6,7.3,8.2,9.2,4.3,5.2,8.5 };
         float y_data[13] = { 0.1,1.1,2.1,3.2,4.2,5.2,6.6,7.3,8.2,9.2,4.3,5.2,8.5 };
 
@@ -158,13 +159,34 @@ int main(int, char**)
 
             ImPlot::EndPlot();
         }
-        ImGui::End();
+        ImGui::End();*/
 
 
 
 
-
-
+        ImGui::ShowFontSelector("Font");
+        ImGui::ShowStyleSelector("ImGui Style");
+        ImPlot::ShowStyleSelector("ImPlot Style");
+        ImPlot::ShowColormapSelector("ImPlot Colormap");
+        ImPlot::ShowInputMapSelector("Input Map");
+        ImGui::Separator();
+        ImGui::Checkbox("Use Local Time", &ImPlot::GetStyle().UseLocalTime);
+        ImGui::Checkbox("Use ISO 8601", &ImPlot::GetStyle().UseISO8601);
+        ImGui::Checkbox("Use 24 Hour Clock", &ImPlot::GetStyle().Use24HourClock);
+        ImGui::Separator();
+        if (ImPlot::BeginPlot("Preview")) {
+            static double now = (double)time(0);
+            ImPlot::SetupAxisScale(ImAxis_X1, ImPlotScale_Time);
+            ImPlot::SetupAxisLimits(ImAxis_X1, now, now + 24 * 3600);
+            for (int i = 0; i < 10; ++i) {
+                double x[2] = { now, now + 24 * 3600 };S
+                double y[2] = { 0,i / 9.0 };
+                ImGui::PushID(i);
+                ImPlot::PlotLine("##Line", x, y, 2);
+                ImGui::PopID();
+            }
+            ImPlot::EndPlot();
+        }
 
         
 
