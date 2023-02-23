@@ -284,25 +284,7 @@ void Demo_Config() {
 
 //-----------------------------------------------------------------------------
 
-void Demo_LinePlots() {
-    static float xs1[1001], ys1[1001];
-    for (int i = 0; i < 1001; ++i) {
-        xs1[i] = i * 0.001f;
-        ys1[i] = 0.5f + 0.5f * sinf(50 * (xs1[i] + (float)ImGui::GetTime() / 10));
-    }
-    static double xs2[20], ys2[20];
-    for (int i = 0; i < 20; ++i) {
-        xs2[i] = i * 1/19.0f;
-        ys2[i] = xs2[i] * xs2[i];
-    }
-    if (ImPlot::BeginPlot("Line Plots")) {
-        ImPlot::SetupAxes("x","y");
-        ImPlot::PlotLine("f(x)", xs1, ys1, 1001);
-        ImPlot::SetNextMarkerStyle(ImPlotMarker_Circle);
-        ImPlot::PlotLine("g(x)", xs2, ys2, 20,ImPlotLineFlags_Segments);
-        ImPlot::EndPlot();
-    }
-}
+
 
 //-----------------------------------------------------------------------------
 
@@ -401,13 +383,14 @@ void Demo_ScatterPlots() {
         ys2[i] = 0.75f + 0.2f * ((float)rand() / (float)RAND_MAX);
     }
 
-    if (ImPlot::BeginPlot("Scatter Plot")) {
+    if (ImPlot::BeginPlot("Scatter Plots")) {
         ImPlot::PlotScatter("Data 1", xs1, ys1, 100);
         ImPlot::PushStyleVar(ImPlotStyleVar_FillAlpha, 0.25f);
         ImPlot::SetNextMarkerStyle(ImPlotMarker_Square, 6, ImPlot::GetColormapColor(1), IMPLOT_AUTO, ImPlot::GetColormapColor(1));
         ImPlot::PlotScatter("Data 2", xs2, ys2, 50);
         ImPlot::PopStyleVar();
         ImPlot::EndPlot();
+    
     }
 }
 
@@ -855,23 +838,21 @@ void Demo_DigitalPlots() {
 //-----------------------------------------------------------------------------
 
 void Demo_Images() {
-    ImGui::BulletText("Below we are displaying the font texture, which is the only texture we have\naccess to in this demo.");
-    ImGui::BulletText("Use the 'ImTextureID' type as storage to pass pointers or identifiers to your\nown texture data.");
-    ImGui::BulletText("See ImGui Wiki page 'Image Loading and Displaying Examples'.");
-    static ImVec2 bmin(0,0);
-    static ImVec2 bmax(1,1);
-    static ImVec2 uv0(0,0);
-    static ImVec2 uv1(1,1);
-    static ImVec4 tint(1,1,1,1);
-    ImGui::SliderFloat2("Min", &bmin.x, -2, 2, "%.1f");
-    ImGui::SliderFloat2("Max", &bmax.x, -2, 2, "%.1f");
-    ImGui::SliderFloat2("UV0", &uv0.x, -2, 2, "%.1f");
-    ImGui::SliderFloat2("UV1", &uv1.x, -2, 2, "%.1f");
-    ImGui::ColorEdit4("Tint",&tint.x);
-    if (ImPlot::BeginPlot("##image")) {
-        ImPlot::PlotImage("my image",ImGui::GetIO().Fonts->TexID, bmin, bmax, uv0, uv1, tint);
+    int bar_data[10] = { 0,1,2,3,4,5,6,7,8,9 };
+    float x_data[13] = { 0.1,1.1,2.1,3.2,4.2,5.2,6.6,7.3,8.2,9.2,4.3,5.2,8.5 };
+    float y_data[13] = { 0.1,1.1,2.1,3.2,4.2,5.2,6.6,7.3,8.2,9.2,4.3,5.2,8.5 };
+
+
+    ImGui::Begin("MYplot");
+    if (ImPlot::BeginPlot("my plot"))
+    {
+        ImPlot::PlotBars("my bar plot", bar_data, 10);
+        ImPlot::PlotLine("my line plot", x_data, y_data, 13);
+
         ImPlot::EndPlot();
     }
+    ImGui::End();
+
 }
 
 //-----------------------------------------------------------------------------
@@ -914,6 +895,12 @@ void Demo_RealtimePlots() {
         ImPlot::EndPlot();
     }
 }
+
+//--------------------------------------------------------------------------
+
+
+
+
 
 //-----------------------------------------------------------------------------
 
@@ -2001,6 +1988,29 @@ void Demo_CustomStyles() {
     }
     ImPlot::GetStyle() = backup;
     ImPlot::PopColormap();
+}
+
+
+
+
+void Demo_LinePlots() {
+    static float xs1[1001], ys1[1001];
+    for (int i = 0; i < 1001; ++i) {
+        xs1[i] = i * 0.001f;
+        ys1[i] = 0.5f + 0.5f * sinf(50 * (xs1[i] + (float)ImGui::GetTime() / 10));
+    }
+    static double xs2[20], ys2[20];
+    for (int i = 0; i < 400; ++i) {
+        xs2[i] = i * 1 / 19.0f;
+        ys2[i] = xs2[i] * xs2[i];
+    }
+    if (ImPlot::BeginPlot("Çizgi Grafikleri")) {
+        ImPlot::SetupAxes("x", "y");
+        ImPlot::PlotLine("f(x)", xs1, ys1, 1001);
+        ImPlot::SetNextMarkerStyle(ImPlotMarker_Circle);
+        ImPlot::PlotLine("g(x)", xs2, ys2, 20, ImPlotLineFlags_Segments);
+        ImPlot::EndPlot();
+    }
 }
 
 //-----------------------------------------------------------------------------
