@@ -1,0 +1,15 @@
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\bin\Debug\net6.0\signal_ping.exe
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\bin\Debug\net6.0\signal_ping.deps.json
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\bin\Debug\net6.0\signal_ping.runtimeconfig.json
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\bin\Debug\net6.0\signal_ping.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\bin\Debug\net6.0\signal_ping.pdb
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\obj\Debug\net6.0\signal_ping.csproj.AssemblyReference.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\obj\Debug\net6.0\signal_ping.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\obj\Debug\net6.0\signal_ping.AssemblyInfoInputs.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\obj\Debug\net6.0\signal_ping.AssemblyInfo.cs
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\obj\Debug\net6.0\signal_ping.csproj.CoreCompileInputs.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\obj\Debug\net6.0\signal_ping.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\obj\Debug\net6.0\refint\signal_ping.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\obj\Debug\net6.0\signal_ping.pdb
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\obj\Debug\net6.0\signal_ping.genruntimeconfig.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\signal_ping\signal_ping\obj\Debug\net6.0\ref\signal_ping.dll
