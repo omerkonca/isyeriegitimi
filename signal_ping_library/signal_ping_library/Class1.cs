@@ -63,30 +63,29 @@ namespace signal_ping_library
                     {
                         Wlan.Dot11Ssid ssid = network.dot11Ssid;
                         string networkName = Encoding.ASCII.GetString(ssid.SSID, 0, (int)ssid.SSIDLength);
-                        int signalQuality = (int)network.linkQuality;
-                        Console.WriteLine("Found network with SSID {0} and Signal Quality {1}.", networkName, signalQuality);
+
+                        if (networkName.Equals("ROBUTEL_TM"))
+                        {
+                            int signalQuality = (int)network.linkQuality;
+                            Console.WriteLine("Found network with SSID {0} and Signal Quality {1}.", networkName, signalQuality);
+
+                            // Ping ölçümü
+                            PingReply reply = _ping.Send(_ip);
+                            if (reply.Status == IPStatus.Success)
+                            {
+                                Console.WriteLine("Ping {0} başarılı! RoundTripTime: {1} ms", _ip, reply.RoundtripTime);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Ping {0} başarısız! Status: {1}", _ip, reply.Status);
+                            }
+                            Console.WriteLine("------------------------------------------------------------------------------------\n");
+                            Thread.Sleep(1000);
+                            break; 
+                        }
                     }
                 }
-
-                // Ping ölçümü
-                PingReply reply = _ping.Send(_ip);
-                if (reply.Status == IPStatus.Success)
-                {
-                    Console.WriteLine("Ping {0} başarılı! RoundTripTime: {1} ms", _ip, reply.RoundtripTime);
-                }
-                else
-                {
-                    Console.WriteLine("Ping {0} başarısız! Status: {1}", _ip, reply.Status);
-                }
-
-                Console.WriteLine("------------------------\n");
-                Thread.Sleep(1000);
             }
-        }
-
-        private static string GetStringForSSID(Wlan.Dot11Ssid ssid)
-        {
-            return Encoding.ASCII.GetString(ssid.SSID, 0, (int)ssid.SSIDLength);
         }
     }
 }
