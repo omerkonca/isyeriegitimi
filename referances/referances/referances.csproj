@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="managedwifi" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="signal_ping_library">
       <HintPath>..\..\signal_ping_library\signal_ping_library\bin\Debug\net6.0\signal_ping_library.dll</HintPath>
     </Reference>

@@ -167,7 +167,7 @@ class Program
                 Console.WriteLine("Ping {0} başarısız! Status: {1}", ip, reply.Status);
             }
 
-            Console.WriteLine("------------------------\n");
+            Console.WriteLine("--------------------------------------------------------------------------------------------------------------\n");
             Thread.Sleep(1000);
         }
     }

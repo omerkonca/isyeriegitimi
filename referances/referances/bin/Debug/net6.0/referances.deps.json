@@ -1,0 +1,55 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "referances/1.0.0": {
+        "dependencies": {
+          "managedwifi": "1.1.0",
+          "signal_ping_library": "1.0.0.0"
+        },
+        "runtime": {
+          "referances.dll": {}
+        }
+      },
+      "managedwifi/1.1.0": {
+        "runtime": {
+          "lib/net20/ManagedWifi.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "signal_ping_library/1.0.0.0": {
+        "runtime": {
+          "signal_ping_library.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "referances/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "managedwifi/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VWEzILcuJLOYrO3gqxAyktDxg16oxtkotoE6K51hqFHM3ebmdgH6dmSctUTkUyhE61f9WFJsEtLtR29a7E6BzQ==",
+      "path": "managedwifi/1.1.0",
+      "hashPath": "managedwifi.1.1.0.nupkg.sha512"
+    },
+    "signal_ping_library/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

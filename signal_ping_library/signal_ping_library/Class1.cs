@@ -1,49 +1,34 @@
-﻿using NativeWifi;
+﻿using System;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Threading;
+using NativeWifi;
 
 namespace signal_ping_library
 {
-    public class Class1
+    public class WifiAndPing
     {
-        static bool isRunning = false;
-        static Thread thread;
-        static string ip = "192.168.68.1"; // ping atmak istediğiniz IP adresi
-        static Ping ping = new Ping();
-        static WlanClient client = new WlanClient();
+        private string _ip;
+        private Ping _ping;
+        private WlanClient _client;
+        private Thread _thread;
+        private bool _isRunning;
 
-        static void Main(string[] args)
+        public WifiAndPing(string ip)
         {
-            Console.WriteLine("Komutları görmek için . koy");
-            while (true)
-            {
-                string command = Console.ReadLine();
-                switch (command.ToLower())
-                {
-                    case "start":
-                        Start();
-                        break;
-                    case "stop":
-                        Stop();
-                        break;
-                    case ".":
-                        Console.WriteLine("start - işlemi başlatır");
-                        Console.WriteLine("stop - işlemi durdurur");
-                        Console.WriteLine(". - komut listesini gösterir");
-                        break;
-                    default:
-                        Console.WriteLine("Geçersiz komut");
-                        break;
-                }
-            }
+            _ip = ip;
+            _ping = new Ping();
+            _client = new WlanClient();
+            _isRunning = false;
         }
-        static void Start()
+
+        public void Start()
         {
-            if (!isRunning)
+            if (!_isRunning)
             {
-                isRunning = true;
-                thread = new Thread(Run);
-                thread.Start();
+                _isRunning = true;
+                _thread = new Thread(Run);
+                _thread.Start();
                 Console.WriteLine("İşlem başlatıldı");
             }
             else
@@ -51,12 +36,13 @@ namespace signal_ping_library
                 Console.WriteLine("İşlem zaten başlatılmış");
             }
         }
-        static void Stop()
+
+        public void Stop()
         {
-            if (isRunning)
+            if (_isRunning)
             {
-                isRunning = false;
-                thread.Join();
+                _isRunning = false;
+                _thread.Join();
                 Console.WriteLine("İşlem durduruldu");
             }
             else
@@ -64,21 +50,13 @@ namespace signal_ping_library
                 Console.WriteLine("İşlem zaten durdurulmuş");
             }
         }
-        static void Run()
+
+        private void Run()
         {
-            while (isRunning)
+            while (_isRunning)
             {
                 // Sinyal kalitesi ölçümü
-                //foreach (WlanClient.WlanInterface wlanIface in client.Interfaces)
-                //{
-                //    Wlan.WlanAvailableNetwork[] networks = wlanIface.GetAvailableNetworkList(0);
-                //    foreach (Wlan.WlanAvailableNetwork network in networks)
-                //    {
-                //        Console.WriteLine("Found network with SSID {0} and Siqnal Quality {1}.", GetStringForSSID(network.dot11Ssid), network.wlanSignalQuality);
-                //    }
-                //}
-
-                foreach (WlanClient.WlanInterface wlanIface in client.Interfaces)
+                foreach (WlanClient.WlanInterface wlanIface in _client.Interfaces)
                 {
                     Wlan.WlanBssEntry[] networks = wlanIface.GetNetworkBssList();
                     foreach (Wlan.WlanBssEntry network in networks)
@@ -91,14 +69,14 @@ namespace signal_ping_library
                 }
 
                 // Ping ölçümü
-                PingReply reply = ping.Send(ip);
+                PingReply reply = _ping.Send(_ip);
                 if (reply.Status == IPStatus.Success)
                 {
-                    Console.WriteLine("Ping {0} başarılı! RoundTripTime: {1} ms", ip, reply.RoundtripTime);
+                    Console.WriteLine("Ping {0} başarılı! RoundTripTime: {1} ms", _ip, reply.RoundtripTime);
                 }
                 else
                 {
-                    Console.WriteLine("Ping {0} başarısız! Status: {1}", ip, reply.Status);
+                    Console.WriteLine("Ping {0} başarısız! Status: {1}", _ip, reply.Status);
                 }
 
                 Console.WriteLine("------------------------\n");
@@ -106,9 +84,9 @@ namespace signal_ping_library
             }
         }
 
-        static string GetStringForSSID(Wlan.Dot11Ssid ssid)
+        private static string GetStringForSSID(Wlan.Dot11Ssid ssid)
         {
-            return Encoding.ASCII.GetString(ssid.SSID, 0, (int)ssid.SSIDLength); 
+            return Encoding.ASCII.GetString(ssid.SSID, 0, (int)ssid.SSIDLength);
         }
     }
 }
