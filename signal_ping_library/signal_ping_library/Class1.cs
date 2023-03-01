@@ -108,7 +108,7 @@ namespace signal_ping_library
 
         static string GetStringForSSID(Wlan.Dot11Ssid ssid)
         {
-            return Encoding.ASCII.GetString(ssid.SSID, 0, (int)ssid.SSIDLength);
+            return Encoding.ASCII.GetString(ssid.SSID, 0, (int)ssid.SSIDLength); 
         }
     }
 }
