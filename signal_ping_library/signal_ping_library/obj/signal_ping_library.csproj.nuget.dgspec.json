@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\sinyal_getir\\sinyal_getir\\sinyal_getir.csproj": {}
+    "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\signal_ping_library\\signal_ping_library\\signal_ping_library.csproj": {}
   },
   "projects": {
-    "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\sinyal_getir\\sinyal_getir\\sinyal_getir.csproj": {
+    "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\signal_ping_library\\signal_ping_library\\signal_ping_library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\sinyal_getir\\sinyal_getir\\sinyal_getir.csproj",
-        "projectName": "sinyal_getir",
-        "projectPath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\sinyal_getir\\sinyal_getir\\sinyal_getir.csproj",
+        "projectUniqueName": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\signal_ping_library\\signal_ping_library\\signal_ping_library.csproj",
+        "projectName": "signal_ping_library",
+        "projectPath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\signal_ping_library\\signal_ping_library\\signal_ping_library.csproj",
         "packagesPath": "C:\\Users\\omerk\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\sinyal_getir\\sinyal_getir\\obj\\",
+        "outputPath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\signal_ping_library\\signal_ping_library\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -43,20 +43,6 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "dependencies": {
-            "System.Threading": {
-              "target": "Package",
-              "version": "[4.3.0, )"
-            },
-            "System.Threading.Tasks.Extensions": {
-              "target": "Package",
-              "version": "[4.5.4, )"
-            },
-            "managedwifi": {
-              "target": "Package",
-              "version": "[1.1.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",

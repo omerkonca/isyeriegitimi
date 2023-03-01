@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "signal_ping_library", "signal_ping_library\signal_ping_library.csproj", "{9519B8BE-EB8A-4137-AD02-B4492280EF9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9519B8BE-EB8A-4137-AD02-B4492280EF9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9519B8BE-EB8A-4137-AD02-B4492280EF9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9519B8BE-EB8A-4137-AD02-B4492280EF9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9519B8BE-EB8A-4137-AD02-B4492280EF9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D908A1A-0FF8-4450-A083-7454A1E87FE9}
+	EndGlobalSection
+EndGlobal

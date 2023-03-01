@@ -1,10 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "GPpw++af+p4Kz7LtmCqrnoR2PF9Ykfpxvqui1vL0m0EGewghbi3BESveJKQPUzudPg0l3DWlMW5vZJ3y8Vzptg==",
+  "dgSpecHash": "+DYqu7wEbmBqPbCSpfGLKCllw1Imz77X0e2X8WfE4U6wcjsK90PCd5i+QY+EyUKpPSP87i2ZmTi1E29WLgVOrg==",
   "success": true,
   "projectFilePath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\sinyal_getir\\sinyal_getir\\sinyal_getir.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\omerk\\.nuget\\packages\\managedwifi\\1.1.0\\managedwifi.1.1.0.nupkg.sha512"
+    "C:\\Users\\omerk\\.nuget\\packages\\managedwifi\\1.1.0\\managedwifi.1.1.0.nupkg.sha512",
+    "C:\\Users\\omerk\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\omerk\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\omerk\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\omerk\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
+    "C:\\Users\\omerk\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
+    "C:\\Users\\omerk\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
   ],
   "logs": [
     {
