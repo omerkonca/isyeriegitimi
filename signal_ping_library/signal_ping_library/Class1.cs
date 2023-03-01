@@ -8,27 +8,27 @@ namespace signal_ping_library
 {
     public class WifiAndPing
     {
-        private string _ip;
-        private Ping _ping;
-        private WlanClient _client;
-        private Thread _thread;
-        private bool _isRunning;
+        string ip;
+        Ping ping;
+        WlanClient client;
+        Thread thread;
+        bool isRunning;
 
         public WifiAndPing(string ip)
         {
-            _ip = ip;
-            _ping = new Ping();
-            _client = new WlanClient();
-            _isRunning = false;
+            this.ip = ip;
+            ping = new Ping();
+            client = new WlanClient();
+            isRunning = false;
         }
 
         public void Start()
         {
-            if (!_isRunning)
+            if (!isRunning)
             {
-                _isRunning = true;
-                _thread = new Thread(Run);
-                _thread.Start();
+                isRunning = true;
+                thread = new Thread(Run);
+                thread.Start();
                 Console.WriteLine("İşlem başlatıldı");
             }
             else
@@ -39,10 +39,10 @@ namespace signal_ping_library
 
         public void Stop()
         {
-            if (_isRunning)
+            if (isRunning)
             {
-                _isRunning = false;
-                _thread.Join();
+                isRunning = false;
+                thread.Join();
                 Console.WriteLine("İşlem durduruldu");
             }
             else
@@ -53,10 +53,10 @@ namespace signal_ping_library
 
         private void Run()
         {
-            while (_isRunning)
+            while (isRunning)
             {
                 // Sinyal kalitesi ölçümü
-                foreach (WlanClient.WlanInterface wlanIface in _client.Interfaces)
+                foreach (WlanClient.WlanInterface wlanIface in client.Interfaces)
                 {
                     Wlan.WlanBssEntry[] networks = wlanIface.GetNetworkBssList();
                     foreach (Wlan.WlanBssEntry network in networks)
@@ -70,18 +70,18 @@ namespace signal_ping_library
                             Console.WriteLine("Found network with SSID {0} and Signal Quality {1}.", networkName, signalQuality);
 
                             // Ping ölçümü
-                            PingReply reply = _ping.Send(_ip);
+                            PingReply reply = ping.Send(ip);
                             if (reply.Status == IPStatus.Success)
                             {
-                                Console.WriteLine("Ping {0} başarılı! RoundTripTime: {1} ms", _ip, reply.RoundtripTime);
+                                Console.WriteLine("Ping {0} başarılı! RoundTripTime: {1} ms", ip, reply.RoundtripTime);
                             }
                             else
                             {
-                                Console.WriteLine("Ping {0} başarısız! Status: {1}", _ip, reply.Status);
+                                Console.WriteLine("Ping {0} başarısız! Status: {1}", ip, reply.Status);
                             }
                             Console.WriteLine("------------------------------------------------------------------------------------\n");
                             Thread.Sleep(1000);
-                            break; 
+                            break;
                         }
                     }
                 }
