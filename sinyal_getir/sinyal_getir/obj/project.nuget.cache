@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "GPpw++af+p4Kz7LtmCqrnoR2PF9Ykfpxvqui1vL0m0EGewghbi3BESveJKQPUzudPg0l3DWlMW5vZJ3y8Vzptg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\sinyal_getir\\sinyal_getir\\sinyal_getir.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\omerk\\.nuget\\packages\\managedwifi\\1.1.0\\managedwifi.1.1.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "'managedwifi 1.1.0' paketi, proje hedef çerçevesi 'net6.0' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
+      "libraryId": "managedwifi",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
+}
