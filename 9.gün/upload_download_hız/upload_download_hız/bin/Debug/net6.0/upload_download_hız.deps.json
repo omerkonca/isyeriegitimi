@@ -8,14 +8,105 @@
     ".NETCoreApp,Version=v6.0": {
       "upload_download_hız/1.0.0": {
         "dependencies": {
+          "GSF.TimeSeries": "2.4.28",
           "System.Threading.Timer": "4.3.0"
         },
         "runtime": {
           "upload_download_hız.dll": {}
         }
       },
+      "Antlr/3.5.0.2": {
+        "runtime": {
+          "lib/Antlr3.Runtime.dll": {
+            "assemblyVersion": "3.5.0.2",
+            "fileVersion": "3.5.0.2"
+          }
+        }
+      },
+      "ExpressionEvaluator/2.0.4": {
+        "dependencies": {
+          "Antlr": "3.5.0.2"
+        },
+        "runtime": {
+          "lib/net40/ExpressionEvaluator.dll": {
+            "assemblyVersion": "2.0.4.0",
+            "fileVersion": "2.0.4.0"
+          }
+        }
+      },
+      "GSF.Communication/2.4.28": {
+        "dependencies": {
+          "GSF.Core": "2.4.28"
+        },
+        "runtime": {
+          "lib/net46/GSF.Communication.dll": {
+            "assemblyVersion": "2.4.28.0",
+            "fileVersion": "2.4.28.0"
+          }
+        }
+      },
+      "GSF.Core/2.4.28": {
+        "dependencies": {
+          "ExpressionEvaluator": "2.0.4"
+        },
+        "runtime": {
+          "lib/net46/GSF.Core.dll": {
+            "assemblyVersion": "2.4.28.0",
+            "fileVersion": "2.4.28.0"
+          }
+        }
+      },
+      "GSF.Security/2.4.28": {
+        "dependencies": {
+          "ExpressionEvaluator": "2.0.4",
+          "GSF.Core": "2.4.28",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/net46/GSF.Security.dll": {
+            "assemblyVersion": "2.4.28.0",
+            "fileVersion": "2.4.28.0"
+          }
+        }
+      },
+      "GSF.ServiceProcess/2.4.28": {
+        "dependencies": {
+          "GSF.Communication": "2.4.28",
+          "GSF.Core": "2.4.28",
+          "GSF.Security": "2.4.28"
+        },
+        "runtime": {
+          "lib/net46/GSF.ServiceProcess.dll": {
+            "assemblyVersion": "2.4.28.0",
+            "fileVersion": "2.4.28.0"
+          }
+        }
+      },
+      "GSF.TimeSeries/2.4.28": {
+        "dependencies": {
+          "ExpressionEvaluator": "2.0.4",
+          "GSF.Communication": "2.4.28",
+          "GSF.Core": "2.4.28",
+          "GSF.Security": "2.4.28",
+          "GSF.ServiceProcess": "2.4.28"
+        },
+        "runtime": {
+          "lib/net46/GSF.TimeSeries.dll": {
+            "assemblyVersion": "2.4.28.0",
+            "fileVersion": "2.4.28.0"
+          }
+        }
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
+      "Newtonsoft.Json/13.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
+          }
+        }
+      },
       "System.Runtime/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -37,6 +128,55 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Antlr/3.5.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CSfrVuDVMx3OrQhT84zed+tOdM1clljyRLWWlQM22fJsmG836RVDGQlE6tzysXh8X8p9UjkHbLr6OqEIVhtdEA==",
+      "path": "antlr/3.5.0.2",
+      "hashPath": "antlr.3.5.0.2.nupkg.sha512"
+    },
+    "ExpressionEvaluator/2.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-w8RqBrK5YkjgXmLE0M6PKcULee3/fVaz+aIt1lOEhyyb0PYIqGvbyovmZ9Mp5WCFV6EnUjxxkoEc4MS6wlyy5Q==",
+      "path": "expressionevaluator/2.0.4",
+      "hashPath": "expressionevaluator.2.0.4.nupkg.sha512"
+    },
+    "GSF.Communication/2.4.28": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xaaRNIVkWzlmdfQ1DAODhRK1dcZpFe6iBgEimlPHy4HH7RLq8D66HxmVKLKb57jn5Qt+xzVoWQ6FFrCDOowjVw==",
+      "path": "gsf.communication/2.4.28",
+      "hashPath": "gsf.communication.2.4.28.nupkg.sha512"
+    },
+    "GSF.Core/2.4.28": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-K0hUUmf+uIPQPf63ULss+6/7Arwxz0SJAb77146gcOgbPV220R2Cix3UPX/FNIedXpc9Y6LAxJfCCbv+bcGWSw==",
+      "path": "gsf.core/2.4.28",
+      "hashPath": "gsf.core.2.4.28.nupkg.sha512"
+    },
+    "GSF.Security/2.4.28": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-P0xXoIkVLQYayz/LUSiUtD1YORMoC8aRXih4sr6nRKm3KNFWT99Ah/0avQ5jZUmZ3ugqd14wQqgy1/1tA3oxog==",
+      "path": "gsf.security/2.4.28",
+      "hashPath": "gsf.security.2.4.28.nupkg.sha512"
+    },
+    "GSF.ServiceProcess/2.4.28": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vmukeMk1wxI96iEWY+cqugPdXj7faj4jMJfW0I8uyi6PILd2F5FNiL9vvBOzX2l1ggakFtdVCxqwjd+G99VnQw==",
+      "path": "gsf.serviceprocess/2.4.28",
+      "hashPath": "gsf.serviceprocess.2.4.28.nupkg.sha512"
+    },
+    "GSF.TimeSeries/2.4.28": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-GDyuYv01QWBu/74t3BaPuLAvBsch+p8ecQxPWsV347vyaBxfgLYfPVIVc8XinZR6M0InzMIsDPvb3QBGLRtyfA==",
+      "path": "gsf.timeseries/2.4.28",
+      "hashPath": "gsf.timeseries.2.4.28.nupkg.sha512"
+    },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",
       "serviceable": true,
@@ -50,6 +190,13 @@
       "sha512": "sha512-aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "path": "newtonsoft.json/13.0.1",
+      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
     },
     "System.Runtime/4.3.0": {
       "type": "package",

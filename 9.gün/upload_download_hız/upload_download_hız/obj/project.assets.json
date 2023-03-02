@@ -2,6 +2,115 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "Antlr/3.5.0.2": {
+        "type": "package",
+        "compile": {
+          "lib/Antlr3.Runtime.dll": {}
+        },
+        "runtime": {
+          "lib/Antlr3.Runtime.dll": {}
+        }
+      },
+      "ExpressionEvaluator/2.0.4": {
+        "type": "package",
+        "dependencies": {
+          "Antlr": "3.5.0.2"
+        },
+        "compile": {
+          "lib/net40/ExpressionEvaluator.dll": {}
+        },
+        "runtime": {
+          "lib/net40/ExpressionEvaluator.dll": {}
+        }
+      },
+      "GSF.Communication/2.4.28": {
+        "type": "package",
+        "dependencies": {
+          "GSF.Core": "2.4.28"
+        },
+        "compile": {
+          "lib/net46/GSF.Communication.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net46/GSF.Communication.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "GSF.Core/2.4.28": {
+        "type": "package",
+        "dependencies": {
+          "ExpressionEvaluator": "2.0.4"
+        },
+        "compile": {
+          "lib/net46/GSF.Core.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net46/GSF.Core.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "GSF.Security/2.4.28": {
+        "type": "package",
+        "dependencies": {
+          "ExpressionEvaluator": "2.0.4",
+          "GSF.Core": "2.4.28",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "lib/net46/GSF.Security.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net46/GSF.Security.dll": {
+            "related": ".XML"
+          }
+        }
+      },
+      "GSF.ServiceProcess/2.4.28": {
+        "type": "package",
+        "dependencies": {
+          "GSF.Communication": "2.4.28",
+          "GSF.Core": "2.4.28",
+          "GSF.Security": "2.4.28"
+        },
+        "compile": {
+          "lib/net46/GSF.ServiceProcess.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net46/GSF.ServiceProcess.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "GSF.TimeSeries/2.4.28": {
+        "type": "package",
+        "dependencies": {
+          "ExpressionEvaluator": "2.0.4",
+          "GSF.Communication": "2.4.28",
+          "GSF.Core": "2.4.28",
+          "GSF.Security": "2.4.28",
+          "GSF.ServiceProcess": "2.4.28"
+        },
+        "compile": {
+          "lib/net46/GSF.TimeSeries.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/net46/GSF.TimeSeries.dll": {
+            "related": ".XML"
+          }
+        }
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
@@ -18,6 +127,19 @@
         },
         "runtime": {
           "lib/netstandard1.0/_._": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime/4.3.0": {
@@ -48,6 +170,123 @@
     }
   },
   "libraries": {
+    "Antlr/3.5.0.2": {
+      "sha512": "CSfrVuDVMx3OrQhT84zed+tOdM1clljyRLWWlQM22fJsmG836RVDGQlE6tzysXh8X8p9UjkHbLr6OqEIVhtdEA==",
+      "type": "package",
+      "path": "antlr/3.5.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "antlr.3.5.0.2.nupkg.sha512",
+        "antlr.nuspec",
+        "lib/Antlr3.Runtime.dll",
+        "lib/Antlr3.Runtime.pdb"
+      ]
+    },
+    "ExpressionEvaluator/2.0.4": {
+      "sha512": "w8RqBrK5YkjgXmLE0M6PKcULee3/fVaz+aIt1lOEhyyb0PYIqGvbyovmZ9Mp5WCFV6EnUjxxkoEc4MS6wlyy5Q==",
+      "type": "package",
+      "path": "expressionevaluator/2.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "expressionevaluator.2.0.4.nupkg.sha512",
+        "expressionevaluator.nuspec",
+        "lib/net40/ExpressionEvaluator.dll"
+      ]
+    },
+    "GSF.Communication/2.4.28": {
+      "sha512": "xaaRNIVkWzlmdfQ1DAODhRK1dcZpFe6iBgEimlPHy4HH7RLq8D66HxmVKLKb57jn5Qt+xzVoWQ6FFrCDOowjVw==",
+      "type": "package",
+      "path": "gsf.communication/2.4.28",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gsf.communication.2.4.28.nupkg.sha512",
+        "gsf.communication.nuspec",
+        "images/GSF64x64.png",
+        "lib/net46/GSF.Communication.XML",
+        "lib/net46/GSF.Communication.dll"
+      ]
+    },
+    "GSF.Core/2.4.28": {
+      "sha512": "K0hUUmf+uIPQPf63ULss+6/7Arwxz0SJAb77146gcOgbPV220R2Cix3UPX/FNIedXpc9Y6LAxJfCCbv+bcGWSw==",
+      "type": "package",
+      "path": "gsf.core/2.4.28",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gsf.core.2.4.28.nupkg.sha512",
+        "gsf.core.nuspec",
+        "images/GSF64x64.png",
+        "lib/net46/GSF.Core.XML",
+        "lib/net46/GSF.Core.dll"
+      ]
+    },
+    "GSF.Security/2.4.28": {
+      "sha512": "P0xXoIkVLQYayz/LUSiUtD1YORMoC8aRXih4sr6nRKm3KNFWT99Ah/0avQ5jZUmZ3ugqd14wQqgy1/1tA3oxog==",
+      "type": "package",
+      "path": "gsf.security/2.4.28",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gsf.security.2.4.28.nupkg.sha512",
+        "gsf.security.nuspec",
+        "images/GSF64x64.png",
+        "lib/net46/GSF.Security.XML",
+        "lib/net46/GSF.Security.dll"
+      ]
+    },
+    "GSF.ServiceProcess/2.4.28": {
+      "sha512": "vmukeMk1wxI96iEWY+cqugPdXj7faj4jMJfW0I8uyi6PILd2F5FNiL9vvBOzX2l1ggakFtdVCxqwjd+G99VnQw==",
+      "type": "package",
+      "path": "gsf.serviceprocess/2.4.28",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gsf.serviceprocess.2.4.28.nupkg.sha512",
+        "gsf.serviceprocess.nuspec",
+        "images/GSF64x64.png",
+        "lib/net46/GSF.ServiceProcess.dll",
+        "lib/net46/GSF.ServiceProcess.xml"
+      ]
+    },
+    "GSF.TimeSeries/2.4.28": {
+      "sha512": "GDyuYv01QWBu/74t3BaPuLAvBsch+p8ecQxPWsV347vyaBxfgLYfPVIVc8XinZR6M0InzMIsDPvb3QBGLRtyfA==",
+      "type": "package",
+      "path": "gsf.timeseries/2.4.28",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "gsf.timeseries.2.4.28.nupkg.sha512",
+        "gsf.timeseries.nuspec",
+        "images/GSF64x64.png",
+        "lib/net46/GSF.TimeSeries.XML",
+        "lib/net46/GSF.TimeSeries.dll",
+        "tools/dbscripts/MySQL/AuditLog.sql",
+        "tools/dbscripts/MySQL/GSFSchema.sql",
+        "tools/dbscripts/MySQL/InitialDataSet.sql",
+        "tools/dbscripts/MySQL/SampleDataSet.sql",
+        "tools/dbscripts/Oracle/AuditLog.sql",
+        "tools/dbscripts/Oracle/GSFSchema.sql",
+        "tools/dbscripts/Oracle/InitialDataSet.sql",
+        "tools/dbscripts/Oracle/SampleDataSet.sql",
+        "tools/dbscripts/PostgreSQL/GSFSchema.sql",
+        "tools/dbscripts/PostgreSQL/InitialDataSet.sql",
+        "tools/dbscripts/PostgreSQL/SampleDataSet.sql",
+        "tools/dbscripts/SQL Server/AuditLog.sql",
+        "tools/dbscripts/SQL Server/GSFSchema.sql",
+        "tools/dbscripts/SQL Server/InitialDataSet.sql",
+        "tools/dbscripts/SQL Server/SampleDataSet.sql",
+        "tools/dbscripts/SQLite/GSFSchema-InitialDataSet.db",
+        "tools/dbscripts/SQLite/GSFSchema-SampleDataSet.db",
+        "tools/dbscripts/SQLite/GSFSchema.db",
+        "tools/dbscripts/SQLite/GSFSchema.sql",
+        "tools/dbscripts/SQLite/InitialDataSet.sql",
+        "tools/dbscripts/SQLite/SampleDataSet.sql"
+      ]
+    },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
@@ -76,6 +315,33 @@
         "microsoft.netcore.targets.1.1.0.nupkg.sha512",
         "microsoft.netcore.targets.nuspec",
         "runtime.json"
+      ]
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
       ]
     },
     "System.Runtime/4.3.0": {
@@ -228,6 +494,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "GSF.TimeSeries >= 2.4.28",
       "System.Threading.Timer >= 4.3.0"
     ]
   },
@@ -275,6 +542,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "GSF.TimeSeries": {
+            "target": "Package",
+            "version": "[2.4.28, )"
+          },
           "System.Threading.Timer": {
             "target": "Package",
             "version": "[4.3.0, )"
@@ -299,5 +570,77 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "'Antlr 3.5.0.2' paketi, proje hedef çerçevesi 'net6.0' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
+      "libraryId": "Antlr",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "'ExpressionEvaluator 2.0.4' paketi, proje hedef çerçevesi 'net6.0' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
+      "libraryId": "ExpressionEvaluator",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "'GSF.Communication 2.4.28' paketi, proje hedef çerçevesi 'net6.0' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
+      "libraryId": "GSF.Communication",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "'GSF.Core 2.4.28' paketi, proje hedef çerçevesi 'net6.0' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
+      "libraryId": "GSF.Core",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "'GSF.Security 2.4.28' paketi, proje hedef çerçevesi 'net6.0' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
+      "libraryId": "GSF.Security",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "'GSF.ServiceProcess 2.4.28' paketi, proje hedef çerçevesi 'net6.0' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
+      "libraryId": "GSF.ServiceProcess",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "'GSF.TimeSeries 2.4.28' paketi, proje hedef çerçevesi 'net6.0' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
+      "libraryId": "GSF.TimeSeries",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

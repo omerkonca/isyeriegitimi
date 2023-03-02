@@ -13,4 +13,7 @@
     <SourceRoot Include="C:\Users\omerk\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgGSF_TimeSeries Condition=" '$(PkgGSF_TimeSeries)' == '' ">C:\Users\omerk\.nuget\packages\gsf.timeseries\2.4.28</PkgGSF_TimeSeries>
+  </PropertyGroup>
 </Project>

@@ -1,0 +1,17 @@
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\bin\Debug\net6.0\upload_download.exe
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\bin\Debug\net6.0\upload_download.deps.json
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\bin\Debug\net6.0\upload_download.runtimeconfig.json
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\bin\Debug\net6.0\upload_download.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\bin\Debug\net6.0\upload_download.pdb
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\obj\Debug\net6.0\upload_download.csproj.AssemblyReference.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\obj\Debug\net6.0\upload_download.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\obj\Debug\net6.0\upload_download.AssemblyInfoInputs.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\obj\Debug\net6.0\upload_download.AssemblyInfo.cs
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\obj\Debug\net6.0\upload_download.csproj.CoreCompileInputs.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\obj\Debug\net6.0\upload_download.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\obj\Debug\net6.0\refint\upload_download.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\obj\Debug\net6.0\upload_download.pdb
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\obj\Debug\net6.0\upload_download.genruntimeconfig.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\obj\Debug\net6.0\ref\upload_download.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\bin\Debug\net6.0\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download\upload_download\obj\Debug\net6.0\upload_download.csproj.CopyComplete

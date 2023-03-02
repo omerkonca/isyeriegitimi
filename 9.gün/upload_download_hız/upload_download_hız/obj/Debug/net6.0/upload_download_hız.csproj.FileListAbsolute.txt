@@ -13,3 +13,12 @@ C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\upload_download_hız.pdb
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\upload_download_hız.genruntimeconfig.cache
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\ref\upload_download_hız.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\bin\Debug\net6.0\Antlr3.Runtime.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\bin\Debug\net6.0\ExpressionEvaluator.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\bin\Debug\net6.0\GSF.Communication.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\bin\Debug\net6.0\GSF.Core.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\bin\Debug\net6.0\GSF.Security.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\bin\Debug\net6.0\GSF.ServiceProcess.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\bin\Debug\net6.0\GSF.TimeSeries.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\upload_download_hız.csproj.CopyComplete

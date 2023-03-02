@@ -1,49 +1,59 @@
-﻿using System;
-using System.Diagnostics;
-using System.Net;
-using System.Net.NetworkInformation;
+﻿using System.Net.NetworkInformation;
 
-public class InternetSpeedTest
+
+class PingStats
 {
-    public static void Main(string[] args)
+    public int Sent { get; set; }
+    public int Received { get; set; }
+    public int Lost { get { return Sent - Received; } }
+    public double SuccessRate { get { return (double)Received / Sent * 100; } }
+    public double AverageRoundtripTime { get { return RoundtripTimes.Count > 0 ? RoundtripTimes.Average() : 0; } }
+    public List<long> RoundtripTimes { get; set; } = new List<long>();
+}
+
+class Program
+{
+    static void Main(string[] args)
     {
-        Ping ping = new Ping();
-        Stopwatch stopwatch = new Stopwatch();
-        string url = "192.168.1.1";
-        int timeout = 120;
+        string ipAddress = "192.168.68.1"; // Ping gönderilecek hedef IP adresi
+        int interval = 1000; // Ping istekleri arasındaki süre (milisaniye cinsinden)
+        int duration = 60000; // Ping istekleri gönderilecek süre (milisaniye cinsinden)
 
-        Console.WriteLine("Testing download speed...");
-        stopwatch.Start();
-        using (var client = new WebClient())
-        {
-            try
-            {
-                client.DownloadString(url);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-        stopwatch.Stop();
-        double downloadSpeed = Math.Round((double)(8 * 1000) / stopwatch.ElapsedMilliseconds, 2);
-        Console.WriteLine($"Download speed: {downloadSpeed} kbps");
+        PingStats stats = new PingStats(); // Ping istatistiklerini tutan nesne
 
-        Console.WriteLine("\nTesting upload speed...");
-        stopwatch.Reset();
-        byte[] data = new byte[1024];
-        new Random().NextBytes(data);
-        stopwatch.Start();
-        try
+        Ping pingSender = new Ping();
+        PingOptions options = new PingOptions();
+        byte[] buffer = new byte[32];
+
+        DateTime startTime = DateTime.Now;
+        while (DateTime.Now - startTime < TimeSpan.FromMilliseconds(duration))
         {
-            ping.Send(url, timeout, data);
+            PingReply reply = pingSender.Send(ipAddress, interval, buffer, options);
+            if (reply.Status == IPStatus.Success)
+            {
+                stats.Received++;
+                stats.RoundtripTimes.Add(reply.RoundtripTime);
+                Console.WriteLine("Ping işlemi başarılı! Gecikme süresi: " + reply.RoundtripTime + " ms");
+            }
+            else
+            {
+                Console.WriteLine("Ping işlemi başarısız: " + reply.Status.ToString());
+            }
+
+            stats.Sent++;
+            Thread.Sleep(interval);
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-        }
-        stopwatch.Stop();
-        double uploadSpeed = Math.Round((double)(8 * data.Length) / (stopwatch.ElapsedMilliseconds * 1000), 2);
-        Console.WriteLine($"Upload speed: {uploadSpeed} kbps");
+
+        Console.WriteLine("Ping istekleri: " + stats.Sent);
+        Console.WriteLine("Başarılı ping istekleri: " + stats.Received);
+        Console.WriteLine("Kaybedilen ping istekleri: " + stats.Lost);
+        Console.WriteLine("Başarı oranı: " + stats.SuccessRate + "%");
+        Console.WriteLine("Ortalama gecikme süresi: " + stats.AverageRoundtripTime + " ms");
+        Console.WriteLine("En düşük gecikme süresi: " + stats.RoundtripTimes.Min() + " ms");
+        Console.WriteLine("En yüksek gecikme süresi: " + stats.RoundtripTimes.Max() + " ms");
+
+        Console.ReadKey();
     }
 }
+
+
