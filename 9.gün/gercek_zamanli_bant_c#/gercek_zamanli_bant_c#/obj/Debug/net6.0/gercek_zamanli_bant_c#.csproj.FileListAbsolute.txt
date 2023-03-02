@@ -1,5 +1,0 @@
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\gercek_zamanli_bant_c#\gercek_zamanli_bant_c#\obj\Debug\net6.0\gercek_zamanli_bant_c#.csproj.AssemblyReference.cache
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\gercek_zamanli_bant_c#\gercek_zamanli_bant_c#\obj\Debug\net6.0\gercek_zamanli_bant_c#.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\gercek_zamanli_bant_c#\gercek_zamanli_bant_c#\obj\Debug\net6.0\gercek_zamanli_bant_c#.AssemblyInfoInputs.cache
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\gercek_zamanli_bant_c#\gercek_zamanli_bant_c#\obj\Debug\net6.0\gercek_zamanli_bant_c#.AssemblyInfo.cs
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\gercek_zamanli_bant_c#\gercek_zamanli_bant_c#\obj\Debug\net6.0\gercek_zamanli_bant_c#.csproj.CoreCompileInputs.cache

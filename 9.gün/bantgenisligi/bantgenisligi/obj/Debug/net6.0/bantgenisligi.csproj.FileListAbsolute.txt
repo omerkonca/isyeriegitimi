@@ -1,0 +1,15 @@
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\bin\Debug\net6.0\bantgenisligi.exe
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\bin\Debug\net6.0\bantgenisligi.deps.json
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\bin\Debug\net6.0\bantgenisligi.runtimeconfig.json
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\bin\Debug\net6.0\bantgenisligi.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\bin\Debug\net6.0\bantgenisligi.pdb
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\obj\Debug\net6.0\bantgenisligi.csproj.AssemblyReference.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\obj\Debug\net6.0\bantgenisligi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\obj\Debug\net6.0\bantgenisligi.AssemblyInfoInputs.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\obj\Debug\net6.0\bantgenisligi.AssemblyInfo.cs
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\obj\Debug\net6.0\bantgenisligi.csproj.CoreCompileInputs.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\obj\Debug\net6.0\bantgenisligi.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\obj\Debug\net6.0\refint\bantgenisligi.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\obj\Debug\net6.0\bantgenisligi.pdb
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\obj\Debug\net6.0\bantgenisligi.genruntimeconfig.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\bantgenisligi\bantgenisligi\obj\Debug\net6.0\ref\bantgenisligi.dll
