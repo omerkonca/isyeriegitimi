@@ -1,31 +1,37 @@
 ﻿using System;
-using System.Net.NetworkInformation;
-using System.Threading;
+using System.Net.Sockets;
 
-class Program
+public static void bantgenisligi(string ipAddress, int port, string message)
 {
-    static void Main(string[] args)
+    try
     {
-        while (true)
-        {
-            long wifiBandwidth = MeasureWifiBandwidth();
-            Console.WriteLine("WiFi bant genişliği: {0} bps", wifiBandwidth);
-            Thread.Sleep(1000); // 1 saniye bekle
-        }
-    }
+        TcpClient client = new TcpClient(ipAddress, port);
 
-    static long MeasureWifiBandwidth()
+        Byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
+
+        NetworkStream stream = client.GetStream();
+
+        stream.Write(data, 0, data.Length);
+
+        Console.WriteLine("Mesaj gönderildi: {0}", message);
+
+        data = new Byte[256];
+
+        String responseData = String.Empty;
+
+        Int32 bytes = stream.Read(data, 0, data.Length);
+        responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+        Console.WriteLine("Sunucudan cevap alındı: {0}", responseData);
+
+        stream.Close();
+        client.Close();
+    }
+    catch (ArgumentNullException e)
     {
-        long bandwidth = 0;
-        NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
-        foreach (NetworkInterface networkInterface in interfaces)
-        {
-            if (networkInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 && networkInterface.OperationalStatus == OperationalStatus.Up)
-            {
-                IPv4InterfaceStatistics statistics = networkInterface.GetIPv4Statistics();
-                bandwidth = networkInterface.Speed;
-            }
-        }
-        return bandwidth;
+        Console.WriteLine("ArgumentNullException: {0}", e);
+    }
+    catch (SocketException e)
+    {
+        Console.WriteLine("SocketException: {0}", e);
     }
 }

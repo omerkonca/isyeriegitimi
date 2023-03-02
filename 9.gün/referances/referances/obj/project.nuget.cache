@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "T/efft1KmRDJvMp7dz0Abjewi9hJgiEcKnaXX5nSPgbP9H4cdEXgWF/VAbrVCcN1MmM5pLSqcLO10Diun+KMTw==",
+  "dgSpecHash": "kL1ep7Rrz8NX8pwwts+BjLNobZ8wsLrKm/DIMO8RWROgNvqJCC5C6GkTEWuoTePU/GaUP4CGLW+DfgFqukp2Tg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\referances\\referances\\referances.csproj",
+  "projectFilePath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\9.gün\\referances\\referances\\referances.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\omerk\\.nuget\\packages\\managedwifi\\1.1.0\\managedwifi.1.1.0.nupkg.sha512"
   ],

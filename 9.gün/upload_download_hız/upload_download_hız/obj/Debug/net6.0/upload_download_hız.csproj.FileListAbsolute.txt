@@ -1,0 +1,15 @@
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\bin\Debug\net6.0\upload_download_hız.exe
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\bin\Debug\net6.0\upload_download_hız.deps.json
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\bin\Debug\net6.0\upload_download_hız.runtimeconfig.json
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\bin\Debug\net6.0\upload_download_hız.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\bin\Debug\net6.0\upload_download_hız.pdb
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\upload_download_hız.csproj.AssemblyReference.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\upload_download_hız.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\upload_download_hız.AssemblyInfoInputs.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\upload_download_hız.AssemblyInfo.cs
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\upload_download_hız.csproj.CoreCompileInputs.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\upload_download_hız.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\refint\upload_download_hız.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\upload_download_hız.pdb
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\upload_download_hız.genruntimeconfig.cache
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\upload_download_hız\upload_download_hız\obj\Debug\net6.0\ref\upload_download_hız.dll

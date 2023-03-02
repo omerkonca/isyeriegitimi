@@ -75,7 +75,31 @@ class Program
     static Ping ping = new Ping();
     static WlanClient client = new WlanClient();
 
-   
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Komutları görmek için . koy");
+        while (true)
+        {
+            string command = Console.ReadLine();
+            switch (command.ToLower())
+            {
+                case "start":
+                    Start();
+                    break;
+                case "stop":
+                    Stop();
+                    break;
+                case ".":
+                    Console.WriteLine("start - işlemi başlatır");
+                    Console.WriteLine("stop - işlemi durdurur");
+                    Console.WriteLine(". - komut listesini gösterir");
+                    break;
+                default:
+                    Console.WriteLine("Geçersiz komut");
+                    break;
+            }
+        }
+    }
 
     static void Start()
     {
@@ -110,31 +134,28 @@ class Program
     {
         while (isRunning)
         {
-           // Sinyal kalitesi ölçümü
-            foreach (WlanClient.WlanInterface wlanIface in client.Interfaces)
-            {
-                Wlan.WlanAvailableNetwork[] networks = wlanIface.GetAvailableNetworkList(0);
-                foreach (Wlan.WlanAvailableNetwork network in networks)
-                {
-                    if (GetStringForSSID(network.dot11Ssid).Equals("ROBUTEL_TM")) { 
-                    Console.WriteLine("Found network with SSID {0} and Siqnal Quality {1}.", GetStringForSSID(network.dot11Ssid), network.wlanSignalQuality);
-                }
-            }
-            }
-
+            // Sinyal kalitesi ölçümü
             //foreach (WlanClient.WlanInterface wlanIface in client.Interfaces)
             //{
-            //    Wlan.WlanBssEntry[] networks = wlanIface.GetNetworkBssList();
-            //    foreach (Wlan.WlanBssEntry network in networks)
+            //    Wlan.WlanAvailableNetwork[] networks = wlanIface.GetAvailableNetworkList(0);
+            //    foreach (Wlan.WlanAvailableNetwork network in networks)
             //    {
-            //        Wlan.Dot11Ssid ssid = network.dot11Ssid;
-            //        string networkName = Encoding.ASCII.GetString(ssid.SSID, 0, (int)ssid.SSIDLength);
-            //        int signalQuality = (int)network.linkQuality;
-            //        if (networkName == "ROBUTEL_TM") { 
-            //        Console.WriteLine("Found network with SSID {0} and Signal Quality {1}.", networkName, signalQuality);
-            //        }
+            //        Console.WriteLine("Found network with SSID {0} and Siqnal Quality {1}.", GetStringForSSID(network.dot11Ssid), network.wlanSignalQuality);
             //    }
             //}
+
+            foreach (WlanClient.WlanInterface wlanIface in client.Interfaces)
+            {
+                Wlan.WlanBssEntry[] networks = wlanIface.GetNetworkBssList();
+                foreach (Wlan.WlanBssEntry network in networks)
+                {
+                    Wlan.Dot11Ssid ssid = network.dot11Ssid;
+                    string networkName = Encoding.ASCII.GetString(ssid.SSID, 0, (int)ssid.SSIDLength);
+                    int signalQuality = (int)network.linkQuality;
+                    Console.WriteLine("Found network with SSID {0} and Signal Quality {1}.", networkName, signalQuality);
+                    break;
+                }
+            }
 
             // Ping ölçümü
             PingReply reply = ping.Send(ip);
@@ -157,4 +178,3 @@ class Program
         return Encoding.ASCII.GetString(ssid.SSID, 0, (int)ssid.SSIDLength);
     }
 }
-

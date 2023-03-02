@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ku7jE2UEArTz6fNXM5Eimxz0dDWW5RYSkAYWGuDiSlGc0QSlV2KEQY/vvoG+hykgWX2a/Ymmzu//Obq59KWNDQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\9.gün\\upload_download_hız\\upload_download_hız\\upload_download_hız.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\omerk\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\omerk\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\omerk\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
+    "C:\\Users\\omerk\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512"
+  ],
+  "logs": []
+}

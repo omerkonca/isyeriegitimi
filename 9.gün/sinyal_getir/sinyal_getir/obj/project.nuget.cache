@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+DYqu7wEbmBqPbCSpfGLKCllw1Imz77X0e2X8WfE4U6wcjsK90PCd5i+QY+EyUKpPSP87i2ZmTi1E29WLgVOrg==",
+  "dgSpecHash": "JcGHtvP3gsoqzcHXawjcEYl2du0og2fv9ixj2TSbxRQ1uaNCPtWDMcK/O0RY1ghH/56HQwexi3D1Haf45keacg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\sinyal_getir\\sinyal_getir\\sinyal_getir.csproj",
+  "projectFilePath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\9.gün\\sinyal_getir\\sinyal_getir\\sinyal_getir.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\omerk\\.nuget\\packages\\managedwifi\\1.1.0\\managedwifi.1.1.0.nupkg.sha512",
     "C:\\Users\\omerk\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
