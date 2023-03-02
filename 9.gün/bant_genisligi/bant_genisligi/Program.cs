@@ -11,7 +11,7 @@ class BandwidthTester
         string url = "https://speed.hetzner.de/1GB.bin";
 
         // İndirme işlemi için kullanılacak WebClient nesnesini yarat
-        WebClient wc = new();
+        WebClient wc = new WebClient();
 
         // İndirme işlemi başlamadan önce geçen süreyi hesaplamak için Stopwatch nesnesi yarat
         Stopwatch sw = new Stopwatch();
