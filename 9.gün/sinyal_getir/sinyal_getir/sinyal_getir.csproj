@@ -9,8 +9,11 @@
 
   <ItemGroup>
     <PackageReference Include="managedwifi" Version="1.1.0" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="7.0.1" />
     <PackageReference Include="System.Threading" Version="4.3.0" />
+    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+    <PackageReference Include="System.Threading.Timer" Version="4.3.0" />
   </ItemGroup>
 
 </Project>

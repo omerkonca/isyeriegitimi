@@ -44,13 +44,25 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "System.Diagnostics.DiagnosticSource": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
             "System.Threading": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Threading.Tasks": {
               "target": "Package",
               "version": "[4.3.0, )"
             },
             "System.Threading.Tasks.Extensions": {
               "target": "Package",
               "version": "[4.5.4, )"
+            },
+            "System.Threading.Timer": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             },
             "managedwifi": {
               "target": "Package",

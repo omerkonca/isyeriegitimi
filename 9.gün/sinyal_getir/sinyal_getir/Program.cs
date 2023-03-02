@@ -60,11 +60,8 @@
 //}
 
 
-
-using System;
 using System.Net.NetworkInformation;
 using System.Text;
-using System.Threading;
 using NativeWifi;
 
 class Program
@@ -172,7 +169,7 @@ class Program
             Thread.Sleep(1000);
         }
     }
-
+    
     static string GetStringForSSID(Wlan.Dot11Ssid ssid)
     {
         return Encoding.ASCII.GetString(ssid.SSID, 0, (int)ssid.SSIDLength);

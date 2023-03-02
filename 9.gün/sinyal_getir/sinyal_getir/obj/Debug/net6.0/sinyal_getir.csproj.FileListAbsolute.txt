@@ -32,3 +32,4 @@ C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\sinyal_getir\sinyal_getir\b
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\sinyal_getir\sinyal_getir\obj\Debug\net6.0\sinyal_getir.csproj.CopyComplete
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\sinyal_getir\sinyal_getir\obj\Debug\net6.0\sinyal_getir.genruntimeconfig.cache
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\sinyal_getir\sinyal_getir\obj\Debug\net6.0\ref\sinyal_getir.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\sinyal_getir\sinyal_getir\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
