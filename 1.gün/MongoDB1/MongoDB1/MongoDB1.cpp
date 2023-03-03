@@ -8,11 +8,11 @@
 
 int main(int, char**) {
 	mongocxx::instance inst{};
-	mongocxx::client conn{ mongocxx::uri{"mongodb://localhost:27017"} };
+	mongocxx::client conn{ mongocxx::uri{"mongodb://<hasan>:<123456>@<user>:<27017>"} };
 
 	bsoncxx::builder::stream::document document{};
 
-	auto collection = conn["deneme"]["names"];
+	auto collection = conn["admin"]["isim"];
 	document << "hello" << "world";
 
 	collection.insert_one(document.view());
@@ -22,3 +22,5 @@ int main(int, char**) {
 		std::cout << bsoncxx::to_json(doc) << std::endl;
 	}
 }
+
+// mongocxx::client conn{mongocxx::uri{"mongodb://<123456>:<123456>@<user>:<27017>"}};
