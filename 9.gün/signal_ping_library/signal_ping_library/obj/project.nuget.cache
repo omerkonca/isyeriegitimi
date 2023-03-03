@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "3Jb48iqRdDUtNdvo4xrnA0wQX2JQOAw5seRADjOozMTZv3wjPDH6l5WMLFkBgWQZFB1jo0Avz1ZmTT0m+qhBSA==",
+  "dgSpecHash": "U30QBU2xStmkC1gTMllDe8vlqPXhbpHW2CGlcoBOITaNbwc53JCdaom52tX1Mqnjv/eM654FZ/r0TwCT5k8pew==",
   "success": true,
   "projectFilePath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\9.gün\\signal_ping_library\\signal_ping_library\\signal_ping_library.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\omerk\\.nuget\\packages\\managedwifi\\1.1.0\\managedwifi.1.1.0.nupkg.sha512"
+    "C:\\Users\\omerk\\.nuget\\packages\\managedwifi\\1.1.0\\managedwifi.1.1.0.nupkg.sha512",
+    "C:\\Users\\omerk\\.nuget\\packages\\system.diagnostics.eventlog\\7.0.0\\system.diagnostics.eventlog.7.0.0.nupkg.sha512"
   ],
   "logs": [
     {

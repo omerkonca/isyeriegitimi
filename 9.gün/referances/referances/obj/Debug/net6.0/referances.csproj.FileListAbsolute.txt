@@ -36,3 +36,4 @@ C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\referances\referances\obj\D
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\referances\referances\obj\Debug\net6.0\referances.pdb
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\referances\referances\obj\Debug\net6.0\referances.genruntimeconfig.cache
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\referances\referances\obj\Debug\net6.0\ref\referances.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\9.gün\referances\referances\bin\Debug\net6.0\ManagedNativeWifi.dll
