@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3Jb48iqRdDUtNdvo4xrnA0wQX2JQOAw5seRADjOozMTZv3wjPDH6l5WMLFkBgWQZFB1jo0Avz1ZmTT0m+qhBSA==",
+  "dgSpecHash": "rJqwbhyNPxxHakA/notoEdm0RxZPn0pGEmT2CI6krDa1sFyxjx6VPifcKR7sq0aeisDkVCgav4Gi4g8nR8kalg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\9.gün\\signal_ping_library\\signal_ping_library\\signal_ping_library.csproj",
+  "projectFilePath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\10.gün\\signal_ping_library\\signal_ping_library\\signal_ping_library.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\omerk\\.nuget\\packages\\managedwifi\\1.1.0\\managedwifi.1.1.0.nupkg.sha512"
   ],
