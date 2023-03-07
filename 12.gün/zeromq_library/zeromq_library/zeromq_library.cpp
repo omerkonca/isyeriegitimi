@@ -1,18 +1,13 @@
-﻿#include <zmq.hpp>
-#include <iostream>
+﻿#include <iostream>
+#include <sstream>
+#include <string>
 
 int main() {
-    zmq::context_t context(1);
-    zmq::socket_t socket(context, ZMQ_REQ);
-    socket.connect("tcp://localhost:5555");
-
-    zmq::message_t request(5);
-    memcpy(request.data(), "Merhaba", 5);
-    socket.send(request);
-
-    zmq::message_t response;
-    socket.recv(&response);
-    std::cout << "Gelen Yanıt: " << std::string(static_cast<char*>(response.data()), response.size()) << std::endl;
-
+    std::string str = "0,1,2,3,4,5,6";
+    std::istringstream ss(str);
+    std::string deger;
+    while (std::getline(ss, deger, ',')) {
+        std::cout << deger << std::endl;
+    }
     return 0;
 }
