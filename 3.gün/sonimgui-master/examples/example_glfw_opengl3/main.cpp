@@ -164,7 +164,7 @@ int main(int, char**)
 
 
 
-        ImGui::ShowFontSelector("Font");
+       /* ImGui::ShowFontSelector("Font");
         ImGui::ShowStyleSelector("ImGui Style");
         ImPlot::ShowStyleSelector("ImPlot Style");
         ImPlot::ShowColormapSelector("ImPlot Colormap");
@@ -187,8 +187,36 @@ int main(int, char**)
                 ImGui::PopID();
             }
             ImPlot::EndPlot();
-        }
+        }*/
 
+
+
+
+
+        static const int k_circles = 10;
+        static const int k_points_per = 10;
+        static const int k_size = 2 * k_points_per;
+        static double interleaved_data[k_size];
+        for (int p = 0; p < k_points_per; ++p) {
+            for (int c = 0; c < k_circles; ++c) {
+                double r = 0.5;
+                interleaved_data[p * 2 * k_circles + 2 * c + 0] = 0.25 + r * cos((double)p / k_points_per * 3.14);
+                interleaved_data[p * 2 * k_circles + 2 * c + 1] = 0.25 + r * sin((double)p / k_points_per * 3.14);
+            }
+        }
+            static int offset = 0;
+            ImGui::SliderInt("Offset", &offset, -2 * k_points_per, 2 * k_points_per);
+            if (ImPlot::BeginPlot("##strideoffset", ImVec2(-1, 0), ImPlotFlags_Equal)) {
+                ImPlot::PushColormap(ImPlotColormap_Jet);
+                char buff[32];
+                for (int c = 0; c < k_circles; ++c) {
+                    snprintf(buff, sizeof(buff), "Circle %d", c);
+                    ImPlot::PlotLine(buff, &interleaved_data[c * 2 + 0], &interleaved_data[c * 2 + 1], k_points_per, 0, offset, 2 * k_circles * sizeof(double));
+                }
+                ImPlot::EndPlot();
+                ImPlot::PopColormap();
+            }
+            // offset++; uncomment for animation!
         
 
         // Rendering

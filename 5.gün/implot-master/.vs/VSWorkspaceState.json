@@ -1,8 +1,8 @@
 {
   "ExpandedNodes": [
     "",
+    "\\.github",
     "\\.github\\out\\build"
   ],
-  "SelectedNode": "\\implot_items.cpp",
   "PreviewInSolutionExplorer": false
 }
