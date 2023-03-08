@@ -24,10 +24,7 @@
 #ifdef __EMSCRIPTEN__
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
 #endif
-#include <string>
 #include <iostream>
-std::string ip_address;
-
 
 static void glfw_error_callback(int error, const char* description)
 {
@@ -40,8 +37,6 @@ int main(int, char**)
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
         return 1;
-
-
 
     // Decide GL+GLSL versions
 #if defined(IMGUI_IMPL_OPENGL_ES2)
@@ -132,25 +127,18 @@ int main(int, char**)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-   
-        void OpenNewPage(const char* page_name) {
-            std::cout << "Opening page " << page_name << " with IP address: " << ip_address << std::endl;
-            // add logic to open new page here
-        }
-       
-      
-        char ip_buf[13];
-        ImGui::InputText("IP address", ip_buf, sizeof(ip_buf));
-        ip_address = std::string(ip_buf); // char array'inden string'e dönüþtürme
 
-            if (ImGui::Button("Login"))
-            {
-               
-            }
-    
-            
-      
-     
+        // IP adresi saklanacak deðiþken
+        char ipAddress[16] = "";
+
+        // IP adresi giriþi ve "Login" düðmesi
+        ImGui::InputText("IP Adresi", ipAddress, 16);
+        if (ImGui::Button("Login")) {
+            // Login düðmesine týklandýðýnda, saklanan IP adresi ile diðer sayfaya geçin
+            // Örnek olarak, saklanan IP adresini konsola yazdýralým:
+            std::cout << "Girilen IP Adresi: " << ipAddress << std::endl;
+        }
+
         // Rendering
         ImGui::Render();
         int display_w, display_h;
