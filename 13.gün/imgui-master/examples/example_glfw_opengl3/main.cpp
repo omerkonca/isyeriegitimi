@@ -29,6 +29,7 @@
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
 #endif
 #include <span>
+#include <random>
 
 static void glfw_error_callback(int error, const char* description)
 {
@@ -178,12 +179,29 @@ int main(int, char**)
         static ScrollingBuffer sdata1, sdata2;
         static RollingBuffer rdata1, rdata2;
         static float t = 0;
-        t += ImGui::GetIO().DeltaTime;
+        /*t += ImGui::GetIO().DeltaTime;
         sdata1.AddPoint(t, 2355 * 0.0005f);
         sdata2.AddPoint(t, 5555 * 0.0005f);
 
         rdata1.AddPoint(t, 2355 * 0.0005f);
-        rdata2.AddPoint(t, 5555 * 0.0005f);
+        rdata2.AddPoint(t, 5555 * 0.0005f);*/
+
+
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_real_distribution<> dis(2355 * 0.0005, 5555 * 0.0005);
+
+        for (int i = 0; i < 10; ++i) {
+            t += ImGui::GetIO().DeltaTime;
+            sdata1.AddPoint(t, dis(gen));
+            sdata2.AddPoint(t, dis(gen));
+        }
+
+        for (int i = 0; i < 10; ++i) {
+            t += ImGui::GetIO().DeltaTime;
+            rdata1.AddPoint(t, dis(gen));
+            rdata2.AddPoint(t, dis(gen));
+        }
 
         static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
 
