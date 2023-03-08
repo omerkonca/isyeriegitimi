@@ -31,16 +31,7 @@
     <ClCompile Include="..\..\backends\imgui_impl_glfw.cpp">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\backends\imgui_impl_opengl3.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\implot\implot.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\implot\implot_demo.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\implot\implot_items.cpp">
+    <ClCompile Include="..\..\backends\imgui_impl_vulkan.cpp">
       <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -57,19 +48,9 @@
     <ClInclude Include="..\..\backends\imgui_impl_glfw.h">
       <Filter>sources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\backends\imgui_impl_opengl3.h">
+    <ClInclude Include="..\..\backends\imgui_impl_vulkan.h">
       <Filter>sources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\backends\imgui_impl_opengl3_loader.h">
-      <Filter>sources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\implot\implot.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\implot\implot_internal.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\Desktop\isyeriegitimi\zmqq\include\zmq.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.txt" />

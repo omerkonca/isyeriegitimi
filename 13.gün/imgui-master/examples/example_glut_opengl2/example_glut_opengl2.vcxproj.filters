@@ -2,10 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="imgui">
-      <UniqueIdentifier>{20b90ce4-7fcb-4731-b9a0-075f875de82d}</UniqueIdentifier>
+      <UniqueIdentifier>{c336cfe3-f0c4-464c-9ef0-a9e17a7ff222}</UniqueIdentifier>
     </Filter>
     <Filter Include="sources">
-      <UniqueIdentifier>{f18ab499-84e1-499f-8eff-9754361e0e52}</UniqueIdentifier>
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
   </ItemGroup>
@@ -28,19 +28,10 @@
     <ClCompile Include="..\..\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\backends\imgui_impl_glfw.cpp">
+    <ClCompile Include="..\..\backends\imgui_impl_glut.cpp">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\backends\imgui_impl_opengl3.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\implot\implot.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\implot\implot_demo.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\implot\implot_items.cpp">
+    <ClCompile Include="..\..\backends\imgui_impl_opengl2.cpp">
       <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -54,27 +45,17 @@
     <ClInclude Include="..\..\imgui_internal.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\backends\imgui_impl_glfw.h">
+    <ClInclude Include="..\..\backends\imgui_impl_glut.h">
       <Filter>sources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\backends\imgui_impl_opengl3.h">
+    <ClInclude Include="..\..\backends\imgui_impl_opengl2.h">
       <Filter>sources</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\backends\imgui_impl_opengl3_loader.h">
-      <Filter>sources</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\implot\implot.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\implot\implot_internal.h">
-      <Filter>imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\Desktop\isyeriegitimi\zmqq\include\zmq.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.txt" />
     <None Include="..\..\misc\debuggers\imgui.natvis">
-      <Filter>imgui</Filter>
+      <Filter>sources</Filter>
     </None>
   </ItemGroup>
 </Project>

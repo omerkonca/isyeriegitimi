@@ -69,7 +69,6 @@
     <ClInclude Include="..\..\implot\implot_internal.h">
       <Filter>imgui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\..\..\Desktop\isyeriegitimi\zmqq\include\zmq.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.txt" />
