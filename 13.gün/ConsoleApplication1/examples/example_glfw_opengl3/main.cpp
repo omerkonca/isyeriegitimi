@@ -127,16 +127,32 @@ int main(int, char**)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-
         // IP adresi saklanacak deðiþken
-        char ipAddress[16] = "";
+        char ipAddress[32] = " ";
 
         // IP adresi giriþi ve "Login" düðmesi
-        ImGui::InputText("IP Adresi", ipAddress, 16);
+    
+        ImGui::InputText("IP Adresi", ipAddress,32);
         if (ImGui::Button("Login")) {
-            // Login düðmesine týklandýðýnda, saklanan IP adresi ile diðer sayfaya geçin
-            // Örnek olarak, saklanan IP adresini konsola yazdýralým:
+            // Login düðmesine týklandýðýnda, saklanan IP adresi ile diðer sayfaya geçme
+            // Örnek olarak, saklanan IP adresini konsola yazdýrma:
             std::cout << "Girilen IP Adresi: " << ipAddress << std::endl;
+
+            // Yeni sayfayý açýn ve IP adresi bilgisini aktarma
+            ImGui::OpenPopup("Yeni Sayfa");
+        }
+
+        // Yeni sayfa penceresi
+        if (ImGui::BeginPopupModal("Yeni Sayfa")) {
+            ImGui::SetNextWindowSize(ImVec2(300, 300));
+            // Yeni sayfa içeriði ve IP adresi bilgisi
+            ImGui::Text("Girilen IP Adresi: %s", ipAddress); // Girilen IP adresini göstermek için metin kutusu oluþturma
+
+            // Yeni sayfa butonlarý
+            if (ImGui::Button("Tamam")) {
+                ImGui::CloseCurrentPopup(); // Pencereyi kapatýn
+            }
+            ImGui::EndPopup();
         }
 
         // Rendering

@@ -30,7 +30,6 @@
 #endif
 #include <span>
 #include <random>
-#include <iostream>
 
 static void glfw_error_callback(int error, const char* description)
 {
@@ -81,69 +80,7 @@ int main(int, char**)
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
         return 1;
-    // GLFW'nin baþlatýlmasý
-    glfwInit();
 
-    // Pencere oluþturma
-    //GLFWwindow* window = glfwCreateWindow(800, 600, "Login", NULL, NULL);
-  //  glfwMakeContextCurrent(window);
-
-    // ImGUI'nin baþlatýlmasý
-    IMGUI_CHECKVERSION();
-   
-    //ImGuiIO& io = ImGui::GetIO(); (void)io;
-    //ImGui_ImplGlfw_InitForOpenGL(window, true);
-    //ImGui_ImplOpenGL3_Init("#version 330");
-
-    // Pencere döngüsü
-    while (!glfwWindowShouldClose(window))
-    {
-        glfwPollEvents();
-
-    
-
-        // Login sayfasý arayüzü
-        ImGui::SetNextWindowSize(ImVec2(400, 150), ImGuiCond_Always);
-        ImGui::SetNextWindowPos(ImVec2(200, 200), ImGuiCond_Always);
-        ImGui::Begin("Login");
-
-        static char username[128];
-        static char password[128];
-
-        ImGui::InputText("Username", username, 128);
-        ImGui::InputText("Password", password, 128, ImGuiInputTextFlags_Password);
-        if (ImGui::Button("Login"))
-        {
-            // Kullanýcý adý ve þifrenin doðruluðu kontrol edilir
-            if (std::string(username) == "admin" && std::string(password) == "password")
-            {
-                std::cout << "Login successful!" << std::endl;
-                // burada baþka bir sayfaya yönlendirebilirsiniz
-            }
-            else
-            {
-                std::cout << "Incorrect username or password. Please try again." << std::endl;
-            }
-        }
-
-        ImGui::End();
-
-        // ImGUI çizimleri yapýlýr
-        ImGui::Render();
-        glClearColor(0.45f, 0.55f, 0.60f, 1.00f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-        glfwSwapBuffers(window);
-    }
-
-    // ImGUI ve GLFW'nin sonlandýrýlmasý
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-   
-    glfwTerminate();
-
-    return 0;
     
     // Decide GL+GLSL versions
 #if defined(IMGUI_IMPL_OPENGL_ES2)
