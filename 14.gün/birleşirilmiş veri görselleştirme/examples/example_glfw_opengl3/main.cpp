@@ -158,6 +158,9 @@ int main(int, char**)
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
+    // IP adresi saklanacak deðiþken
+    char ipAddress[16] = " ";
+
     // Main loop
 #ifdef __EMSCRIPTEN__
     // For an Emscripten build we are disabling file-system access, so let's not attempt to do a fopen() of the imgui.ini file.
@@ -179,13 +182,14 @@ int main(int, char**)
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-        // IP adresi saklanacak deðiþken
-        char ipAddress[32] = " ";
+      
 
         // IP adresi giriþi ve "Login" düðmesi
 
+     
         ImGui::InputText("IP Adresi", ipAddress, 32);
         if (ImGui::Button("Login")) {
+           
             // Login düðmesine týklandýðýnda, saklanan IP adresi ile diðer sayfaya geçme
             // Örnek olarak, saklanan IP adresini konsola yazdýrma:
             std::cout << "Girilen IP Adresi: " << ipAddress << std::endl;
@@ -195,8 +199,8 @@ int main(int, char**)
         }
 
         // Yeni sayfa penceresi
-        if (ImGui::BeginPopupModal("Yeni Sayfa")) {
-            ImGui::SetNextWindowSize(ImVec2(300, 300));
+        if (ImGui::BeginPopupModal("Yeni Sayfa", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
+            ImGui::SetNextWindowSize(ImVec2(720, 720));
             // Yeni sayfa içeriði ve IP adresi bilgisi
 
             static ScrollingBuffer sdata1, sdata2;
