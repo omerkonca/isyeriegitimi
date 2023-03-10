@@ -262,7 +262,7 @@ int main(int, char**)
         // ----------------------------------------------------------------------------------------------------------
 
          
-        ImGui::SetNextWindowSize(ImVec2(720, 320));
+        ImGui::SetNextWindowSize(ImVec2(420, 320));
         ImGui::Begin("PAGE", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
         ImGui::StyleColorsDark();
         ImGuiStyle& style = ImGui::GetStyle();
@@ -273,9 +273,9 @@ int main(int, char**)
         colors[ImGuiCol_WindowBg] = ImVec4(0.15f, 0.15f, 0.15f, 0.95f);
         colors[ImGuiCol_TitleBg] = ImVec4(0.10f, 0.10f, 0.10f, 0.95f);
         colors[ImGuiCol_TitleBgActive] = ImVec4(0.15f, 0.15f, 0.15f, 0.95f);
-        colors[ImGuiCol_Button] = ImVec4(0.10f, 0.10f, 0.10f, 1.00f);
-        colors[ImGuiCol_ButtonHovered] = ImVec4(0.15f, 0.15f, 0.15f, 1.00f);
-        colors[ImGuiCol_ButtonActive] = ImVec4(0.20f, 0.20f, 0.20f, 1.00f);
+        colors[ImGuiCol_Button] = ImVec4(0.67f, 0.40f, 0.40f, 0.60f);
+        colors[ImGuiCol_ButtonHovered] = ImVec4(0.67f, 0.40f, 0.40f, 1.00f);
+        colors[ImGuiCol_ButtonActive] = ImVec4(0.80f, 0.50f, 0.50f, 1.00f);
         colors[ImGuiCol_ScrollbarBg] = ImVec4(0.10f, 0.10f, 0.10f, 1.00f);
         colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.20f, 0.20f, 0.20f, 1.00f);
         colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
@@ -285,7 +285,7 @@ int main(int, char**)
         // IP adresi giriþi ve "Login" düðmesi
         if (ImGui::Button("Login")) {
             // IP adresi doðrulama
-            std::regex ip_regex("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
+            std::regex ip_regex("^\\d{ }\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\d{ }\\$");
             if (!std::regex_match(ipAddress, ip_regex)) {
                 ImGui::OpenPopup("Uyari");
             }
@@ -304,7 +304,7 @@ int main(int, char**)
             }
             ImGui::EndPopup();
         }
-
+        
         // Yeni sayfa penceresi
         if (ImGui::BeginPopupModal("Yeni Sayfa", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
             ImGui::SetNextWindowSize(ImVec2(720, 720));
