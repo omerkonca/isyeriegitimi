@@ -1,0 +1,625 @@
+const MSG_BUTTON_STYLE_ID = 1000;
+
+var LogData;
+var SetLogData;
+
+var _onceGroupPreparing = false;
+var _selectedRow = [false];
+
+var _selectedDataArray = [];
+
+var _typeFilterInfo = true;
+var _typeFilterWarn = true;
+var _typeFilterErr = true;
+var _categoryFilter = [0,1,2,3,4,5,6]
+
+String.prototype.eng = function () {
+    return this.replaceAll('G', 'G')
+        .replaceAll('Ü', 'U')
+        .replaceAll('S', 'S')
+        .replaceAll('I', 'I')
+        .replaceAll('I', 'I')
+        .replaceAll('Ö', 'O')
+        .replaceAll('Ç', 'C')
+        .replaceAll('g', 'g')
+        .replaceAll('ü', 'u')
+        .replaceAll('s', 's')
+        .replaceAll('i', 'i')
+        .replaceAll('ö', 'o')
+        .replaceAll('ç', 'c');
+};
+
+String.prototype.align = function () {
+    var w = 30;
+    var padding = (w - this.length) / 2;
+    var s = this.padStart(padding + this.length, ' ')
+    return s.padEnd(w, ' ')
+};
+
+(async function () {
+
+    await ImGui.default();
+    const canvas = document.getElementById("output");
+    const devicePixelRatio = window.devicePixelRatio || 1;
+    canvas.width = canvas.scrollWidth * devicePixelRatio;
+    canvas.height = canvas.scrollHeight * devicePixelRatio;
+
+    // Events
+    window.addEventListener("resize", () => {
+        const devicePixelRatio = window.devicePixelRatio || 1;
+        canvas.width = canvas.scrollWidth * devicePixelRatio;
+        canvas.height = canvas.scrollHeight * devicePixelRatio;
+
+        onWindowResize();
+    });
+
+    /*document.addEventListener('pointermove', onPointerMove);
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('pointerup', onPointeUp);
+    document.addEventListener('mousewheel', onMousewheel);*/
+
+    // Variables
+    // let raycaster = new THREE.Raycaster();
+    let pointer = new THREE.Vector2();
+
+    var tileColors = [];
+    var cameraTilt = 45;
+    var altitudeMin = 10;
+    var altitudeMax = 2500;
+    var altitude = 1000;
+    var positionOffset = 1000;
+    var gridX = 0;
+    var gridY = 0;
+    var tileCode = 0;
+    var mapWidth = 0;
+    var mapHeight = 0;
+    var gridMap = null;
+
+    let mdPointer = new THREE.Vector2();
+    let muPointer = new THREE.Vector2();
+    var isMouseDown = false;
+
+    const clear_color = new ImGui.ImVec4(0.3, 0.3, 0.3, 1.00);
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas });
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(50, canvas.width / canvas.height, 0.1, 10000);
+    camera.position.set(0, 0, altitude);
+    camera.rotateX(cameraTilt * Math.PI / 180);
+    scene.add(camera);
+
+    const light = new THREE.DirectionalLight(0xffffff, 0.8);
+    light.position.set(0, 0, 350);
+    light.lookAt(new THREE.Vector3(0, 0, 0));
+    scene.add(light);
+
+    //console.log(light);
+    //console.log(scene);
+
+    ImGui.CreateContext();
+    // ImGui_Impl.Init(canvas);
+    //ImGui.StyleColorsDark();
+    ImGui.StyleColorsClassic();
+
+    // Event Functions
+
+    function onWindowResize() {
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    /*
+    function onPointerMove(event) {
+
+        pointer.set((event.clientX / window.innerWidth) * 2 - 1, - (event.clientY / window.innerHeight) * 2 + 1);
+
+        raycaster.setFromCamera(pointer, camera);
+
+        const obj = scene.getObjectByName("MAP");
+
+        if (obj == null || obj == undefined)
+            return;
+
+        const intersects = raycaster.intersectObjects([obj], false);
+
+        if (intersects.length > 0) {
+
+            const intersect = intersects[0];
+            gridX = parseInt(mapWidth / 2 + intersect.point.x);
+            gridY = parseInt(mapHeight / 2 - intersect.point.y);
+
+            if (gridMap != null)
+                tileCode = gridMap[parseInt(mapHeight / 2 + intersect.point.y)][gridX]
+        }
+
+        if (isMouseDown) {
+            muPointer.set(event.clientX, - event.clientY);
+            camera.position.y += (mdPointer.y - muPointer.y) //* 100;
+            camera.position.x += (mdPointer.x - muPointer.x)
+            mdPointer.set(event.clientX, - event.clientY);
+        }
+
+    }
+
+    function onPointerDown(event) {
+        mdPointer.set(event.clientX, - event.clientY);
+        isMouseDown = true;
+    }
+
+    function onPointeUp(event) {
+        muPointer.set(event.clientX, - event.clientY);
+        isMouseDown = false;
+    }
+
+    function onMousewheel(event) {
+        var cmz = camera.position.z;
+
+        cmz += event.deltaY / 2;
+
+        if (cmz < altitudeMin)
+            cmz = altitudeMin
+        else if (cmz > altitudeMax)
+            cmz = altitudeMax;
+
+        camera.position.z = cmz;
+    }*/
+
+    //
+
+    ImGui_Impl.Init(canvas);
+
+    let done = false;
+    window.requestAnimationFrame(_loop);
+    function _loop(time) {
+        ImGui_Impl.NewFrame(time);
+        ImGui.NewFrame();
+
+        //
+        ShowToolBar()
+
+        ShowLogDialog()
+        //
+
+        ImGui.EndFrame();
+
+
+
+        ImGui.Render();
+
+        renderer.setClearColor(new THREE.Color(clear_color.x, clear_color.y, clear_color.z), clear_color.w);
+        renderer.setSize(canvas.width, canvas.height);
+        camera.aspect = canvas.width / canvas.height;
+        camera.updateProjectionMatrix();
+        renderer.render(scene, camera);
+
+        ImGui_Impl.RenderDrawData(ImGui.GetDrawData());
+
+        // TODO: restore WebGL state in ImGui Impl
+        renderer.state.reset();
+
+        window.requestAnimationFrame(done ? _done : _loop);
+    }
+
+    function _done() {
+        ImGui_Impl.Shutdown();
+        ImGui.DestroyContext();
+    }
+
+    function ShowLogDialog() {
+
+        //ImGui.SetNextWindowSize(new ImGui.ImVec2(300, 150), ImGui.Cond.FirstUseEver);
+        //ImGui.SetNextWindowPos(new ImGui.ImVec2(10, 10), ImGui.Cond.FirstUseEver);
+
+        if (LogData == undefined || LogData == null) {
+            return;
+        }
+
+        var llog = JSON.parse(LogData);
+
+        //console.log(llog);
+
+        var value = "";
+        var linenum = 1;
+
+        ImGui.Begin("Test", null, ImGui.ImGuiWindowFlags.HorizontalScrollbar | ImGui.ImGuiWindowFlags.NoCollapse)
+
+        for (var i = 0, n = 0; i < llog.length; i++) {
+
+            for (var j = 0; j < llog[i].length; j++) {
+                if (llog[i][j].Name == "Message") {
+                    value = JSON.parse(llog[i][j].Value);
+
+
+                    if (value != undefined && value != null) {
+
+                        let fcolor;
+                        let isTypeActive = true;
+                        let isCategoryActive = _categoryFilter.includes(value.FlagCategory)
+                        var fc, ft;
+                        switch (value.FlagCategory) {
+                            case 0: {
+                                fc = "WaitingPoint";                          
+                                break;
+                            }
+                            case 1: {
+                                fc = "NewRouteRequest";
+                                break;
+                            }
+                            case 2: {
+                                fc = "PotantialRouteCalculation";
+                                break;
+                            }
+                            case 3: {
+                                fc = "OptimalRouteSelection";
+                                break;
+                            }
+                            case 4: {
+                                fc = "PhysicalConflictControl";
+                                break;
+                            }
+                            case 5: {
+                                fc = "Simplifications";
+                                break;
+                            }
+                            case 6: {
+                                fc = "ResendRouteResponse";
+                                break;
+                            }
+                        }
+
+                        switch (value.FlagType) {
+                            case 0: {
+                                ft = "Info";
+                                fcolor = new ImGui.Vec4(0.0, 1.0, 0.0, 1.0);                             
+                                isTypeActive = _typeFilterInfo;
+                                break;
+                            }
+                            case 1: {
+                                ft = "Warning";
+                                fcolor = new ImGui.Vec4(0.0, 0.0, 1.0, 1.0);  
+                                isTypeActive = _typeFilterWarn;
+                                break;
+                            }
+                            case 2: {
+                                ft = "Error";
+                                fcolor = new ImGui.Vec4(1.0, 0.0, 0.0, 1.0);  
+                                isTypeActive = _typeFilterErr;
+                                break;
+                            }
+                        }
+
+                       
+                        if (value.ParentTick == -1) {
+                            n++;
+                            if (_onceGroupPreparing == false)
+                                _selectedRow.push(false);
+                        }
+
+                        if (isTypeActive == false || isCategoryActive == false) {
+                            continue;
+                        }
+
+                        if (ImGui.Selectable("", function () { return _selectedRow[n]; }, ImGui.SelectableFlags.AllowDoubleClick |  ImGui.SelectableFlags.None, new ImGui.Vec2(0, 24))) {
+                            if (ImGui.IsMouseDoubleClicked(0)) {
+
+                                // Seçili tüm gruplari temizle
+                                var lg = _selectedRow.length
+                                _selectedRow = [];
+                                for (var o = 0; o < lg; o++)
+                                    _selectedRow.push(false);
+
+                                _selectedRow[n] = _selectedRow[n] ? false : true;
+                            }
+                        }
+
+                        // Renk Buttonu
+                        ImGui.SameLine();
+                        let p = ImGui.GetCursorScreenPos();
+                        ImGui.BeginGroup();
+                        let ics = 8
+                        let draw_list = ImGui.GetWindowDrawList();
+                        var lpos = new ImGui.Vec2(p.x - ics / 2, p.y + ics / 2 + 4);
+                        draw_list.AddRectFilled(lpos, new ImGui.Vec2(lpos.x + ics, lpos.y + ics), ImGui.ColorConvertFloat4ToU32(fcolor), 2.0);
+                        ImGui.EndGroup();
+
+
+                        ImGui.SameLine(ics * 2 + 10);
+
+                        var keepPosition = ImGui.GetCursorScreenPos();
+                        keepPosition.y += 5;
+
+                        ImGui.SetCursorScreenPos(keepPosition);
+
+                        ImGui.TextDisabled("[" + linenum.toString().padStart(10, '0') + "]");
+                        linenum++;
+
+                        ImGui.SameLine();
+
+                        ImGui.TextDisabled("[" + n.toString().padStart(6, '0') + "]");
+
+                        ImGui.SameLine();
+
+
+                        if (value.ParentTick == -1) {
+                            ImGui.TextColored(fcolor,"[*]");
+                        }
+                        else {
+                            ImGui.Text("   ");
+                        }
+
+                        ImGui.SameLine();
+                        ImGui.Text("[" + ticksToDateString(value.Tick) + "]");
+                        ImGui.SameLine();
+                        ImGui.Text(fc.align());
+      
+                        // Y ekseninde hizala
+                        ImGui.SameLine();
+                        var keepPosition = ImGui.GetCursorScreenPos();
+                        keepPosition.y -= 3;
+                        ImGui.SetCursorScreenPos(keepPosition);
+
+                        var msg = value.Message.toString().eng().split('&');
+
+                        for (var m = 0; m < msg.length; m++) {
+
+                            // Tekrarsiz bir id olusturuyoruz...
+                            let lmid = (m + 1) * (i + 1) + MSG_BUTTON_STYLE_ID
+
+                            // TODO
+                            if (msg[m].length > 400) {
+
+                                ImGui.SameLine();
+
+                                if (ImGui.TreeNode("C4SIMUNO3")) {
+                                    for (let i = 0; i < 5; i++) {
+                                        ImGui.Text("[R] CP:490_3655 WP:551_3655 WI:39 RP:429-3655 RI:161 f3a1362... ")
+                                    }
+                                    ImGui.TreePop();
+                                }
+
+
+                                continue;
+                            }
+
+                           
+                            ImGui.PushID(lmid);
+                            if (m > 0)
+                                ImGui.SameLine();
+
+                            var selectedItem = _selectedDataArray.filter(s => s.SelectedStr == msg[m]);
+                            let isSelected = false;
+                            if (selectedItem.length > 0) {
+                                isSelected = true;                             
+                            }
+
+                            if (_selectedDataArray.length > 0) {
+                                if (isSelected == false) {
+                                    // Gray
+                                    ImGui.PushStyleColor(ImGui.Col.Button, ImGui.Color.HSV(0, 0, 0.2));
+                                    ImGui.PushStyleColor(ImGui.Col.ButtonHovered, ImGui.Color.HSV(0, 0, 0.5));
+                                    ImGui.PushStyleColor(ImGui.Col.ButtonActive, ImGui.Color.HSV(0, 0, 0.6));
+                                }
+                                else {
+
+                                    let hue = selectedItem[0].ColorIndex  * 0.3;
+                                    ImGui.PushStyleColor(ImGui.Col.Button, ImGui.Color.HSV(hue, 0.6, 0.6));
+                                    ImGui.PushStyleColor(ImGui.Col.ButtonHovered, ImGui.Color.HSV(hue, 0.7, 0.7));
+                                    ImGui.PushStyleColor(ImGui.Col.ButtonActive, ImGui.Color.HSV(hue, 0.8, 0.8));
+                                }
+                            }
+                            else {
+                                let hue = (m + 3) * 0.15;
+                                ImGui.PushStyleColor(ImGui.Col.Button, ImGui.Color.HSV(hue, 0.6, 0.6));
+                                ImGui.PushStyleColor(ImGui.Col.ButtonHovered, ImGui.Color.HSV(hue, 0.7, 0.7));
+                                ImGui.PushStyleColor(ImGui.Col.ButtonActive, ImGui.Color.HSV(hue, 0.8, 0.8));
+                            }
+
+                            ImGui.Button(msg[m].toString());
+                            if (ImGui.BeginPopupContextItem()) {
+
+                                if (isSelected) {
+                                    if (ImGui.MenuItem("Deselect", "", true)) {
+                                        _selectedDataArray = _selectedDataArray.filter(s => s.SelectedStr !== msg[m]);
+                                    }
+                                }
+                                else {
+                                    if (ImGui.MenuItem("Select", "", false)) {
+
+                                        // 1000 adet renk araligi tanimlayalim
+                                        // seçim renk listesinde bulunmayan ilk sirayi yeni seçim rengi olarak ayarlayalim
+                                        var c = 1
+                                        for (c; c < 1000; c++) {
+                                            if (_selectedDataArray.length > 0) {
+                                                if (_selectedDataArray.filter(s => s.ColorIndex === c).length > 0) {
+                                                    continue;
+                                                }
+                                                else {  
+                                                    break;
+                                                }
+                                            }
+                                            else {    
+                                                break;
+                                            }                                                                                 
+                                        }
+
+                                        _selectedDataArray.push({ SelectedStr: msg[m], ColorIndex : c });
+                                    }
+                                }
+
+                                ImGui.EndPopup();
+                            }
+                            ImGui.PopStyleColor(3);
+                            ImGui.PopID();
+            
+                        }
+                    }
+                }
+            }
+
+        }
+        ImGui.End();
+
+        _onceGroupPreparing = true;
+    }
+
+    SetLogData = function (data) {
+        LogData = data;
+        _onceGroupPreparing = false;
+    }
+
+    function ShowToolBar() {
+
+        ImGui.BeginMainMenuBar("ToolBar", null)
+        if (ImGui.BeginMenu("Types")) {
+
+            // Renk Buttonu
+            let p = ImGui.GetCursorScreenPos();
+            ImGui.BeginGroup();
+            let ics = 8
+            let draw_list = ImGui.GetWindowDrawList();
+            var lpos = new ImGui.Vec2(p.x - ics / 2, p.y + ics / 2 );
+            draw_list.AddRectFilled(lpos, new ImGui.Vec2(lpos.x + ics, lpos.y + ics), ImGui.GetColorU32(ImGui.COL32(0, 255, 0, 255)), 2.0);
+            ImGui.EndGroup();
+            ImGui.SameLine(ics * 2 + 5);
+            if (ImGui.MenuItem("Info", "", _typeFilterInfo)) {
+                _typeFilterInfo = !_typeFilterInfo;
+            }
+
+            //
+            p = ImGui.GetCursorScreenPos();
+            ImGui.BeginGroup();            
+            lpos = new ImGui.Vec2(p.x - ics / 2, p.y + ics / 2 );
+            draw_list.AddRectFilled(lpos, new ImGui.Vec2(lpos.x + ics, lpos.y + ics), ImGui.GetColorU32(ImGui.COL32(0, 0, 255, 255)), 2.0);
+            ImGui.EndGroup();
+            ImGui.SameLine(ics * 2 + 5);
+            if (ImGui.MenuItem("Warning", "", _typeFilterWarn)) {
+                _typeFilterWarn = !_typeFilterWarn;
+            }
+
+            //
+            p = ImGui.GetCursorScreenPos();
+            ImGui.BeginGroup();
+            lpos = new ImGui.Vec2(p.x - ics / 2, p.y + ics / 2 );
+            draw_list.AddRectFilled(lpos, new ImGui.Vec2(lpos.x + ics, lpos.y + ics), ImGui.GetColorU32(ImGui.COL32(255, 0, 0, 255)), 2.0);
+            ImGui.EndGroup();
+            ImGui.SameLine(ics * 2 + 5);
+            if (ImGui.MenuItem("Error", "", _typeFilterErr)) {
+                _typeFilterErr = !_typeFilterErr;
+            }
+
+            ImGui.EndMenu();
+        }
+
+        if (ImGui.BeginMenu("Categories")) {
+            if (ImGui.MenuItem("WaitingPoint", "", _categoryFilter.includes(0))) {
+                if (_categoryFilter.includes(0)) {
+                    _categoryFilter.splice(_categoryFilter.indexOf(0), 1);
+                }
+                else {
+                    _categoryFilter.push(0);
+                }
+            }
+
+            if (ImGui.MenuItem("NewRouteRequest", "", _categoryFilter.includes(1))) {
+                if (_categoryFilter.includes(1)) {
+                    _categoryFilter.splice(_categoryFilter.indexOf(1), 1);
+                }
+                else {
+                    _categoryFilter.push(1);
+                }
+            }
+
+            if (ImGui.MenuItem("PotantialRouteCalculation", "", _categoryFilter.includes(2))) {
+                if (_categoryFilter.includes(2)) {
+                    _categoryFilter.splice(_categoryFilter.indexOf(2), 1);
+                }
+                else {
+                    _categoryFilter.push(2);
+                }
+            }
+
+            if (ImGui.MenuItem("OptimalRouteSelection", "", _categoryFilter.includes(3))) {
+                if (_categoryFilter.includes(3)) {
+                    _categoryFilter.splice(_categoryFilter.indexOf(3), 1);
+                }
+                else {
+                    _categoryFilter.push(3);
+                }
+            }
+
+            if (ImGui.MenuItem("PhysicalConflictControl", "", _categoryFilter.includes(4))) {
+                if (_categoryFilter.includes(4)) {
+                    _categoryFilter.splice(_categoryFilter.indexOf(4), 1);
+                }
+                else {
+                    _categoryFilter.push(4);
+                }
+            }
+
+            if (ImGui.MenuItem("Simplifications", "", _categoryFilter.includes(5))) {
+                if (_categoryFilter.includes(5)) {
+                    _categoryFilter.splice(_categoryFilter.indexOf(5), 1);
+                }
+                else {
+                    _categoryFilter.push(5);
+                }
+            }
+
+            if (ImGui.MenuItem("ResendRouteResponse", "", _categoryFilter.includes(6))) {
+                if (_categoryFilter.includes(6)) {
+                    _categoryFilter.splice(_categoryFilter.indexOf(6), 1);
+                }
+                else {
+                    _categoryFilter.push(6);
+                }
+            }
+
+            ImGui.EndMenu();
+        }
+
+        if (ImGui.BeginMenu("Reset Selection", _selectedDataArray.length > 0 ? true : false)) {
+            _selectedDataArray = [];
+            ImGui.EndMenu();
+        }
+
+        if (ImGui.BeginMenu("Reset Group Selection", _selectedRow.includes(true))) {
+            // Seçili tüm gruplari temizle
+            var lg = _selectedRow.length
+            _selectedRow = [];
+            for (var o = 0; o < lg; o++)
+                _selectedRow.push(false);
+            ImGui.EndMenu();
+        }
+
+        ImGui.EndMainMenuBar();
+    }
+
+    var epochTicks = 621355968000000000;
+    var ticksPerMillisecond = 10000; // whoa!
+    var maxDateMilliseconds = 8640000000000000;// via http://ecma-international.org/ecma-262/5.1/#sec-15.9.1.1
+
+    var ticksToDateString = function (ticks) {
+        if (isNaN(ticks)) {
+            //      0001-01-01T00:00:00.000Z
+            return "NANA-NA-NATNA:NA:BA.TMAN";
+        }
+
+        // convert the ticks into something javascript understands
+        var ticksSinceEpoch = ticks - epochTicks;
+        var millisecondsSinceEpoch = ticksSinceEpoch / ticksPerMillisecond;
+
+        if (millisecondsSinceEpoch > maxDateMilliseconds) {
+            //      +035210-09-17T07:18:31.111Z
+            return "+WHOAWH-OA-ISTOO:FA:RA.WAYZ";
+        }
+
+        // output the result in something the human understands
+        var date = new Date(millisecondsSinceEpoch);
+        return date.getDay().toString().padStart(2, '0') + "-" + date.getMonth().toString().padStart(2, '0') + "-" + date.getFullYear() + " " + date.getHours().toString().padStart(2, '0') + ":" + date.getMinutes().toString().padStart(2, '0') + ":" + date.getSeconds().toString().padStart(2, '0') + ":" + date.getMilliseconds().toString().padStart(3, '0')
+    };
+
+
+})();

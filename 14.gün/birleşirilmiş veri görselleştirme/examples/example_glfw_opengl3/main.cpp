@@ -171,7 +171,7 @@ int main(int, char**)
     io.IniFilename = NULL;
     EMSCRIPTEN_MAINLOOP_BEGIN
 #else
-    
+    ImGui::Begin("PAGE");
     while (!glfwWindowShouldClose(window))
 #endif
     {
@@ -293,7 +293,7 @@ int main(int, char**)
             else {
                 // Login düðmesine týklandýðýnda, saklanan IP adresi ile diðer sayfaya geçme
                 std::cout << "Girilen IP Adresi:"<<ipAddress << std::endl;
-                ImGui::End();
+                
                 ImGui::OpenPopup("Yeni Sayfa");
             }
         }
