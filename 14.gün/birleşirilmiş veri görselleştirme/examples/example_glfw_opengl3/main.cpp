@@ -171,15 +171,10 @@ int main(int, char**)
     io.IniFilename = NULL;
     EMSCRIPTEN_MAINLOOP_BEGIN
 #else
-    ImGui::Begin("PAGE");
+    
     while (!glfwWindowShouldClose(window))
 #endif
     {
-        // Poll and handle events (inputs, window resize, etc.)
-        // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
-        // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application, or clear/overwrite your copy of the mouse data.
-        // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application, or clear/overwrite your copy of the keyboard data.
-        // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
         glfwPollEvents();
 
         // Start the Dear ImGui frame
@@ -262,14 +257,13 @@ int main(int, char**)
         //
         // ----------------------------------------------------------------------------------------------------------
 
-         
         ImGui::SetNextWindowSize(ImVec2(420, 320));
         ImGui::Begin("PAGE", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
         ImGui::StyleColorsDark();
         ImGuiStyle& style = ImGui::GetStyle();
         ImVec4* colors = style.Colors;
         style.WindowRounding = 0.9f; // Pencere köþelerinin yuvarlanma miktarý
-       // style.Colors[ImGuiCol_WindowBg] = ImVec4(0.07f, 0.07f, 0.07f, 1.0f); // Pencere arka plan rengi
+        // style.Colors[ImGuiCol_WindowBg] = ImVec4(0.07f, 0.07f, 0.07f, 1.0f); // Pencere arka plan rengi
 
         colors[ImGuiCol_WindowBg] = ImVec4(0.15f, 0.15f, 0.15f, 0.95f);
         colors[ImGuiCol_TitleBg] = ImVec4(0.10f, 0.10f, 0.10f, 0.95f);
@@ -280,8 +274,8 @@ int main(int, char**)
         colors[ImGuiCol_ScrollbarBg] = ImVec4(0.10f, 0.10f, 0.10f, 1.00f);
         colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.20f, 0.20f, 0.20f, 1.00f);
         colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
-        colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.30f, 0.30f, 0.30f, 1.00f);                                                                                                                                                                                                                                                                  
-        ImGui::InputText("IP Adresi",ipAddress, 32); // IP adresi giriþ kutusu
+        colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.30f, 0.30f, 0.30f, 1.00f);
+        ImGui::InputText("IP Adresi", ipAddress, 32); // IP adresi giriþ kutusu
 
         // IP adresi giriþi ve "Login" düðmesi
         if (ImGui::Button("Login")) {
@@ -292,8 +286,7 @@ int main(int, char**)
             }
             else {
                 // Login düðmesine týklandýðýnda, saklanan IP adresi ile diðer sayfaya geçme
-                std::cout << "Girilen IP Adresi:"<<ipAddress << std::endl;
-                
+                std::cout << "Girilen IP Adresi:" << ipAddress << std::endl;
                 ImGui::OpenPopup("Yeni Sayfa");
             }
         }
