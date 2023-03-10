@@ -162,8 +162,8 @@ int main(int, char**)
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     // IP adresi saklanacak deðiþken
-    char ipAddress[16] = " ";
-
+    char ipAddress[16] = "";
+    bool PAGE = false;
     // Main loop
 #ifdef __EMSCRIPTEN__
     // For an Emscripten build we are disabling file-system access, so let's not attempt to do a fopen() of the imgui.ini file.
@@ -171,6 +171,7 @@ int main(int, char**)
     io.IniFilename = NULL;
     EMSCRIPTEN_MAINLOOP_BEGIN
 #else
+    
     while (!glfwWindowShouldClose(window))
 #endif
     {
@@ -285,13 +286,14 @@ int main(int, char**)
         // IP adresi giriþi ve "Login" düðmesi
         if (ImGui::Button("Login")) {
             // IP adresi doðrulama
-            std::regex ip_regex("^\\d{ }\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\d{ }\\$");
+            std::regex ip_regex("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
             if (!std::regex_match(ipAddress, ip_regex)) {
                 ImGui::OpenPopup("Uyari");
             }
             else {
                 // Login düðmesine týklandýðýnda, saklanan IP adresi ile diðer sayfaya geçme
                 std::cout << "Girilen IP Adresi:"<<ipAddress << std::endl;
+                ImGui::End();
                 ImGui::OpenPopup("Yeni Sayfa");
             }
         }
@@ -306,10 +308,10 @@ int main(int, char**)
         }
         
         // Yeni sayfa penceresi
-        if (ImGui::BeginPopupModal("Yeni Sayfa", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
+        if (ImGui::BeginPopupModal("Yeni Sayfa")) {
             ImGui::SetNextWindowSize(ImVec2(720, 720));
             // Yeni sayfa içeriði ve IP adresi bilgisi
-
+           
             static ScrollingBuffer sdata1, sdata2;
             static RollingBuffer rdata1, rdata2;
             static float t = 0;
