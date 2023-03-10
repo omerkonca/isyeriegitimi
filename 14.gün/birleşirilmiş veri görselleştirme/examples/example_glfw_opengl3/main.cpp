@@ -186,18 +186,22 @@ int main(int, char**)
 
         // IP adresi giriþi ve "Login" düðmesi
 
-     
+        ImGui::Begin("PAGE"/*, NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize*/);
+        ImGui::SetNextWindowSize(ImVec2(1080, 1080));
         ImGui::InputText("IP Adresi", ipAddress, 32);
         if (ImGui::Button("Login")) {
            
             // Login düðmesine týklandýðýnda, saklanan IP adresi ile diðer sayfaya geçme
             // Örnek olarak, saklanan IP adresini konsola yazdýrma:
             std::cout << "Girilen IP Adresi: " << ipAddress << std::endl;
-
+           
             // Yeni sayfayý açýn ve IP adresi bilgisini aktarma
-            ImGui::OpenPopup("Yeni Sayfa");
+            if (strlen(ipAddress) > 0) {
+                ImGui::OpenPopup("Yeni Sayfa");
+            }
+           
         }
-
+      
         // Yeni sayfa penceresi
         if (ImGui::BeginPopupModal("Yeni Sayfa", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
             ImGui::SetNextWindowSize(ImVec2(720, 720));
@@ -265,8 +269,8 @@ int main(int, char**)
             if (ImGui::Button("Tamam")) {
                 ImGui::CloseCurrentPopup(); // Pencereyi kapatýn
             }
-            ImGui::EndPopup();
-        }
+            ImGui::EndPopup();  
+        }  ImGui::End();
         //-----------------------------------draw graphics------------------------------------------------------- 
 
         
