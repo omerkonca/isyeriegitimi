@@ -36,6 +36,7 @@
 #include <iostream>
 #include <winsock.h>
 #include <regex>
+#include <d3d11.h>
 
 
 
@@ -117,7 +118,7 @@ int main(int, char**)
 #endif
 
     // Create window with graphics context
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Dear ImGui GLFW+OpenGL3 example", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(1280, 720, "Page", NULL, NULL);
     if (window == NULL)
         return 1;
     glfwMakeContextCurrent(window);
@@ -162,7 +163,8 @@ int main(int, char**)
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     // IP adresi saklanacak deðiþken
-    char ipAddress[16] = " ";
+    char ipAddress[16] = "";
+    bool page1 = true;
 
     // Main loop
 #ifdef __EMSCRIPTEN__
@@ -185,7 +187,7 @@ int main(int, char**)
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-      
+
 
         //// IP adresi giriþi ve "Login" düðmesi
         //ImGui::SetNextWindowSize(ImVec2(720, 320));
@@ -261,53 +263,77 @@ int main(int, char**)
         //
         // ----------------------------------------------------------------------------------------------------------
 
-         
-        ImGui::SetNextWindowSize(ImVec2(720, 320));
-        ImGui::Begin("PAGE", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
-        ImGui::StyleColorsDark();
-        ImGuiStyle& style = ImGui::GetStyle();
-        ImVec4* colors = style.Colors;
-        style.WindowRounding = 0.9f; // Pencere köþelerinin yuvarlanma miktarý
-       // style.Colors[ImGuiCol_WindowBg] = ImVec4(0.07f, 0.07f, 0.07f, 1.0f); // Pencere arka plan rengi
 
-        colors[ImGuiCol_WindowBg] = ImVec4(0.15f, 0.15f, 0.15f, 0.95f);
-        colors[ImGuiCol_TitleBg] = ImVec4(0.10f, 0.10f, 0.10f, 0.95f);
-        colors[ImGuiCol_TitleBgActive] = ImVec4(0.15f, 0.15f, 0.15f, 0.95f);
-        colors[ImGuiCol_Button] = ImVec4(0.10f, 0.10f, 0.10f, 1.00f);
-        colors[ImGuiCol_ButtonHovered] = ImVec4(0.15f, 0.15f, 0.15f, 1.00f);
-        colors[ImGuiCol_ButtonActive] = ImVec4(0.20f, 0.20f, 0.20f, 1.00f);
-        colors[ImGuiCol_ScrollbarBg] = ImVec4(0.10f, 0.10f, 0.10f, 1.00f);
-        colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.20f, 0.20f, 0.20f, 1.00f);
-        colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
-        colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.30f, 0.30f, 0.30f, 1.00f);                                                                                                                                                                                                                                                                  
-        ImGui::InputText("IP Adresi",ipAddress, 32); // IP adresi giriþ kutusu
+       
+        ImGui::SetNextWindowSize(ImVec2(920, 520));
 
-        // IP adresi giriþi ve "Login" düðmesi
-        if (ImGui::Button("Login")) {
-            // IP adresi doðrulama
-            std::regex ip_regex("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
-            if (!std::regex_match(ipAddress, ip_regex)) {
-                ImGui::OpenPopup("Uyari");
-            }
-            else {
-                // Login düðmesine týklandýðýnda, saklanan IP adresi ile diðer sayfaya geçme
-                std::cout << "Girilen IP Adresi:"<<ipAddress << std::endl;
-                ImGui::OpenPopup("Yeni Sayfa");
-            }
-        }
+        if (page1 == true)
+        {
+            ImGui::Begin("PAGE", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
+            ImGui::StyleColorsDark();
+            ImGuiStyle& style = ImGui::GetStyle();
+            ImVec4* colors = style.Colors;
+            style.WindowRounding = 0.9f; // Pencere köþelerinin yuvarlanma miktarý
+            colors[ImGuiCol_WindowBg] = ImVec4(0.15f, 0.15f, 0.15f, 0.95f);
+            colors[ImGuiCol_TitleBg] = ImVec4(0.10f, 0.10f, 0.10f, 0.95f);
+            colors[ImGuiCol_TitleBgActive] = ImVec4(0.15f, 0.15f, 0.15f, 0.95f);
+            colors[ImGuiCol_Button] = ImVec4(0.10f, 0.10f, 0.10f, 1.00f);
+            colors[ImGuiCol_ButtonHovered] = ImVec4(0.15f, 0.15f, 0.15f, 1.00f);
+            colors[ImGuiCol_ButtonActive] = ImVec4(0.20f, 0.20f, 0.20f, 1.00f);
+            colors[ImGuiCol_ScrollbarBg] = ImVec4(0.10f, 0.10f, 0.10f, 1.00f);
+            colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.20f, 0.20f, 0.20f, 1.00f);
+            colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
+            colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.30f, 0.30f, 0.30f, 1.00f);
+            ImGui::Text(" ");
+            ImGui::Text(" ");
+            ImGui::Text(" ");
+            ImGui::Text(" ");
+            ImGui::Text(" ");
+            // Pencere baþlýðý ve IP adresi giriþ kutusu
+            ImGui::Text("                                                       Enter IP Address");
+            ImGui::Spacing();
 
-        // IP adresi uyarý mesajý
-        if (ImGui::BeginPopupModal("Uyari", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
-            ImGui::Text("Lutfen gecerli bir IP adresi girin.");
-            if (ImGui::Button("Tamam")) {
-                ImGui::CloseCurrentPopup();
+            ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize(" ", NULL, true).x) / (1,5));
+            ImGui::InputText(" ", ipAddress, 32, ImGuiInputTextFlags_CharsNoBlank);
+
+            ImGui::Spacing();
+
+            // IP adresi giriþi ve "Login" düðmesi
+            ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize("Login", NULL, true).x) / 2);
+
+            // IP adresi giriþi ve "Login" düðmesi
+            if (ImGui::Button("Login")) {
+                // IP adresi doðrulama
+                std::regex ip_regex("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
+                if (!std::regex_match(ipAddress, ip_regex)) {
+                    ImGui::OpenPopup("Uyari");
+                }
+                else {
+                    // Login düðmesine týklandýðýnda, saklanan IP adresi ile diðer sayfaya geçme
+                    std::cout << "Entered IP Address:" << ipAddress << std::endl;
+                    ImGui::OpenPopup("New Page");
+                    page1 = false;
+                }
             }
-            ImGui::EndPopup();
+
+            // IP adresi uyarý mesajý
+            if (ImGui::BeginPopupModal("Uyari", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
+                ImGui::Text("Please enter a valid IP address.");
+                if (ImGui::Button("Ok")) {
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::EndPopup();
+            }
+
+            ImGui::End();
         }
 
         // Yeni sayfa penceresi
-        if (ImGui::BeginPopupModal("Yeni Sayfa", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
-            ImGui::SetNextWindowSize(ImVec2(720, 720));
+       if(!page1){
+
+          // ImGui::BeginPopupModal("Yeni Sayfa", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
+           ImGui::Begin("New Page");
+           ImGui::SetNextWindowSize(ImVec2(920, 520));
             // Yeni sayfa içeriði ve IP adresi bilgisi
 
             static ScrollingBuffer sdata1, sdata2;
@@ -366,21 +392,23 @@ int main(int, char**)
                 ImPlot::PlotLine("Mouse Y", &rdata2.Data[0].x, &rdata2.Data[0].y, rdata2.Data.size(), 0, 0, 2 * sizeof(float));
                 ImPlot::EndPlot();
             }
-            ImGui::Text("Girilen IP Adresi: %s", ipAddress); // Girilen IP adresini göstermek için metin kutusu oluþturma
+            ImGui::Text("Entered IP Address: %s", ipAddress); // Girilen IP adresini göstermek için metin kutusu oluþturma
 
-            // Yeni sayfa butonlarý
-            if (ImGui::Button("Tamam")) {
-                ImGui::CloseCurrentPopup(); // Pencereyi kapatýn
-            }
-            ImGui::EndPopup();  
-        }  ImGui::End();
+            //// Yeni sayfa butonlarý
+            //if (ImGui::Button("Ok")) {
+            //    ImGui::CloseCurrentPopup(); // Pencereyi kapatýn
+            //    
+            //}
+         
+            ImGui::End(); 
+        }  
         //-----------------------------------draw graphics------------------------------------------------------- 
 
-        
-        
 
 
 
+
+            
         //-------------------------------------------------------------------------------------------------------
 
 

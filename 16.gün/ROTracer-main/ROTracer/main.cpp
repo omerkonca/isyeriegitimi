@@ -128,32 +128,32 @@ static void glfw_error_callback(int error, const char* description)
 {
 	fprintf(stderr, "GLFW Error %d: %s\n", error, description);
 }
-struct RollingBuffer {  //grafik için eklendi 
-	float Span;
-	ImVector<ImVec2> Data;
-	RollingBuffer() {
-		Span = 10.0f;
-		Data.reserve(2000);
-	}
-	void AddPoint(float x, float y) {
-		float xmod = fmodf(x, Span);
-		if (!Data.empty() && xmod < Data.back().x)
-			Data.shrink(0);
-		Data.push_back(ImVec2(xmod, y));
-	}
-};
+//struct RollingBuffer {  //grafik için eklendi 
+//	float Span;
+//	ImVector<ImVec2> Data;
+//	RollingBuffer() {
+//		Span = 10.0f;
+//		Data.reserve(2000);
+//	}
+//	void AddPoint(float x, float y) {
+//		float xmod = fmodf(x, Span);
+//		if (!Data.empty() && xmod < Data.back().x)
+//			Data.shrink(0);
+//		Data.push_back(ImVec2(xmod, y));
+//	}
+//};
 
 // Main code
 int main(int, char**)
 {
 
-	TakeDatasString datasa, //  nesnesi oluþtur
-		* dataaPtr = &datasa, // dataya pointer
-		& dataRef = datasa; // dataya referans
-	
+	//TakeDatasString datasa, //  nesnesi oluþtur
+	//	* dataaPtr = &datasa, // dataya pointer
+	//	& dataRef = datasa; // dataya referans
+	//
 
-	std::thread t1(task1);
-	t1.detach(); 
+	//std::thread t1(task1);
+	//t1.detach(); 
 
 	glfwSetErrorCallback(glfw_error_callback);
 	if (!glfwInit())

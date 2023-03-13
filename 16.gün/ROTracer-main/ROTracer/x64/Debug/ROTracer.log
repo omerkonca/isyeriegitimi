@@ -1,25 +1,4 @@
-﻿  imgui_impl_glfw.cpp
-  imgui_impl_opengl3.cpp
-  imgui.cpp
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
-  implot.cpp
-  implot_demo.cpp
-  implot_items.cpp
-  data_for_graphic.cpp
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(30,5): warning C4189: 'dataRef': yerel değişken başlatıldı ancak başvurulmadı
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(29,5): warning C4189: 'dataaPtr': yerel değişken başlatıldı ancak başvurulmadı
-  main.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22000.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': makro yeniden tanımlama
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\libs\glfw\include\GLFW\glfw3.h(98,1): message : önceki 'APIENTRY' tanımına bakın
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\main.cpp(71,19): warning C4130: '==': dize sabitinin adresi üzerinde mantıksal işlem
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\main.cpp(44,5): warning C4189: 'dataRef': yerel değişken başlatıldı ancak başvurulmadı
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\main.cpp(43,5): warning C4189: 'dataaPtr': yerel değişken başlatıldı ancak başvurulmadı
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\main.cpp(203,7): warning C4189: 'show_demo_window': yerel değişken başlatıldı ancak başvurulmadı
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\main.cpp(152,5): warning C4189: 'dataRef': yerel değişken başlatıldı ancak başvurulmadı
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\main.cpp(204,7): warning C4189: 'show_another_window': yerel değişken başlatıldı ancak başvurulmadı
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\main.cpp(151,5): warning C4189: 'dataaPtr': yerel değişken başlatıldı ancak başvurulmadı
-  Kod Üretiliyor...
+﻿  data_for_graphic.cpp
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(30,6): warning C4189: 'dataRef': yerel değişken başlatıldı ancak başvurulmadı
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(29,6): warning C4189: 'dataaPtr': yerel değişken başlatıldı ancak başvurulmadı
   ROTracer.vcxproj -> C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\x64\Debug\ROTracer.exe
