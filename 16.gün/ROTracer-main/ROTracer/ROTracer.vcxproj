@@ -129,12 +129,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>Default</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\HASAN\Desktop\zmqq\include;C:\Users\HASAN\Desktop\Yeni klasör %284%29\ROTracer\ROTracer;C:\Users\HASAN\Desktop\Yeni klasör (4)\ROTracer\ROTracer\backends;C:\Users\HASAN\Desktop\Yeni klasör %284%29\ROTracer\libs\glfw\include;C:\Users\HASAN\Desktop\Yeni klasör %284%29\ROTracer\implot;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\backends;C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer;C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\zmqq\include;C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\libs\glfw\include;C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\implot;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\HASAN\Desktop\Yeni klasör %284%29\ROTracer\implot;C:\Users\HASAN\Desktop\Yeni klasör %284%29\ROTracer\libs\glfw\lib-vc2010-64;C:\Users\HASAN\Desktop\zmqq\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\implot;C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\libs\glfw\lib-vc2010-64;C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\zmqq\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;libzmq-v142-mt-gd-4_3_5.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib</IgnoreSpecificDefaultLibraries>
     </Link>
