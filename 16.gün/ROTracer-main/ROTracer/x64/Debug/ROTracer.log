@@ -1,0 +1,11 @@
+﻿  main.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22000.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': makro yeniden tanımlama
+C:\Users\HASAN\Desktop\Yeni klasör (4)\ROTracer\libs\glfw\include\GLFW\glfw3.h(98,1): message : önceki 'APIENTRY' tanımına bakın
+C:\Users\HASAN\Desktop\Yeni klasör (4)\ROTracer\ROTracer\main.cpp(71,19): warning C4130: '==': dize sabitinin adresi üzerinde mantıksal işlem
+C:\Users\HASAN\Desktop\Yeni klasör (4)\ROTracer\ROTracer\main.cpp(44,5): warning C4189: 'dataRef': yerel değişken başlatıldı ancak başvurulmadı
+C:\Users\HASAN\Desktop\Yeni klasör (4)\ROTracer\ROTracer\main.cpp(43,5): warning C4189: 'dataaPtr': yerel değişken başlatıldı ancak başvurulmadı
+C:\Users\HASAN\Desktop\Yeni klasör (4)\ROTracer\ROTracer\main.cpp(203,7): warning C4189: 'show_demo_window': yerel değişken başlatıldı ancak başvurulmadı
+C:\Users\HASAN\Desktop\Yeni klasör (4)\ROTracer\ROTracer\main.cpp(152,5): warning C4189: 'dataRef': yerel değişken başlatıldı ancak başvurulmadı
+C:\Users\HASAN\Desktop\Yeni klasör (4)\ROTracer\ROTracer\main.cpp(204,7): warning C4189: 'show_another_window': yerel değişken başlatıldı ancak başvurulmadı
+C:\Users\HASAN\Desktop\Yeni klasör (4)\ROTracer\ROTracer\main.cpp(151,5): warning C4189: 'dataaPtr': yerel değişken başlatıldı ancak başvurulmadı
+  ROTracer.vcxproj -> C:\Users\HASAN\Desktop\Yeni klasör (4)\ROTracer\x64\Debug\ROTracer.exe

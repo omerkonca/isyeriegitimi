@@ -1,0 +1,18 @@
+﻿  imgui_impl_glfw.cpp
+  imgui_impl_opengl3.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  implot.cpp
+  implot_demo.cpp
+  implot_items.cpp
+  main.cpp
+  Kod Üretiliyor...
+LINK : warning LNK4217: 'vsnprintf' sembolü ('implot_demo.obj' içinde tanımlanan), 'glfw3.lib(init.obj)' tarafından '_glfwInputError' işlevinde içeri aktarıldı
+LINK : warning LNK4286: 'vsnprintf' sembolü ('implot_demo.obj' içinde tanımlanan), 'MSVCRTD.lib(vsnprintf.obj)' tarafından içeri aktarıldı
+LINK : warning LNK4217: 'sscanf' sembolü ('imgui_impl_opengl3.obj' içinde tanımlanan), 'glfw3.lib(context.obj)' tarafından 'parseVersionString' işlevinde içeri aktarıldı
+LINK : warning LNK4286: '_vsnprintf' sembolü ('imgui.obj' içinde tanımlanan), 'MSVCRTD.lib(vsnprintf.obj)' tarafından içeri aktarıldı
+MSVCRTD.lib(exe_main.obj) : error LNK2019: çözümlenmemiş dış sembol main için "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ) işlevinde başvuruldu
+C:\Users\omerk\Desktop\bundle\x64\Debug\bundle.exe : fatal error LNK1120: 1 çözümlenmemiş dışlar
