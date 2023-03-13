@@ -165,7 +165,10 @@ int main(int, char**)
     // IP adresi saklanacak deðiþken
     char ipAddress[16] = "";
     bool page1 = true;
-
+    static bool position = false;
+    static bool angle = false;
+    static bool speed = false;
+    static bool wheel = false;
     // Main loop
 #ifdef __EMSCRIPTEN__
     // For an Emscripten build we are disabling file-system access, so let's not attempt to do a fopen() of the imgui.ini file.
@@ -187,7 +190,7 @@ int main(int, char**)
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-
+        ImGui::ShowDemoWindow();
 
         //// IP adresi giriþi ve "Login" düðmesi
         //ImGui::SetNextWindowSize(ImVec2(720, 320));
@@ -329,79 +332,179 @@ int main(int, char**)
         }
 
         // Yeni sayfa penceresi
-       if(!page1){
-
-          // ImGui::BeginPopupModal("Yeni Sayfa", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
-           ImGui::Begin("New Page");
-           ImGui::SetNextWindowSize(ImVec2(920, 520));
-            // Yeni sayfa içeriði ve IP adresi bilgisi
-
+        if (!page1) {
+           
+            // ImGui::BeginPopupModal("Yeni Sayfa", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
+            ImGui::Begin("New Page");
+            ImGui::Text("Entered IP Address: %s", ipAddress); // Girilen IP adresini göstermek için metin kutusu oluþturma
+            ImGui::SetNextWindowSize(ImVec2(920, 520));
+            if (ImGui::CollapsingHeader("NET"))
+            {
+                ImGui::Text("DeviceMacAddress: ");
+                ImGui::Text("SSID: ");
+                ImGui::Text("Status: ");
+                
+            }
             static ScrollingBuffer sdata1, sdata2;
             static RollingBuffer rdata1, rdata2;
             static float t = 0;
-            t += ImGui::GetIO().DeltaTime;
-            sdata1.AddPoint(t, 2355 * 0.0005f);
-            sdata2.AddPoint(t, 5555 * 0.0005f);
+            if (ImGui::CollapsingHeader("AGV"))
+            {
+                if (ImGui::BeginTable("split", 3))
+                {
+                    ImGui::TableNextColumn(); ImGui::Checkbox("Position", &position);
+                    ImGui::TableNextColumn(); ImGui::Checkbox("Angle", &angle);
+                    ImGui::TableNextColumn(); ImGui::Checkbox("Speed", &speed);
+                    ImGui::TableNextColumn(); ImGui::Checkbox("Wheel", &wheel);
+                  
+                    if (position == true)//position checkbox ýna týklanýnca
+                    {
 
-            rdata1.AddPoint(t, 2355 * 0.0005f);
-            rdata2.AddPoint(t, 5555 * 0.0005f);
+                        // Yeni sayfa içeriði ve IP adresi bilgisi
+                       --------------------------------------------------
+                       
+                        t += ImGui::GetIO().DeltaTime;
+                        sdata1.AddPoint(t, 2355 * 0.0005f);
+                        sdata2.AddPoint(t, 5555 * 0.0005f);
 
-
-            std::random_device rd;
-            std::mt19937 gen(rd());
-            std::uniform_real_distribution<> dis(2355 * 0.0005, 5555 * 0.0005);
-
-            //for (int i = 0; i < 10; ++i) {
-            //    t += ImGui::GetIO().DeltaTime;
-            //    sdata1.AddPoint(t, dis(gen));
-            //    sdata2.AddPoint(t, dis(gen));
-            //}
-
-            //for (int i = 0; i < 20; ++i) {
-            //    t += ImGui::GetIO().DeltaTime;
-            //    rdata1.AddPoint(t, dis(gen));
-            //    rdata2.AddPoint(t, dis(gen));
-            //}
-
-            static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
+                        rdata1.AddPoint(t, 2355 * 0.0005f);
+                        rdata2.AddPoint(t, 5555 * 0.0005f);
 
 
-            static float history = 10.0f;
+                        std::random_device rd;
+                        std::mt19937 gen(rd());
+                        std::uniform_real_distribution<> dis(2355 * 0.0005, 5555 * 0.0005);
 
-            ImGui::SliderFloat("History", &history, 1, 30, "%.1f s");
-            rdata1.Span = history;
-            rdata2.Span = history;
+                        //for (int i = 0; i < 10; ++i) {
+                        //    t += ImGui::GetIO().DeltaTime;
+                        //    sdata1.AddPoint(t, dis(gen));
+                        //    sdata2.AddPoint(t, dis(gen));
+                        //}
+
+                        //for (int i = 0; i < 20; ++i) {
+                        //    t += ImGui::GetIO().DeltaTime;
+                        //    rdata1.AddPoint(t, dis(gen));
+                        //    rdata2.AddPoint(t, dis(gen));
+                        //}
+
+                        static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
 
 
-            if (ImPlot::BeginPlot("##Scrolling", ImVec2(-1, 150))) {
-                ImPlot::SetupAxes(NULL, NULL, flags, flags);
-                ImPlot::SetupAxisLimits(ImAxis_X1, t - history, t, ImGuiCond_Always);
-                ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1);
-                ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 0.5f);
-                ImPlot::PlotShaded("Mouse X", &sdata1.Data[0].x, &sdata1.Data[0].y, sdata1.Data.size(), -INFINITY, 0, sdata1.Offset, 2 * sizeof(float));
-                ImPlot::PlotLine("Mouse Y", &sdata2.Data[0].x, &sdata2.Data[0].y, sdata2.Data.size(), 0, sdata2.Offset, 2 * sizeof(float));
-                ImPlot::EndPlot();
+                        static float history = 10.0f;
+
+                        ImGui::SliderFloat("History", &history, 1, 30, "%.1f s");
+                        rdata1.Span = history;
+                        rdata2.Span = history;
+
+
+                        if (ImPlot::BeginPlot("##Scrolling", ImVec2(-1, 150))) {
+                            ImPlot::SetupAxes(NULL, NULL, flags, flags);
+                            ImPlot::SetupAxisLimits(ImAxis_X1, t - history, t, ImGuiCond_Always);
+                            ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1);
+                            ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 0.5f);
+                            ImPlot::PlotShaded("Mouse X", &sdata1.Data[0].x, &sdata1.Data[0].y, sdata1.Data.size(), -INFINITY, 0, sdata1.Offset, 2 * sizeof(float));
+                            ImPlot::PlotLine("Mouse Y", &sdata2.Data[0].x, &sdata2.Data[0].y, sdata2.Data.size(), 0, sdata2.Offset, 2 * sizeof(float));
+                            ImPlot::EndPlot();
+                        }
+
+
+                        if (ImPlot::BeginPlot("##Rolling", ImVec2(-1, 150))) {
+                            ImPlot::SetupAxes(NULL, NULL, flags, flags);
+                            ImPlot::SetupAxisLimits(ImAxis_X1, 0, history, ImGuiCond_Always);
+                            ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1);
+                            ImPlot::PlotLine("Mouse X", &rdata1.Data[0].x, &rdata1.Data[0].y, rdata1.Data.size(), 0, 0, 2 * sizeof(float));
+                            ImPlot::PlotLine("Mouse Y", &rdata2.Data[0].x, &rdata2.Data[0].y, rdata2.Data.size(), 0, 0, 2 * sizeof(float));
+                            ImPlot::EndPlot();
+                        }
+                    }
+
+                    if (angle == true) //angle checkbox ýna týklanýnca
+                    {
+
+                    }
+
+
+                    if (speed == true)//speed checkbox ýna týklanýnca
+                    {
+                    }
+
+
+                    if (wheel == true)//wheel checkbox ýna týklanýnca
+                    {
+                    }
+                    ImGui::EndTable();
+                }
             }
+                // Yeni sayfa içeriði ve IP adresi bilgisi
+               //--------------------------------------------------
+                //static ScrollingBuffer sdata1, sdata2;
+                //static RollingBuffer rdata1, rdata2;
+                //static float t = 0;
+                //t += ImGui::GetIO().DeltaTime;
+                //sdata1.AddPoint(t, 2355 * 0.0005f);
+                //sdata2.AddPoint(t, 5555 * 0.0005f);
+
+                //rdata1.AddPoint(t, 2355 * 0.0005f);
+                //rdata2.AddPoint(t, 5555 * 0.0005f);
 
 
-            if (ImPlot::BeginPlot("##Rolling", ImVec2(-1, 150))) {
-                ImPlot::SetupAxes(NULL, NULL, flags, flags);
-                ImPlot::SetupAxisLimits(ImAxis_X1, 0, history, ImGuiCond_Always);
-                ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1);
-                ImPlot::PlotLine("Mouse X", &rdata1.Data[0].x, &rdata1.Data[0].y, rdata1.Data.size(), 0, 0, 2 * sizeof(float));
-                ImPlot::PlotLine("Mouse Y", &rdata2.Data[0].x, &rdata2.Data[0].y, rdata2.Data.size(), 0, 0, 2 * sizeof(float));
-                ImPlot::EndPlot();
+                //std::random_device rd;
+                //std::mt19937 gen(rd());
+                //std::uniform_real_distribution<> dis(2355 * 0.0005, 5555 * 0.0005);
+
+                ////for (int i = 0; i < 10; ++i) {
+                ////    t += ImGui::GetIO().DeltaTime;
+                ////    sdata1.AddPoint(t, dis(gen));
+                ////    sdata2.AddPoint(t, dis(gen));
+                ////}
+
+                ////for (int i = 0; i < 20; ++i) {
+                ////    t += ImGui::GetIO().DeltaTime;
+                ////    rdata1.AddPoint(t, dis(gen));
+                ////    rdata2.AddPoint(t, dis(gen));
+                ////}
+
+                //static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
+
+
+                //static float history = 10.0f;
+
+                //ImGui::SliderFloat("History", &history, 1, 30, "%.1f s");
+                //rdata1.Span = history;
+                //rdata2.Span = history;
+
+
+                //if (ImPlot::BeginPlot("##Scrolling", ImVec2(-1, 150))) {
+                //    ImPlot::SetupAxes(NULL, NULL, flags, flags);
+                //    ImPlot::SetupAxisLimits(ImAxis_X1, t - history, t, ImGuiCond_Always);
+                //    ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1);
+                //    ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 0.5f);
+                //    ImPlot::PlotShaded("Mouse X", &sdata1.Data[0].x, &sdata1.Data[0].y, sdata1.Data.size(), -INFINITY, 0, sdata1.Offset, 2 * sizeof(float));
+                //    ImPlot::PlotLine("Mouse Y", &sdata2.Data[0].x, &sdata2.Data[0].y, sdata2.Data.size(), 0, sdata2.Offset, 2 * sizeof(float));
+                //    ImPlot::EndPlot();
+                //}
+
+
+                //if (ImPlot::BeginPlot("##Rolling", ImVec2(-1, 150))) {
+                //    ImPlot::SetupAxes(NULL, NULL, flags, flags);
+                //    ImPlot::SetupAxisLimits(ImAxis_X1, 0, history, ImGuiCond_Always);
+                //    ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1);
+                //    ImPlot::PlotLine("Mouse X", &rdata1.Data[0].x, &rdata1.Data[0].y, rdata1.Data.size(), 0, 0, 2 * sizeof(float));
+                //    ImPlot::PlotLine("Mouse Y", &rdata2.Data[0].x, &rdata2.Data[0].y, rdata2.Data.size(), 0, 0, 2 * sizeof(float));
+                //    ImPlot::EndPlot();
+                //}
+                //------------------------------------------------------------
+            
+
+                //// Yeni sayfa butonlarý
+                //if (ImGui::Button("Ok")) {
+                //    ImGui::CloseCurrentPopup(); // Pencereyi kapatýn
+                //    
+                //}
+
+                ImGui::End();
             }
-            ImGui::Text("Entered IP Address: %s", ipAddress); // Girilen IP adresini göstermek için metin kutusu oluþturma
-
-            //// Yeni sayfa butonlarý
-            //if (ImGui::Button("Ok")) {
-            //    ImGui::CloseCurrentPopup(); // Pencereyi kapatýn
-            //    
-            //}
-         
-            ImGui::End(); 
-        }  
+       
         //-----------------------------------draw graphics------------------------------------------------------- 
 
 
