@@ -310,7 +310,7 @@ int main(int, char**)
                 std::regex ip_regex("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
                 if (!std::regex_match(ipAddress, ip_regex)) {
                     ImGui::OpenPopup("Uyari");
-                }
+                } 
                 else {
                     // Login düðmesine týklandýðýnda, saklanan IP adresi ile diðer sayfaya geçme
                     std::cout << "Entered IP Address:" << ipAddress << std::endl;
