@@ -1,43 +1,42 @@
-#ifndef ROTRACER_H   // bu kütüphaneye birden fazla yerden çagırmak için  İsimlendirmenini kısaltması şeklinde yazdık burdaki ismi
+ï»¿#ifndef ROTRACER_H   // bu kÃ¼tÃ¼phaneye birden fazla yerden Ã§agÃ½rmak iÃ§in  Ãsimlendirmenini kÃ½saltmasÃ½ Ã¾eklinde yazdÃ½k burdaki ismi
 #define ROTRACER_H    
-// ----------------------------BÜTÜN TANIMLAMA İŞLEMLERİNİ BURDA YAPIYORUZ --------------------------
+// ----------------------------BÃœTÃœN TANIMLAMA ÃÃLEMLERÃNÃ BURDA YAPIYORUZ --------------------------
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning (disable : 4996)
 
 #include <iostream>
-#include <imgui.h>               // imgui bileşenlerini kullnmak için 
-#include <implot/implot.h>       // implot bileşenleri için 
+#include <imgui.h>               // imgui bileÃ¾enlerini kullnmak iÃ§in 
+#include <implot/implot.h>       // implot bileÃ¾enleri iÃ§in 
 #include <regex>
 #include <string.h>
 #include <zmq.h>
 #include <thread>
 #include <stdio.h>
 
+// AgvStreamData
 class AgvData {
 public:
-	int x;           //x konum
-	int y;           // y konum
-	float a;           // açı
-	int ws;          // yazılan hız
-	int rs;          // okunan hız 
-	float wwa;         // yazılan teker açısı 
-	float rwa;         // okunan teker açısı 
+	int X;                       //x konum
+	int Y;                       // y konum
+	float Angle;                 // aÃ§Ã½
+	int WSpeed;                  // yazÃ½lan hÃ½z
+	int RSpeed;                  // okunan hÃ½z 
+	float WAngle;                // yazÃ½lan teker aÃ§Ã½sÃ½ 
+	float RAngle;                // okunan teker aÃ§Ã½sÃ½ 
 };
 
+class NetData {
+public:
+	std::string DeviceMacAddress;     //mac adresi    
+	int Ping;                         // ping degeri 
+	int ReceivedRate;                 // alÃ½nma oranÃ½
+	int Signal;                       // wifi sinyal kalitesi
+	int Speed;                        // wifi hÃ½zÃ½ 
+	std::string SSID;                // wifi ismi 
+	std::string Status;               // wifi durumu 
+	int TransmitededRate;             // iletim oranÃ½
 
-struct RollingBuffer {  //grafik için eklendi 
-	float Span;
-	ImVector<ImVec2> Data;
-	RollingBuffer() {
-		Span = 10.0f;
-		Data.reserve(2000);
-	}
-	void AddPoint(float x, float y) {
-		float xmod = fmodf(x, Span);
-		if (!Data.empty() && xmod < Data.back().x)
-			Data.shrink(0);
-		Data.push_back(ImVec2(xmod, y));
-	}
+
 };
 
 struct ScrollingBuffer {
@@ -65,6 +64,21 @@ struct ScrollingBuffer {
 	}
 };
 
+class SpeedGraphicData
+{
+public:
+	ScrollingBuffer ReadingSpeed;        // data depolamak iÃ§in oluÃ¾turduÃ°umuz deÃ°iÃ¾ken 
+	ScrollingBuffer WritingSpeed;        // data depolamak iÃ§in oluÃ¾turduÃ°umuz deÃ°iÃ¾ken 
+	ScrollingBuffer ReadingAngel;
+	ScrollingBuffer WritingAngel;
+	ScrollingBuffer totalAngel;
+	static ScrollingBuffer totalX;
+	static ScrollingBuffer totalY;
+
+	float Time;                          // geÃ§en zamanÃ½ depolamak iÃ§in oluÃ¾turdugumuz deÃ°iÃ¾ken 
+	float History;                       // geÃ§miÃ¾ zamanÃ½ depolamak iÃ§in 
+};
+
 class ROTracer
 {
 public:                   //constructor 
@@ -74,22 +88,38 @@ public:                   //constructor
 	void SpeedPage();      //fonksiyonlar 
 	void LoginPage();
 
+
 	void StartStreamParser();
 	void StopStreamParser();
 
-	AgvData* Agv;          // nesne oluşturduk
-
+	AgvData* Agv;          //agv classÃ½na ait  nesne oluÃ¾turduk  
+	NetData* Net;
 	char IpAddress[16] = "192.168.2.125";
 	bool _isRunning;
+	bool page1 = true;
+	bool position = false;
+	bool angle = false;
+	bool speed = false;
+	bool wheel = false;
+
+	bool isPause = false;       // grafik durdurma durumunu tutma       
+	SpeedGraphicData* SGD;    // SpeedGraphicData class'Ã½nÃ½n nesnesini oluÃ¾turduk  
 
 
 private:
-	bool _loginPageVisibility;        //giriş sayfa görünürlüğü
-	bool _speedPageVisibility;        //hız grafik sayfasının görünürlüğü
+	bool _loginPageVisibility;        //giriÃ¾ sayfa gÃ¶rÃ¼nÃ¼rlÃ¼Ã°Ã¼
+	bool _speedPageVisibility;        //hÃ½z grafik sayfasÃ½nÃ½n gÃ¶rÃ¼nÃ¼rlÃ¼Ã°Ã¼
+	bool _positionPageVisibility;
+	bool _wheelPageVisibility;
+	bool _anglePageVisibility;
 
-	bool _zmqLoopFlag;               //zmq data parse işlemini yapıp yapmama  
 
-	void ZMQDataStreamParser();       // parse işlemi private onun için burda yoksa yukarı da yazabilirdik
+	bool _zmqLoopFlag;               //zmq data parse iÃ¾lemini yapÃ½p yapmama  
+
+	void ZMQDataStreamParser();       // parse iÃ¾lemi private onun iÃ§in burda yoksa yukarÃ½ da yazabilirdik
+	void PositionPage();
+	void WheelPage();
+	void AngelPage();
 };
 
 

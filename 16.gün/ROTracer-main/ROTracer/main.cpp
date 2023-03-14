@@ -115,9 +115,6 @@ int main(int, char**)
 
 		_rot->LoginPage();
 
-
-
-
 		// Rendering
 		ImGui::Render();
 		int display_w, display_h;
@@ -132,7 +129,7 @@ int main(int, char**)
 #ifdef __EMSCRIPTEN__
 	EMSCRIPTEN_MAINLOOP_END;
 #endif
-	_rot->StopStreamParser();
+	_rot->StopStreamParser();               //parse (parçalama )iþlemini durdurduk.parçalama iþlemini baþlatmayý loginPage() de yapýyoruz. 
 	// Cleanup
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
