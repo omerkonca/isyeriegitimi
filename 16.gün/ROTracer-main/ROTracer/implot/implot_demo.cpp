@@ -382,7 +382,7 @@ void Demo_ScatterPlots() {
     if (ImPlot::BeginPlot("Scatter Plot")) {
         ImPlot::PlotScatter("Data 1", xs1, ys1, 100);
         ImPlot::PushStyleVar(ImPlotStyleVar_FillAlpha, 0.25f);
-        ImPlot::SetNextMarkerStyle(ImPlotMarker_Square, 6, ImPlot::GetColormapColor(1), IMPLOT_AUTO, ImPlot::GetColormapColor(1));
+        ImPlot::SetNextMarkerStyle(ImPlotMarker_Up, 6, ImPlot::GetColormapColor(1), IMPLOT_AUTO, ImPlot::GetColormapColor(1));
         ImPlot::PlotScatter("Data 2", xs2, ys2, 50);
         ImPlot::PopStyleVar();
         ImPlot::EndPlot();
