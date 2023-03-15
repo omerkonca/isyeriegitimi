@@ -196,7 +196,7 @@ void ROTracer::Ping() {
 			this->SGD->Time += ImGui::GetIO().DeltaTime;
 
 			this->SGD->ping.AddPoint(this->SGD->Time, this->Net->Ping);
-			
+
 
 		}
 		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
@@ -399,56 +399,57 @@ void ROTracer::LoginPage() {
 		}
 
 	}
-	
+
 	// Yeni acýlacak grafiklerin sayfasý penceresi 
 	if (!this->_loginPageVisibility) {
-		
+
 		if (!page1) {
 			ImGui::Begin("New Page");
 			ImGui::SetNextWindowSize(ImVec2(920, 520));
 			// Yeni sayfa içeriði ve IP adresi bilgisi
 		   //--------------------------------------------------
-			if (ImGui::CollapsingHeader("NET",2))
+			if (ImGui::CollapsingHeader("NET"))
 			{
 				static ImPlotSubplotFlags flags = ImPlotSubplotFlags_None;
-				static int rows = 3;
-				static int cols = 3;
-				ImGui::SliderInt("Rows", &rows, 1, 5);
-				ImGui::SliderInt("Cols", &cols, 1, 5);
-				if (ImPlot::BeginSubplots("split", rows, cols, ImVec2(-1, 400), flags))
+				static int rows = 1;
+				static int cols = 1;
+				ImGui::SliderInt("Rows", &rows, 1, 1);
+
+				static float rratios[] = { 5 };
+				static float cratios[] = { 5 };
+				if (ImPlot::BeginSubplots("split", rows, cols, ImVec2(-1, 400), flags, rratios, cratios))
 				{
 					ImGui::TableNextColumn();
-					ImGui::Text("DeviceMacAddress: ");
+					ImGui::Text("DeviceMacAddress:");
 					ImGui::TableNextColumn();
-					ImGui::Text("SSID: ");
+					ImGui::Text("SSID:");
 					ImGui::TableNextColumn();
-					ImGui::Text("Status: ");
-
+					ImGui::Text("Status:");
 					ImGui::TableNextColumn();
 					_PingPageVisibility = true;
 					this->Ping();
-
+					ImGui::Text("*************************************************************************************************** ");
 					ImGui::TableNextColumn();
-				_ReceivedRatePageVisibility = true;
-				this->ReceivedRate();
+					_ReceivedRatePageVisibility = true;
+					this->ReceivedRate();
+					ImGui::Text("*************************************************************************************************** ");
+					ImGui::TableNextColumn();
+					_SignalPageVisibility = true;
+					this->Signal();
+					ImGui::Text("*************************************************************************************************** ");
+					/*_wifiSpeedPageVisibility = true;
+					this->wifiSpeed();*/
 
-				ImGui::TableNextColumn();
-				_SignalPageVisibility = true;
-				this->Signal();
+					ImPlot::EndSubplots();
 
-				/*_wifiSpeedPageVisibility = true;
-				this->wifiSpeed();*/
 
-				ImPlot::EndSubplots();
-				
-				
-				
-			}
-				
+
+				}
+
 			}
 			if (ImGui::CollapsingHeader("AGV"))
 			{
-				if (ImGui::BeginTable("split",2))
+				if (ImGui::BeginTable("split", 2))
 				{
 					ImGui::TableNextColumn(); ImGui::Checkbox("Position", &position);
 					ImGui::TableNextColumn(); ImGui::Checkbox("Angle", &angle);
