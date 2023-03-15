@@ -278,7 +278,7 @@ void ROTracer::Signal() {
 			return;
 		}
 
-		ImGui::BulletText("Move your speed to change the data!");
+		ImGui::BulletText("Move your signal to change the data!");
 
 		ImGui::Checkbox("Pause", &isPause);     // duraklatma seçenegi 
 
@@ -301,7 +301,7 @@ void ROTracer::Signal() {
 
 		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
 
-		if (ImPlot::BeginPlot("##Scrolling", ImVec2(400, 150))) {     // grafik ölçeklendirme 
+		if (ImPlot::BeginPlot("##Scrolling", ImVec2(200, 150))) {     // grafik ölçeklendirme 
 			ImPlot::SetupAxes("Time [s]", "Speed [mm/s]");
 
 			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->Time - this->SGD->History, this->SGD->Time, ImGuiCond_Always);
@@ -404,49 +404,100 @@ void ROTracer::LoginPage() {
 	if (!this->_loginPageVisibility) {
 
 		if (!page1) {
+		
 			ImGui::Begin("New Page");
-			ImGui::SetNextWindowSize(ImVec2(920, 520));
+			ImGui::SetNextWindowSize(ImVec2(1700, 900));
 			// Yeni sayfa içeriði ve IP adresi bilgisi
 		   //--------------------------------------------------
+			//if (ImGui::CollapsingHeader("NET"))
+			//{
+			//	
+			//
+			//	
+
+		
+			//	ImGui::SetNextWindowSize(ImVec2(1400, 400));
+			//	if (ImGui::Begin("Graphs"))
+			//	{
+			//		ImGui::TableNextColumn();
+			//		ImGui::Text("DeviceMacAddress:",this->Net->DeviceMacAddress);
+			//		ImGui::TableNextColumn();
+			//		ImGui::Text("SSID:",this->Net->SSID);
+			//		ImGui::TableNextColumn();
+			//		ImGui::Text("Status:", this->Net->Status);
+			//		ImGui::TableNextColumn();
+			//		
+			//			_PingPageVisibility = true;
+			//			this->Ping();
+			//		
+			//		ImGui::Text("*************************************************************************************************** ");
+			//		ImGui::TableNextColumn();
+			//		_ReceivedRatePageVisibility = true;
+			//		this->ReceivedRate();
+			//		ImGui::Text("*************************************************************************************************** ");
+			//		ImGui::TableNextColumn();
+			//		_SignalPageVisibility = true;
+			//		this->Signal();
+			//		ImGui::Text("*************************************************************************************************** ");
+
+			//		/*_wifiSpeedPageVisibility = true;
+			//		this->wifiSpeed();*/
+
+			//		ImGui::End();
+
+
+
+			//	}
+
+			//}
+
 			if (ImGui::CollapsingHeader("NET"))
 			{
-				static ImPlotSubplotFlags flags = ImPlotSubplotFlags_None;
-				static int rows = 1;
-				static int cols = 1;
-				ImGui::SliderInt("Rows", &rows, 1, 1);
-
-				static float rratios[] = { 5 };
-				static float cratios[] = { 5 };
-				if (ImPlot::BeginSubplots("split", rows, cols, ImVec2(-1, 400), flags, rratios, cratios))
-				{
+				ImGui::TableNextColumn();
+					ImGui::Text("DeviceMacAddress:",this->Net->DeviceMacAddress);
 					ImGui::TableNextColumn();
-					ImGui::Text("DeviceMacAddress:");
-					ImGui::TableNextColumn();
-					ImGui::Text("SSID:");
-					ImGui::TableNextColumn();
-					ImGui::Text("Status:");
-					ImGui::TableNextColumn();
-					_PingPageVisibility = true;
-					this->Ping();
-					ImGui::Text("*************************************************************************************************** ");
-					ImGui::TableNextColumn();
-					_ReceivedRatePageVisibility = true;
-					this->ReceivedRate();
-					ImGui::Text("*************************************************************************************************** ");
-					ImGui::TableNextColumn();
-					_SignalPageVisibility = true;
-					this->Signal();
-					ImGui::Text("*************************************************************************************************** ");
-					/*_wifiSpeedPageVisibility = true;
-					this->wifiSpeed();*/
+						ImGui::Text("SSID:",this->Net->SSID);
+						ImGui::TableNextColumn();
+						ImGui::Text("Status:", this->Net->Status);
+					ImGui::Columns(3); // 3 sütun oluştur
+					ImGui::SetColumnWidth(0, 400); // ilk sütunun genişliğini ayarla
 
-					ImPlot::EndSubplots();
+					// ilk sütunda "Ping" grafiğini görüntüle
+					if (ImGui::BeginChild("Ping", ImVec2(0, 300), true))
+					{
+						// Ping grafiğini çizdir
+						_PingPageVisibility = true;
+						this->Ping();
+						ImGui::EndChild();
+					}
 
+					ImGui::NextColumn(); // bir sonraki sütuna geç
+					ImGui::SetColumnWidth(1, 400); // ilk sütunun genişliğini ayarla
+					// ikinci sütunda "Received Rate" grafiğini görüntüle
+					if (ImGui::BeginChild("ReceivedRate", ImVec2(0, 300), true))
+					{
+						// Received Rate grafiğini çizdir
+						_ReceivedRatePageVisibility = true;
+						this->ReceivedRate();
+						ImGui::EndChild();
+					}
 
+					ImGui::NextColumn(); // bir sonraki sütuna geç
 
-				}
-
+					ImGui::SetColumnWidth(2, 400); // üçüncü sütunun genişliğini ayarla
+					if (ImGui::BeginChild("Signal", ImVec2(0, 300), true))
+					{
+						// "Signal" grafiğini çizdir
+						_SignalPageVisibility = true;
+						this->Signal();
+						ImGui::EndChild();
+					}
+					ImGui::Columns(1); // sütunları sıfırla
+					
+				
 			}
+
+
 			if (ImGui::CollapsingHeader("AGV"))
 			{
 				if (ImGui::BeginTable("split", 2))
