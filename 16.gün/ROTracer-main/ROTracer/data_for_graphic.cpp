@@ -177,6 +177,153 @@ void ROTracer::PositionPage() {
 }
 
 
+
+void ROTracer::Ping() {
+	_zmqLoopFlag = true;
+	if (this->_PingPageVisibility == true) {
+
+		if (this->Net == NULL) {
+			return;
+		}
+
+		ImGui::BulletText("Move your speed to change the data!");
+
+		ImGui::Checkbox("Pause", &isPause);     // duraklatma seçenegi 
+
+		if (!isPause)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
+		{
+			this->SGD->History = 20.0f;
+			this->SGD->Time += ImGui::GetIO().DeltaTime;
+
+			this->SGD->ping.AddPoint(this->SGD->Time, this->Net->Ping);
+			
+
+		}
+		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
+			this->SGD->Time;
+
+
+
+		ImGui::SliderFloat("History", &this->SGD->History, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
+
+
+		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
+
+		if (ImPlot::BeginPlot("##Scrolling", ImVec2(400, 150))) {     // grafik ölçeklendirme 
+			ImPlot::SetupAxes("Time [s]", "Speed [mm/s]");
+
+			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->Time - this->SGD->History, this->SGD->Time, ImGuiCond_Always);
+			ImPlot::SetupAxisLimits(ImAxis_Y1, -500, 1900);
+
+			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
+			ImPlot::PlotLine("rs X", &this->SGD->ping.Data[0].x, &this->SGD->ping.Data[0].y, this->SGD->ping.Data.size(), 0, this->SGD->ping.Offset, 2 * sizeof(float));
+			// plotline düz cizgili grafik <=> PlotShaded gölgeli grafik  
+			ImPlot::EndPlot();
+		}
+	}
+}
+
+void ROTracer::ReceivedRate() {
+	_zmqLoopFlag = true;
+	if (this->_ReceivedRatePageVisibility == true) {
+
+		if (this->Net == NULL) {
+			return;
+		}
+
+		ImGui::BulletText("Move your speed to change the data!");
+
+		ImGui::Checkbox("Pause", &isPause);     // duraklatma seçenegi 
+
+		if (!isPause)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
+		{
+			this->SGD->History = 20.0f;
+			this->SGD->Time += ImGui::GetIO().DeltaTime;
+
+			this->SGD->receivedrate.AddPoint(this->SGD->Time, this->Net->ReceivedRate);
+
+
+		}
+		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
+			this->SGD->Time;
+
+
+
+		ImGui::SliderFloat("History", &this->SGD->History, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
+
+
+		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
+
+		if (ImPlot::BeginPlot("##Scrolling", ImVec2(400, 150))) {     // grafik ölçeklendirme 
+			ImPlot::SetupAxes("Time [s]", "Speed [mm/s]");
+
+			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->Time - this->SGD->History, this->SGD->Time, ImGuiCond_Always);
+			ImPlot::SetupAxisLimits(ImAxis_Y1, -500, 1900);
+
+			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
+			ImPlot::PlotLine("rs X", &this->SGD->receivedrate.Data[0].x, &this->SGD->receivedrate.Data[0].y, this->SGD->receivedrate.Data.size(), 0, this->SGD->receivedrate.Offset, 2 * sizeof(float));
+			// plotline düz cizgili grafik <=> PlotShaded gölgeli grafik  
+			ImPlot::EndPlot();
+		}
+	}
+
+}
+
+void ROTracer::Signal() {
+
+	_zmqLoopFlag = true;
+	if (this->_SignalPageVisibility == true) {
+
+		if (this->Net == NULL) {
+			return;
+		}
+
+		ImGui::BulletText("Move your speed to change the data!");
+
+		ImGui::Checkbox("Pause", &isPause);     // duraklatma seçenegi 
+
+		if (!isPause)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
+		{
+			this->SGD->History = 20.0f;
+			this->SGD->Time += ImGui::GetIO().DeltaTime;
+
+			this->SGD->signal.AddPoint(this->SGD->Time, this->Net->Signal);
+
+
+		}
+		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
+			this->SGD->Time;
+
+
+
+		ImGui::SliderFloat("History", &this->SGD->History, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
+
+
+		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
+
+		if (ImPlot::BeginPlot("##Scrolling", ImVec2(400, 150))) {     // grafik ölçeklendirme 
+			ImPlot::SetupAxes("Time [s]", "Speed [mm/s]");
+
+			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->Time - this->SGD->History, this->SGD->Time, ImGuiCond_Always);
+			ImPlot::SetupAxisLimits(ImAxis_Y1, -500, 1900);
+
+			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
+			ImPlot::PlotLine("rs X", &this->SGD->signal.Data[0].x, &this->SGD->signal.Data[0].y, this->SGD->signal.Data.size(), 0, this->SGD->signal.Offset, 2 * sizeof(float));
+			// plotline düz cizgili grafik <=> PlotShaded gölgeli grafik  
+			ImPlot::EndPlot();
+		}
+	}
+}
+
+void ROTracer::wifiSpeed() {
+
+
+}
+
+
+
+
+
 //--------------------------------giriþ sayfasý--------------------------------------------------------------------
 
 void ROTracer::LoginPage() {
@@ -252,28 +399,56 @@ void ROTracer::LoginPage() {
 		}
 
 	}
-
+	
 	// Yeni acýlacak grafiklerin sayfasý penceresi 
 	if (!this->_loginPageVisibility) {
-
+		
 		if (!page1) {
 			ImGui::Begin("New Page");
 			ImGui::SetNextWindowSize(ImVec2(920, 520));
 			// Yeni sayfa içeriði ve IP adresi bilgisi
 		   //--------------------------------------------------
-			if (ImGui::CollapsingHeader("NET"))
+			if (ImGui::CollapsingHeader("NET",2))
 			{
-				ImGui::Text("DeviceMacAddress: ");
-				ImGui::Text("SSID: ");
-				ImGui::Text("Status: ");
+				static ImPlotSubplotFlags flags = ImPlotSubplotFlags_None;
+				static int rows = 3;
+				static int cols = 3;
+				ImGui::SliderInt("Rows", &rows, 1, 5);
+				ImGui::SliderInt("Cols", &cols, 1, 5);
+				if (ImPlot::BeginSubplots("split", rows, cols, ImVec2(-1, 400), flags))
+				{
+					ImGui::TableNextColumn();
+					ImGui::Text("DeviceMacAddress: ");
+					ImGui::TableNextColumn();
+					ImGui::Text("SSID: ");
+					ImGui::TableNextColumn();
+					ImGui::Text("Status: ");
 
+					ImGui::TableNextColumn();
+					_PingPageVisibility = true;
+					this->Ping();
 
-				_speedPageVisibility = true;
-				this->SpeedPage();
+					ImGui::TableNextColumn();
+				_ReceivedRatePageVisibility = true;
+				this->ReceivedRate();
+
+				ImGui::TableNextColumn();
+				_SignalPageVisibility = true;
+				this->Signal();
+
+				/*_wifiSpeedPageVisibility = true;
+				this->wifiSpeed();*/
+
+				ImPlot::EndSubplots();
+				
+				
+				
+			}
+				
 			}
 			if (ImGui::CollapsingHeader("AGV"))
 			{
-				if (ImGui::BeginTable("split", 3))
+				if (ImGui::BeginTable("split",2))
 				{
 					ImGui::TableNextColumn(); ImGui::Checkbox("Position", &position);
 					ImGui::TableNextColumn(); ImGui::Checkbox("Angle", &angle);

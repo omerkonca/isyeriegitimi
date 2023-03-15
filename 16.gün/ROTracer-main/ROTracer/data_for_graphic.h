@@ -75,6 +75,11 @@ public:
 	static ScrollingBuffer totalX;
 	static ScrollingBuffer totalY;
 
+	ScrollingBuffer ping;
+	ScrollingBuffer receivedrate;
+	ScrollingBuffer signal;
+
+
 	float Time;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
 	float History;                       // geçmiþ zamaný depolamak için 
 };
@@ -87,6 +92,7 @@ public:                   //constructor
 
 	void SpeedPage();      //fonksiyonlar 
 	void LoginPage();
+
 
 
 
@@ -103,6 +109,14 @@ public:                   //constructor
 	bool speed = false;
 	bool wheel = false;
 
+
+
+	//bool Ping = false;
+	//bool ReceivedRate = false;
+	//bool Signal = false;
+	//bool wifiSpeed = false;
+
+
 	bool isPause = false;       // grafik durdurma durumunu tutma       
 	SpeedGraphicData* SGD;    // SpeedGraphicData class'ýnýn nesnesini oluþturduk  
 
@@ -115,12 +129,22 @@ private:
 	bool _anglePageVisibility;
 
 
+	bool _PingPageVisibility;
+	bool _ReceivedRatePageVisibility;
+	bool _SignalPageVisibility;
+	bool _wifiSpeedPageVisibility;
+
+
 	bool _zmqLoopFlag;               //zmq data parse iþlemini yapýp yapmama  
 
 	void ZMQDataStreamParser();       // parse işlemi private onun için burda yoksa yukarý da yazabilirdik
 	void PositionPage();
 	void WheelPage();
 	void AngelPage();
+	void Ping();
+	void ReceivedRate();
+	void Signal();
+	void wifiSpeed();
 };
 
 
