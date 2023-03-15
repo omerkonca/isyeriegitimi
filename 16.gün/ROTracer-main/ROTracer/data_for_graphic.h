@@ -117,7 +117,7 @@ private:
 
 	bool _zmqLoopFlag;               //zmq data parse iþlemini yapýp yapmama  
 
-	void ZMQDataStreamParser();       // parse iþlemi private onun için burda yoksa yukarý da yazabilirdik
+	void ZMQDataStreamParser();       // parse işlemi private onun için burda yoksa yukarý da yazabilirdik
 	void PositionPage();
 	void WheelPage();
 	void AngelPage();
