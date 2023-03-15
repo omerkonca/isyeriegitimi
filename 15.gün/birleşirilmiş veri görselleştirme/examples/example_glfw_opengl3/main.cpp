@@ -447,7 +447,7 @@ int main(int, char**)
             //static float t = 0;
             if (ImGui::CollapsingHeader("AGV"))
             {
-                if (ImGui::BeginTable("split", 3))
+                if (ImGui::BeginTable("split", 2))
                 {
                     ImGui::TableNextColumn(); ImGui::Checkbox("Position", &position);
                     ImGui::TableNextColumn(); ImGui::Checkbox("Angle", &angle);

@@ -100,8 +100,9 @@ void ROTracer::WheelPage() {
 
 		}
 		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
+		{
 			this->SGD->Time;
-
+		}
 
 
 		ImGui::SliderFloat("History", &this->SGD->History, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 

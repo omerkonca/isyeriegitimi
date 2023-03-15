@@ -89,6 +89,7 @@ public:                   //constructor
 	void LoginPage();
 
 
+
 	void StartStreamParser();
 	void StopStreamParser();
 
