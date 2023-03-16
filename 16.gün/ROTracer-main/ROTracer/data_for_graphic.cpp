@@ -46,7 +46,7 @@ void ROTracer::SpeedPage() {
 
 		if (!speedPause)      // eger checkbox'a tıklanmazsa (false)  güncel zamanı alıyor  
 		{
-			this->SGD->speedHistory = 20.0f;
+			/*this->SGD->speedHistory = 20.0f;*/
 			this->SGD->speedTime += ImGui::GetIO().DeltaTime;
 
 			this->SGD->ReadingSpeed.AddPoint(this->SGD->speedTime, this->Agv->RSpeed);
@@ -92,7 +92,7 @@ void ROTracer::WheelPage() {
 
 		if (!wheelPause)      // eger checkbox'a tıklanmazsa (false)  güncel zamanı alıyor  
 		{
-			this->SGD->wheelHistory = 20.0f;
+			/*this->SGD->wheelHistory = 20.0f;*/
 			this->SGD->wheelTime += ImGui::GetIO().DeltaTime;
 
 			this->SGD->ReadingAngel.AddPoint(this->SGD->wheelTime, this->Agv->RAngle);
@@ -139,7 +139,7 @@ void ROTracer::TotalAngelPage() {
 
 		if (!anglePause)      // eger checkbox'a tıklanmazsa (false)  güncel zamanı alıyor  
 		{
-			this->SGD->angleHistory = 20.0f;
+			/*this->SGD->angleHistory = 20.0f;*/
 			this->SGD->angleTime += ImGui::GetIO().DeltaTime;
 
 			this->SGD->ReadingAngel.AddPoint(this->SGD->angleTime, this->Agv->RAngle);
@@ -156,7 +156,7 @@ void ROTracer::TotalAngelPage() {
 		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
 
 		if (ImPlot::BeginPlot("##Scrolling", ImVec2(800, 350))) {     // grafik ölçeklendirme 
-			ImPlot::SetupAxes("Time [s]", "Angle °");
+			ImPlot::SetupAxes("Time [s]", "Angle ");
 
 			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->angleTime - this->SGD->angleHistory, this->SGD->angleTime, ImGuiCond_Always);
 			ImPlot::SetupAxisLimits(ImAxis_Y1, -100, 100);
@@ -288,11 +288,13 @@ void ROTracer::PositionPage() {
 //}
 
 void ROTracer::Signal_ping_baundrate() {
-
+	
 	_zmqLoopFlag = true;
+	
 	if (this->_SignalPageVisibility == true) {
-
+	
 		if (this->Net == NULL) {
+		
 			return;
 		}
 
@@ -300,21 +302,27 @@ void ROTracer::Signal_ping_baundrate() {
 
 		ImGui::Checkbox("Pause", &SignalPause);     // duraklatma seçenegi 
 
+
 		if (!SignalPause)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
 		{
-			this->SGD->signalHistory = 20.0f;
-			this->SGD->signalTime += ImGui::GetIO().DeltaTime;
 
+			this->SGD->signalTime += ImGui::GetIO().DeltaTime;
+		
 			this->SGD->Signal_ping_baundrate.AddPoint(this->SGD->signalTime, this->Net->Signal);
 			this->SGD->ping.AddPoint(this->SGD->signalTime, this->Net->Ping);
 			this->SGD->speed.AddPoint(this->SGD->signalTime, this->Net->Speed);
-
-
+			
+			
 		}
 		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
+		
+		
 			this->SGD->signalTime;
-
-
+		
+		
+		
+	
+		
 
 		ImGui::SliderFloat("History", &this->SGD->signalHistory, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
 
@@ -335,7 +343,10 @@ void ROTracer::Signal_ping_baundrate() {
 			ImPlot::EndPlot();
 		}
 	}
+
+		
 }
+
 
 
 
@@ -423,17 +434,19 @@ void ROTracer::LoginPage() {
 	if (!this->_loginPageVisibility) {
 
 		if (!page1) {
+		
 
-			ImGui::Begin("New Page");
+			ImGui::Begin("New Page ");
 			ImGui::SetNextWindowSize(ImVec2(1700, 900));
 			// Yeni sayfa içeriði ve IP adresi bilgisi
-		  
+		
 
 			if (ImGui::CollapsingHeader("NET"))
 			{
+			
 				ImGui::TableNextColumn();
-				ImGui::Text("DeviceMacAddress: %s",this->Net->DeviceMacAddress.c_str());
-				
+				ImGui::Text("DeviceMacAddress: %s", this->Net->DeviceMacAddress.c_str());
+
 				ImGui::TableNextColumn();
 				ImGui::Text("SSID: %s", this->Net->SSID.c_str());
 				ImGui::TableNextColumn();
@@ -503,7 +516,7 @@ void ROTracer::LoginPage() {
 
 
 			}
-			
+
 			ImGui::End();
 
 		}
@@ -640,7 +653,7 @@ void ROTracer::ZMQDataStreamParser()
 
 						}
 
-							printf("%s\n", pch);
+						printf("%s\n", pch);
 						pch = strtok(NULL, ";");
 					}
 					sayac = 0;

@@ -88,13 +88,13 @@ public:
 	float pingTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
 	float receivedrateTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
 	float signalTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
-	float History;                       // geçmiþ zamaný depolamak için 
-	float angleHistory;                       // geçmiþ zamaný depolamak için 
-	float speedHistory;                       // geçmiþ zamaný depolamak için 
-	float pingHistory;                       // geçmiþ zamaný depolamak için 
+	float History= 20.0f;                       // geçmiþ zamaný depolamak için 
+	float angleHistory= 20.0f;                       // geçmiþ zamaný depolamak için 
+	float speedHistory = 20.0f;                       // geçmiþ zamaný depolamak için 
+	float pingHistory=20.0f;                       // geçmiþ zamaný depolamak için 
 	float receivedrateHistory;                       // geçmiþ zamaný depolamak için 
-	float signalHistory;                       // geçmiþ zamaný depolamak için 
-	float wheelHistory;                       // geçmiþ zamaný depolamak için 
+	float signalHistory= 20.0f;                       // geçmiþ zamaný depolamak için 
+	float wheelHistory= 20.0f;                       // geçmiþ zamaný depolamak için 
 };
 
 class ROTracer
