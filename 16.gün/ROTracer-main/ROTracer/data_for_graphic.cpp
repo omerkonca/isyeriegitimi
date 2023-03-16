@@ -42,23 +42,23 @@ void ROTracer::SpeedPage() {
 
 		ImGui::BulletText("Move your speed to change the data!");
 
-		ImGui::Checkbox("Pause", &isPause);     // duraklatma seçenegi 
+		ImGui::Checkbox("Pause", &speedPause);     // duraklatma seçenegi 
 
-		if (!isPause)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
+		if (!speedPause)      // eger checkbox'a tıklanmazsa (false)  güncel zamanı alıyor  
 		{
-			this->SGD->History = 20.0f;
-			this->SGD->Time += ImGui::GetIO().DeltaTime;
+			this->SGD->speedHistory = 20.0f;
+			this->SGD->speedTime += ImGui::GetIO().DeltaTime;
 
-			this->SGD->ReadingSpeed.AddPoint(this->SGD->Time, this->Agv->RSpeed);
-			this->SGD->WritingSpeed.AddPoint(this->SGD->Time, this->Agv->WSpeed);
+			this->SGD->ReadingSpeed.AddPoint(this->SGD->speedTime, this->Agv->RSpeed);
+			this->SGD->WritingSpeed.AddPoint(this->SGD->speedTime, this->Agv->WSpeed);
 
 		}
-		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
-			this->SGD->Time;
+		else     // eger checkbox'a tıklanırsa en son zamanı alıyor 
+			this->SGD->speedTime;
 
 
 
-		ImGui::SliderFloat("History", &this->SGD->History, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
+		ImGui::SliderFloat("History", &this->SGD->speedHistory, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanıyor 
 
 
 		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
@@ -66,7 +66,7 @@ void ROTracer::SpeedPage() {
 		if (ImPlot::BeginPlot("##Scrolling", ImVec2(800, 350))) {     // grafik ölçeklendirme 
 			ImPlot::SetupAxes("Time [s]", "Speed [mm/s]");
 
-			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->Time - this->SGD->History, this->SGD->Time, ImGuiCond_Always);
+			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->speedTime - this->SGD->speedHistory, this->SGD->speedTime, ImGuiCond_Always);
 			ImPlot::SetupAxisLimits(ImAxis_Y1, -500, 1900);
 
 			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
@@ -88,32 +88,31 @@ void ROTracer::WheelPage() {
 
 		ImGui::BulletText("Move your whell to change the data!");
 
-		ImGui::Checkbox("Pause", &isPause);     // duraklatma seçenegi 
+		ImGui::Checkbox("Pause", &wheelPause);     // duraklatma seçenegi 
 
-		if (!isPause)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
+		if (!wheelPause)      // eger checkbox'a tıklanmazsa (false)  güncel zamanı alıyor  
 		{
-			this->SGD->History = 20.0f;
-			this->SGD->Time += ImGui::GetIO().DeltaTime;
+			this->SGD->wheelHistory = 20.0f;
+			this->SGD->wheelTime += ImGui::GetIO().DeltaTime;
 
-			this->SGD->ReadingAngel.AddPoint(this->SGD->Time, this->Agv->RAngle);
-			this->SGD->WritingAngel.AddPoint(this->SGD->Time, this->Agv->WAngle);
+			this->SGD->ReadingAngel.AddPoint(this->SGD->wheelTime, this->Agv->RAngle);
+			this->SGD->WritingAngel.AddPoint(this->SGD->wheelTime, this->Agv->WAngle);
 
 		}
-		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
-		{
-			this->SGD->Time;
-		}
+		else     // eger checkbox'a tıklanırsa en son zamanı alıyor 
+			this->SGD->wheelTime;
 
 
-		ImGui::SliderFloat("History", &this->SGD->History, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
+
+		ImGui::SliderFloat("History", &this->SGD->wheelHistory, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanıyor 
 
 
 		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
 
 		if (ImPlot::BeginPlot("##Scrolling", ImVec2(800, 350))) {     // grafik ölçeklendirme 
-			ImPlot::SetupAxes("WHEEL ANGLES", "Speed [mm/s]");
+			ImPlot::SetupAxes("Time [s]", "Wheel °");
 
-			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->Time - this->SGD->History, this->SGD->Time, ImGuiCond_Always);
+			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->wheelTime - this->SGD->wheelHistory, this->SGD->wheelTime, ImGuiCond_Always);
 			ImPlot::SetupAxisLimits(ImAxis_Y1, -500, 1900);
 
 			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
@@ -126,9 +125,9 @@ void ROTracer::WheelPage() {
 
 }
 
-void ROTracer::AngelPage() {
+void ROTracer::TotalAngelPage() {
 	_zmqLoopFlag = true;
-	if (this->_anglePageVisibility == true) {
+	if (this->_angleTotalPageVisibility == true) {
 
 		if (this->Agv == NULL) {
 			return;
@@ -136,33 +135,35 @@ void ROTracer::AngelPage() {
 
 		ImGui::BulletText("Move your Angel to change the data!");
 
-		ImGui::Checkbox("Pause", &isPause);     // duraklatma seçenegi 
+		ImGui::Checkbox("Pause", &anglePause);     // duraklatma seçenegi 
 
-		if (!isPause)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
+		if (!anglePause)      // eger checkbox'a tıklanmazsa (false)  güncel zamanı alıyor  
 		{
-			this->SGD->History = 20.0f;
-			this->SGD->Time += ImGui::GetIO().DeltaTime;
+			this->SGD->angleHistory = 20.0f;
+			this->SGD->angleTime += ImGui::GetIO().DeltaTime;
 
-			this->SGD->totalAngel.AddPoint(this->SGD->Time, this->Agv->Angle);
+			this->SGD->ReadingAngel.AddPoint(this->SGD->angleTime, this->Agv->RAngle);
+			this->SGD->WritingAngel.AddPoint(this->SGD->angleTime, this->Agv->WAngle);
 		}
-		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
-			this->SGD->Time;
+		else     // eger checkbox'a tıklanırsa en son zamanı alıyor 
+			this->SGD->angleTime;
 
 
 
-		ImGui::SliderFloat("History", &this->SGD->History, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
+		ImGui::SliderFloat("History", &this->SGD->angleHistory, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanıyor 
 
 
 		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
 
 		if (ImPlot::BeginPlot("##Scrolling", ImVec2(800, 350))) {     // grafik ölçeklendirme 
-			ImPlot::SetupAxes("ANGLE", "Speed [mm/s]");
+			ImPlot::SetupAxes("Time [s]", "Angle °");
 
-			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->Time - this->SGD->History, this->SGD->Time, ImGuiCond_Always);
-			ImPlot::SetupAxisLimits(ImAxis_Y1, -500, 1900);
+			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->angleTime - this->SGD->angleHistory, this->SGD->angleTime, ImGuiCond_Always);
+			ImPlot::SetupAxisLimits(ImAxis_Y1, -100, 100);
 
 			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
-			ImPlot::PlotLine("TOTAL ANGLE ", &this->SGD->totalAngel.Data[0].x, &this->SGD->totalAngel.Data[0].y, this->SGD->totalAngel.Data.size(), 0, this->SGD->totalAngel.Offset, 2 * sizeof(float));
+			ImPlot::PlotLine("W ANGLE ", &this->SGD->ReadingAngel.Data[0].x, &this->SGD->ReadingAngel.Data[0].y, this->SGD->ReadingAngel.Data.size(), 0, this->SGD->ReadingAngel.Offset, 2 * sizeof(float));
+			ImPlot::PlotLine("R ANGLE ", &this->SGD->WritingAngel.Data[0].x, &this->SGD->WritingAngel.Data[0].y, this->SGD->WritingAngel.Data.size(), 0, this->SGD->WritingAngel.Offset, 2 * sizeof(float));
 
 			// plotline düz cizgili grafik <=> PlotShaded gölgeli grafik  
 			ImPlot::EndPlot();
@@ -172,104 +173,121 @@ void ROTracer::AngelPage() {
 }
 
 void ROTracer::PositionPage() {
+	srand(0);
+
+	static float xs1[1000], ys1[1000], xs2[1], ys2[1];
+	for (int i = 0; i < 1000; ++i) {
+		xs1[i] = this->Agv->X;
+		ys1[i] = this->Agv->Y;
+		xs2[0] = xs1[i];
+		ys2[0] = ys1[i];
+	}
 
 
-}
-
-
-
-void ROTracer::Ping() {
-	_zmqLoopFlag = true;
-	if (this->_PingPageVisibility == true) {
-
-		if (this->Net == NULL) {
-			return;
-		}
-
-		ImGui::BulletText("Move your speed to change the data!");
-
-		ImGui::Checkbox("Pause", &isPause);     // duraklatma seçenegi 
-
-		if (!isPause)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
-		{
-			this->SGD->History = 20.0f;
-			this->SGD->Time += ImGui::GetIO().DeltaTime;
-
-			this->SGD->ping.AddPoint(this->SGD->Time, this->Net->Ping);
-
-
-		}
-		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
-			this->SGD->Time;
-
-
-
-		ImGui::SliderFloat("History", &this->SGD->History, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
-
-
-		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
-
-		if (ImPlot::BeginPlot("##Scrolling", ImVec2(400, 150))) {     // grafik ölçeklendirme 
-			ImPlot::SetupAxes("Time [s]", "Speed [mm/s]");
-
-			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->Time - this->SGD->History, this->SGD->Time, ImGuiCond_Always);
-			ImPlot::SetupAxisLimits(ImAxis_Y1, -500, 1900);
-
-			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
-			ImPlot::PlotLine("rs X", &this->SGD->ping.Data[0].x, &this->SGD->ping.Data[0].y, this->SGD->ping.Data.size(), 0, this->SGD->ping.Offset, 2 * sizeof(float));
-			// plotline düz cizgili grafik <=> PlotShaded gölgeli grafik  
-			ImPlot::EndPlot();
-		}
+	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(800, 350))) {
+		ImPlot::PlotScatter("Old Data ", xs1, ys1, 100);
+		ImPlot::PushStyleVar(ImPlotStyleVar_FillAlpha, 0.25f);
+		ImPlot::SetNextMarkerStyle(ImPlotMarker_Square, 6, ImPlot::GetColormapColor(1), IMPLOT_AUTO, ImPlot::GetColormapColor(1));
+		ImPlot::PlotScatter("NEW Data ", xs2, ys2, 50);
+		ImPlot::PopStyleVar();
+		ImPlot::EndPlot();
 	}
 }
 
-void ROTracer::ReceivedRate() {
-	_zmqLoopFlag = true;
-	if (this->_ReceivedRatePageVisibility == true) {
-
-		if (this->Net == NULL) {
-			return;
-		}
-
-		ImGui::BulletText("Move your speed to change the data!");
-
-		ImGui::Checkbox("Pause", &isPause);     // duraklatma seçenegi 
-
-		if (!isPause)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
-		{
-			this->SGD->History = 20.0f;
-			this->SGD->Time += ImGui::GetIO().DeltaTime;
-
-			this->SGD->receivedrate.AddPoint(this->SGD->Time, this->Net->ReceivedRate);
 
 
-		}
-		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
-			this->SGD->Time;
+//void ROTracer::Ping() {
+//	_zmqLoopFlag = true;
+//	if (this->_PingPageVisibility == true) {
+//
+//		if (this->Net == NULL) {
+//			return;
+//		}
+//
+//		ImGui::BulletText("Move your speed to change the data!");
+//
+//		ImGui::Checkbox("Pause", &PingPause);     // duraklatma seçenegi 
+//
+//		if (!PingPause)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
+//		{
+//			this->SGD->pingHistory = 20.0f;
+//			this->SGD->pingTime += ImGui::GetIO().DeltaTime;
+//
+//			this->SGD->ping.AddPoint(this->SGD->pingTime, this->Net->Ping);
+//
+//
+//		}
+//		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
+//			this->SGD->pingTime;
+//
+//
+//
+//		ImGui::SliderFloat("History", &this->SGD->pingHistory, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
+//
+//
+//		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
+//
+//		if (ImPlot::BeginPlot("##Scrolling", ImVec2(400, 150))) {     // grafik ölçeklendirme 
+//			ImPlot::SetupAxes("Time [s]", "Speed [mm/s]");
+//
+//			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->pingTime - this->SGD->pingHistory, this->SGD->pingTime, ImGuiCond_Always);
+//			ImPlot::SetupAxisLimits(ImAxis_Y1, -500, 1900);
+//
+//			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
+//			ImPlot::PlotLine("rs X", &this->SGD->ping.Data[0].x, &this->SGD->ping.Data[0].y, this->SGD->ping.Data.size(), 0, this->SGD->ping.Offset, 2 * sizeof(float));
+//			// plotline düz cizgili grafik <=> PlotShaded gölgeli grafik  
+//			ImPlot::EndPlot();
+//		}
+//	}
+//}
+//
+//void ROTracer::ReceivedRate() {
+//	_zmqLoopFlag = true;
+//	if (this->_ReceivedRatePageVisibility == true) {
+//
+//		if (this->Net == NULL) {
+//			return;
+//		}
+//
+//		ImGui::BulletText("Move your speed to change the data!");
+//
+//		ImGui::Checkbox("Pause", &ReceivedRatePause);     // duraklatma seçenegi 
+//
+//		if (!ReceivedRatePause)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
+//		{
+//			this->SGD->receivedrateHistory = 20.0f;
+//			this->SGD->receivedrateTime += ImGui::GetIO().DeltaTime;
+//
+//			this->SGD->receivedrate.AddPoint(this->SGD->receivedrateTime, this->Net->ReceivedRate);
+//
+//
+//		}
+//		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
+//			this->SGD->receivedrateTime;
+//
+//
+//
+//		ImGui::SliderFloat("History", &this->SGD->receivedrateHistory, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
+//
+//
+//		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
+//
+//		if (ImPlot::BeginPlot("##Scrolling", ImVec2(400, 150))) {     // grafik ölçeklendirme 
+//			ImPlot::SetupAxes("Time [s]", "Speed [mm/s]");
+//
+//			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->receivedrateTime - this->SGD->receivedrateHistory, this->SGD->receivedrateTime, ImGuiCond_Always);
+//			ImPlot::SetupAxisLimits(ImAxis_Y1, -500, 1900);
+//
+//			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
+//			ImPlot::PlotLine("rs X", &this->SGD->receivedrate.Data[0].x, &this->SGD->receivedrate.Data[0].y, this->SGD->receivedrate.Data.size(), 0, this->SGD->receivedrate.Offset, 2 * sizeof(float));
+//			// plotline düz cizgili grafik <=> PlotShaded gölgeli grafik  
+//			ImPlot::EndPlot();
+//		}
+//	}
+//
+//}
 
-
-
-		ImGui::SliderFloat("History", &this->SGD->History, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
-
-
-		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
-
-		if (ImPlot::BeginPlot("##Scrolling", ImVec2(400, 150))) {     // grafik ölçeklendirme 
-			ImPlot::SetupAxes("Time [s]", "Speed [mm/s]");
-
-			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->Time - this->SGD->History, this->SGD->Time, ImGuiCond_Always);
-			ImPlot::SetupAxisLimits(ImAxis_Y1, -500, 1900);
-
-			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
-			ImPlot::PlotLine("rs X", &this->SGD->receivedrate.Data[0].x, &this->SGD->receivedrate.Data[0].y, this->SGD->receivedrate.Data.size(), 0, this->SGD->receivedrate.Offset, 2 * sizeof(float));
-			// plotline düz cizgili grafik <=> PlotShaded gölgeli grafik  
-			ImPlot::EndPlot();
-		}
-	}
-
-}
-
-void ROTracer::Signal() {
+void ROTracer::Signal_ping_baundrate() {
 
 	_zmqLoopFlag = true;
 	if (this->_SignalPageVisibility == true) {
@@ -278,47 +296,48 @@ void ROTracer::Signal() {
 			return;
 		}
 
-		ImGui::BulletText("Move your signal to change the data!");
+		ImGui::BulletText("Move your signal,Ping, Speed to change the data!");
 
-		ImGui::Checkbox("Pause", &isPause);     // duraklatma seçenegi 
+		ImGui::Checkbox("Pause", &SignalPause);     // duraklatma seçenegi 
 
-		if (!isPause)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
+		if (!SignalPause)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
 		{
-			this->SGD->History = 20.0f;
-			this->SGD->Time += ImGui::GetIO().DeltaTime;
+			this->SGD->signalHistory = 20.0f;
+			this->SGD->signalTime += ImGui::GetIO().DeltaTime;
 
-			this->SGD->signal.AddPoint(this->SGD->Time, this->Net->Signal);
+			this->SGD->Signal_ping_baundrate.AddPoint(this->SGD->signalTime, this->Net->Signal);
+			this->SGD->ping.AddPoint(this->SGD->signalTime, this->Net->Ping);
+			this->SGD->speed.AddPoint(this->SGD->signalTime, this->Net->Speed);
 
 
 		}
 		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
-			this->SGD->Time;
+			this->SGD->signalTime;
 
 
 
-		ImGui::SliderFloat("History", &this->SGD->History, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
+		ImGui::SliderFloat("History", &this->SGD->signalHistory, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
 
 
 		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
 
-		if (ImPlot::BeginPlot("##Scrolling", ImVec2(200, 150))) {     // grafik ölçeklendirme 
+		if (ImPlot::BeginPlot("##Scrolling", ImVec2(800, 350))) {     // grafik ölçeklendirme 
 			ImPlot::SetupAxes("Time [s]", "Speed [mm/s]");
 
-			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->Time - this->SGD->History, this->SGD->Time, ImGuiCond_Always);
+			ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->signalTime - this->SGD->signalHistory, this->SGD->signalTime, ImGuiCond_Always);
 			ImPlot::SetupAxisLimits(ImAxis_Y1, -500, 1900);
 
 			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
-			ImPlot::PlotLine("rs X", &this->SGD->signal.Data[0].x, &this->SGD->signal.Data[0].y, this->SGD->signal.Data.size(), 0, this->SGD->signal.Offset, 2 * sizeof(float));
+			ImPlot::PlotLine("Signal", &this->SGD->Signal_ping_baundrate.Data[0].x, &this->SGD->Signal_ping_baundrate.Data[0].y, this->SGD->Signal_ping_baundrate.Data.size(), 0, this->SGD->Signal_ping_baundrate.Offset, 2 * sizeof(float));
+			ImPlot::PlotLine("Ping", &this->SGD->ping.Data[0].x, &this->SGD->ping.Data[0].y, this->SGD->ping.Data.size(), 0, this->SGD->ping.Offset, 2 * sizeof(float));
+			ImPlot::PlotLine("Speed", &this->SGD->speed.Data[0].x, &this->SGD->speed.Data[0].y, this->SGD->speed.Data.size(), 0, this->SGD->speed.Offset, 2 * sizeof(float));
 			// plotline düz cizgili grafik <=> PlotShaded gölgeli grafik  
 			ImPlot::EndPlot();
 		}
 	}
 }
 
-void ROTracer::wifiSpeed() {
 
-
-}
 
 
 
@@ -404,158 +423,94 @@ void ROTracer::LoginPage() {
 	if (!this->_loginPageVisibility) {
 
 		if (!page1) {
-		
+
 			ImGui::Begin("New Page");
 			ImGui::SetNextWindowSize(ImVec2(1700, 900));
 			// Yeni sayfa içeriði ve IP adresi bilgisi
-		   //--------------------------------------------------
-			//if (ImGui::CollapsingHeader("NET"))
-			//{
-			//	
-			//
-			//	
-
-		
-			//	ImGui::SetNextWindowSize(ImVec2(1400, 400));
-			//	if (ImGui::Begin("Graphs"))
-			//	{
-			//		ImGui::TableNextColumn();
-			//		ImGui::Text("DeviceMacAddress:",this->Net->DeviceMacAddress);
-			//		ImGui::TableNextColumn();
-			//		ImGui::Text("SSID:",this->Net->SSID);
-			//		ImGui::TableNextColumn();
-			//		ImGui::Text("Status:", this->Net->Status);
-			//		ImGui::TableNextColumn();
-			//		
-			//			_PingPageVisibility = true;
-			//			this->Ping();
-			//		
-			//		ImGui::Text("*************************************************************************************************** ");
-			//		ImGui::TableNextColumn();
-			//		_ReceivedRatePageVisibility = true;
-			//		this->ReceivedRate();
-			//		ImGui::Text("*************************************************************************************************** ");
-			//		ImGui::TableNextColumn();
-			//		_SignalPageVisibility = true;
-			//		this->Signal();
-			//		ImGui::Text("*************************************************************************************************** ");
-
-			//		/*_wifiSpeedPageVisibility = true;
-			//		this->wifiSpeed();*/
-
-			//		ImGui::End();
-
-
-
-			//	}
-
-			//}
+		  
 
 			if (ImGui::CollapsingHeader("NET"))
 			{
 				ImGui::TableNextColumn();
-					ImGui::Text("DeviceMacAddress:",this->Net->DeviceMacAddress);
-					ImGui::TableNextColumn();
-						ImGui::Text("SSID:",this->Net->SSID);
-						ImGui::TableNextColumn();
-						ImGui::Text("Status:", this->Net->Status);
-					ImGui::Columns(3); // 3 sütun oluştur
-					ImGui::SetColumnWidth(0, 400); // ilk sütunun genişliğini ayarla
-
-					// ilk sütunda "Ping" grafiğini görüntüle
-					if (ImGui::BeginChild("Ping", ImVec2(0, 300), true))
-					{
-						// Ping grafiğini çizdir
-						_PingPageVisibility = true;
-						this->Ping();
-						ImGui::EndChild();
-					}
-
-					ImGui::NextColumn(); // bir sonraki sütuna geç
-					ImGui::SetColumnWidth(1, 400); // ilk sütunun genişliğini ayarla
-					// ikinci sütunda "Received Rate" grafiğini görüntüle
-					if (ImGui::BeginChild("ReceivedRate", ImVec2(0, 300), true))
-					{
-						// Received Rate grafiğini çizdir
-						_ReceivedRatePageVisibility = true;
-						this->ReceivedRate();
-						ImGui::EndChild();
-					}
-
-					ImGui::NextColumn(); // bir sonraki sütuna geç
-
-					ImGui::SetColumnWidth(2, 400); // üçüncü sütunun genişliğini ayarla
-					if (ImGui::BeginChild("Signal", ImVec2(0, 300), true))
-					{
-						// "Signal" grafiğini çizdir
-						_SignalPageVisibility = true;
-						this->Signal();
-						ImGui::EndChild();
-					}
-					ImGui::Columns(1); // sütunları sıfırla
-					
+				ImGui::Text("DeviceMacAddress: %s",this->Net->DeviceMacAddress.c_str());
 				
-			}
+				ImGui::TableNextColumn();
+				ImGui::Text("SSID: %s", this->Net->SSID.c_str());
+				ImGui::TableNextColumn();
+				ImGui::Text("Status: %s", this->Net->Status.c_str());
 
+				// İlk iki grafiği yan yana sırala
+				ImGui::BeginChild("Ping", ImVec2(900, 500), true);
+				_SignalPageVisibility = true;
+				this->Signal_ping_baundrate();
+				ImGui::EndChild();
+
+				//ImGui::SameLine();
+
+				//ImGui::BeginChild("ReceivedRate", ImVec2(600, 300), true);
+				//_ReceivedRatePageVisibility = true;
+				//this->ReceivedRate();
+				//ImGui::EndChild();
+
+				//// Son grafiği hemen altına sırala
+				//ImGui::BeginChild("Signal", ImVec2(600, 300), true);
+				//_SignalPageVisibility = true;
+				//this->Signal();
+				//ImGui::EndChild();
+			}
 
 			if (ImGui::CollapsingHeader("AGV"))
 			{
-				if (ImGui::BeginTable("split", 2))
-				{
-					ImGui::TableNextColumn(); ImGui::Checkbox("Position", &position);
-					ImGui::TableNextColumn(); ImGui::Checkbox("Angle", &angle);
-					ImGui::TableNextColumn(); ImGui::Checkbox("Speed", &speed);
-					ImGui::TableNextColumn(); ImGui::Checkbox("Wheel", &wheel);
+				ImGui::Checkbox("Wheel", &wheel);
+				ImGui::SameLine();
+				ImGui::Checkbox("Speed", &Agvspeed);
+				ImGui::SameLine();
+				ImGui::Checkbox("Angle", &totalangle);
+				ImGui::SameLine();
+				ImGui::Checkbox("Position", &position);
 
-					// pozisyon grafiði 
-					if (position == true)//position checkbox ýna týklanýnca
-					{
-						ImGui::Begin("Position Chart");
-						_positionPageVisibility = true;
-						this->PositionPage();
 
-						// x ve y kordinatý alýnnan grafik  ücgen ve daireli 
-						ImGui::End();
-					}
+				if (Agvspeed) {
+					ImGui::BeginChild("speed", ImVec2(900, 500), true);
+					_speedPageVisibility = true;
+					this->SpeedPage();
+					ImGui::EndChild();
 
-					// açý grafiði
-					if (angle == true) //angle checkbox ýna týklanýnca
-					{
-
-						ImGui::Begin("Angle Chart");
-						_anglePageVisibility = true;
-						this->AngelPage();
-						ImGui::End();
-
-					}
-
-					// hýz grafiði
-					if (speed == true)//speed checkbox ýna týklanýnca
-					{
-						ImGui::Begin("Speed Chart");
-						_speedPageVisibility = true;
-						this->SpeedPage();
-						ImGui::End();
-					}
-
-					// tekerlek açý grafiði
-					if (wheel == true)//wheel checkbox ýna týklanýnca
-					{
-						ImGui::Begin("Wheel Chart");
-						_wheelPageVisibility = true;
-						this->WheelPage();
-						ImGui::End();
-
-					}
-					ImGui::EndTable();
 				}
+
+				if (wheel) {
+					ImGui::BeginChild("Ping", ImVec2(900, 500), true);
+					_wheelPageVisibility = true;
+					this->WheelPage();
+					ImGui::EndChild();
+
+				}
+
+				if (totalangle) {
+					ImGui::BeginChild("Total Angle", ImVec2(900, 500), true);
+					_angleTotalPageVisibility = true;
+					this->TotalAngelPage();
+					ImGui::EndChild();
+
+				}
+
+				if (position) {
+					ImGui::BeginChild("Postion", ImVec2(900, 500), true);
+					_positionPageVisibility = true;
+					this->PositionPage();
+					ImGui::EndChild();
+				}
+
+
 			}
+			
 			ImGui::End();
 
 		}
 	}
-
 }
+
+
 //-------------------------------DATA  PARSER BLOCK----------------------------------------------------------
 
 void ROTracer::ZMQDataStreamParser()
@@ -685,7 +640,7 @@ void ROTracer::ZMQDataStreamParser()
 
 						}
 
-						//	printf("%s\n", pch);
+							printf("%s\n", pch);
 						pch = strtok(NULL, ";");
 					}
 					sayac = 0;
@@ -700,5 +655,6 @@ void ROTracer::ZMQDataStreamParser()
 	zmq_ctx_destroy(context);
 
 	_isRunning = false;
+
 
 }

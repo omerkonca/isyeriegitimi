@@ -77,11 +77,24 @@ public:
 
 	ScrollingBuffer ping;
 	ScrollingBuffer receivedrate;
-	ScrollingBuffer signal;
+	ScrollingBuffer Signal_ping_baundrate;
+	ScrollingBuffer speed;
 
 
 	float Time;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
+	float wheelTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
+	float angleTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
+	float speedTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
+	float pingTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
+	float receivedrateTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
+	float signalTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
 	float History;                       // geçmiþ zamaný depolamak için 
+	float angleHistory;                       // geçmiþ zamaný depolamak için 
+	float speedHistory;                       // geçmiþ zamaný depolamak için 
+	float pingHistory;                       // geçmiþ zamaný depolamak için 
+	float receivedrateHistory;                       // geçmiþ zamaný depolamak için 
+	float signalHistory;                       // geçmiþ zamaný depolamak için 
+	float wheelHistory;                       // geçmiþ zamaný depolamak için 
 };
 
 class ROTracer
@@ -105,8 +118,8 @@ public:                   //constructor
 	bool _isRunning;
 	bool page1 = true;
 	bool position = false;
-	bool angle = false;
-	bool speed = false;
+	bool totalangle = false;
+	bool Agvspeed = false;
 	bool wheel = false;
 
 
@@ -117,7 +130,16 @@ public:                   //constructor
 	//bool wifiSpeed = false;
 
 
-	bool isPause = false;       // grafik durdurma durumunu tutma       
+	bool isPause = false;       // grafik durdurma durumunu tutma  
+	bool anglePause = false;       // grafik durdurma durumunu tutma  
+	bool speedPause = false;       // grafik durdurma durumunu tutma  
+	bool PingPause = false;       // grafik durdurma durumunu tutma  
+	bool ReceivedRatePause = false;       // grafik durdurma durumunu tutma  
+	bool SignalPause = false;       // grafik durdurma durumunu tutma  
+	bool wheelPause = false;       // grafik durdurma durumunu tutma  
+
+
+
 	SpeedGraphicData* SGD;    // SpeedGraphicData class'ýnýn nesnesini oluþturduk  
 
 
@@ -126,7 +148,7 @@ private:
 	bool _speedPageVisibility;        //hýz grafik sayfasýnýn görünürlüðü
 	bool _positionPageVisibility;
 	bool _wheelPageVisibility;
-	bool _anglePageVisibility;
+	bool _angleTotalPageVisibility;
 
 
 	bool _PingPageVisibility;
@@ -140,10 +162,10 @@ private:
 	void ZMQDataStreamParser();       // parse işlemi private onun için burda yoksa yukarý da yazabilirdik
 	void PositionPage();
 	void WheelPage();
-	void AngelPage();
+	void TotalAngelPage();
 	void Ping();
 	void ReceivedRate();
-	void Signal();
+	void Signal_ping_baundrate();
 	void wifiSpeed();
 };
 
