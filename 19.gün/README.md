@@ -1,3 +1,3 @@
 # İşyeri Eğitimi
 
-## bu kısımda rotracer güncellemesine devam edildi
+## bu kısımda rotracer güncellemesine devam edildi ekstra grafikler ayarlandı
