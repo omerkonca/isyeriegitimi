@@ -88,6 +88,7 @@ public:
 	float pingTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
 	float receivedrateTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
 	float signalTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
+	
 	float History= 20.0f;                       // geçmiþ zamaný depolamak için 
 	float angleHistory= 20.0f;                       // geçmiþ zamaný depolamak için 
 	float speedHistory = 20.0f;                       // geçmiþ zamaný depolamak için 

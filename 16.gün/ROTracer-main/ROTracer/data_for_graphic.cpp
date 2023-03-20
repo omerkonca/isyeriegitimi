@@ -175,20 +175,22 @@ void ROTracer::TotalAngelPage() {
 void ROTracer::PositionPage() {
 	srand(0);
 
-	static float xs1[1000], ys1[1000], xs2[1], ys2[1];
+
+	float xs1[1000], ys1[1000];
 	for (int i = 0; i < 1000; ++i) {
 		xs1[i] = this->Agv->X;
 		ys1[i] = this->Agv->Y;
-		xs2[0] = xs1[i];
-		ys2[0] = ys1[i];
 	}
 
+	// xs2 ve ys2 dizileri değiştirilmeden kullanılabilir
+	float xs2[1], ys2[1];
 
+	// Kodun geri kalan kısmı değiştirilmeden kullanılabilir
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(800, 350))) {
-		ImPlot::PlotScatter("Old Data ", xs1, ys1, 100);
+		ImPlot::PlotScatter("Old Data", xs1, ys1, 1000);
 		ImPlot::PushStyleVar(ImPlotStyleVar_FillAlpha, 0.25f);
-		ImPlot::SetNextMarkerStyle(ImPlotMarker_Square, 6, ImPlot::GetColormapColor(1), IMPLOT_AUTO, ImPlot::GetColormapColor(1));
-		ImPlot::PlotScatter("NEW Data ", xs2, ys2, 50);
+		ImPlot::SetNextMarkerStyle(ImPlotMarker_Up, 6, ImPlot::GetColormapColor(1), IMPLOT_AUTO, ImPlot::GetColormapColor(1));
+		ImPlot::PlotScatter("New Data", xs2, ys2, 1);
 		ImPlot::PopStyleVar();
 		ImPlot::EndPlot();
 	}
@@ -600,7 +602,7 @@ void ROTracer::ZMQDataStreamParser()
 
 						}
 
-						//printf("%s\n", pch);
+						printf("%s\n", pch);
 						pch = strtok(NULL, ";");
 					}
 					sayac = 0;
