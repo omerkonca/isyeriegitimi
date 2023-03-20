@@ -36,6 +36,7 @@
     <ClInclude Include="data_for_graphic.h">
       <Filter>imgui</Filter>
     </ClInclude>
+    <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui.cpp">

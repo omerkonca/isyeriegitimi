@@ -74,6 +74,8 @@ public:
 	ScrollingBuffer totalAngel;
 	static ScrollingBuffer totalX;
 	static ScrollingBuffer totalY;
+	ScrollingBuffer StokingPosition;
+
 
 	ScrollingBuffer ping;
 	ScrollingBuffer receivedrate;
@@ -88,6 +90,9 @@ public:
 	float pingTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
 	float receivedrateTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
 	float signalTime;                          // geçen zamaný depolamak için oluþturdugumuz deðiþken 
+	 float TimeReceivedRate;
+
+	float TimePosition;
 	
 	float History= 20.0f;                       // geçmiþ zamaný depolamak için 
 	float angleHistory= 20.0f;                       // geçmiþ zamaný depolamak için 
@@ -96,6 +101,7 @@ public:
 	float receivedrateHistory;                       // geçmiþ zamaný depolamak için 
 	float signalHistory= 20.0f;                       // geçmiþ zamaný depolamak için 
 	float wheelHistory= 20.0f;                       // geçmiþ zamaný depolamak için 
+	float HistoryPosition = 20.0f;
 };
 
 class ROTracer
@@ -139,6 +145,8 @@ public:                   //constructor
 	bool SignalPause = false;       // grafik durdurma durumunu tutma  
 	bool wheelPause = false;       // grafik durdurma durumunu tutma  
 
+	bool isPausePosition = false;
+
 
 
 	SpeedGraphicData* SGD;    // SpeedGraphicData class'ýnýn nesnesini oluþturduk  
@@ -164,10 +172,10 @@ private:
 	void PositionPage();
 	void WheelPage();
 	void TotalAngelPage();
-	void Ping();
-	void ReceivedRate();
 	void Signal_ping_baundrate();
-	void wifiSpeed();
+
+	void positionjson();
+
 };
 
 

@@ -5,6 +5,7 @@
 #include "implot/implot_internal.h"
 
 
+
 #include <string>
 #include "data_for_graphic.h"
 
@@ -29,6 +30,7 @@
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
 #endif
 #include <iostream>
+#include "main.h"
 
 using namespace std;
 
@@ -44,6 +46,9 @@ static void glfw_error_callback(int error, const char* description)
 // Main code
 int main(int, char**)
 {
+
+
+
 	_rot = new ROTracer();     // kütüphane nesnesini oluþturma
 
 	glfwSetErrorCallback(glfw_error_callback);
@@ -129,7 +134,7 @@ int main(int, char**)
 #ifdef __EMSCRIPTEN__
 	EMSCRIPTEN_MAINLOOP_END;
 #endif
-	_rot->StopStreamParser();               //parse (parçalama )iþlemini durdurduk.parçalama iþlemini baþlatmayý loginPage() de yapýyoruz. 
+	_rot->StopStreamParser();               //parse (parçalama )işlemini durdurduk.parçalama işlemini başlatmayı loginPage() de yapıyoruz. 
 	// Cleanup
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();

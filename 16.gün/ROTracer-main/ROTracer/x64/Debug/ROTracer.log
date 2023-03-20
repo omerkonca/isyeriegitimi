@@ -1,10 +1,3 @@
-﻿  data_for_graphic.cpp
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(52,68): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(53,68): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(181,21): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(182,21): warning C4244: '=': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(313,78): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(314,61): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(315,62): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(563,23): warning C4130: '==': dize sabitinin adresi üzerinde mantıksal işlem
+﻿  implot_demo.cpp
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\implot\implot_demo.cpp(1996,13): warning C4189: 'angle': yerel değişken başlatıldı ancak başvurulmadı
   ROTracer.vcxproj -> C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\x64\Debug\ROTracer.exe

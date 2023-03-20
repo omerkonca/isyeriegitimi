@@ -30,7 +30,7 @@ void ROTracer::StopStreamParser() {
 	this->_zmqLoopFlag = false;
 }
 
-//--------------------------------grafik çizme alaný---------------------------------------------------------------
+//--------------------------------grafik çizme alanı---------------------------------------------------------------
 
 void ROTracer::SpeedPage() {
 	_zmqLoopFlag = true;
@@ -173,28 +173,147 @@ void ROTracer::TotalAngelPage() {
 }
 
 void ROTracer::PositionPage() {
-	srand(0);
+	_zmqLoopFlag = true;
+	if (this->_positionPageVisibility == true) {
+
+		if (this->Agv == NULL) {
+			return;
+		}
+		/*
+		ImGui::BulletText("Move your position to change the data!");
+
+		ImGui::Checkbox("Pause", &isPausePosition);     // duraklatma seçenegi
+
+		if (!isPausePosition)      // eger checkbox'a tıklanmazsa (false)  güncel zamanı alıyor
+		{
+
+			this->SGD->TimePosition += ImGui::GetIO().DeltaTime;
+
+			this->SGD->StokingPosition.AddPoint(this->Agv->X, this->Agv->Y);
 
 
-	float xs1[1000], ys1[1000];
-	for (int i = 0; i < 1000; ++i) {
-		xs1[i] = this->Agv->X;
-		ys1[i] = this->Agv->Y;
-	}
+		}
+		else     // eger checkbox'a tıklanırsa en son zamanı alıyor
+			this->SGD->TimeReceivedRate;
 
-	// xs2 ve ys2 dizileri değiştirilmeden kullanılabilir
-	float xs2[1], ys2[1];
+		ImGui::SliderFloat("History", &this->SGD->HistoryPosition, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanıyor
 
-	// Kodun geri kalan kısmı değiştirilmeden kullanılabilir
-	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(800, 350))) {
-		ImPlot::PlotScatter("Old Data", xs1, ys1, 1000);
-		ImPlot::PushStyleVar(ImPlotStyleVar_FillAlpha, 0.25f);
-		ImPlot::SetNextMarkerStyle(ImPlotMarker_Up, 6, ImPlot::GetColormapColor(1), IMPLOT_AUTO, ImPlot::GetColormapColor(1));
-		ImPlot::PlotScatter("New Data", xs2, ys2, 1);
-		ImPlot::PopStyleVar();
-		ImPlot::EndPlot();
+
+		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
+		*/
+
+
+
+		//	printf("%d   %d\n", this->Agv->X, this->Agv->Y);
+			//
+		if (this->SGD->StokingPosition.Data.size() > 0)
+			if (ImPlot::BeginPlot("Scatter Plot", ImVec2(800, 350))) {
+				ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
+
+				ImPlot::PlotScatter("pos", &this->SGD->StokingPosition.Data[0].x, &this->SGD->StokingPosition.Data[0].y, this->SGD->StokingPosition.Data.size(), 0, 0, 2 * sizeof(int));
+				
+							
+								ImPlot::PushStyleVar(ImPlotStyleVar_FillAlpha, 0.25f);
+								ImPlot::SetNextMarkerStyle(ImPlotMarker_Up, 6, ImPlot::GetColormapColor(1), IMPLOT_AUTO, ImPlot::GetColormapColor(1));
+								//ImPlot::SetNextMarkerStyle(ImPlotMarker_Square, 6);
+								int lastIndex = this->SGD->StokingPosition.Data.Size - 1;
+
+								ImPlot::PlotScatter("p2 ", &this->SGD->StokingPosition.Data[lastIndex].x, &this->SGD->StokingPosition.Data[lastIndex].y, 1);
+
+								//ImPlot::PopStyleVar();
+							
+				
+				ImPlot::EndPlot();
+			}
+
+		/*
+		
+		static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs)
+		{
+			return ImVec2(lhs.x + rhs.x, lhs.y + rhs.y);
+		}
+
+
+		static inline ImVec2 ImRotate(const ImVec2& v, float cos_a, float sin_a)
+		{
+			return ImVec2(v.x * cos_a - v.y * sin_a, v.x * sin_a + v.y * cos_a);
+		}
+
+
+		void ImageRotated(ImTextureID tex_id, ImVec2 center, ImVec2 size, float angle)
+		{
+			ImDrawList* draw_list = ImGui::GetWindowDrawList();
+
+			float cos_a = cosf(angle);
+			float sin_a = sinf(angle);
+			ImVec2 pos[4] =
+			{
+				center + ImRotate(ImVec2(-size.x * 0.5f, -size.y * 0.5f), cos_a, sin_a),
+				center + ImRotate(ImVec2(+size.x * 0.5f, -size.y * 0.5f), cos_a, sin_a),
+				center + ImRotate(ImVec2(+size.x * 0.5f, +size.y * 0.5f), cos_a, sin_a),
+				center + ImRotate(ImVec2(-size.x * 0.5f, +size.y * 0.5f), cos_a, sin_a)
+			};
+			ImVec2 uvs[4] =
+			{
+				ImVec2(0.0f, 0.0f),
+				ImVec2(1.0f, 0.0f),
+				ImVec2(1.0f, 1.0f),
+				ImVec2(0.0f, 1.0f)
+			};
+
+			draw_list->AddImageQuad(tex_id, pos[0], pos[1], pos[2], pos[3], uvs[0], uvs[1], uvs[2], uvs[3], IM_COL32_WHITE);
+		}
+
+		*/
+
+
+		//------------------------------------------------------------------------------------
+		/*void Demo_CustomRendering() {
+			if (ImPlot::BeginPlot("##CustomRend")) {
+				ImVec2 cntr = ImPlot::PlotToPixels(ImPlotPoint(0.5f, 0.5f));
+				ImVec2 rmin = ImPlot::PlotToPixels(ImPlotPoint(0.25f, 0.75f));
+				ImVec2 rmax = ImPlot::PlotToPixels(ImPlotPoint(0.75f, 0.25f));
+				ImPlot::PushPlotClipRect();
+				ImPlot::GetPlotDrawList()->AddCircleFilled(cntr, 20, IM_COL32(255, 255, 0, 255), 20);
+				ImPlot::GetPlotDrawList()->AddRect(rmin, rmax, IM_COL32(128, 0, 255, 255));
+
+				srand(359);
+				int angle = rand();
+
+				ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(0.0f, 0.0f));
+				ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(0.5f, 0.0f));
+				ImVec2 p3 = ImPlot::PlotToPixels(ImPlotPoint(0.25f, 1.f));
+
+				ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(128, 0, 255, 255));
+				ImPlot::PopPlotClipRect();
+				ImPlot::EndPlot();
+			}
+		}*/
+
 	}
 }
+
+//void ROTracer::positionjson() {
+//
+//
+//	int main()
+//	{
+//		std::ifstream input_file("example.json");
+//		std::stringstream buffer;
+//		buffer << input_file.rdbuf();
+//		std::string json_data = buffer.str();
+//
+//		boost::property_tree::ptree pt;
+//		std::istringstream is(json_data);
+//		boost::property_tree::json_parser::read_json(is, pt);
+//
+//		std::cout << "Name: " << pt.get<std::string>("name") << std::endl;
+//		std::cout << "Age: " << pt.get<int>("age") << std::endl;
+//		std::cout << "City: " << pt.get<std::string>("city") << std::endl;
+//
+//		return 0;
+//	}
+//}
 
 
 
@@ -290,13 +409,13 @@ void ROTracer::PositionPage() {
 //}
 
 void ROTracer::Signal_ping_baundrate() {
-	
+
 	_zmqLoopFlag = true;
-	
+
 	if (this->_SignalPageVisibility == true) {
-	
+
 		if (this->Net == NULL) {
-		
+
 			return;
 		}
 
@@ -309,22 +428,22 @@ void ROTracer::Signal_ping_baundrate() {
 		{
 
 			this->SGD->signalTime += ImGui::GetIO().DeltaTime;
-		
+
 			this->SGD->Signal_ping_baundrate.AddPoint(this->SGD->signalTime, this->Net->Signal);
 			this->SGD->ping.AddPoint(this->SGD->signalTime, this->Net->Ping);
 			this->SGD->speed.AddPoint(this->SGD->signalTime, this->Net->Speed);
-			
-			
+
+
 		}
 		else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
-		
-		
+
+
 			this->SGD->signalTime;
-		
-		
-		
-	
-		
+
+
+
+
+
 
 		ImGui::SliderFloat("History", &this->SGD->signalHistory, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
 
@@ -346,7 +465,7 @@ void ROTracer::Signal_ping_baundrate() {
 		}
 	}
 
-		
+
 }
 
 
@@ -356,7 +475,7 @@ void ROTracer::Signal_ping_baundrate() {
 
 
 
-//--------------------------------giriþ sayfasý--------------------------------------------------------------------
+//--------------------------------giriş sayfası--------------------------------------------------------------------
 
 void ROTracer::LoginPage() {
 	//_zmqLoopFlag = false;
@@ -436,16 +555,16 @@ void ROTracer::LoginPage() {
 	if (!this->_loginPageVisibility) {
 
 		if (!page1) {
-		
+
 
 			ImGui::Begin("New Page ");
 			ImGui::SetNextWindowSize(ImVec2(1700, 900));
 			// Yeni sayfa içeriði ve IP adresi bilgisi
-		
+
 
 			if (ImGui::CollapsingHeader("NET"))
 			{
-			
+
 				ImGui::TableNextColumn();
 				ImGui::Text("DeviceMacAddress: %s", this->Net->DeviceMacAddress.c_str());
 
@@ -531,145 +650,179 @@ void ROTracer::LoginPage() {
 void ROTracer::ZMQDataStreamParser()
 {
 
+
 	void* context = zmq_ctx_new();
 	void* subscriber = zmq_socket(context, ZMQ_SUB);
 	std::string take_ip = this->IpAddress;
 	std::string  a = "tcp://" + take_ip + ":5556";
-	//std::string b = ("tcp://%s:%d", take_ip,take_port);    // opsiyonel kullaným 
+	//std::string b = ("tcp://%s:%d", take_ip,take_port);    // opsiyonel kullanım 
 
 	int rc = zmq_connect(subscriber, a.c_str());  //"tcp://192.168.2.125:5556"
 	rc = zmq_setsockopt(subscriber, ZMQ_SUBSCRIBE, "", 0);
 
-	const int topic_size = 5;
-	const int msg_size = 128;
+	//const int topic_size = 5;
+	//const int msg_size = 128;
 
-	char topic[topic_size] = { 0 };
-	char msg[msg_size] = { 0 };
-	std::string new_msg(msg);
+	//char topic[topic_size] = { 0 };
+	//char msg[msg_size] = { 0 };
+	//std::string new_msg(msg);
 	size_t sayac = 0;
 	char* pch;
 	_isRunning = true;
 
-	printf("start");
+	fprintf(stdout, "start");
 
 	while (this->_zmqLoopFlag)
 	{
-		rc = zmq_recv(subscriber, topic, topic_size, 0);
-		if (rc != -1)
-			fprintf(stdout, "TOPIC: %s \n", topic);
+		zmq_msg_t zmq_topic;
+		zmq_msg_t zmq_message;
 
-		rc = zmq_recv(subscriber, msg, msg_size, 0);
+		zmq_msg_init(&zmq_topic);
+		rc = zmq_msg_recv(&zmq_topic, subscriber, 0);
+
+		zmq_msg_init(&zmq_message);
+		rc = zmq_msg_recv(&zmq_message, subscriber, 0);
+
+		int zmq_topic_size = zmq_msg_size(&zmq_topic);
+		int zmq_message_size = zmq_msg_size(&zmq_message);
+
+		char* zmq_topic_data = (char*)malloc(zmq_topic_size + 1);
+		memcpy(zmq_topic_data, zmq_msg_data(&zmq_topic), zmq_topic_size);
+		zmq_msg_close(&zmq_topic);
+		zmq_topic_data[zmq_topic_size] = 0;
+
+		char* zmq_message_data = (char*)malloc(zmq_message_size + 1);
+		memcpy(zmq_message_data, zmq_msg_data(&zmq_message), zmq_message_size);
+		zmq_msg_close(&zmq_message);
+		zmq_message_data[zmq_message_size] = 0;
+
+		//rc = zmq_recv(subscriber, topic, topic_size, 0);
+		/*if (rc != -1) {
+			fprintf(stdout, "TOPIC: %s \n", zmq_topic_data);
+			fprintf(stdout, "MSG: %s \n", zmq_message_data);
+		}*/
+
+		//rc = zmq_recv(subscriber, msg, msg_size, 0);
 		if (rc != -1) {
-			if (topic == "real")         //gelen veri tipine göre parse iþlemi yapacak 
-			{
-				if (std::strcmp("real", topic) == 0) {
-					pch = strtok(msg, ";");
-					while (pch != NULL)
-					{
-						if (sayac == 0) {
-							Agv->X = stoi(pch);
-							sayac++;
 
-						}
-						else if (sayac == 1) {
-							Agv->Y = stoi(pch);
-							sayac++;
+			if (std::strcmp("real", zmq_topic_data) == 0) {
+				pch = strtok(zmq_message_data, ";");
+				while (pch != NULL)
+				{
+					if (sayac == 0) {
+						Agv->X = stoi(pch);
+						sayac++;
 
-						}
-						else if (sayac == 2) {
-							Agv->Angle = std::stof(pch);
-							sayac++;
-
-						}
-						else if (sayac == 3) {
-							Agv->WSpeed = stoi(pch);
-							sayac++;
-
-						}
-						else if (sayac == 4) {
-							Agv->RSpeed = stoi(pch);
-							sayac++;
-
-						}
-						else if (sayac == 5) {
-							Agv->WAngle = std::stof(pch);
-							sayac++;
-
-						}
-						else if (sayac == 6) {
-							Agv->RAngle = std::stof(pch);
-							sayac++;
-
-						}
-
-						printf("%s\n", pch);
-						pch = strtok(NULL, ";");
 					}
-					sayac = 0;
-				}
-				//printf("-----------------------");
-				//fprintf(stdout, "MSG: %s \n", msg);
-			}
-			else {
-				if (std::strcmp("net", topic) == 0) {
-					pch = strtok(msg, ";");
-					while (pch != NULL)
-					{
-						if (sayac == 0) {
-							Net->DeviceMacAddress = std::string(msg);
-							sayac++;
+					else if (sayac == 1) {
+						Agv->Y = stoi(pch);
+						sayac++;
 
-						}
-						else if (sayac == 1) {
-							Net->Ping = stoi(pch);
-							sayac++;
-
-						}
-						else if (sayac == 2) {
-							Net->ReceivedRate = stoi(pch);
-							sayac++;
-
-						}
-						else if (sayac == 3) {
-							Net->Signal = stoi(pch);
-							sayac++;
-
-						}
-						else if (sayac == 4) {
-							Net->Speed = stoi(pch);
-							sayac++;
-
-						}
-						else if (sayac == 5) {
-							Net->SSID = std::string(msg);;
-							sayac++;
-
-						}
-						else if (sayac == 6) {
-							Net->Status = std::string(msg);
-							sayac++;
-						}
-						else if (sayac == 7) {
-							Net->TransmitededRate = stoi(pch);
-							sayac++;
-
-						}
-
-						printf("%s\n", pch);
-						pch = strtok(NULL, ";");
 					}
-					sayac = 0;
-				}
-				//printf("-----------------------");
-				//fprintf(stdout, "MSG: %s \n", msg);
+					else if (sayac == 2) {
+						Agv->Angle = std::stof(pch);
+						sayac++;
 
+					}
+					else if (sayac == 3) {
+						Agv->WSpeed = stoi(pch);
+						sayac++;
+
+					}
+					else if (sayac == 4) {
+						Agv->RSpeed = stoi(pch);
+						sayac++;
+
+					}
+					else if (sayac == 5) {
+						Agv->WAngle = std::stof(pch);
+						sayac++;
+
+					}
+					else if (sayac == 6) {
+						Agv->RAngle = std::stof(pch);
+						sayac++;
+
+					}
+
+					//printf("%s\n", pch);
+					pch = strtok(NULL, ";");
+				}
+				sayac = 0;
+
+				this->SGD->StokingPosition.AddPoint(this->Agv->X, this->Agv->Y);
 			}
+			else if (std::strcmp("net", zmq_topic_data) == 0) {
+				pch = strtok(zmq_message_data, ";");
+				while (pch != NULL)
+				{
+					if (sayac == 0) {
+						Net->DeviceMacAddress = std::string(pch);
+						sayac++;
+
+					}
+					else if (sayac == 1) {
+						Net->Ping = stoi(pch);
+						sayac++;
+
+					}
+					else if (sayac == 2) {
+						Net->ReceivedRate = stoi(pch);
+						sayac++;
+
+					}
+					else if (sayac == 3) {
+						Net->Signal = stoi(pch);
+						sayac++;
+
+					}
+					else if (sayac == 4) {
+						Net->Speed = stoi(pch);
+						sayac++;
+
+					}
+					else if (sayac == 5) {
+						Net->SSID = std::string(pch);;
+						sayac++;
+
+					}
+					else if (sayac == 6) {
+						Net->Status = std::string(pch);
+						sayac++;
+					}
+					else if (sayac == 7) {
+						Net->TransmitededRate = stoi(pch);
+						sayac++;
+
+					}
+
+					//	printf("%s\n", pch);
+					pch = strtok(NULL, ";");
+				}
+				sayac = 0;
+			}
+			/*
+			else if (std::strcmp("route", topic) == 0) {
+			}
+			else if (std::strcmp("sim", topic) == 0) {
+			}
+			else if (std::strcmp("curve", topic) == 0) {
+			}*/
+
+
+			//fprintf(stdout, "----------------------- \n");
+
 		}
+
+
+		//  serbest bırakma 
+		free(zmq_topic_data);
+		free(zmq_message_data);
 	}
+
 	zmq_close(subscriber);
 	zmq_ctx_destroy(context);
 
 	_isRunning = false;
-
 
 }
