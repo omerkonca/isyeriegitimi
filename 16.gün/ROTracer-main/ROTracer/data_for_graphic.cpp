@@ -1,10 +1,7 @@
 ﻿#include "data_for_graphic.h"   //data_for_graphic deki veriler için çagýrýyoruz 
-#include <imgui_internal.h>
 
 
-#include "rapidjson/document.h"
-#include "rapidjson/writer.h"
-#include "rapidjson/stringbuffer.h"
+
 
 
 using namespace std;
@@ -185,75 +182,93 @@ void ROTracer::PositionPage() {
 	_zmqLoopFlag = true;
 	if (this->_positionPageVisibility == true) {
 
+
+		//if (ImPlot::BeginPlot("##EqualAxes", ImVec2(-1, 0), ImPlotFlags_Equal)) {
+		//	int x1 = 4;
+		//	int y1 = 2;
+		//	int r = 5;
+
+		//	float angle = 45;
+
+		//	float x_1 = x1 + cos(angle * PI / 180) * r;   //üst 
+		//	float y_1 = y1 + sin(angle * PI / 180) * r;
+
+		//	float x_2 = x1 + cos((angle + 120) * PI / 180) * r;  // sol alt 
+		//	float y_2 = y1 + sin((angle + 120) * PI / 180) * r;
+
+		//	float x_3 = x1 + cos((angle + 240) * PI / 180) * r;    //sağ alt 
+		//	float y_3 = y1 + sin((angle + 240) * PI / 180) * r;
+
+
+		//	ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(x_2, y_2));    //sol alt 
+		//	ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(x_3, y_3));     // sag alt 
+		//	ImVec2 p3 = ImPlot::PlotToPixels(ImPlotPoint(x_1, y_1));     // tepe
+
+
+		//	//ImPlot::SetupAxis(ImAxis_X2, NULL, ImPlotAxisFlags_AuxDefault);
+		//	//ImPlot::SetupAxis(ImAxis_Y2, NULL, ImPlotAxisFlags_AuxDefault);
+		//	//ImPlot::SetAxes(ImAxis_X2, ImAxis_Y2);
+
+		//	ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(128, 0, 255, 255));
+		//	ImPlot::EndPlot();
+		//}
+
 		if (this->Agv == NULL) {
 			return;
 		}
-		/*
-		ImGui::BulletText("Move your position to change the data!");
 
-		ImGui::Checkbox("Pause", &isPausePosition);     // duraklatma seçenegi
-
-		if (!isPausePosition)      // eger checkbox'a tıklanmazsa (false)  güncel zamanı alıyor
-		{
-
-			this->SGD->TimePosition += ImGui::GetIO().DeltaTime;
-
-			this->SGD->StokingPosition.AddPoint(this->Agv->X, this->Agv->Y);
-
-
-		}
-		else     // eger checkbox'a tıklanırsa en son zamanı alıyor
-			this->SGD->TimeReceivedRate;
-
-		ImGui::SliderFloat("History", &this->SGD->HistoryPosition, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanıyor
-
-
-		static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
-		*/
-
-
-
-		//	printf("%d   %d\n", this->Agv->X, this->Agv->Y);
+		float xMin = 10000, xMax = 30000, yMin = 30000, yMax = 80000;
+		if (this->SGD->StokingPosition.Data.size() > 0) {
+			if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, 0), ImPlotFlags_Equal)) {
 			
-
-		if (this->SGD->StokingPosition.Data.size() > 0)
-			if (ImPlot::BeginPlot("Scatter Plot", ImVec2(800, 350))) {
-				ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
-
 				ImPlot::PlotScatter("pos", &this->SGD->StokingPosition.Data[0].x, &this->SGD->StokingPosition.Data[0].y, this->SGD->StokingPosition.Data.size(), 0, 0, 2 * sizeof(int));
-				
-							
-								ImPlot::PushStyleVar(ImPlotStyleVar_FillAlpha, 0.25f);
-								ImPlot::SetNextMarkerStyle(ImPlotMarker_Up, 6, ImPlot::GetColormapColor(1), IMPLOT_AUTO, ImPlot::GetColormapColor(1));
-								//ImPlot::SetNextMarkerStyle(ImPlotMarker_Square, 6);
-								int lastIndex = this->SGD->StokingPosition.Data.Size - 1;
 
-								ImPlot::PlotScatter("p2 ", &this->SGD->StokingPosition.Data[lastIndex].x, &this->SGD->StokingPosition.Data[lastIndex].y, 1);
 
-								//ImPlot::PopStyleVar();
-							
-				
+				//ImPlot::PushStyleVar(ImPlotStyleVar_FillAlpha, 0.25f);
+				//ImPlot::SetNextMarkerStyle(ImPlotMarker_Up, 6, ImPlot::GetColormapColor(1), IMPLOT_AUTO, ImPlot::GetColormapColor(1));
+				//ImPlot::SetNextMarkerStyle(ImPlotMarker_Square, 6);
+				int lastIndex = this->SGD->StokingPosition.Data.Size - 1;
+
+				//ImPlot::PlotScatter("p2 ", &this->SGD->StokingPosition.Data[lastIndex].x, &this->SGD->StokingPosition.Data[lastIndex].y, 1);
+
+				//ImPlot::PopStyleVar();
+				float xRange = ImPlot::GetPlotLimits().X.Max - ImPlot::GetPlotLimits().X.Min;
+				float yRange = ImPlot::GetPlotLimits().Y.Max - ImPlot::GetPlotLimits().Y.Min;
+				float r = fminf(xRange, yRange) / 50.0f; // r değerini grafik boyutuna göre ölçeklendirin
+
+				float x1 = this->SGD->StokingPosition.Data[lastIndex].x;
+				float y1 = this->SGD->StokingPosition.Data[lastIndex].y;
+
+				float x_1 = x1 + cos(this->Agv->Angle * PI / 180) * r * 2;
+				float y_1 = y1 + sin(this->Agv->Angle * PI / 180) * r * 2;
+
+				float x_2 = x1 + cos(fmod(this->Agv->Angle + 120, 360) * PI / 180) * r;
+				float y_2 = y1 + sin(fmod(this->Agv->Angle + 120, 360) * PI / 180) * r;
+
+				float x_3 = x1 + cos(fmod(this->Agv->Angle + 240, 360) * PI / 180) * r;
+				float y_3 = y1 + sin(fmod(this->Agv->Angle + 240, 360) * PI / 180) * r;
+
+
+				ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(x_2, y_2));//sol alt 
+				ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(x_3, y_3));// sag alt 
+				ImVec2 p3 = ImPlot::PlotToPixels(ImPlotPoint(x_1, y_1));// tepe
+				ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(255, 127, 0, 255));
+
 				ImPlot::EndPlot();
 			}
-
+		}
 		/*
-		
 		static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs)
 		{
 			return ImVec2(lhs.x + rhs.x, lhs.y + rhs.y);
 		}
-
-
 		static inline ImVec2 ImRotate(const ImVec2& v, float cos_a, float sin_a)
 		{
 			return ImVec2(v.x * cos_a - v.y * sin_a, v.x * sin_a + v.y * cos_a);
 		}
-
-
 		void ImageRotated(ImTextureID tex_id, ImVec2 center, ImVec2 size, float angle)
 		{
 			ImDrawList* draw_list = ImGui::GetWindowDrawList();
-
 			float cos_a = cosf(angle);
 			float sin_a = sinf(angle);
 			ImVec2 pos[4] =
@@ -270,10 +285,8 @@ void ROTracer::PositionPage() {
 				ImVec2(1.0f, 1.0f),
 				ImVec2(0.0f, 1.0f)
 			};
-
 			draw_list->AddImageQuad(tex_id, pos[0], pos[1], pos[2], pos[3], uvs[0], uvs[1], uvs[2], uvs[3], IM_COL32_WHITE);
 		}
-
 		*/
 
 
@@ -286,19 +299,18 @@ void ROTracer::PositionPage() {
 				ImPlot::PushPlotClipRect();
 				ImPlot::GetPlotDrawList()->AddCircleFilled(cntr, 20, IM_COL32(255, 255, 0, 255), 20);
 				ImPlot::GetPlotDrawList()->AddRect(rmin, rmax, IM_COL32(128, 0, 255, 255));
-
-				srand(359);
-				int angle = rand();
-
-				ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(0.0f, 0.0f));
-				ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(0.5f, 0.0f));
-				ImVec2 p3 = ImPlot::PlotToPixels(ImPlotPoint(0.25f, 1.f));
-
-				ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(128, 0, 255, 255));
-				ImPlot::PopPlotClipRect();
+				 srand(359);
+				 int angle = rand();
+				ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(0.0f, 1.f));
+				ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(2.f, 1.f));
+				ImVec2 p3 = ImPlot::PlotToPixels(ImPlotPoint(1.f, 7.f));
+				 ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(128, 0, 255, 255));
+				 ImPlot::PopPlotClipRect();
 				ImPlot::EndPlot();
 			}
 		}*/
+
+
 
 	}
 }
@@ -903,7 +915,7 @@ void ROTracer::ZMQDataStreamParser()
 		free(zmq_topic_data);
 		free(zmq_message_data);
 	}
-
+	
 	zmq_close(subscriber);
 	zmq_ctx_destroy(context);
 

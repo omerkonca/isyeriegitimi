@@ -1,11 +1,23 @@
 ﻿  data_for_graphic.cpp
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(61,68): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(62,68): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(487,78): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(488,61): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(489,62): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(741,48): warning C4267: 'başlatılıyor': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(742,52): warning C4267: 'başlatılıyor': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(808,64): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(808,50): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(58,68): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(59,68): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(235,18): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(236,18): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(242,15): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(243,15): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(245,15): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(246,15): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(248,15): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(249,15): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(220,37): warning C4189: 'yMin': yerel değişken başlatıldı ancak başvurulmadı
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(220,23): warning C4189: 'xMax': yerel değişken başlatıldı ancak başvurulmadı
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(220,51): warning C4189: 'yMax': yerel değişken başlatıldı ancak başvurulmadı
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(220,9): warning C4189: 'xMin': yerel değişken başlatıldı ancak başvurulmadı
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(499,78): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(500,61): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(501,62): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(753,48): warning C4267: 'başlatılıyor': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(754,52): warning C4267: 'başlatılıyor': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(820,64): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(820,50): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
   ROTracer.vcxproj -> C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\x64\Debug\ROTracer.exe

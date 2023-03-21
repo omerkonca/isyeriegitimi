@@ -14,6 +14,12 @@
 #include <stdio.h>
 
 
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+#ifndef PI
+#define PI 3.14159265358979323846
+#endif
 
 // AgvStreamData
 class AgvData {
