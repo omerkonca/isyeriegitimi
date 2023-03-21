@@ -1,4 +1,12 @@
 ﻿#include "data_for_graphic.h"   //data_for_graphic deki veriler için çagýrýyoruz 
+#include <imgui_internal.h>
+
+
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+
+
 using namespace std;
 
 
@@ -8,6 +16,7 @@ ROTracer::ROTracer() {
 
 	this->SGD = new SpeedGraphicData();
 
+	
 	_loginPageVisibility = true;
 }
 
@@ -205,7 +214,8 @@ void ROTracer::PositionPage() {
 
 
 		//	printf("%d   %d\n", this->Agv->X, this->Agv->Y);
-			//
+			
+
 		if (this->SGD->StokingPosition.Data.size() > 0)
 			if (ImPlot::BeginPlot("Scatter Plot", ImVec2(800, 350))) {
 				ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
@@ -293,27 +303,72 @@ void ROTracer::PositionPage() {
 	}
 }
 
-//void ROTracer::positionjson() {
-//
-//
-//	int main()
-//	{
-//		std::ifstream input_file("example.json");
-//		std::stringstream buffer;
-//		buffer << input_file.rdbuf();
-//		std::string json_data = buffer.str();
-//
-//		boost::property_tree::ptree pt;
-//		std::istringstream is(json_data);
-//		boost::property_tree::json_parser::read_json(is, pt);
-//
-//		std::cout << "Name: " << pt.get<std::string>("name") << std::endl;
-//		std::cout << "Age: " << pt.get<int>("age") << std::endl;
-//		std::cout << "City: " << pt.get<std::string>("city") << std::endl;
-//
-//		return 0;
-//	}
-//}
+
+float x = 10.f;
+float y = 15.f;
+void ROTracer::positionjson() {
+
+	if (ImPlot::BeginPlot("##CustomRend")) {
+		float base = x;   // taban uzunluğu
+		float height = y; // yükseklik
+		ImVec2 center = ImPlot::PlotToPixels(ImPlotPoint(x, y));
+
+		float half_base = base * 0.5f;
+		float half_height = height * 0.5f;
+
+		ImVec2 p1 = ImVec2(center.x - half_base, center.y + half_height);
+		ImVec2 p2 = ImVec2(center.x + half_base, center.y + half_height);
+		ImVec2 p3 = ImVec2(center.x, center.y - half_height);
+
+		ImPlot::PushPlotClipRect();
+		ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(128, 0, 255, 255));
+		ImPlot::PopPlotClipRect();
+		ImPlot::EndPlot();
+	}
+
+
+	//if (ImPlot::BeginPlot("##CustomRend")) {
+	//	float base = x;    // taban uzunluğu
+	//	float height = y;  // yükseklik
+	//	ImVec2 center = ImPlot::PlotToPixels(ImPlotPoint(x, y));
+
+	//	float half_base = base * 0.5f;
+	//	float half_height = height * 0.5f;
+
+	//	// Calculate the four corners of the triangle
+	//	ImVec2 p1 = ImVec2(center.x - half_base, center.y + half_height);
+	//	ImVec2 p2 = ImVec2(center.x + half_base, center.y + half_height);
+	//	ImVec2 p3 = ImVec2(center.x, center.y - half_height);
+
+	//	// Define the rotation angle in degrees
+	//	float angle_degrees = 45.0f; // Change this to your desired angle
+
+	//	// Convert the angle from degrees to radians
+	//	float angle_radians = angle_degrees * (PI / 180.0f);
+
+	//	// Calculate the cosine and sine of the angle
+	//	float cos_a = cosf(angle_radians);
+	//	float sin_a = sinf(angle_radians);
+
+	//	// Rotate each corner of the triangle around the center point
+	//	ImVec2 delta1 = p1 - center;
+	//	ImVec2 delta2 = p2 - center;
+	//	ImVec2 delta3 = p3 - center;
+	//	p1.x = center.x + delta1.x * cos_a - delta1.y * sin_a;
+	//	p1.y = center.y + delta1.x * sin_a + delta1.y * cos_a;
+	//	p2.x = center.x + delta2.x * cos_a - delta2.y * sin_a;
+	//	p2.y = center.y + delta2.x * sin_a + delta2.y * cos_a;
+	//	p3.x = center.x + delta3.x * cos_a - delta3.y * sin_a;
+	//	p3.y = center.y + delta3.x * sin_a + delta3.y * cos_a;
+
+	//	// Add the rotated triangle to the plot draw list
+	//	ImPlot::PushPlotClipRect();
+	//	ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(128, 0, 255, 255));
+	//	ImPlot::PopPlotClipRect();
+
+	//	ImPlot::EndPlot();
+	//}
+}
 
 
 
@@ -607,7 +662,7 @@ void ROTracer::LoginPage() {
 				if (Agvspeed) {
 					ImGui::BeginChild("speed", ImVec2(900, 500), true);
 					_speedPageVisibility = true;
-					this->SpeedPage();
+					this->positionjson();
 					ImGui::EndChild();
 
 				}
@@ -801,9 +856,38 @@ void ROTracer::ZMQDataStreamParser()
 				}
 				sayac = 0;
 			}
-			/*
-			else if (std::strcmp("route", topic) == 0) {
-			}
+			
+			else if (std::strcmp("route", zmq_topic_data) == 0) {
+
+				try {
+					rapidjson::Document doc;
+					doc.Parse(zmq_message_data);
+
+					if (doc.HasParseError()) {
+						std::cerr << "Error parsing JSON: "
+							<< doc.GetParseError() << std::endl;
+						continue;
+					}
+
+					rapidjson::Value::ConstValueIterator itr;
+
+					for (itr = doc.Begin(); itr != doc.End(); ++itr) {
+						// Access the data in the object
+						std::cout << "X: "
+							<< itr->GetObject()["X"].GetFloat()
+							<< std::endl;
+						std::cout << "Y: "
+							<< itr->GetObject()["Y"].GetFloat()
+							<< std::endl;
+						this->SGD->StokingPosition.Data.push_back(ImVec2(x, y));
+					}
+
+				}
+				catch (...)
+				{
+
+				}
+			}/*
 			else if (std::strcmp("sim", topic) == 0) {
 			}
 			else if (std::strcmp("curve", topic) == 0) {

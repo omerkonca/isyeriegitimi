@@ -1992,14 +1992,14 @@ void Demo_CustomRendering() {
         ImPlot::GetPlotDrawList()->AddCircleFilled(cntr,20,IM_COL32(255,255,0,255),20);
         ImPlot::GetPlotDrawList()->AddRect(rmin, rmax, IM_COL32(128,0,255,255));
         
-        srand(359);
+       /* srand(359);
         int angle = rand();
 
         ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(0.0f, 0.0f));
         ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(0.5f, 0.0f));
         ImVec2 p3 = ImPlot::PlotToPixels(ImPlotPoint(0.25f, 1.f));
 
-        ImPlot::GetPlotDrawList()->AddTriangleFilled(p1,p2,p3, IM_COL32(128, 0, 255, 255));
+        ImPlot::GetPlotDrawList()->AddTriangleFilled(p1,p2,p3, IM_COL32(128, 0, 255, 255));*/
         ImPlot::PopPlotClipRect();
         ImPlot::EndPlot();
     }
