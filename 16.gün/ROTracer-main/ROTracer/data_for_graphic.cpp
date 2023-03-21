@@ -216,7 +216,11 @@ void ROTracer::PositionPage() {
 		if (this->SGD->StokingPosition.Data.size() > 0) {
 			
 			if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1,0), ImPlotFlags_Equal)) {
-				ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
+				float xMin = this->SGD->StokingPosition.Data[0].x - 5000; // x ekseninin minimum değeri
+				float xMax = this->SGD->StokingPosition.Data[0].x + 5000; // x ekseninin maksimum değeri
+				float yMin = this->SGD->StokingPosition.Data[0].y - 5000; // y ekseninin minimum değeri
+				float yMax = this->SGD->StokingPosition.Data[0].y + 5000; // y ekseninin maksimum değeri
+				ImPlot::SetupAxesLimits(xMin, xMax, yMin, yMax);
 				ImPlot::PlotScatter("pos", &this->SGD->StokingPosition.Data[0].x, &this->SGD->StokingPosition.Data[0].y, this->SGD->StokingPosition.Data.size(), 0, 0, 2 * sizeof(int));
 
 
@@ -660,9 +664,9 @@ void ROTracer::LoginPage() {
 
 			if (ImGui::CollapsingHeader("AGV"))
 			{
-				ImGui::Checkbox("Wheel", &wheel);
+				ImGui::Checkbox("Agv Speed", &Agvspeed);
 				ImGui::SameLine();
-				ImGui::Checkbox("Speed", &Agvspeed);
+				ImGui::Checkbox("Wheel", &wheel);
 				ImGui::SameLine();
 				ImGui::Checkbox("Angle", &totalangle);
 				ImGui::SameLine();
@@ -670,7 +674,7 @@ void ROTracer::LoginPage() {
 
 
 				if (Agvspeed) {
-					ImGui::BeginChild("speed", ImVec2(900, 500), true);
+					ImGui::BeginChild("speed", ImVec2(850, 450), true);
 					_speedPageVisibility = true;
 					this->SpeedPage();
 					ImGui::EndChild();
@@ -678,7 +682,8 @@ void ROTracer::LoginPage() {
 				}
 
 				if (wheel) {
-					ImGui::BeginChild("Ping", ImVec2(900, 500), true);
+					ImGui::SameLine();
+					ImGui::BeginChild("Wheel", ImVec2(850, 450), true);
 					_wheelPageVisibility = true;
 					this->WheelPage();
 					ImGui::EndChild();
@@ -686,7 +691,7 @@ void ROTracer::LoginPage() {
 				}
 
 				if (totalangle) {
-					ImGui::BeginChild("Total Angle", ImVec2(900, 500), true);
+					ImGui::BeginChild("Total Angle", ImVec2(850, 450), true);
 					_angleTotalPageVisibility = true;
 					this->TotalAngelPage();
 					ImGui::EndChild();
@@ -694,7 +699,8 @@ void ROTracer::LoginPage() {
 				}
 
 				if (position) {
-					ImGui::BeginChild("Postion", ImVec2(900, 500), true);
+					ImGui::SameLine();
+					ImGui::BeginChild("Postion", ImVec2(850, 450), true);
 					_positionPageVisibility = true;
 					this->PositionPage();
 					ImGui::EndChild();
