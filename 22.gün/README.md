@@ -1,11 +1,30 @@
 # İşyeri Eğitimi
 
-Bu hafta haftanın ilk günü olması sebebiyle toplantı yaptık ve herkese bu hafta yapılacak görevler verildi ve bende geçen haftadan kalan görevime devam ettim şuanlık bu şekilde ilerledi bugünkü görevim grafiklei düzenleme ve verileri grafikte gösterme. 
-Bu şekilde gösterdim
 
-![image](https://user-images.githubusercontent.com/65457096/226278878-fad90ecf-03f3-4cde-b20c-a9bd564d580d.png)
+## Yapılan Çalışmanın Konusu : Grafikler classlara çevirildi
 
-![image](https://user-images.githubusercontent.com/65457096/226278912-d14b795a-925c-4e51-b2e4-f8f12ca2f6ae.png)
+Bugunkü görevim grafikleri tek tek classlara atayıp classları çağırıp daha okunaklı clean kod yasmak
+
+Yazdığım kodlar şu şekilde
+
+ ![image](https://user-images.githubusercontent.com/65457096/226632140-86013412-997a-48bf-b859-8fe03a4c49c9.png)
+![image](https://user-images.githubusercontent.com/65457096/226632162-3ebb0bd0-2fd8-4bd9-914b-fe29b30643d1.png)
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
  	
