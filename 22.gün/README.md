@@ -1,7 +1,7 @@
 # İşyeri Eğitimi
 
 
-Yapılan Çalışmanın Konusu : Grafikler classlara çevirildi ……………………………………………………………………...…………………………………………………………………………………….……………………..……………….…………………………………..
+## Yapılan Çalışmanın Konusu : Grafikler classlara çevirildi
 
 Bugunkü görevim grafikleri tek tek classlara atayıp classları çağırıp daha okunaklı clean kod yasmak
 
