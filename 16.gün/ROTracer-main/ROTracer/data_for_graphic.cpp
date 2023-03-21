@@ -217,10 +217,11 @@ void ROTracer::PositionPage() {
 			return;
 		}
 
-		float xMin = 10000, xMax = 30000, yMin = 30000, yMax = 80000;
+		ImVec2 plotPos(-1, 0);
 		if (this->SGD->StokingPosition.Data.size() > 0) {
-			if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, 0), ImPlotFlags_Equal)) {
 			
+			if (ImPlot::BeginPlot("Scatter Plot", plotPos, ImPlotFlags_Equal )) {
+				ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
 				ImPlot::PlotScatter("pos", &this->SGD->StokingPosition.Data[0].x, &this->SGD->StokingPosition.Data[0].y, this->SGD->StokingPosition.Data.size(), 0, 0, 2 * sizeof(int));
 
 
@@ -235,6 +236,7 @@ void ROTracer::PositionPage() {
 				float xRange = ImPlot::GetPlotLimits().X.Max - ImPlot::GetPlotLimits().X.Min;
 				float yRange = ImPlot::GetPlotLimits().Y.Max - ImPlot::GetPlotLimits().Y.Min;
 				float r = fminf(xRange, yRange) / 50.0f; // r değerini grafik boyutuna göre ölçeklendirin
+
 
 				float x1 = this->SGD->StokingPosition.Data[lastIndex].x;
 				float y1 = this->SGD->StokingPosition.Data[lastIndex].y;
@@ -253,8 +255,9 @@ void ROTracer::PositionPage() {
 				ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(x_3, y_3));// sag alt 
 				ImVec2 p3 = ImPlot::PlotToPixels(ImPlotPoint(x_1, y_1));// tepe
 				ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(255, 127, 0, 255));
-
+				
 				ImPlot::EndPlot();
+				
 			}
 		}
 		/*
@@ -674,7 +677,7 @@ void ROTracer::LoginPage() {
 				if (Agvspeed) {
 					ImGui::BeginChild("speed", ImVec2(900, 500), true);
 					_speedPageVisibility = true;
-					this->positionjson();
+					this->SpeedPage();
 					ImGui::EndChild();
 
 				}
@@ -866,6 +869,7 @@ void ROTracer::ZMQDataStreamParser()
 					//	printf("%s\n", pch);
 					pch = strtok(NULL, ";");
 				}
+				this->SGD->StokingPosition.AddPoint(Agv->X, Agv->Y);
 				sayac = 0;
 			}
 			
