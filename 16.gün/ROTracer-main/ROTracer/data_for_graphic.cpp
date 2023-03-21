@@ -1,9 +1,5 @@
 ﻿#include "data_for_graphic.h"   //data_for_graphic deki veriler için çagýrýyoruz 
 
-
-
-
-
 using namespace std;
 
 
@@ -217,10 +213,9 @@ void ROTracer::PositionPage() {
 			return;
 		}
 
-		ImVec2 plotPos(-1, 0);
 		if (this->SGD->StokingPosition.Data.size() > 0) {
 			
-			if (ImPlot::BeginPlot("Scatter Plot", plotPos, ImPlotFlags_Equal )) {
+			if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1,0), ImPlotFlags_Equal)) {
 				ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
 				ImPlot::PlotScatter("pos", &this->SGD->StokingPosition.Data[0].x, &this->SGD->StokingPosition.Data[0].y, this->SGD->StokingPosition.Data.size(), 0, 0, 2 * sizeof(int));
 
@@ -319,27 +314,27 @@ void ROTracer::PositionPage() {
 }
 
 
-float x = 10.f;
-float y = 15.f;
-void ROTracer::positionjson() {
-
-	if (ImPlot::BeginPlot("##CustomRend")) {
-		float base = x;   // taban uzunluğu
-		float height = y; // yükseklik
-		ImVec2 center = ImPlot::PlotToPixels(ImPlotPoint(x, y));
-
-		float half_base = base * 0.5f;
-		float half_height = height * 0.5f;
-
-		ImVec2 p1 = ImVec2(center.x - half_base, center.y + half_height);
-		ImVec2 p2 = ImVec2(center.x + half_base, center.y + half_height);
-		ImVec2 p3 = ImVec2(center.x, center.y - half_height);
-
-		ImPlot::PushPlotClipRect();
-		ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(128, 0, 255, 255));
-		ImPlot::PopPlotClipRect();
-		ImPlot::EndPlot();
-	}
+//float x = 10.f;
+//float y = 15.f;
+//void ROTracer::positionjson() {
+//
+//	if (ImPlot::BeginPlot("##CustomRend")) {
+//		float base = x;   // taban uzunluğu
+//		float height = y; // yükseklik
+//		ImVec2 center = ImPlot::PlotToPixels(ImPlotPoint(x, y));
+//
+//		float half_base = base * 0.5f;
+//		float half_height = height * 0.5f;
+//
+//		ImVec2 p1 = ImVec2(center.x - half_base, center.y + half_height);
+//		ImVec2 p2 = ImVec2(center.x + half_base, center.y + half_height);
+//		ImVec2 p3 = ImVec2(center.x, center.y - half_height);
+//
+//		ImPlot::PushPlotClipRect();
+//		ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(128, 0, 255, 255));
+//		ImPlot::PopPlotClipRect();
+//		ImPlot::EndPlot();
+//	}
 
 
 	//if (ImPlot::BeginPlot("##CustomRend")) {
@@ -383,7 +378,7 @@ void ROTracer::positionjson() {
 
 	//	ImPlot::EndPlot();
 	//}
-}
+//}
 
 
 
@@ -895,7 +890,7 @@ void ROTracer::ZMQDataStreamParser()
 						std::cout << "Y: "
 							<< itr->GetObject()["Y"].GetFloat()
 							<< std::endl;
-						this->SGD->StokingPosition.Data.push_back(ImVec2(x, y));
+						
 					}
 
 				}

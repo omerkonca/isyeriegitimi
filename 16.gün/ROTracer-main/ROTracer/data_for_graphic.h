@@ -182,7 +182,7 @@ private:
 	void TotalAngelPage();
 	void Signal_ping_baundrate();
 
-	void positionjson();
+	
 
 };
 
