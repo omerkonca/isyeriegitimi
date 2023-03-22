@@ -215,12 +215,12 @@ void ROTracer::PositionPage() {
 
 		if (this->SGD->StokingPosition.Data.size() > 0) {
 			
-			if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1,0), ImPlotFlags_Equal)) {
-				float xMin = this->SGD->StokingPosition.Data[0].x - 5000; // x ekseninin minimum değeri
-				float xMax = this->SGD->StokingPosition.Data[0].x + 5000; // x ekseninin maksimum değeri
-				float yMin = this->SGD->StokingPosition.Data[0].y - 5000; // y ekseninin minimum değeri
-				float yMax = this->SGD->StokingPosition.Data[0].y + 5000; // y ekseninin maksimum değeri
-				ImPlot::SetupAxesLimits(xMin, xMax, yMin, yMax);
+			if (ImPlot::BeginPlot("Scatter Plot", ImVec2(800, 350), ImPlotFlags_Equal)) {
+				//float xMin = this->SGD->StokingPosition.Data[0].x - 5000; // x ekseninin minimum değeri
+				//float xMax = this->SGD->StokingPosition.Data[0].x + 5000; // x ekseninin maksimum değeri
+				//float yMin = this->SGD->StokingPosition.Data[0].y - 5000; // y ekseninin minimum değeri
+				//float yMax = this->SGD->StokingPosition.Data[0].y + 5000; // y ekseninin maksimum değeri
+				//ImPlot::SetupAxesLimits(xMin, xMax, yMin, yMax);
 				ImPlot::PlotScatter("pos", &this->SGD->StokingPosition.Data[0].x, &this->SGD->StokingPosition.Data[0].y, this->SGD->StokingPosition.Data.size(), 0, 0, 2 * sizeof(int));
 
 
