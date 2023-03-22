@@ -547,6 +547,7 @@ void ROTracer::Signal_ping_baundrate() {
 //--------------------------------giriş sayfası--------------------------------------------------------------------
 
 void ROTracer::LoginPage() {
+	bool isFullScreenpage1 = false;
 	//_zmqLoopFlag = false;
 	if (this->_loginPageVisibility == true)
 	{
@@ -555,7 +556,21 @@ void ROTracer::LoginPage() {
 		// GÝRÝÞ SAYFA
 		if (page1 == true)
 		{
-			ImGui::Begin("PAGE", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);  //, &no_collapse
+
+			if (isFullScreenpage1)
+			{
+				// Tam ekran modu için pencere boyutunu tam ekran yap
+				ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
+				// Pencereyi ekranın sol üst köşesine konumlandır
+				ImGui::SetNextWindowPos(ImVec2(0, 0));
+			}
+			else
+			{
+				// Normal mod için pencere boyutunu ve konumunu ayarla
+				ImGui::SetNextWindowSize(ImVec2(800, 600));
+				ImGui::SetNextWindowPos(ImVec2(100, 100));
+			}
+			ImGui::Begin("PAGE", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);  //, &no_collapse
 			ImGui::StyleColorsDark();
 			ImGuiStyle& style = ImGui::GetStyle();
 			ImVec4* colors = style.Colors;
@@ -619,15 +634,29 @@ void ROTracer::LoginPage() {
 		}
 
 	}
-
+	bool isFullScreen = true; // Tam ekran modu açık mı?
 	// Yeni acýlacak grafiklerin sayfasý penceresi 
 	if (!this->_loginPageVisibility) {
 
 		if (!page1) {
+			
 
+			if (isFullScreen)
+			{
+				// Tam ekran modu için pencere boyutunu tam ekran yap
+				ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
+				// Pencereyi ekranın sol üst köşesine konumlandır
+				ImGui::SetNextWindowPos(ImVec2(0, 0));
+			}
+			else
+			{
+				// Normal mod için pencere boyutunu ve konumunu ayarla
+				ImGui::SetNextWindowSize(ImVec2(800, 600));
+				ImGui::SetNextWindowPos(ImVec2(100, 100));
+			}
 
-			ImGui::Begin("New Page ");
-			ImGui::SetNextWindowSize(ImVec2(1700, 900));
+			ImGui::Begin("New Page",NULL,ImGuiWindowFlags_NoMove);
+			//ImGui::SetNextWindowSize(ImVec2(1700, 900));
 			// Yeni sayfa içeriði ve IP adresi bilgisi
 
 

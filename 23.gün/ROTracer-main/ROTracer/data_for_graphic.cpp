@@ -57,7 +57,6 @@ static inline ImVec2 ImRotate(const ImVec2& v, float cos_a, float sin_a)
 
 
 void ROTracer::LoginPage() {
-	bool isFullScreenpage1 = true;
 	//_zmqLoopFlag = false;
 	if (this->_loginPageVisibility == true)
 	{
@@ -66,19 +65,6 @@ void ROTracer::LoginPage() {
 		// GİRİŞ SAYFA
 		if (page1 == true)
 		{
-			if (isFullScreenpage1)
-			{
-				// Tam ekran modu için pencere boyutunu tam ekran yap
-				ImGui::SetNextWindowSize(ImGui::GetIO().DisplaySize);
-				// Pencereyi ekranın sol üst köşesine konumlandır
-				ImGui::SetNextWindowPos(ImVec2(0, 0));
-			}
-			else
-			{
-				// Normal mod için pencere boyutunu ve konumunu ayarla
-				ImGui::SetNextWindowSize(ImVec2(800, 600));
-				ImGui::SetNextWindowPos(ImVec2(100, 100));
-			}
 			ImGui::Begin("PAGE", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);  //, &no_collapse
 			ImGui::StyleColorsDark();
 			ImGuiStyle& style = ImGui::GetStyle();
@@ -144,76 +130,18 @@ void ROTracer::LoginPage() {
 
 	}
 
+
 	// Yeni acılacak grafiklerin sayfası penceresi 
 	if (!this->_loginPageVisibility) {
 
 		if (!page1) {
 			ImGui::Begin("New Page");
 			ImGui::SetNextWindowSize(ImVec2(920, 520));
+			
+			this->ShowNETWindow(NULL);
 
-
-			if (ImGui::CollapsingHeader("NET"))
-			{
-				ImGui::TableNextColumn();
-				ImGui::Text("DeviceMacAddress: %s", this->Net->DeviceMacAddress.c_str());
-				ImGui::TableNextColumn();
-				ImGui::Text("SSID: %s", this->Net->SSID.c_str());
-				ImGui::TableNextColumn();
-				ImGui::Text("Status: %s", this->Net->Status.c_str());
-
-				// İlk iki grafiği yan yana sırala
-				ImGui::BeginChild("Ping", ImVec2(600, 400), true);
-
-				this->SignalPingSpeedPage();
-				ImGui::EndChild();
-			}
-
-
-			if (ImGui::CollapsingHeader("AGV"))
-			{
-				ImGui::Checkbox("Agv Speed", &this->SpeedGraphic->Enabled);
-				ImGui::SameLine();
-				ImGui::Checkbox("Agv Wheel", &this->WheelGraphic->Enabled);
-				ImGui::SameLine();
-				ImGui::Checkbox("Agv Angle", &this->AgvAngleGraphic->Enabled);
-				ImGui::SameLine();
-				ImGui::Checkbox("Agv Position", &this->AgvPositionGraphic->Enabled);
-
-				if (this->SpeedGraphic->Enabled) {
-					ImGui::BeginChild("Agv Speed Graphic", ImVec2(900, 500), true);
-					ImGui::SeparatorText("Agv Speed Graphic");
-					this->SpeedPage();
-					ImGui::EndChild();
-
-				}
-
-				if (this->WheelGraphic->Enabled) {
-					ImGui::SameLine();
-					ImGui::BeginChild("Agv Wheel Graphic", ImVec2(900, 500), true);
-					ImGui::SeparatorText("Agv Wheel Graphic");
-					this->WheelPage();
-					ImGui::EndChild();
-
-				}
-
-				if (this->AgvAngleGraphic->Enabled) {
-					ImGui::BeginChild("Agv Angle Graphic", ImVec2(900, 500), true);
-					ImGui::SeparatorText("Agv Angle Graphic");
-					this->AgvAngelPage();
-					ImGui::EndChild();
-
-				}
-
-				if (this->AgvPositionGraphic->Enabled == true) {
-					ImGui::SameLine();
-					ImGui::BeginChild("Postion", ImVec2(900, 500), true);
-					ImGui::SeparatorText("Agv Position Graphic");
-					this->AgvPositionPage();
-					ImGui::EndChild();
-				}
-
-
-			}
+			this->ShowAGVWindow(NULL);
+			
 
 			ImGui::End();
 
@@ -368,9 +296,9 @@ void ROTracer::ZMQDataStreamParser()
 					pch = strtok(NULL, ";");
 				}
 			}
-			else if (std::strcmp("route", zmq_topic_data) == 0)
+			else if (std::strcmp("route", zmq_topic_data) == 0) 
 			{
-
+		
 				doc.Parse(zmq_message_data);
 
 				if (doc.HasParseError()) {
@@ -382,15 +310,15 @@ void ROTracer::ZMQDataStreamParser()
 
 				this->AgvRouteGraphic->Point.Erase();
 
-				for (itr = doc.Begin(); itr != doc.End(); ++itr)
+				for (itr = doc.Begin(); itr != doc.End(); ++itr) 
 				{
 					this->AgvRouteGraphic->Point.AddPoint(itr->GetObject()["X"].GetFloat(), itr->GetObject()["Y"].GetFloat());
 				}
 			}
 			else if (std::strcmp("sim", zmq_topic_data) == 0) {
-
-
-
+				
+				
+		
 				doc.Parse(zmq_message_data);
 
 				if (doc.HasParseError()) {
@@ -404,7 +332,7 @@ void ROTracer::ZMQDataStreamParser()
 				}
 			}
 			else if (std::strcmp("curve", zmq_topic_data) == 0) {
-
+				
 				doc.Parse(zmq_message_data);
 
 				if (doc.HasParseError()) {
@@ -433,6 +361,101 @@ void ROTracer::ZMQDataStreamParser()
 	_isRunning = false;
 
 }
+void ROTracer::ShowNETWindow(bool* p_open) {//net BeginMenuBarın yazıldığı yer
+	static bool show_ping_speed_graph = false;
+
+	ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowSize(ImVec2(600, 750), ImGuiCond_FirstUseEver);
+	ImGui::Begin("Net", p_open, ImGuiWindowFlags_MenuBar);
+	if (ImGui::BeginMenuBar()) {
+		if (ImGui::BeginMenu("NET")) {
+			ImGui::MenuItem("Ping Speed", NULL, &show_ping_speed_graph);
+			ImGui::EndMenu();
+		}
+		ImGui::EndMenuBar();
+	}
+	
+	if (show_ping_speed_graph) {
+		ImGui::TableNextColumn();
+		ImGui::Text("DeviceMacAddress: %s", this->Net->DeviceMacAddress.c_str());
+
+		ImGui::TableNextColumn();
+		ImGui::Text("SSID: %s", this->Net->SSID.c_str());
+
+		ImGui::TableNextColumn();
+		ImGui::Text("Status: %s", this->Net->Status.c_str());
+
+		ImGui::TableNextColumn();
+		ImGui::Text("Ping: %d ms", this->Net->Ping);
+		
+
+		ImGui::BeginChild("Ping Speed Graph", ImVec2(900, 500), true);
+		ImGui::SeparatorText("Ping Speed Graph");
+		this->SignalPingSpeedPage();
+		
+		ImGui::EndChild();
+		
+	}
+
+	ImGui::End();
+}
+
+void ROTracer::ShowAGVWindow(bool* p_open) {  //agv BeginMenuBarın yazıldığı yer
+
+	static bool show_agv_speed = false;
+	static bool show_agv_wheel = false;
+	static bool show_agv_angle = false;
+	static bool show_agv_position = false;
+
+	ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
+	ImGui::SetNextWindowSize(ImVec2(900, 600), ImGuiCond_FirstUseEver);
+	ImGui::Begin("AGV", p_open, ImGuiWindowFlags_MenuBar);
+
+	if (ImGui::BeginMenuBar()) {
+		if (ImGui::BeginMenu("AGV")) {
+			ImGui::MenuItem("AGV Speed", NULL, &show_agv_speed);
+			ImGui::MenuItem("AGV Wheel", NULL, &show_agv_wheel);
+			ImGui::MenuItem("AGV Angle", NULL, &show_agv_angle);
+			ImGui::MenuItem("AGV Position", NULL, &show_agv_position);
+			ImGui::EndMenu();
+		}
+		ImGui::EndMenuBar();
+	}
+
+	if (show_agv_speed) {
+		ImGui::BeginChild("Agv Speed Graphic", ImVec2(800, 500), true);
+		ImGui::SeparatorText("Agv Speed Graphic");
+		this->SpeedPage();
+		ImGui::EndChild();
+	}
+
+	if (show_agv_wheel) {
+		ImGui::SameLine();
+		ImGui::BeginChild("Agv Wheel Graphic", ImVec2(800, 500), true);
+		ImGui::SeparatorText("Agv Wheel Graphic");
+		this->WheelPage();
+		ImGui::EndChild();
+	}
+
+	if (show_agv_angle) {
+		ImGui::BeginChild("Agv Angle Graphic", ImVec2(800, 500), true);
+		ImGui::SeparatorText("Agv Angle Graphic");
+		this->AgvAngelPage();
+		ImGui::EndChild();
+	}
+
+	if (show_agv_position) {
+		ImGui::SameLine();
+		ImGui::BeginChild("Agv Position Graphic", ImVec2(800, 500), true);
+		ImGui::SeparatorText("Agv Position Graphic");
+		this->AgvPositionPage();
+		ImGui::EndChild();
+	}
+
+	ImGui::End();
+}
+
+
 
 void ROTracer::SpeedPage() {
 

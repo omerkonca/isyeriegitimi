@@ -48,6 +48,8 @@ public:
 	
 };
 
+
+
 struct ScrollingBuffer {
 	int MaxSize;
 	int Offset;
@@ -129,6 +131,9 @@ public:                   //constructor
 	void WheelPage();
 	void AgvAngelPage();
 
+	void ShowAGVWindow(bool* p_open);
+	void ShowNETWindow(bool* p_open);
+
 	//----------------
 	void WifiSpeedPage();    // net fonksiyonlarý 
 	void PingPage();
@@ -139,6 +144,7 @@ public:                   //constructor
 
 	void StartStreamParser();
 	void StopStreamParser();
+
 
 
 	AgvData *Agv;          //agv classýna ait  nesne oluþturduk  
