@@ -153,26 +153,51 @@ void ROTracer::LoginPage() {
 
 		if (this-> SpeedGraphic->Visibility)
 		{
-			
 			ImGui::BeginChild("Speed Page", ImVec2(1000, 600), true);
 			this->SpeedGraphic->Visibility = true;
+
+			// Child penceresinin pozisyonunu tutmak için bir static değişken tanımlıyoruz
+			static ImVec2 window_pos = ImVec2(0, 0);
+			window_pos = ImGui::GetWindowPos();
+
+			// İnput tuşları ile child penceresinin pozisyonunu değiştirebilmek için bir ImGui::GetIO() kullanarak klavye inputlarını okuyoruz
+			if (ImGui::IsWindowHovered() && ImGui::IsMouseClicked(0))
+			{
+				auto mouse_pos = ImGui::GetMousePos();
+				window_pos = ImVec2(mouse_pos.x - 100, mouse_pos.y - 100);
+			}
+
+			// Child penceresinin konumunu ayarlıyoruz
+			ImGui::SetWindowPos(window_pos);
+
 			this->SpeedPage();
 			ImGui::EndChild();
+			
 		}
 
 		if (this->WheelGraphic->Visibility)
 		{
 			ImGui::SameLine();
+
 			ImGui::BeginChild("Wheel Angle Page", ImVec2(1000, 600), true);
-			this->WheelPage();
-			ImGui::EndChild();
+			
+				
+
+				this->WheelGraphic->Visibility = true;
+				this->WheelPage();
+				ImGui::EndChild();
+			
 		}
 
 		if (this->AgvAngleGraphic->Visibility)
 		{
+
 			ImGui::BeginChild("Agv Angle Page", ImVec2(1000, 600), true);
-			this->AgvAngelPage();
-			ImGui::EndChild();
+			
+				this->AgvAngleGraphic->Visibility = true;
+				this->AgvAngelPage();
+				ImGui::EndChild();
+			
 		}
 
 		if (this->AgvPositionGraphic->Visibility)
@@ -520,7 +545,7 @@ void ROTracer::SpeedPage() {
 void ROTracer::WheelPage() {
 
 	ImGui::SetNextWindowSize(ImVec2(920, 520));
-	ImGui::Begin("Agv Wheel Graphic", &this->WheelGraphic->Visibility);
+	//ImGui::Begin("Agv Wheel Graphic", &this->WheelGraphic->Visibility);
 
 	
 	if (this->Agv == NULL) {
@@ -547,14 +572,14 @@ void ROTracer::WheelPage() {
 		ImPlot::EndPlot();
 	}
 
-	ImGui::End();
+	//ImGui::End();
 }
 
 
 void ROTracer::AgvAngelPage() {
 
 	ImGui::SetNextWindowSize(ImVec2(920, 520));
-	ImGui::Begin("Agv Angle Graphic", &this->AgvAngleGraphic->Visibility);
+	//ImGui::Begin("Agv Angle Graphic", &this->AgvAngleGraphic->Visibility);
 
 	if (this->Agv == NULL) {
 		return;
@@ -579,7 +604,7 @@ void ROTracer::AgvAngelPage() {
 		ImPlot::EndPlot();
 	}
 
-	ImGui::End();
+	//ImGui::End();
 }
 
 void ROTracer::AgvPositionPage() {
