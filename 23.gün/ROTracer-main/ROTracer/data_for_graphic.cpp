@@ -133,19 +133,14 @@ void ROTracer::LoginPage() {
 	}
 	else {
 
-		bool show_wheel_graphic = false;
-		bool show_speed_graphic = true;
-		bool show_angle_graphic = true;
-		bool show_position_graphic = true;
-
 		ImGui::BeginMainMenuBar();
 
 		if (ImGui::BeginMenu("Agv"))
 		{
-			ImGui::MenuItem("Wheel Angle", "", &show_wheel_graphic);
-			ImGui::MenuItem("Speed", "", &show_speed_graphic);
-			ImGui::MenuItem("Angle", "", &show_angle_graphic);
-			ImGui::MenuItem("Position", "", &show_position_graphic);
+			ImGui::MenuItem("Wheel Angle", "", &this->WheelGraphic->Visibility);
+			ImGui::MenuItem("Speed", "", &this->SpeedGraphic->Visibility);
+			ImGui::MenuItem("Angle", "", &this->AgvAngleGraphic->Visibility);
+			ImGui::MenuItem("Position", "", &this->AgvPositionGraphic->Visibility);
 			ImGui::EndMenu();
 		}
 
@@ -156,39 +151,36 @@ void ROTracer::LoginPage() {
 
 		ImGui::EndMainMenuBar();
 
-		if (show_speed_graphic || show_wheel_graphic || show_angle_graphic || show_position_graphic)
+		if (this-> SpeedGraphic->Visibility)
 		{
-			ImGui::Columns(3, "mycolumns");
-			ImGui::Separator();
-		}
-
-		if (show_speed_graphic)
-		{
+			
+			ImGui::BeginChild("Speed Page", ImVec2(1000, 600), true);
+			this->SpeedGraphic->Visibility = true;
 			this->SpeedPage();
-			ImGui::NextColumn();
+			ImGui::EndChild();
 		}
 
-		if (show_wheel_graphic)
+		if (this->WheelGraphic->Visibility)
 		{
+			ImGui::SameLine();
+			ImGui::BeginChild("Wheel Angle Page", ImVec2(1000, 600), true);
 			this->WheelPage();
-			ImGui::NextColumn();
+			ImGui::EndChild();
 		}
 
-		if (show_angle_graphic)
+		if (this->AgvAngleGraphic->Visibility)
 		{
+			ImGui::BeginChild("Agv Angle Page", ImVec2(1000, 600), true);
 			this->AgvAngelPage();
-			ImGui::NextColumn();
+			ImGui::EndChild();
 		}
 
-		if (show_position_graphic)
+		if (this->AgvPositionGraphic->Visibility)
 		{
+			ImGui::SameLine();
+			ImGui::BeginChild("Agv Position Page", ImVec2(1000, 600), true);
 			this->AgvPositionPage();
-			ImGui::NextColumn();
-		}
-
-		if (show_speed_graphic || show_wheel_graphic || show_angle_graphic || show_position_graphic)
-		{
-			ImGui::Columns(1);
+			ImGui::EndChild();
 		}
 		// END MENU
 
@@ -253,7 +245,21 @@ void ROTracer::LoginPage() {
 		//ImGui::SetNextWindowSize(ImVec2(920, 520));
 
 
-		
+		/*if (this->SpeedGraphic->Visibility) {
+			this->SpeedPage();
+		}
+
+		if (this->WheelGraphic->Visibility) {
+			this->WheelPage();
+		}
+
+		if (this->AgvAngleGraphic->Visibility) {
+			this->AgvAngelPage();
+		}
+
+		if (this->AgvPositionGraphic->Visibility) {
+			this->AgvPositionPage();
+		} */
 		 
 	}
 
@@ -482,7 +488,7 @@ void ROTracer::SpeedPage() {
 
 	ImGui::SetNextWindowSize(ImVec2(920, 520));
 
-	ImGui::Begin("Agv Speed Graphic",&this->SpeedGraphic->Visibility);
+	/*ImGui::Begin("Agv Speed Graphic",&this->SpeedGraphic->Visibility);*/
 
 	if (this->Agv == NULL) {
 		return;
@@ -508,13 +514,14 @@ void ROTracer::SpeedPage() {
 		ImPlot::EndPlot();
 	}
 
-	ImGui::End();
+	//ImGui::End();
 }
 
 void ROTracer::WheelPage() {
 
 	ImGui::SetNextWindowSize(ImVec2(920, 520));
 	ImGui::Begin("Agv Wheel Graphic", &this->WheelGraphic->Visibility);
+
 	
 	if (this->Agv == NULL) {
 		return;
@@ -579,7 +586,6 @@ void ROTracer::AgvPositionPage() {
 
 	ImGui::SetNextWindowSize(ImVec2(920, 520));
 	ImGui::Begin("Agv Position Graphic", &this->AgvPositionGraphic->Visibility);
-
 	if (this->Agv == NULL) {
 		return;
 	}
