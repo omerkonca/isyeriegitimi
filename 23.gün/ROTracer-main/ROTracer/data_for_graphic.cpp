@@ -133,14 +133,19 @@ void ROTracer::LoginPage() {
 	}
 	else {
 
+		bool show_wheel_graphic = false;
+		bool show_speed_graphic = true;
+		bool show_angle_graphic = true;
+		bool show_position_graphic = true;
+
 		ImGui::BeginMainMenuBar();
 
 		if (ImGui::BeginMenu("Agv"))
 		{
-			ImGui::MenuItem("Wheel Angle", "", &this->WheelGraphic->Visibility);
-			ImGui::MenuItem("Speed", "", &this->SpeedGraphic->Visibility);
-			ImGui::MenuItem("Angle", "", &this->AgvAngleGraphic->Visibility);
-			ImGui::MenuItem("Position", "", &this->AgvPositionGraphic->Visibility);
+			ImGui::MenuItem("Wheel Angle", "", &show_wheel_graphic);
+			ImGui::MenuItem("Speed", "", &show_speed_graphic);
+			ImGui::MenuItem("Angle", "", &show_angle_graphic);
+			ImGui::MenuItem("Position", "", &show_position_graphic);
 			ImGui::EndMenu();
 		}
 
@@ -150,6 +155,41 @@ void ROTracer::LoginPage() {
 		}
 
 		ImGui::EndMainMenuBar();
+
+		if (show_speed_graphic || show_wheel_graphic || show_angle_graphic || show_position_graphic)
+		{
+			ImGui::Columns(3, "mycolumns");
+			ImGui::Separator();
+		}
+
+		if (show_speed_graphic)
+		{
+			this->SpeedPage();
+			ImGui::NextColumn();
+		}
+
+		if (show_wheel_graphic)
+		{
+			this->WheelPage();
+			ImGui::NextColumn();
+		}
+
+		if (show_angle_graphic)
+		{
+			this->AgvAngelPage();
+			ImGui::NextColumn();
+		}
+
+		if (show_position_graphic)
+		{
+			this->AgvPositionPage();
+			ImGui::NextColumn();
+		}
+
+		if (show_speed_graphic || show_wheel_graphic || show_angle_graphic || show_position_graphic)
+		{
+			ImGui::Columns(1);
+		}
 		// END MENU
 
 		//// Arrange the visibility flags in a vector for easier manipulation
@@ -213,21 +253,7 @@ void ROTracer::LoginPage() {
 		//ImGui::SetNextWindowSize(ImVec2(920, 520));
 
 
-		if (this->SpeedGraphic->Visibility) {
-			this->SpeedPage();
-		}
-
-		if (this->WheelGraphic->Visibility) {
-			this->WheelPage();
-		}
-
-		if (this->AgvAngleGraphic->Visibility) {
-			this->AgvAngelPage();
-		}
-
-		if (this->AgvPositionGraphic->Visibility) {
-			this->AgvPositionPage();
-		} 
+		
 		 
 	}
 
