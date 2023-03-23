@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <imgui.h>               // imgui bileþenlerini kullnmak için 
+#include <imgui_internal.h>
 #include <implot/implot.h>       // implot bileþenleri için 
 #include <regex>
 #include <string.h>
@@ -16,6 +17,9 @@
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
+#include <rapidjson/ostreamwrapper.h>
+#include <fstream>
+#include <mutex>
 
 #ifndef PI
 #define PI 3.14159265358979323846
@@ -33,6 +37,11 @@ public:
     int RSpeed;                  // okunan hýz 
     float WAngle;                // yazýlan teker açýsý 
     float RAngle;                // okunan teker açýsý 
+
+	float CellLx;
+	float CellLy;
+	float CellSx;
+	float CellSy;
 };
 
 class NetData {
@@ -48,11 +57,10 @@ public:
 	
 };
 
-
-
 struct ScrollingBuffer {
 	int MaxSize;
 	int Offset;
+	std::mutex mx;
 	ImVector<ImVec2> Data;
 	ScrollingBuffer(int max_size = 2000000) {
 		MaxSize = max_size;
@@ -60,18 +68,22 @@ struct ScrollingBuffer {
 		Data.reserve(MaxSize);
 	}
 	void AddPoint(float x, float y) {
+		mx.lock();
 		if (Data.size() < MaxSize)
 			Data.push_back(ImVec2(x, y));
 		else {
 			Data[Offset] = ImVec2(x, y);
 			Offset = (Offset + 1) % MaxSize;
 		}
+		mx.unlock();
 	}
 	void Erase() {
+		mx.lock();
 		if (Data.size() > 0) {
-			Data.shrink(0);
+			Data.resize(0);
 			Offset = 0;
 		}
+		mx.unlock();
 	}
 };
 
@@ -82,6 +94,7 @@ public:
 	float Time;
 	float History = 1.0f;
 	bool Enabled = true;
+	bool Visibility = false;
 };
 
 class WheelGraphicData :public GraphicData
@@ -110,14 +123,24 @@ class AgvPositionGraphicData : public GraphicData
 public:
 	ScrollingBuffer AgvFrontPosition;
 	ScrollingBuffer AgvBackPosition;
+
+	ScrollingBuffer Route;
+	ScrollingBuffer Curve;
+	ScrollingBuffer Simu;
+
+	void Erase() {
+		AgvFrontPosition.Erase();
+		AgvBackPosition.Erase();
+		Route.Erase();
+		Curve.Erase();
+		Simu.Erase();
+	}
+
 	float AgvAngle;
 };
 
-class PointGraphicData : public GraphicData
-{
-public:
-	ScrollingBuffer Point;
-};
+ 
+
 
 class ROTracer
 {   
@@ -131,9 +154,6 @@ public:                   //constructor
 	void WheelPage();
 	void AgvAngelPage();
 
-	void ShowAGVWindow(bool* p_open);
-	void ShowNETWindow(bool* p_open);
-
 	//----------------
 	void WifiSpeedPage();    // net fonksiyonlarý 
 	void PingPage();
@@ -146,20 +166,17 @@ public:                   //constructor
 	void StopStreamParser();
 
 
-
 	AgvData *Agv;          //agv classýna ait  nesne oluþturduk  
 	NetData *Net;
 	SpeedGraphicData *SpeedGraphic;    // SpeedGraphicData class'ýnýn nesnesini oluþturduk 
 	WheelGraphicData *WheelGraphic;
 	AgvAngleGraphicData *AgvAngleGraphic;
 	AgvPositionGraphicData *AgvPositionGraphic;
-	PointGraphicData *AgvRouteGraphic;
-	PointGraphicData *AgvCurveGraphic;
-	PointGraphicData *AgvSimRouteGraphic;
-
+ 
 	char IpAddress[16] = "192.168.2.125";
+	char PortAddress[8] = "5556";
 	bool _isRunning;
-	bool page1 = true;
+ 
 
 
 private:
@@ -171,6 +188,5 @@ private:
 	void ZMQDataStreamParser();       // parse iþlemi private onun için burda yoksa yukarý da yazabilirdik
 	
 };
-
 
 #endif

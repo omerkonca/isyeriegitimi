@@ -9,10 +9,8 @@ ROTracer::ROTracer() {
 	this->SpeedGraphic = new SpeedGraphicData();
 	this->WheelGraphic = new WheelGraphicData();
 	this->AgvAngleGraphic = new AgvAngleGraphicData();
+
 	this->AgvPositionGraphic = new AgvPositionGraphicData();
-	this->AgvRouteGraphic = new PointGraphicData();
-	this->AgvCurveGraphic = new PointGraphicData();
-	this->AgvSimRouteGraphic = new PointGraphicData();
 
 	_loginPageVisibility = true;
 }
@@ -57,95 +55,180 @@ static inline ImVec2 ImRotate(const ImVec2& v, float cos_a, float sin_a)
 
 
 void ROTracer::LoginPage() {
-	//_zmqLoopFlag = false;
+	
 	if (this->_loginPageVisibility == true)
 	{
-		ImGui::SetNextWindowSize(ImVec2(920, 520));
+		ImGui::SetNextWindowSize(ImVec2(920, 300));
+	
+		ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.5f), ImGuiCond_::ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 
-		// GİRİŞ SAYFA
-		if (page1 == true)
-		{
-			ImGui::Begin("PAGE", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);  //, &no_collapse
-			ImGui::StyleColorsDark();
-			ImGuiStyle& style = ImGui::GetStyle();
-			ImVec4* colors = style.Colors;
-			style.WindowRounding = 0.9f; // Pencere köşelerinin yuvarlanma miktarı
-			colors[ImGuiCol_WindowBg] = ImVec4(0.15f, 0.15f, 0.15f, 0.95f);
-			colors[ImGuiCol_TitleBg] = ImVec4(0.10f, 0.10f, 0.10f, 0.95f);
-			colors[ImGuiCol_TitleBgActive] = ImVec4(0.15f, 0.15f, 0.15f, 0.95f);
-			colors[ImGuiCol_Button] = ImVec4(0.10f, 0.10f, 0.10f, 1.00f);
-			colors[ImGuiCol_ButtonHovered] = ImVec4(0.15f, 0.15f, 0.15f, 1.00f);
-			colors[ImGuiCol_ButtonActive] = ImVec4(0.20f, 0.20f, 0.20f, 1.00f);
-			colors[ImGuiCol_ScrollbarBg] = ImVec4(0.10f, 0.10f, 0.10f, 1.00f);
-			colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.20f, 0.20f, 0.20f, 1.00f);
-			colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
-			colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.30f, 0.30f, 0.30f, 1.00f);
-			ImGui::Text(" ");
-			ImGui::Text(" ");
-			ImGui::Text(" ");
-			ImGui::Text(" ");
-			ImGui::Text(" ");
-			// Pencere başlığı ve IP adresi giriş kutusu
-			ImGui::Text("                                                       Enter IP Address");
-			ImGui::Spacing();
+		ImGui::Begin("PAGE", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);  //, &no_collapse
+		ImGui::StyleColorsDark();
+		ImGuiStyle& style = ImGui::GetStyle();
+		ImVec4* colors = style.Colors;
+		style.WindowRounding = 0.9f; // Pencere köşelerinin yuvarlanma miktarı
+		colors[ImGuiCol_WindowBg] = ImVec4(0.15f, 0.15f, 0.15f, 0.95f);
+		colors[ImGuiCol_TitleBg] = ImVec4(0.10f, 0.10f, 0.10f, 0.95f);
+		colors[ImGuiCol_TitleBgActive] = ImVec4(0.15f, 0.15f, 0.15f, 0.95f);
+		colors[ImGuiCol_Button] = ImVec4(0.10f, 0.10f, 0.10f, 1.00f);
+		colors[ImGuiCol_ButtonHovered] = ImVec4(0.15f, 0.15f, 0.15f, 1.00f);
+		colors[ImGuiCol_ButtonActive] = ImVec4(0.20f, 0.20f, 0.20f, 1.00f);
+		colors[ImGuiCol_ScrollbarBg] = ImVec4(0.10f, 0.10f, 0.10f, 1.00f);
+		colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.20f, 0.20f, 0.20f, 1.00f);
+		colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.25f, 0.25f, 0.25f, 1.00f);
+		colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.30f, 0.30f, 0.30f, 1.00f);
+		ImGui::Text(" ");
+		ImGui::Text(" ");
+		ImGui::Text(" ");
+		ImGui::Text(" ");
+		ImGui::Text(" ");
+		// Pencere başlığı ve IP adresi giriş kutusu
+		ImGui::SetCursorPosX(300);
+		ImGui::Text("Enter IP Address");
+		ImGui::SameLine();
+		ImGui::SetCursorPosX(510);
+		ImGui::Text("Port Address");
+		ImGui::Spacing();
 
-			ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize(" ", NULL, true).x) / (1, 5));
-			ImGui::InputText(" ", IpAddress, 32, ImGuiInputTextFlags_CharsNoBlank);
+		ImGui::SetCursorPosX(300);
+		ImGui::PushItemWidth(200);
+		ImGui::InputText("##Ip", IpAddress, 24, ImGuiInputTextFlags_CharsNoBlank );
+		ImGui::SameLine();
+		
+	
+		ImGui::PushItemWidth(100);
+		ImGui::InputText("##Port", PortAddress, 8, ImGuiInputTextFlags_CharsNoBlank);
+		ImGui::Spacing();
+		ImGui::Spacing();
 
-			ImGui::Spacing();
+		// IP adresi girişi ve "Login" düğmesi
+		ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize("Login", NULL, true).x) / 2);
 
-			// IP adresi girişi ve "Login" düğmesi
-			ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize("Login", NULL, true).x) / 2);
-
-			// IP adresi girişi ve "Login" düğmesi
-			if (ImGui::Button("Login")) {
-				// IP adresi doğrulama
-				std::regex ip_regex("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
-				if (!std::regex_match(IpAddress, ip_regex)) {
-					ImGui::OpenPopup("Uyari");
-				}
-				else {
-					// Login düğmesine tıklandığında, saklanan IP adresi ile diğer sayfaya geçme
-					std::cout << "Entered IP Address:" << IpAddress << std::endl;
-					ImGui::OpenPopup("New Page");
-					page1 = false;
-					this->_loginPageVisibility = false;
-					this->StartStreamParser();
-
-				}
+		// IP adresi girişi ve "Login" düğmesi
+		if (ImGui::Button("Login")) {
+			// IP adresi doğrulama
+			std::regex ip_regex("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
+			if (!std::regex_match(IpAddress, ip_regex)) {
+				ImGui::OpenPopup("Uyari");
 			}
-
-
-			// IP adresi uyarı mesajı
-			if (ImGui::BeginPopupModal("Uyari", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
-				ImGui::Text("Please enter a valid IP address.");
-				if (ImGui::Button("Ok")) {
-					ImGui::CloseCurrentPopup();
-				}
-				ImGui::EndPopup();
+			else {
+			
+				this->_loginPageVisibility = false;
+				this->StartStreamParser();
 			}
-
-			ImGui::End();
 		}
+
+		// IP adresi uyarı mesajı
+		if (ImGui::BeginPopupModal("Uyari", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize)) {
+			ImGui::Text("Please enter a valid IP address.");
+			if (ImGui::Button("Ok")) {
+				ImGui::CloseCurrentPopup();
+			}
+			ImGui::EndPopup();
+		}
+
+		ImGui::End();
+
 
 	}
+	else {
 
+		ImGui::BeginMainMenuBar();
 
-	// Yeni acılacak grafiklerin sayfası penceresi 
-	if (!this->_loginPageVisibility) {
-
-		if (!page1) {
-			ImGui::Begin("New Page");
-			ImGui::SetNextWindowSize(ImVec2(920, 520));
-			
-			this->ShowNETWindow(NULL);
-
-			this->ShowAGVWindow(NULL);
-			
-
-			ImGui::End();
-
+		if (ImGui::BeginMenu("Agv"))
+		{
+			ImGui::MenuItem("Wheel Angle", "", &this->WheelGraphic->Visibility);
+			ImGui::MenuItem("Speed", "", &this->SpeedGraphic->Visibility);
+			ImGui::MenuItem("Angle", "", &this->AgvAngleGraphic->Visibility);
+			ImGui::MenuItem("Position", "", &this->AgvPositionGraphic->Visibility);
+			ImGui::EndMenu();
 		}
+
+		if (ImGui::BeginMenu("Net"))
+		{
+			ImGui::EndMenu();
+		}
+
+		ImGui::EndMainMenuBar();
+		// END MENU
+
+		//// Arrange the visibility flags in a vector for easier manipulation
+		//std::vector<bool*> visibilityFlags = { &this->WheelGraphic->Visibility, &this->SpeedGraphic->Visibility,
+		//									   &this->AgvAngleGraphic->Visibility, &this->AgvPositionGraphic->Visibility };
+
+		//// Calculate the number of columns
+		//const int columns = 3;
+		//int visibleItemCount = 0;
+		//for (const bool* flag : visibilityFlags) {
+		//	if (*flag) visibleItemCount++;
+		//}
+		//const int rows = std::max(1, (visibleItemCount + columns - 1) / columns);
+
+		//// Calculate the item width and height
+		//const float itemWidth = ImGui::GetWindowWidth() / columns;
+		//const float itemHeight = 30;
+		//bool visibilityFlagNames[] = {};
+		//// Draw the visible items
+		//int itemIndex = 0;
+		//for (int row = 0; row < rows; row++) {
+		//	ImGui::Columns(columns, nullptr, false);
+		//	for (int col = 0; col < columns; col++) {
+		//		if (itemIndex >= visibilityFlags.size()) break;
+		//		if (*visibilityFlags[itemIndex]) {
+		//			ImGui::SetColumnWidth(col, itemWidth);
+		//			ImGui::SetCursorPosX(col * itemWidth);
+		//			ImGui::SetCursorPosY(ImGui::GetCursorPosY() + itemHeight * row);
+		//			if (itemIndex == visibleItemCount - 1 && rows > 1) {
+		//				ImGui::SetNextWindowContentSize(ImVec2(itemWidth, itemHeight));
+		//				ImGui::SetNextWindowPos(ImVec2(ImGui::GetCursorPosX(), ImGui::GetCursorPosY() + itemHeight));
+		//			}
+		//			if (itemIndex == 0) ImGui::BeginChild("##child", ImVec2(0, 0), false);
+		//			ImGui::Text("%s", visibilityFlagNames[itemIndex].c_str());
+		//			if (itemIndex == visibilityFlags.size() - 1) ImGui::EndChild();
+		//			itemIndex++;
+		//		}
+		//	}
+		//	ImGui::Columns(1);
+		//}
+		// END MENU
+
+		//if (ImGui::CollapsingHeader("NET"))
+		//{
+		//	ImGui::TableNextColumn();
+		//	ImGui::Text("DeviceMacAddress: %s", this->Net->DeviceMacAddress.c_str());
+
+		//	ImGui::TableNextColumn();
+		//	ImGui::Text("SSID: %s", this->Net->SSID.c_str());
+		//	ImGui::TableNextColumn();
+		//	ImGui::Text("Status: %s", this->Net->Status.c_str());
+
+		//	// İlk iki grafiği yan yana sırala
+		//	ImGui::BeginChild("Ping", ImVec2(600, 400), true);
+
+		//	this->SignalPingSpeedPage();
+		//	ImGui::EndChild();
+		//}
+
+
+		//ImGui::SetNextWindowSize(ImVec2(920, 520));
+
+
+		if (this->SpeedGraphic->Visibility) {
+			this->SpeedPage();
+		}
+
+		if (this->WheelGraphic->Visibility) {
+			this->WheelPage();
+		}
+
+		if (this->AgvAngleGraphic->Visibility) {
+			this->AgvAngelPage();
+		}
+
+		if (this->AgvPositionGraphic->Visibility) {
+			this->AgvPositionPage();
+		} 
+		 
 	}
 
 }
@@ -154,10 +237,11 @@ void ROTracer::ZMQDataStreamParser()
 {
 	void* context = zmq_ctx_new();
 	void* subscriber = zmq_socket(context, ZMQ_SUB);
-	std::string take_ip = this->IpAddress;
-	std::string  a = "tcp://" + take_ip + ":5556";
-
-	int rc = zmq_connect(subscriber, a.c_str());  //"tcp://192.168.2.125:5556"
+ 
+	char ip[100];
+	sprintf(ip, "tcp://%s:%s", this->IpAddress, this->PortAddress);
+	
+	int rc = zmq_connect(subscriber, ip);  //"tcp://192.168.2.125:5556"
 	rc = zmq_setsockopt(subscriber, ZMQ_SUBSCRIBE, "", 0);
 
 	size_t index = 0;
@@ -244,8 +328,8 @@ void ROTracer::ZMQDataStreamParser()
 				if (this->WheelGraphic->Enabled == true)
 				{
 					this->WheelGraphic->Time += ImGui::GetIO().DeltaTime;
-					this->WheelGraphic->ReadingWheelAngel.AddPoint(this->WheelGraphic->Time, this->Agv->WAngle);
-					this->WheelGraphic->WritingWheelAngel.AddPoint(this->WheelGraphic->Time, this->Agv->RAngle);
+					this->WheelGraphic->ReadingWheelAngel.AddPoint(this->WheelGraphic->Time, this->Agv->RAngle);
+					this->WheelGraphic->WritingWheelAngel.AddPoint(this->WheelGraphic->Time, this->Agv->WAngle);
 				}
 
 				if (this->AgvAngleGraphic->Enabled == true)
@@ -296,55 +380,61 @@ void ROTracer::ZMQDataStreamParser()
 					pch = strtok(NULL, ";");
 				}
 			}
-			else if (std::strcmp("route", zmq_topic_data) == 0) 
+			else if (std::strcmp("route", zmq_topic_data) == 0)
 			{
-		
 				doc.Parse(zmq_message_data);
 
 				if (doc.HasParseError()) {
 					continue;
 				}
 
-				this->AgvPositionGraphic->AgvBackPosition.Erase();
-				this->AgvPositionGraphic->AgvFrontPosition.Erase();
+				this->AgvPositionGraphic->Erase();
 
-				this->AgvRouteGraphic->Point.Erase();
-
-				for (itr = doc.Begin(); itr != doc.End(); ++itr) 
+				for (itr = doc.Begin(); itr != doc.End(); ++itr)
 				{
-					this->AgvRouteGraphic->Point.AddPoint(itr->GetObject()["X"].GetFloat(), itr->GetObject()["Y"].GetFloat());
+					this->AgvPositionGraphic->Route.AddPoint(itr->GetObject()["X"].GetFloat(), itr->GetObject()["Y"].GetFloat());
 				}
 			}
 			else if (std::strcmp("sim", zmq_topic_data) == 0) {
-				
-				
-		
+
 				doc.Parse(zmq_message_data);
 
 				if (doc.HasParseError()) {
 					continue;
 				}
 
-				this->AgvSimRouteGraphic->Point.Erase();
 				for (itr = doc.Begin(); itr != doc.End(); ++itr)
 				{
-					this->AgvSimRouteGraphic->Point.AddPoint(itr->GetObject()["X"].GetFloat(), itr->GetObject()["Y"].GetFloat());
+					this->AgvPositionGraphic->Simu.AddPoint(itr->GetObject()["X"].GetFloat(), itr->GetObject()["Y"].GetFloat());
 				}
 			}
 			else if (std::strcmp("curve", zmq_topic_data) == 0) {
-				
+
 				doc.Parse(zmq_message_data);
 
 				if (doc.HasParseError()) {
 					continue;
 				}
 
-				this->AgvCurveGraphic->Point.Erase();
-
 				for (itr = doc.Begin(); itr != doc.End(); ++itr)
 				{
-					this->AgvCurveGraphic->Point.AddPoint(itr->GetObject()["X"].GetFloat(), itr->GetObject()["Y"].GetFloat());
+					this->AgvPositionGraphic->Curve.AddPoint(itr->GetObject()["X"].GetFloat(), itr->GetObject()["Y"].GetFloat());
 				}
+			}
+			else if (std::strcmp("cell", zmq_topic_data) == 0) {
+
+				doc.Parse(zmq_message_data);
+
+				if (doc.HasParseError()) {
+					continue;
+				}
+
+				this->Agv->CellLx = doc[0].GetObject()["X"].GetFloat();
+				this->Agv->CellLy = doc[0].GetObject()["Y"].GetFloat();
+
+				this->Agv->CellSx = doc[1].GetObject()["X"].GetFloat();
+				this->Agv->CellSy = doc[1].GetObject()["Y"].GetFloat();
+
 			}
 
 		}
@@ -361,103 +451,12 @@ void ROTracer::ZMQDataStreamParser()
 	_isRunning = false;
 
 }
-void ROTracer::ShowNETWindow(bool* p_open) {//net BeginMenuBarın yazıldığı yer
-	static bool show_ping_speed_graph = false;
-
-	ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
-	ImGui::SetNextWindowSize(ImVec2(600, 750), ImGuiCond_FirstUseEver);
-	ImGui::Begin("Net", p_open, ImGuiWindowFlags_MenuBar);
-	if (ImGui::BeginMenuBar()) {
-		if (ImGui::BeginMenu("NET")) {
-			ImGui::MenuItem("Ping Speed", NULL, &show_ping_speed_graph);
-			ImGui::EndMenu();
-		}
-		ImGui::EndMenuBar();
-	}
-	
-	if (show_ping_speed_graph) {
-		ImGui::TableNextColumn();
-		ImGui::Text("DeviceMacAddress: %s", this->Net->DeviceMacAddress.c_str());
-
-		ImGui::TableNextColumn();
-		ImGui::Text("SSID: %s", this->Net->SSID.c_str());
-
-		ImGui::TableNextColumn();
-		ImGui::Text("Status: %s", this->Net->Status.c_str());
-
-		ImGui::TableNextColumn();
-		ImGui::Text("Ping: %d ms", this->Net->Ping);
-		
-
-		ImGui::BeginChild("Ping Speed Graph", ImVec2(900, 500), true);
-		ImGui::SeparatorText("Ping Speed Graph");
-		this->SignalPingSpeedPage();
-		
-		ImGui::EndChild();
-		
-	}
-
-	ImGui::End();
-}
-
-void ROTracer::ShowAGVWindow(bool* p_open) {  //agv BeginMenuBarın yazıldığı yer
-
-	static bool show_agv_speed = false;
-	static bool show_agv_wheel = false;
-	static bool show_agv_angle = false;
-	static bool show_agv_position = false;
-
-	ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
-	ImGui::SetNextWindowSize(ImVec2(900, 600), ImGuiCond_FirstUseEver);
-	ImGui::Begin("AGV", p_open, ImGuiWindowFlags_MenuBar);
-
-	if (ImGui::BeginMenuBar()) {
-		if (ImGui::BeginMenu("AGV")) {
-			ImGui::MenuItem("AGV Speed", NULL, &show_agv_speed);
-			ImGui::MenuItem("AGV Wheel", NULL, &show_agv_wheel);
-			ImGui::MenuItem("AGV Angle", NULL, &show_agv_angle);
-			ImGui::MenuItem("AGV Position", NULL, &show_agv_position);
-			ImGui::EndMenu();
-		}
-		ImGui::EndMenuBar();
-	}
-
-	if (show_agv_speed) {
-		ImGui::BeginChild("Agv Speed Graphic", ImVec2(800, 500), true);
-		ImGui::SeparatorText("Agv Speed Graphic");
-		this->SpeedPage();
-		ImGui::EndChild();
-	}
-
-	if (show_agv_wheel) {
-		ImGui::SameLine();
-		ImGui::BeginChild("Agv Wheel Graphic", ImVec2(800, 500), true);
-		ImGui::SeparatorText("Agv Wheel Graphic");
-		this->WheelPage();
-		ImGui::EndChild();
-	}
-
-	if (show_agv_angle) {
-		ImGui::BeginChild("Agv Angle Graphic", ImVec2(800, 500), true);
-		ImGui::SeparatorText("Agv Angle Graphic");
-		this->AgvAngelPage();
-		ImGui::EndChild();
-	}
-
-	if (show_agv_position) {
-		ImGui::SameLine();
-		ImGui::BeginChild("Agv Position Graphic", ImVec2(800, 500), true);
-		ImGui::SeparatorText("Agv Position Graphic");
-		this->AgvPositionPage();
-		ImGui::EndChild();
-	}
-
-	ImGui::End();
-}
-
-
 
 void ROTracer::SpeedPage() {
+
+	ImGui::SetNextWindowSize(ImVec2(920, 520));
+
+	ImGui::Begin("Agv Speed Graphic",&this->SpeedGraphic->Visibility);
 
 	if (this->Agv == NULL) {
 		return;
@@ -482,11 +481,15 @@ void ROTracer::SpeedPage() {
 
 		ImPlot::EndPlot();
 	}
+
+	ImGui::End();
 }
 
-
-
 void ROTracer::WheelPage() {
+
+	ImGui::SetNextWindowSize(ImVec2(920, 520));
+	ImGui::Begin("Agv Wheel Graphic", &this->WheelGraphic->Visibility);
+	
 	if (this->Agv == NULL) {
 		return;
 	}
@@ -510,10 +513,15 @@ void ROTracer::WheelPage() {
 
 		ImPlot::EndPlot();
 	}
+
+	ImGui::End();
 }
 
 
 void ROTracer::AgvAngelPage() {
+
+	ImGui::SetNextWindowSize(ImVec2(920, 520));
+	ImGui::Begin("Agv Angle Graphic", &this->AgvAngleGraphic->Visibility);
 
 	if (this->Agv == NULL) {
 		return;
@@ -538,9 +546,13 @@ void ROTracer::AgvAngelPage() {
 		ImPlot::EndPlot();
 	}
 
+	ImGui::End();
 }
 
 void ROTracer::AgvPositionPage() {
+
+	ImGui::SetNextWindowSize(ImVec2(920, 520));
+	ImGui::Begin("Agv Position Graphic", &this->AgvPositionGraphic->Visibility);
 
 	if (this->Agv == NULL) {
 		return;
@@ -566,35 +578,35 @@ void ROTracer::AgvPositionPage() {
 				this->AgvPositionGraphic->AgvBackPosition.Data.size(), 0, 0, 2 * sizeof(int));
 			ImPlot::PopStyleVar();
 
-			if (this->AgvRouteGraphic->Point.Data.size() > 0) {
+			if (this->AgvPositionGraphic->Route.Data.size() > 0) {
 				ImPlot::PushStyleVar(ImPlotStyleVar_FillAlpha, 0.25f);
 				ImPlot::SetNextMarkerStyle(ImPlotMarker_Circle, 2, ImPlot::GetColormapColor(2), IMPLOT_AUTO, ImPlot::GetColormapColor(2));
 				ImPlot::PlotScatter("AgvRoute",
-					&this->AgvRouteGraphic->Point.Data[0].x,
-					&this->AgvRouteGraphic->Point.Data[0].y,
-					this->AgvRouteGraphic->Point.Data.size(), 0, 0, 2 * sizeof(int));
+					&this->AgvPositionGraphic->Route.Data[0].x,
+					&this->AgvPositionGraphic->Route.Data[0].y,
+					this->AgvPositionGraphic->Route.Data.size(), 0, 0, 2 * sizeof(int));
 
 				ImPlot::PopStyleVar();
 			}
 
-			if (this->AgvCurveGraphic->Point.Data.size() > 0) {
+			if (this->AgvPositionGraphic->Curve.Data.size() > 0) {
 				ImPlot::PushStyleVar(ImPlotStyleVar_FillAlpha, 0.25f);
 				ImPlot::SetNextMarkerStyle(ImPlotMarker_Circle, 2, ImPlot::GetColormapColor(4), IMPLOT_AUTO, ImPlot::GetColormapColor(4));
 				ImPlot::PlotScatter("AgvCurve",
-					&this->AgvCurveGraphic->Point.Data[0].x,
-					&this->AgvCurveGraphic->Point.Data[0].y,
-					this->AgvCurveGraphic->Point.Data.size(), 0, 0, 2 * sizeof(int));
+					&this->AgvPositionGraphic->Curve.Data[0].x,
+					&this->AgvPositionGraphic->Curve.Data[0].y,
+					this->AgvPositionGraphic->Curve.Data.size(), 0, 0, 2 * sizeof(int));
 
 				ImPlot::PopStyleVar();
 			}
 
-			if (this->AgvSimRouteGraphic->Point.Data.size() > 0) {
+			if (this->AgvPositionGraphic->Simu.Data.size() > 0) {
 				ImPlot::PushStyleVar(ImPlotStyleVar_FillAlpha, 0.25f);
 				ImPlot::SetNextMarkerStyle(ImPlotMarker_Circle, 2, ImPlot::GetColormapColor(5), IMPLOT_AUTO, ImPlot::GetColormapColor(5));
 				ImPlot::PlotScatter("AgvSim",
-					&this->AgvSimRouteGraphic->Point.Data[0].x,
-					&this->AgvSimRouteGraphic->Point.Data[0].y,
-					this->AgvSimRouteGraphic->Point.Data.size(), 0, 0, 2 * sizeof(int));
+					&this->AgvPositionGraphic->Simu.Data[0].x,
+					&this->AgvPositionGraphic->Simu.Data[0].y,
+					this->AgvPositionGraphic->Simu.Data.size(), 0, 0, 2 * sizeof(int));
 
 				ImPlot::PopStyleVar();
 			}
@@ -623,9 +635,20 @@ void ROTracer::AgvPositionPage() {
 			ImVec2 p3 = ImPlot::PlotToPixels(ImPlotPoint(x_1, y_1));// tepe
 			ImPlot::PushPlotClipRect();
 			ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(255, 127, 0, 255));
+
+
+			if (this->AgvPositionGraphic->Route.Data.size() > 0) {
+
+				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellSx, this->Agv->CellSy)), IM_COL32(255, 127, 0, 255));
+				ImPlot::GetPlotDrawList()->AddCircleFilled(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), 3, IM_COL32(255, 127, 0, 255));
+
+			}
+
 		}
 		ImPlot::EndPlot();
 	}
+
+	ImGui::End();
 
 }
 
