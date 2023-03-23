@@ -117,6 +117,7 @@ int main(int, char**)
 		ImGui::NewFrame();
 
 		ImPlot::ShowDemoWindow();
+		//ImGui::ShowDemoWindow();
 
 		_rot->LoginPage();
 		

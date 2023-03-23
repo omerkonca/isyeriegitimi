@@ -3,7 +3,7 @@
 // ----------------------------BÜTÜN TANIMLAMA ÝÞLEMLERÝNÝ BURDA YAPIYORUZ --------------------------
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning (disable : 4996)
-
+#include <GLFW/glfw3.h>
 #include <iostream>
 #include <imgui.h>               // imgui bileþenlerini kullnmak için 
 #include <imgui_internal.h>
