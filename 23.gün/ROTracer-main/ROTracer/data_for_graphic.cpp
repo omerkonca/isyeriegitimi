@@ -134,28 +134,14 @@ void ROTracer::LoginPage() {
 	}
 	else {
 
-		float width = 1000.0f;
-		float height = 600.0f;
-
-		ImGui::SetNextWindowSize(ImVec2(width, height));
-
 		ImGui::BeginMainMenuBar();
-
-		int numMenuItems = 5; // Örnek olarak, 5 menü öğesi varsayalım
 
 		if (ImGui::BeginMenu("Agv"))
 		{
-			ImVec2 contentSize = ImGui::GetContentRegionAvail(); // Mevcut içerik bölgesinin boyutunu al
-
-			float menuItemHeight = contentSize.y / numMenuItems; // Menü öğesi yüksekliğini hesapla
-
-			ImGui::SetNextWindowSizeConstraints(ImVec2(contentSize.x, menuItemHeight), ImVec2(contentSize.x, menuItemHeight * numMenuItems)); // Menü öğesi boyutunu ayarla
-
 			ImGui::MenuItem("Wheel Angle", "", &this->WheelGraphic->Visibility);
 			ImGui::MenuItem("Speed", "", &this->SpeedGraphic->Visibility);
 			ImGui::MenuItem("Angle", "", &this->AgvAngleGraphic->Visibility);
 			ImGui::MenuItem("Position", "", &this->AgvPositionGraphic->Visibility);
-
 			ImGui::EndMenu();
 		}
 		
@@ -168,7 +154,7 @@ void ROTracer::LoginPage() {
 
 		if (this-> SpeedGraphic->Visibility)
 		{
-			ImGui::BeginChild("Speed Page", ImVec2(width, height), true);
+			ImGui::BeginChild("Speed Page", ImVec2(1000, 600), true);
 				this->SpeedGraphic->Visibility = true;
 				this->SpeedPage();
 				ImGui::EndChild();
