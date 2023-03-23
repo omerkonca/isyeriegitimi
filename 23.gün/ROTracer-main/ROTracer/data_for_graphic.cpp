@@ -55,6 +55,7 @@ static inline ImVec2 ImRotate(const ImVec2& v, float cos_a, float sin_a)
 
 
 void ROTracer::LoginPage() {
+
 	
 	if (this->_loginPageVisibility == true)
 	{
@@ -154,29 +155,15 @@ void ROTracer::LoginPage() {
 		if (this-> SpeedGraphic->Visibility)
 		{
 			ImGui::BeginChild("Speed Page", ImVec2(1000, 600), true);
-			this->SpeedGraphic->Visibility = true;
-
-			// Child penceresinin pozisyonunu tutmak için bir static değişken tanımlıyoruz
-			static ImVec2 window_pos = ImVec2(0, 0);
-			window_pos = ImGui::GetWindowPos();
-
-			// İnput tuşları ile child penceresinin pozisyonunu değiştirebilmek için bir ImGui::GetIO() kullanarak klavye inputlarını okuyoruz
-			if (ImGui::IsWindowHovered() && ImGui::IsMouseClicked(0))
-			{
-				auto mouse_pos = ImGui::GetMousePos();
-				window_pos = ImVec2(mouse_pos.x - 100, mouse_pos.y - 100);
-			}
-
-			// Child penceresinin konumunu ayarlıyoruz
-			ImGui::SetWindowPos(window_pos);
-
-			this->SpeedPage();
-			ImGui::EndChild();
-			
+				this->SpeedGraphic->Visibility = true;
+				this->SpeedPage();
+				ImGui::EndChild();
 		}
-
+		
 		if (this->WheelGraphic->Visibility)
 		{
+			ImGuiIO& io = ImGui::GetIO();
+		
 			ImGui::SameLine();
 
 			ImGui::BeginChild("Wheel Angle Page", ImVec2(1000, 600), true);
@@ -203,10 +190,14 @@ void ROTracer::LoginPage() {
 		if (this->AgvPositionGraphic->Visibility)
 		{
 			ImGui::SameLine();
+
 			ImGui::BeginChild("Agv Position Page", ImVec2(1000, 600), true);
+
+			this->AgvPositionGraphic->Visibility = true;
 			this->AgvPositionPage();
 			ImGui::EndChild();
 		}
+		
 		// END MENU
 
 		//// Arrange the visibility flags in a vector for easier manipulation
@@ -610,7 +601,7 @@ void ROTracer::AgvAngelPage() {
 void ROTracer::AgvPositionPage() {
 
 	ImGui::SetNextWindowSize(ImVec2(920, 520));
-	ImGui::Begin("Agv Position Graphic", &this->AgvPositionGraphic->Visibility);
+	//ImGui::Begin("Agv Position Graphic", &this->AgvPositionGraphic->Visibility);
 	if (this->Agv == NULL) {
 		return;
 	}
@@ -705,7 +696,7 @@ void ROTracer::AgvPositionPage() {
 		ImPlot::EndPlot();
 	}
 
-	ImGui::End();
+	//ImGui::End();
 
 }
 
