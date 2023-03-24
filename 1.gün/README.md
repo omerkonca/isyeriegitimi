@@ -1,0 +1,3 @@
+# İşyeri Eğitimi
+
+## bugün izinliydim

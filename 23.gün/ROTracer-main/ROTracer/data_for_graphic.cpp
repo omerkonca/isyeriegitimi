@@ -162,7 +162,7 @@ void ROTracer::LoginPage() {
 		
 		if (this->WheelGraphic->Visibility)
 		{
-			ImGuiIO& io = ImGui::GetIO();
+
 		
 			ImGui::SameLine();
 
