@@ -608,6 +608,7 @@ void ROTracer::AgvPositionPage() {
 	if (this->Agv == NULL) {
 		return;
 	}
+
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
 
 
