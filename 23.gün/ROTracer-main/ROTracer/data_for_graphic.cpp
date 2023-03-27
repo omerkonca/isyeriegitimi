@@ -51,7 +51,7 @@ static inline ImVec2 ImRotate(const ImVec2& v, float cos_a, float sin_a)
 {
 	return ImVec2(v.x * cos_a - v.y * sin_a, v.x * sin_a + v.y * cos_a);
 }*/
-
+static ImPlotPoint point1, point2;
 
 
 void ROTracer::LoginPage() {
@@ -505,38 +505,29 @@ void ROTracer::ZMQDataStreamParser()
 
 }
 //ben bezier eğrisi çizmek istiyorum fareyle bir noktadan bir noktaya çektiğim eğrinin uzunluğunu hesaplamak istiyorum nasıl yaparım
-void Demo_DragBezier() {
-
-	ImVec2 start, end;
-	bool is_drawing = false;
-
-	if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
-	{
-		if (!is_drawing)
-		{
-			start = ImGui::GetMousePos();
-			is_drawing = true;
-		}
-		else
-		{
-			end = ImGui::GetMousePos();
-			is_drawing = false;
-		}
-	}
-
-	if (is_drawing)
-	{
-		ImDrawList* draw_list = ImGui::GetWindowDrawList();
-		draw_list->AddLine(start, ImGui::GetMousePos(), IM_COL32(255, 0, 0, 255));
-	}
-	else if (start.x != 0 && start.y != 0 && end.x != 0 && end.y != 0)
-	{
-		ImDrawList* draw_list = ImGui::GetWindowDrawList();
-		draw_list->AddLine(start, end, IM_COL32(255, 0, 0, 255));
-		start = ImVec2(0, 0);
-		end = ImVec2(0, 0);
-	}
-}
+//void Demo_DragBezier() {
+//	static ImVec2 point1, point2, point3; // İki kontrol noktası ve bitiş noktası
+//
+//	if (ImGui::IsMouseClicked(0)) {
+//		point1 = point2 = point3 = ImGui::GetMousePos();
+//	}
+//
+//	if (ImGui::IsMouseDragging(0)) {
+//		point2 = ImGui::GetMousePos();
+//	}
+//
+//	if (ImGui::IsMouseReleased(0)) {
+//		point3 = ImGui::GetMousePos();
+//		ImPlot::GetPlotDrawList()->AddBezierCurve(
+//			ImPlot::PlotToPixels(point1),
+//			ImPlot::PlotToPixels(point2),
+//			ImPlot::PlotToPixels(point3),
+//			ImVec2(0, 0), // kontrol noktası çizmek için bu değerlere sıfır veriyoruz
+//			IM_COL32(255, 0, 0, 255),
+//			2.0f // çizgi kalınlığı
+//		);
+//	}
+//}
 
 
 void ROTracer::SpeedPage() {
@@ -645,9 +636,9 @@ void ROTracer::AgvPositionPage() {
 		return;
 	}
 
-	Demo_DragBezier();
+	/*Demo_DragBezier();*/
 
-
+	ImGui::InputFloat2("Mouse", new float[2] {(float)point1.x, (float)point1.y});
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
 
 
@@ -729,16 +720,34 @@ void ROTracer::AgvPositionPage() {
 			ImPlot::PushPlotClipRect();
 			ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(255, 127, 0, 255));
 
-			 
-			if (this->AgvPositionGraphic->Route.Data.size() > 0) {
+	
+			//if (this->AgvPositionGraphic->Route.Data.size() > 0) {
+			/*
+			if (ImGui::IsMouseReleased(0)) {
+				if (point1.x == 0 && point1.y == 0) {
+					point1 = ImPlot::GetPlotMousePos();
+				}
+				else {
+					point2 = ImPlot::GetPlotMousePos();
+					float length = sqrt(pow(point2.x - point1.x, 2) + pow(point2.y - point1.y, 2));
+					ImGui::Text("Uzunluk: %.2f", length);
+				}
+			}*/
 
+			if (ImGui::IsMouseClicked(0))
+				point1 = ImPlot::GetPlotMousePos();
+			// mevcut konum ve tıklanan nokta arasındaki uzaklığı hesapla
+			float dx = point1.x - this->Agv->Fx;
+			float dy = point1.y - this->Agv->Fy;
+			float distance = sqrt(dx * dx + dy * dy);
+			ImGui::Text("Uzunluk: %.2f", distance);
 				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellSx, this->Agv->CellSy)), IM_COL32(255, 127, 0, 255));
 				ImPlot::GetPlotDrawList()->AddCircleFilled(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), 3, IM_COL32(255, 127, 0, 255));
 
-				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Fx, this->Agv->Fy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Bx, this->Agv->By)), IM_COL32(255, 0, 0, 255));
+				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Fx, this->Agv->Fy)), ImPlot::PlotToPixels(point1), IM_COL32(255, 0, 0, 255));
 
 
-			}
+			//}
 
 		}
 		ImPlot::EndPlot();
