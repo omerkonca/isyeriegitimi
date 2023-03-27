@@ -1,6 +1,2 @@
-﻿  main.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22000.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': makro yeniden tanımlama
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\libs\glfw\include\GLFW\glfw3.h(98,1): message : önceki 'APIENTRY' tanımına bakın
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\main.cpp(99,7): warning C4189: 'show_demo_window': yerel değişken başlatıldı ancak başvurulmadı
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\ROTracer\main.cpp(100,7): warning C4189: 'show_another_window': yerel değişken başlatıldı ancak başvurulmadı
+﻿  implot_demo.cpp
   ROTracer.vcxproj -> C:\Users\omerk\Documents\GitHub\isyeriegitimi\16.gün\ROTracer-main\x64\Debug\ROTracer.exe

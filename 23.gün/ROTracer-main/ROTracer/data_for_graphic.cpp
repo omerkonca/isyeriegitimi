@@ -56,11 +56,11 @@ static inline ImVec2 ImRotate(const ImVec2& v, float cos_a, float sin_a)
 
 void ROTracer::LoginPage() {
 
-	
+
 	if (this->_loginPageVisibility == true)
 	{
 		ImGui::SetNextWindowSize(ImVec2(920, 300));
-	
+
 		ImGui::SetNextWindowPos(ImVec2(ImGui::GetIO().DisplaySize.x * 0.5f, ImGui::GetIO().DisplaySize.y * 0.5f), ImGuiCond_::ImGuiCond_Always, ImVec2(0.5f, 0.5f));
 
 		ImGui::Begin("PAGE", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar);  //, &no_collapse
@@ -93,10 +93,10 @@ void ROTracer::LoginPage() {
 
 		ImGui::SetCursorPosX(300);
 		ImGui::PushItemWidth(200);
-		ImGui::InputText("##Ip", IpAddress, 24, ImGuiInputTextFlags_CharsNoBlank );
+		ImGui::InputText("##Ip", IpAddress, 24, ImGuiInputTextFlags_CharsNoBlank);
 		ImGui::SameLine();
-		
-	
+
+
 		ImGui::PushItemWidth(100);
 		ImGui::InputText("##Port", PortAddress, 8, ImGuiInputTextFlags_CharsNoBlank);
 		ImGui::Spacing();
@@ -113,7 +113,7 @@ void ROTracer::LoginPage() {
 				ImGui::OpenPopup("Uyari");
 			}
 			else {
-			
+
 				this->_loginPageVisibility = false;
 				this->StartStreamParser();
 			}
@@ -144,7 +144,7 @@ void ROTracer::LoginPage() {
 			ImGui::MenuItem("Position", "", &this->AgvPositionGraphic->Visibility);
 			ImGui::EndMenu();
 		}
-		
+
 		if (ImGui::BeginMenu("Net"))
 		{
 			ImGui::EndMenu();
@@ -152,39 +152,39 @@ void ROTracer::LoginPage() {
 
 		ImGui::EndMainMenuBar();
 
-		if (this-> SpeedGraphic->Visibility)
+		if (this->SpeedGraphic->Visibility)
 		{
 			ImGui::BeginChild("Speed Page", ImVec2(1000, 600), true);
-				this->SpeedGraphic->Visibility = true;
-				this->SpeedPage();
-				ImGui::EndChild();
+			this->SpeedGraphic->Visibility = true;
+			this->SpeedPage();
+			ImGui::EndChild();
 		}
-		
+
 		if (this->WheelGraphic->Visibility)
 		{
 
-		
+
 			ImGui::SameLine();
 
 			ImGui::BeginChild("Wheel Angle Page", ImVec2(1000, 600), true);
-			
-				
 
-				this->WheelGraphic->Visibility = true;
-				this->WheelPage();
-				ImGui::EndChild();
-			
+
+
+			this->WheelGraphic->Visibility = true;
+			this->WheelPage();
+			ImGui::EndChild();
+
 		}
 
 		if (this->AgvAngleGraphic->Visibility)
 		{
 
 			ImGui::BeginChild("Agv Angle Page", ImVec2(1000, 600), true);
-			
-				this->AgvAngleGraphic->Visibility = true;
-				this->AgvAngelPage();
-				ImGui::EndChild();
-			
+
+			this->AgvAngleGraphic->Visibility = true;
+			this->AgvAngelPage();
+			ImGui::EndChild();
+
 		}
 
 		if (this->AgvPositionGraphic->Visibility)
@@ -197,7 +197,7 @@ void ROTracer::LoginPage() {
 			this->AgvPositionPage();
 			ImGui::EndChild();
 		}
-		
+
 		// END MENU
 
 		//// Arrange the visibility flags in a vector for easier manipulation
@@ -276,7 +276,7 @@ void ROTracer::LoginPage() {
 		if (this->AgvPositionGraphic->Visibility) {
 			this->AgvPositionPage();
 		} */
-		 
+
 	}
 
 }
@@ -288,10 +288,10 @@ void ROTracer::ZMQDataStreamParser()
 {
 	void* context = zmq_ctx_new();
 	void* subscriber = zmq_socket(context, ZMQ_SUB);
- 
+
 	char ip[100];
 	sprintf(ip, "tcp://%s:%s", this->IpAddress, this->PortAddress);
-	
+
 	int rc = zmq_connect(subscriber, ip);  //"tcp://192.168.2.125:5556"
 	rc = zmq_setsockopt(subscriber, ZMQ_SUBSCRIBE, "", 0);
 
@@ -305,7 +305,7 @@ void ROTracer::ZMQDataStreamParser()
 	{
 		zmq_msg_t zmq_topic;
 		zmq_msg_t zmq_message;
-		
+
 
 
 		zmq_msg_init(&zmq_topic);
@@ -504,6 +504,40 @@ void ROTracer::ZMQDataStreamParser()
 	_isRunning = false;
 
 }
+//ben bezier eğrisi çizmek istiyorum fareyle bir noktadan bir noktaya çektiğim eğrinin uzunluğunu hesaplamak istiyorum nasıl yaparım
+void Demo_DragBezier() {
+
+	ImVec2 start, end;
+	bool is_drawing = false;
+
+	if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+	{
+		if (!is_drawing)
+		{
+			start = ImGui::GetMousePos();
+			is_drawing = true;
+		}
+		else
+		{
+			end = ImGui::GetMousePos();
+			is_drawing = false;
+		}
+	}
+
+	if (is_drawing)
+	{
+		ImDrawList* draw_list = ImGui::GetWindowDrawList();
+		draw_list->AddLine(start, ImGui::GetMousePos(), IM_COL32(255, 0, 0, 255));
+	}
+	else if (start.x != 0 && start.y != 0 && end.x != 0 && end.y != 0)
+	{
+		ImDrawList* draw_list = ImGui::GetWindowDrawList();
+		draw_list->AddLine(start, end, IM_COL32(255, 0, 0, 255));
+		start = ImVec2(0, 0);
+		end = ImVec2(0, 0);
+	}
+}
+
 
 void ROTracer::SpeedPage() {
 
@@ -543,7 +577,7 @@ void ROTracer::WheelPage() {
 	ImGui::SetNextWindowSize(ImVec2(920, 520));
 	//ImGui::Begin("Agv Wheel Graphic", &this->WheelGraphic->Visibility);
 
-	
+
 	if (this->Agv == NULL) {
 		return;
 	}
@@ -610,6 +644,9 @@ void ROTracer::AgvPositionPage() {
 	if (this->Agv == NULL) {
 		return;
 	}
+
+	Demo_DragBezier();
+
 
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
 
@@ -692,11 +729,14 @@ void ROTracer::AgvPositionPage() {
 			ImPlot::PushPlotClipRect();
 			ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(255, 127, 0, 255));
 
-
+			 
 			if (this->AgvPositionGraphic->Route.Data.size() > 0) {
 
 				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellSx, this->Agv->CellSy)), IM_COL32(255, 127, 0, 255));
 				ImPlot::GetPlotDrawList()->AddCircleFilled(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), 3, IM_COL32(255, 127, 0, 255));
+
+				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Fx, this->Agv->Fy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Bx, this->Agv->By)), IM_COL32(255, 0, 0, 255));
+
 
 			}
 
