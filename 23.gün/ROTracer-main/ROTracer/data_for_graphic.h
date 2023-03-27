@@ -155,8 +155,8 @@ public:                   //constructor
 	void AgvAngelPage();
 
 	//----------------
-	void WifiSpeedPage();    // net fonksiyonlarý 
-	void PingPage();
+	//void WifiSpeedPage();    // net fonksiyonlarý 
+	//void PingPage();
 	void ReceivedRatePage();
 	void SignalPingSpeedPage();
 	void TransmitededRatePage();

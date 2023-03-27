@@ -305,6 +305,8 @@ void ROTracer::ZMQDataStreamParser()
 	{
 		zmq_msg_t zmq_topic;
 		zmq_msg_t zmq_message;
+		
+
 
 		zmq_msg_init(&zmq_topic);
 		rc = zmq_msg_recv(&zmq_topic, subscriber, 0);
