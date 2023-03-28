@@ -1,79 +1,55 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu : Arayüz geliştirilmesi
+## Yapılan Çalışmanın Konusu : Position grafiğinde mouse çizgi çizip uzunluk ölçümü yapma 
 
-Bugünkü görevim arayüzde kullanışsız bazı yerler vardı onları daha kullanışlı hale getirme
-Grafiklerde yeniden boyutlandırılmaya izin verilmiyor onu düzelttim
-Bir checkbox ile hizala görevini yapamadım
-3grafiği yanyana gösterme görevinide tamamladım
-Birde otomatik fokuslama görevinide kısmen hallettim
-Kodlarım şu şekilde
+Bugün haftanın ilk günü olması sebebiyle toplantı yaptık görev dağılımlarını belirledik ben uzunluk hesabı kısmını aldım ve ayrıca bu hafta demolara başlıyacağımızı söylediler. Benim görevim position grafiğinde herhangi bir yere mouse ile sağ click yapınca oraya kadar olan bir çizgi çizmeyi sağlıyor. İlk görevim buydu ve bunu yaptım. Daha sonraki görevim ise o çizdiğim çizginin uzunluğunu hesaplamaktı ve onu da yaptım aşağıda kodları ve resimleri belirttim.
 
-ImGui::BeginMainMenuBar();
 
-		if (ImGui::BeginMenu("Agv"))
-		{
-			ImGui::MenuItem("Wheel Angle", "", &this->WheelGraphic->Visibility);
-			ImGui::MenuItem("Speed", "", &this->SpeedGraphic->Visibility);
-			ImGui::MenuItem("Angle", "", &this->AgvAngleGraphic->Visibility);
-			ImGui::MenuItem("Position", "", &this->AgvPositionGraphic->Visibility);
-			ImGui::EndMenu();
-		}	
-		if (ImGui::BeginMenu("Net"))
-		{
-			ImGui::EndMenu();
-		}
+Aşağıdaki kod mouse sağ tıklamasını verdiğimiz point1 parametresine atama yapıyor.
 
-		ImGui::EndMainMenuBar();
+Ve aşağıdaki fx ve fy ile mouse tıkladığımız yere GetPlotDrawList fonksiyonuyla çizgi çizdirebiliyoruz.
 
-		if (this-> SpeedGraphic->Visibility)
-		{
-			ImGui::BeginChild("Speed Page", ImVec2(1000, 600), true);
-				this->SpeedGraphic->Visibility = true;
-				this->SpeedPage();
-				ImGui::EndChild();
-		}
-		
-		if (this->WheelGraphic->Visibility)
-		{
-
-		
-			ImGui::SameLine();
-
-			ImGui::BeginChild("Wheel Angle Page", ImVec2(1000, 600), true);
+	if (ImGui::IsMouseClicked(0))
+   		 point1 = ImPlot::GetPlotMousePos();
+				
+			// mevcut konum ve tıklanan nokta arasındaki uzaklığı hesapla
 			
-				this->WheelGraphic->Visibility = true;
-				this->WheelPage();
-				ImGui::EndChild();
-			
-		}
-		
-                if (this->AgvAngleGraphic->Visibility)
-		{
+			//ImGui::Text("Uzunluk: %.2f", distance);
+				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellSx, this->Agv->CellSy)), IM_COL32(255, 127, 0, 255));
+				ImPlot::GetPlotDrawList()->AddCircleFilled(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), 3, IM_COL32(255, 127, 0, 255));
 
-			ImGui::BeginChild("Agv Angle Page", ImVec2(1000, 600), true);
-			
-				this->AgvAngleGraphic->Visibility = true;
-				this->AgvAngelPage();
-				ImGui::EndChild();	
-		}
+				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Fx, this->Agv->Fy)), ImPlot::PlotToPixels(point1), IM_COL32(255, 0, 0, 255));
 
-		if (this->AgvPositionGraphic->Visibility)
-			{
-			ImGui::SameLine();
 
-			ImGui::BeginChild("Agv Position Page", ImVec2(1000, 600), true);
 
-			this->AgvPositionGraphic->Visibility = true;
-			this->AgvPositionPage();
-			ImGui::EndChild();
-			}
-![image](https://user-images.githubusercontent.com/65457096/227555571-b60b1d41-b0db-45ef-bfc5-cda28df9d6c4.png)
-Bu şekilde normalde alt alta geliyordu açılan grafikler bu şekilde güncelledim
 
-Bugünkü kazanımlarım
-- ImGui::BeginChild("Wheel Angle Page", ImVec2(1000, 600), true);   yapısını öğrendim
+Burda position grafiğinin çalışma mantığı forklift haraketini bitirdikten sonra gittiği yolu gösteriyor onuda diziye atayarak yaptık.
+
+
+
+![image](https://user-images.githubusercontent.com/65457096/228207594-bf08d0f4-fffd-41f8-a6dc-c796573c9217.png)
+
+
+
+## Bugünkü kazanımlarım
+- getplotdrawlist fonksiyonun ne işe yaradığını öğrendim
+- çizgi çizmeyi öğrendim ve 2 nokta arasındaki uzunluk nasıl hesaplanır onu öğrendim
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
