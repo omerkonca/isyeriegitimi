@@ -1,14 +1,4 @@
-﻿  imgui_impl_glfw.cpp
-  imgui_impl_opengl3.cpp
-  imgui.cpp
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
-  implot.cpp
-  implot_demo.cpp
-  implot_items.cpp
-  data_for_graphic.cpp
+﻿  data_for_graphic.cpp
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(317,48): warning C4267: 'başlatılıyor': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(318,52): warning C4267: 'başlatılıyor': 'size_t' - 'int' dönüşümü; veri kaybı olabilir
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(377,83): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
@@ -17,20 +7,14 @@ C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\dat
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(397,61): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(398,69): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(398,60): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(700,17): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(701,17): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(707,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(708,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(710,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(711,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(638,11): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(639,11): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(705,17): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(706,17): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(712,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(713,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(714,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(740,13): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(741,13): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-  main.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': makro yeniden tanımlama
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\libs\glfw\include\GLFW\glfw3.h(98,1): message : önceki 'APIENTRY' tanımına bakın
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\main.cpp(94,7): warning C4189: 'show_demo_window': yerel değişken başlatıldı ancak başvurulmadı
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\main.cpp(95,7): warning C4189: 'show_another_window': yerel değişken başlatıldı ancak başvurulmadı
-  Kod Üretiliyor...
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(715,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(716,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(718,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(719,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
   ROTracer.vcxproj -> C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\x64\Debug\ROTracer.exe
