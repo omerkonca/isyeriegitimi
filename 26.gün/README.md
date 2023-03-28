@@ -24,11 +24,11 @@ Ve aşağıdaki fx ve fy ile mouse tıkladığımız yere GetPlotDrawList fonksi
 
 
 
-Burda position grafiğinin çalışma mantığı forklift haraketini bitirdikten sonra gittiği yolu gösteriyor onuda diziye atayarak yaptık.
+#### Burda position grafiğinin çalışma mantığı forklift haraketini bitirdikten sonra gittiği yolu gösteriyor onuda diziye atayarak yaptık.
 
 
 
-![image](https://user-images.githubusercontent.com/65457096/228207594-bf08d0f4-fffd-41f8-a6dc-c796573c9217.png)
+![image](https://user-images.githubusercontent.com/65457096/228234244-2b697cd3-f93a-4cb8-a74e-85df5762e826.png)
 
 
 
