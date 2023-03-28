@@ -737,8 +737,8 @@ void ROTracer::AgvPositionPage() {
 			if (ImGui::IsMouseClicked(0))
 				point1 = ImPlot::GetPlotMousePos();
 			// mevcut konum ve tıklanan nokta arasındaki uzaklığı hesapla
-			float dx = point1.x - this->Agv->Fx;
-			float dy = point1.y - this->Agv->Fy;
+			float dx = point1.x - (this->Agv->Fx);
+			float dy = point1.y - (this->Agv->Fy);
 			float distance = sqrt(dx * dx + dy * dy);
 			ImGui::Text("Uzunluk: %.2f", distance);
 				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellSx, this->Agv->CellSy)), IM_COL32(255, 127, 0, 255));
