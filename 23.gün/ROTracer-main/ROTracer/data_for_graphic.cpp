@@ -627,7 +627,6 @@ void ROTracer::AgvAngelPage() {
 
 	//ImGui::End();
 }
-static bool isLineComplete = true;
 void ROTracer::AgvPositionPage() {
 
 	ImGui::SetNextWindowSize(ImVec2(920, 520));
@@ -635,9 +634,14 @@ void ROTracer::AgvPositionPage() {
 	if (this->Agv == NULL) {
 		return;
 	}
-	float dx = point1.x - point2.x;
+	/*float dx = point1.x - point2.x;
 	float dy = point1.y - point2.y;
-	float distance = sqrt(dx * dx + dy * dy);
+	float distance = sqrt(dx * dx + dy * dy);*/
+
+	//float distance = sqrt(pow(point2.x - point1.x, 2) + pow(point2.y - point1.y, 2));
+	double dx = point2.x - point1.x;
+	double dy = point2.y - point1.y;
+	double distance = sqrt(dx * dx + dy * dy);
 	/*Demo_DragBezier();*/
 	//ImGui::Text("Uzunluk: %.2f", distance);
 	ImGui::InputFloat2("Mouse", new float[2] {(float)point1.x, (float)point1.y});
@@ -645,7 +649,26 @@ void ROTracer::AgvPositionPage() {
 	ImGui::Checkbox("Draw Line", &drawLine);
 
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
-		
+		if (drawLine && ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl)
+		{
+			if (point1.x == 0.0f && point1.y == 0.0f)
+			{
+				point1 = ImPlot::GetPlotMousePos();
+
+			}
+			else
+			{
+				point2 = ImPlot::GetPlotMousePos();
+				
+				ImPlot::GetPlotDrawList()->AddLine(
+					ImPlot::PlotToPixels(ImPlotPoint(point1)),
+					ImPlot::PlotToPixels(ImPlotPoint(point2)),
+					IM_COL32(255, 0, 0, 255)
+				);
+				point1 = ImVec2(0.0f, 0.0f);
+				//point2 = ImVec2(0.0f, 0.0f);
+			}
+		}
 
 		//ImPlot::SetupAxisLimits(ImAxis_X1, this->Agv->X - 500, this->Agv->X + 1000, ImGuiCond_Always);
 		//ImPlot::SetupAxisLimits(ImAxis_Y1, this->Agv->Y - 500, this->Agv->Y + 1000, ImGuiCond_Always);
@@ -760,13 +783,13 @@ void ROTracer::AgvPositionPage() {
 				}
 			}
 			
-			// mevcut konum ve tıklanan nokta arasındaki uzaklığı hesapla
-			//if (ImGui::IsItemHovered()) // Eğer fare imleci üzerindeyse
-			//{
-			//	ImGui::BeginTooltip();
-			//	ImGui::Text("Length: %f", distance);
-			//	ImGui::EndTooltip();
-			//}
+			 //mevcut konum ve tıklanan nokta arasındaki uzaklığı hesapla
+			if (ImGui::IsItemHovered()) // Eğer fare imleci üzerindeyse
+			{
+				ImGui::BeginTooltip();
+				ImGui::Text("Length: %f", distance);
+				ImGui::EndTooltip();
+			}
 			//ImGui::Text("Uzunluk: %.2f", distance);
 
 				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellSx, this->Agv->CellSy)), IM_COL32(255, 127, 0, 255));

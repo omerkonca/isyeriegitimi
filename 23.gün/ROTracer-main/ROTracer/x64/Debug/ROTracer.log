@@ -7,14 +7,12 @@ C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\dat
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(397,61): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(398,69): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(398,60): warning C4244: 'bağımsız değişken': 'int' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(638,11): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(639,11): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(705,17): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(706,17): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(712,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(713,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(715,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(716,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(718,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(719,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(728,17): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(729,17): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(735,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(736,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(738,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(739,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(741,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\ROTracer\data_for_graphic.cpp(742,14): warning C4244: 'başlatılıyor': 'double' - 'float' dönüşümü; veri kaybı olabilir
   ROTracer.vcxproj -> C:\Users\omerk\Documents\GitHub\isyeriegitimi\23.gün\ROTracer-main\x64\Debug\ROTracer.exe
