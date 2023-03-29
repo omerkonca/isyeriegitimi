@@ -627,7 +627,8 @@ void ROTracer::AgvAngelPage() {
 
 	//ImGui::End();
 }
-
+bool is_first_click = true;
+ImVec2 first_point, second_point;
 void ROTracer::AgvPositionPage() {
 
 	ImGui::SetNextWindowSize(ImVec2(920, 520));
@@ -646,7 +647,21 @@ void ROTracer::AgvPositionPage() {
 
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
 
-
+		if (ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+			if (is_first_click) {
+				first_point = ImGui::GetMousePos();
+				is_first_click = false;
+			}
+			else {
+				second_point = ImGui::GetMousePos();
+				ImPlot::GetPlotDrawList()->AddLine(
+					ImPlot::PlotToPixels(first_point),
+					ImPlot::PlotToPixels(second_point),
+					IM_COL32(255, 0, 0, 255)
+				);
+				is_first_click = true;
+			}
+		}
 		//ImPlot::SetupAxisLimits(ImAxis_X1, this->Agv->X - 500, this->Agv->X + 1000, ImGuiCond_Always);
 		//ImPlot::SetupAxisLimits(ImAxis_Y1, this->Agv->Y - 500, this->Agv->Y + 1000, ImGuiCond_Always);
 
@@ -741,9 +756,6 @@ void ROTracer::AgvPositionPage() {
 
 			
 
-			while (true)
-			{
-
 			if (drawLine && ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl)
 			{
 				if (point1.x == 0.0f && point1.y == 0.0f)
@@ -759,9 +771,10 @@ void ROTracer::AgvPositionPage() {
 						IM_COL32(255, 0, 0, 255)
 					);
 					point1 = ImVec2(0.0f, 0.0f);
+					point2 = ImVec2(0.0f, 0.0f);
 				}
 			}
-			}
+			
 			// mevcut konum ve tıklanan nokta arasındaki uzaklığı hesapla
 			//if (ImGui::IsItemHovered()) // Eğer fare imleci üzerindeyse
 			//{
@@ -770,6 +783,7 @@ void ROTracer::AgvPositionPage() {
 			//	ImGui::EndTooltip();
 			//}
 			//ImGui::Text("Uzunluk: %.2f", distance);
+
 				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellSx, this->Agv->CellSy)), IM_COL32(255, 127, 0, 255));
 				ImPlot::GetPlotDrawList()->AddCircleFilled(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), 3, IM_COL32(255, 127, 0, 255));
 				//ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlot::PlotToPixels(point2)), ImPlot::PlotToPixels(point1), IM_COL32(255, 0, 0, 255)); //mouse ile çizgi çizdirme
