@@ -648,26 +648,40 @@ void ROTracer::AgvPositionPage() {
 	ImGui::InputFloat("Length ", new float[1] {(float)distance});
 	ImGui::Checkbox("Draw Line", &drawLine);
 
+	static int cnt = 0;
+
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
 		if (drawLine && ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl)
 		{
-			if (point1.x == 0.0f && point1.y == 0.0f)
+			if (cnt==0)
 			{
 				point1 = ImPlot::GetPlotMousePos();
-
+				cnt = 1;
 			}
-			else
+			else if(cnt==1)
 			{
 				point2 = ImPlot::GetPlotMousePos();
+				cnt = 2;
 				
-				ImPlot::GetPlotDrawList()->AddLine(
-					ImPlot::PlotToPixels(ImPlotPoint(point1)),
-					ImPlot::PlotToPixels(ImPlotPoint(point2)),
-					IM_COL32(255, 0, 0, 255)
-				);
-				point1 = ImVec2(0.0f, 0.0f);
 				//point2 = ImVec2(0.0f, 0.0f);
 			}
+			
+		}
+		else if(drawLine==false)
+		{
+			point1 = ImVec2(0.0f, 0.0f);
+			point2 = ImVec2(0.0f, 0.0f);
+			cnt = 0;
+		}
+
+		if (cnt == 2) {
+
+			ImPlot::GetPlotDrawList()->AddLine(
+				ImPlot::PlotToPixels(ImPlotPoint(point1)),
+				ImPlot::PlotToPixels(ImPlotPoint(point2)),
+				IM_COL32(255, 0, 0, 255)
+			);
+
 		}
 
 		//ImPlot::SetupAxisLimits(ImAxis_X1, this->Agv->X - 500, this->Agv->X + 1000, ImGuiCond_Always);
