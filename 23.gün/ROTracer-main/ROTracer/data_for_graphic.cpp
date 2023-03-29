@@ -627,7 +627,7 @@ void ROTracer::AgvAngelPage() {
 
 	//ImGui::End();
 }
-
+static bool isLineComplete = true;
 void ROTracer::AgvPositionPage() {
 
 	ImGui::SetNextWindowSize(ImVec2(920, 520));
@@ -645,7 +645,7 @@ void ROTracer::AgvPositionPage() {
 	ImGui::Checkbox("Draw Line", &drawLine);
 
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
-	
+		
 
 		//ImPlot::SetupAxisLimits(ImAxis_X1, this->Agv->X - 500, this->Agv->X + 1000, ImGuiCond_Always);
 		//ImPlot::SetupAxisLimits(ImAxis_Y1, this->Agv->Y - 500, this->Agv->Y + 1000, ImGuiCond_Always);
@@ -755,7 +755,6 @@ void ROTracer::AgvPositionPage() {
 						ImPlot::PlotToPixels(ImPlotPoint(point2)),
 						IM_COL32(255, 0, 0, 255)
 					);
-					ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlot::PlotToPixels(point1)), ImPlot::PlotToPixels(point2), IM_COL32(255, 0, 0, 255));
 					point1 = ImVec2(0.0f, 0.0f);
 					//point2 = ImVec2(0.0f, 0.0f);
 				}
