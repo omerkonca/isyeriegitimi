@@ -1,79 +1,56 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu : Arayüz geliştirilmesi
+## Yapılan Çalışmanın Konusu :Position kısmı revize işlemleri
 
-Bugünkü görevim arayüzde kullanışsız bazı yerler vardı onları daha kullanışlı hale getirme
-Grafiklerde yeniden boyutlandırılmaya izin verilmiyor onu düzelttim
-Bir checkbox ile hizala görevini yapamadım
-3grafiği yanyana gösterme görevinide tamamladım
-Birde otomatik fokuslama görevinide kısmen hallettim
-Kodlarım şu şekilde
+Bugünkü görevim mouse tıkladığımızda 1.noktayı alıp, 2.tıkladığımızdada 2.noktayı alıp arasına çizgi çizmek ve bunuda ctrl tuşuna basarak yapmaktı ve başarılı bir şekilde yaptım. Ve aynı zamanda bir checkbox ekleyip checkbox a tıklayınca çizgi çizebiliyoruz basmazsak hiçbir işlem yapamıyoruz.
 
-ImGui::BeginMainMenuBar();
+Kodumu aşağıya ekledim
 
-		if (ImGui::BeginMenu("Agv"))
+	if (drawLine && ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl)
+	{
+		if (point1.x == 0.0f && point1.y == 0.0f)
 		{
-			ImGui::MenuItem("Wheel Angle", "", &this->WheelGraphic->Visibility);
-			ImGui::MenuItem("Speed", "", &this->SpeedGraphic->Visibility);
-			ImGui::MenuItem("Angle", "", &this->AgvAngleGraphic->Visibility);
-			ImGui::MenuItem("Position", "", &this->AgvPositionGraphic->Visibility);
-			ImGui::EndMenu();
-		}	
-		if (ImGui::BeginMenu("Net"))
-		{
-			ImGui::EndMenu();
+			point1 = ImPlot::GetPlotMousePos();
 		}
-
-		ImGui::EndMainMenuBar();
-
-		if (this-> SpeedGraphic->Visibility)
+		else
 		{
-			ImGui::BeginChild("Speed Page", ImVec2(1000, 600), true);
-				this->SpeedGraphic->Visibility = true;
-				this->SpeedPage();
-				ImGui::EndChild();
+			point2 = ImPlot::GetPlotMousePos();
+			ImPlot::GetPlotDrawList()->AddLine(
+			ImPlot::PlotToPixels(ImPlotPoint(point1)),
+			ImPlot::PlotToPixels(ImPlotPoint(point2)),
+			IM_COL32(255, 0, 0, 255)
+			);
+			ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlot::PlotToPixels(point1)), ImPlot::PlotToPixels(point2), IM_COL32(255, 0, 0, 255));
+			point1 = ImVec2(0.0f, 0.0f);
+			//point2 = ImVec2(0.0f, 0.0f);
 		}
-		
-		if (this->WheelGraphic->Visibility)
-		{
+	}
 
-		
-			ImGui::SameLine();
 
-			ImGui::BeginChild("Wheel Angle Page", ImVec2(1000, 600), true);
-			
-				this->WheelGraphic->Visibility = true;
-				this->WheelPage();
-				ImGui::EndChild();
-			
-		}
-		
-                if (this->AgvAngleGraphic->Visibility)
-		{
 
-			ImGui::BeginChild("Agv Angle Page", ImVec2(1000, 600), true);
-			
-				this->AgvAngleGraphic->Visibility = true;
-				this->AgvAngelPage();
-				ImGui::EndChild();	
-		}
+Uzunluk hesaplaması da bu şekilde
 
-		if (this->AgvPositionGraphic->Visibility)
-			{
-			ImGui::SameLine();
+	float dx = point1.x - point2.x;
+	float dy = point1.y - point2.y;
+	float distance = sqrt(dx * dx + dy * dy);
 
-			ImGui::BeginChild("Agv Position Page", ImVec2(1000, 600), true);
 
-			this->AgvPositionGraphic->Visibility = true;
-			this->AgvPositionPage();
-			ImGui::EndChild();
-			}
-![image](https://user-images.githubusercontent.com/65457096/227555571-b60b1d41-b0db-45ef-bfc5-cda28df9d6c4.png)
-Bu şekilde normalde alt alta geliyordu açılan grafikler bu şekilde güncelledim
+
+
 
 Bugünkü kazanımlarım
-- ImGui::BeginChild("Wheel Angle Page", ImVec2(1000, 600), true);   yapısını öğrendim
+-	Mouse değişkenlerini kullanmayı öğrendim
+
+
+
+
+
+
+
+
+
+
 
 
 
