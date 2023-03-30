@@ -637,53 +637,78 @@ void ROTracer::AgvPositionPage() {
 	/*float dx = point1.x - point2.x;
 	float dy = point1.y - point2.y;
 	float distance = sqrt(dx * dx + dy * dy);*/
-
+	static int cnt = 0;
 	//float distance = sqrt(pow(point2.x - point1.x, 2) + pow(point2.y - point1.y, 2));
 	double dx = point2.x - point1.x;
 	double dy = point2.y - point1.y;
 	double distance = sqrt(dx * dx + dy * dy);
 	/*Demo_DragBezier();*/
 	//ImGui::Text("Uzunluk: %.2f", distance);
-	ImGui::InputFloat2("Mouse", new float[2] {(float)point1.x, (float)point1.y});
-	ImGui::InputFloat("Length ", new float[1] {(float)distance});
-	ImGui::Checkbox("Draw Line", &drawLine);
 
-	static int cnt = 0;
+	ImGui::InputFloat2("Mouse", new float[2] {(float)point1.x, (float)point1.y});
+	ImGui::InputFloat("Length ", new float[1] {(float)distance});	
+	ImGui::SameLine(); 
+	ImGui::Checkbox("Draw Line", &drawLine); 
+	ImGui::SameLine();
+	
+	if (ImGui::Button("Clear Line")) {
+		//drawLine = false;
+		point1 = ImVec2(0.0f, 0.0f);
+		point2 = ImVec2(0.0f, 0.0f);
+		cnt = 0;
+	}
 
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
-		if (drawLine && ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl)
-		{
-			if (cnt==0)
-			{
-				point1 = ImPlot::GetPlotMousePos();
-				cnt = 1;
-			}
-			else if(cnt==1)
-			{
-				point2 = ImPlot::GetPlotMousePos();
-				cnt = 2;
-				
-				//point2 = ImVec2(0.0f, 0.0f);
-			}
-			
-		}
-		else if(drawLine==false)
-		{
-			point1 = ImVec2(0.0f, 0.0f);
-			point2 = ImVec2(0.0f, 0.0f);
-			cnt = 0;
-		}
+		//if (drawLine && ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl)
+		//{
+		//	if (cnt==0)
+		//	{
+		//		point1 = ImPlot::GetPlotMousePos();
+		//		cnt = 1;
+		//	}
+		//	else if(cnt==1)
+		//	{
+		//		point2 = ImPlot::GetPlotMousePos();
+		//		cnt = 2;
+		//		
+		//		//point2 = ImVec2(0.0f, 0.0f);
+		//	}
+		//	
+		//}
+		//else if(drawLine==false)
+		//{
+		//	point1 = ImVec2(0.0f, 0.0f);
+		//	point2 = ImVec2(0.0f, 0.0f);
+		//	cnt = 0;
+		//}
 
-		if (cnt == 2) {
+		//if (cnt == 2) {
 
-			ImPlot::GetPlotDrawList()->AddLine(
-				ImPlot::PlotToPixels(ImPlotPoint(point1)),
-				ImPlot::PlotToPixels(ImPlotPoint(point2)),
-				IM_COL32(255, 0, 0, 255)
-			);
+		//	const float arrowSize = 10.0f;
+		//	const ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(point1));
+		//	const ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(point2));
+		//	const ImVec2 dir = ImVec2(p2.x - p1.x, p2.y - p1.y);
+		//	const float len = sqrtf(dir.x * dir.x + dir.y * dir.y);
+		//	const ImVec2 norm = ImVec2(dir.x / len, dir.y / len);
+		//	const ImVec2 perp = ImVec2(-norm.y, norm.x);
 
-		}
+		//	ImPlot::GetPlotDrawList()->AddLine(p1, p2, IM_COL32(255, 0, 0, 255), 3.0f);
+		//	if (ImPlot::IsPlotHovered()) {
+		//		ImGui::BeginTooltip();
+		//		ImGui::Text("Length: %.2f", distance);
+		//		ImGui::EndTooltip();
+		//	}
+		//
+		//	const float crossSize = 4.0f;
+		//	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y + perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+		//	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y - perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
 
+		//	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y + perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+		//	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y - perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+		//	
+
+		//}
+		  
 		//ImPlot::SetupAxisLimits(ImAxis_X1, this->Agv->X - 500, this->Agv->X + 1000, ImGuiCond_Always);
 		//ImPlot::SetupAxisLimits(ImAxis_Y1, this->Agv->Y - 500, this->Agv->Y + 1000, ImGuiCond_Always);
 
@@ -777,33 +802,69 @@ void ROTracer::AgvPositionPage() {
 			}*/
 
 			
-
 			if (drawLine && ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl)
 			{
-				if (point1.x == 0.0f && point1.y == 0.0f)
+				if (cnt == 0)
 				{
 					point1 = ImPlot::GetPlotMousePos();
+					cnt = 1;
 				}
-				else
+				else if (cnt == 1)
 				{
 					point2 = ImPlot::GetPlotMousePos();
-					ImPlot::GetPlotDrawList()->AddLine(
-						ImPlot::PlotToPixels(ImPlotPoint(point1)),
-						ImPlot::PlotToPixels(ImPlotPoint(point2)),
-						IM_COL32(255, 0, 0, 255)
-					);
-					point1 = ImVec2(0.0f, 0.0f);
+					cnt = 2;
+
 					//point2 = ImVec2(0.0f, 0.0f);
+				}
+
+			}
+			else if (drawLine == false)
+			{
+				/*point1 = ImVec2(0.0f, 0.0f);
+				point2 = ImVec2(0.0f, 0.0f);*/
+				cnt = 0;
+			}
+
+			if (cnt == 2) {
+
+				const float arrowSize = 10.0f;
+				const ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(point1));
+				const ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(point2));
+				const ImVec2 dir = ImVec2(p2.x - p1.x, p2.y - p1.y);
+				const float len = sqrtf(dir.x * dir.x + dir.y * dir.y);
+				const ImVec2 norm = ImVec2(dir.x / len, dir.y / len);
+				const ImVec2 perp = ImVec2(-norm.y, norm.x);
+
+				//ImPlot::GetPlotDrawList()->AddLine(p1, p2, IM_COL32(255, 0, 0, 255), 3.0f);
+				ImPlot::GetPlotDrawList()->AddLine(
+					ImPlot::PlotToPixels(ImPlotPoint(point1)),
+					ImPlot::PlotToPixels(ImPlotPoint(point2)),
+					IM_COL32(255, 0, 0, 255), 
+					3.0f
+				);
+			
+
+				const float crossSize = 4.0f;
+				ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y + perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+				ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y - perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+
+				ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y + perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+				ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y - perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+
+				if (ImGui::IsItemHovered()) {
+					ImGui::BeginTooltip();
+					ImGui::Text("Line Length: %.2f", distance);
+					ImGui::EndTooltip();
 				}
 			}
 			
 			 //mevcut konum ve tıklanan nokta arasındaki uzaklığı hesapla
-			if (ImGui::IsItemHovered()) // Eğer fare imleci üzerindeyse
-			{
-				ImGui::BeginTooltip();
-				ImGui::Text("Length: %f", distance);
-				ImGui::EndTooltip();
-			}
+			//if (ImGui::IsItemHovered()) // Eğer fare imleci üzerindeyse
+			//{
+			//	ImGui::BeginTooltip();
+			//	ImGui::Text("Length: %f", distance);
+			//	ImGui::EndTooltip();
+			//}
 			//ImGui::Text("Uzunluk: %.2f", distance);
 
 				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellSx, this->Agv->CellSy)), IM_COL32(255, 127, 0, 255));
