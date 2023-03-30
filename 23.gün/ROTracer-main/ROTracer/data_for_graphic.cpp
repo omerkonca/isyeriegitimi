@@ -51,7 +51,7 @@ static inline ImVec2 ImRotate(const ImVec2& v, float cos_a, float sin_a)
 {
 	return ImVec2(v.x * cos_a - v.y * sin_a, v.x * sin_a + v.y * cos_a);
 }*/
-static ImPlotPoint point1, point2;
+static ImPlotPoint point1, point2, mousePos, center;
 static bool drawLine = false;
 
 void ROTracer::LoginPage() {
@@ -641,23 +641,61 @@ void ROTracer::AgvPositionPage() {
 
 	ImGui::InputFloat2("Mouse", new float[2] {(float)point1.x, (float)point1.y});
 	//ImGui::InputFloat("Length ", new float[1] {(float)distance});	
-	ImGui::SameLine(); 
-	ImGui::Checkbox("Draw Line", &drawLine); 
 	ImGui::SameLine();
-	
+	ImGui::Checkbox("Draw Line", &drawLine);
+	ImGui::SameLine();
+
 	if (ImGui::Button("Clear Line")) {
 		//drawLine = false;
 		point1 = ImVec2(0.0f, 0.0f);
 		point2 = ImVec2(0.0f, 0.0f);
 		cnt = 0;
 	}
-
+	//bool drawCircle = false;
+	//ImVec2 center;
+	float radius = 0.0f;
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
 
 		//ImPlot::SetupAxisLimits(ImAxis_X1, this->Agv->X - 500, this->Agv->X + 1000, ImGuiCond_Always);
 		//ImPlot::SetupAxisLimits(ImAxis_Y1, this->Agv->Y - 500, this->Agv->Y + 1000, ImGuiCond_Always);
 
 		//ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
+		if (drawLine && ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl)
+		{
+			if (cnt == 0)
+			{
+				point1 = ImPlot::GetPlotMousePos();
+				cnt = 1;
+			}
+			else if (cnt == 1)
+			{
+				point2 = ImPlot::GetPlotMousePos();
+				cnt = 2;
+
+				//point2 = ImVec2(0.0f, 0.0f);
+			}
+
+		}
+		else if (drawLine == false)
+		{
+			/*point1 = ImVec2(0.0f, 0.0f);
+			point2 = ImVec2(0.0f, 0.0f);*/
+			cnt = 0;
+		}
+
+		if (cnt == 2)
+		{
+
+			radius = sqrt(pow(point1.x - point2.x, 2) + pow(point1.y - point2.y, 2));
+			static double xs[360], ys[360];
+			for (int i = 0; i < 360; ++i)
+			{
+				double angle = i * 2 * PI / 359.0;
+				xs[i] = point2.x + radius * cos(angle);
+				ys[i] = point2.y + radius * sin(angle);
+			}
+			//ImPlot::PlotLine("Circle", xs, ys, 360);
+		}
 
 		if (this->AgvPositionGraphic->AgvFrontPosition.Data.size() > 0) {
 
@@ -732,7 +770,7 @@ void ROTracer::AgvPositionPage() {
 			ImPlot::PushPlotClipRect();
 			ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(255, 127, 0, 255));
 
-          //mouse tıklamasıyla çizgi çizen kod	
+			//mouse tıklamasıyla çizgi çizen kod	
 			if (drawLine && ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl)
 			{
 				if (cnt == 0)
@@ -770,10 +808,10 @@ void ROTracer::AgvPositionPage() {
 				ImPlot::GetPlotDrawList()->AddLine(
 					ImPlot::PlotToPixels(ImPlotPoint(point1)),
 					ImPlot::PlotToPixels(ImPlotPoint(point2)),
-					IM_COL32(255, 0, 0, 255), 
+					IM_COL32(255, 0, 0, 255),
 					3.0f
 				);
-			
+
 
 				const float crossSize = 4.0f;
 				ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y + perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
@@ -788,23 +826,23 @@ void ROTracer::AgvPositionPage() {
 					ImGui::EndTooltip();
 				}
 			}
-			
-		
 
-				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellSx, this->Agv->CellSy)), IM_COL32(255, 127, 0, 255));
-				ImPlot::GetPlotDrawList()->AddCircleFilled(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), 3, IM_COL32(255, 127, 0, 255));
-				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Fx, this->Agv->Fy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Bx, this->Agv->By)), IM_COL32(255, 127, 0, 255)); 
 
-				//ImPlot::SetNextMarkerStyle(ImPlotMarker_Cross, 6.0f, ImVec4(1, 0, 0, 1), 2.0f);
-				
-			//}
+
+			ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellSx, this->Agv->CellSy)), IM_COL32(255, 127, 0, 255));
+			ImPlot::GetPlotDrawList()->AddCircleFilled(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), 3, IM_COL32(255, 127, 0, 255));
+			ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Fx, this->Agv->Fy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Bx, this->Agv->By)), IM_COL32(255, 127, 0, 255));
+
+			//ImPlot::SetNextMarkerStyle(ImPlotMarker_Cross, 6.0f, ImVec4(1, 0, 0, 1), 2.0f);
+
+		//}
 
 		}
 		ImPlot::EndPlot();
 	}
 
 	//ImGui::End();
-		
+
 }
 
 void ROTracer::ReceivedRatePage() {
