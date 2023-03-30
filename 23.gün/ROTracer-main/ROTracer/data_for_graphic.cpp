@@ -640,7 +640,7 @@ void ROTracer::AgvPositionPage() {
 	double distance = sqrt(dx * dx + dy * dy);
 
 	ImGui::InputFloat2("Mouse", new float[2] {(float)point1.x, (float)point1.y});
-	ImGui::InputFloat("Length ", new float[1] {(float)distance});	
+	//ImGui::InputFloat("Length ", new float[1] {(float)distance});	
 	ImGui::SameLine(); 
 	ImGui::Checkbox("Draw Line", &drawLine); 
 	ImGui::SameLine();
@@ -732,8 +732,7 @@ void ROTracer::AgvPositionPage() {
 			ImPlot::PushPlotClipRect();
 			ImPlot::GetPlotDrawList()->AddTriangleFilled(p1, p2, p3, IM_COL32(255, 127, 0, 255));
 
-
-			
+          //mouse tıklamasıyla çizgi çizen kod	
 			if (drawLine && ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl)
 			{
 				if (cnt == 0)
@@ -790,18 +789,11 @@ void ROTracer::AgvPositionPage() {
 				}
 			}
 			
-			 //mevcut konum ve tıklanan nokta arasındaki uzaklığı hesapla
-			//if (ImGui::IsItemHovered()) // Eğer fare imleci üzerindeyse
-			//{
-			//	ImGui::BeginTooltip();
-			//	ImGui::Text("Length: %f", distance);
-			//	ImGui::EndTooltip();
-			//}
-			//ImGui::Text("Uzunluk: %.2f", distance);
+		
 
 				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellSx, this->Agv->CellSy)), IM_COL32(255, 127, 0, 255));
 				ImPlot::GetPlotDrawList()->AddCircleFilled(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->CellLx, this->Agv->CellLy)), 3, IM_COL32(255, 127, 0, 255));
-				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Fx, this->Agv->Fy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Bx, this->Agv->By)), IM_COL32(255, 127, 0, 255));
+				ImPlot::GetPlotDrawList()->AddLine(ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Fx, this->Agv->Fy)), ImPlot::PlotToPixels(ImPlotPoint(this->Agv->Bx, this->Agv->By)), IM_COL32(255, 127, 0, 255)); 
 
 				//ImPlot::SetNextMarkerStyle(ImPlotMarker_Cross, 6.0f, ImVec4(1, 0, 0, 1), 2.0f);
 				
