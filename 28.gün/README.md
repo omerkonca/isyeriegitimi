@@ -1,82 +1,54 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu : Arayüz geliştirilmesi
+## Yapılan Çalışmanın Konusu : Position kısmı revize işlemleri 2 
+Bugün position kısmına devam ediyorum. Dün yazdığım kodlarımı tamamen değiştirdim bugün biraz daha clean code yapısına çevirdim ayrıca begintooltip yapısıda ekledim. Begintooltip yapısının amaci fareyle çizginin üzerine geldiği zaman uzunluğu göstermesi. Ek olarak clear line diye bir buton ekledim ona bastığımız zaman çizgiyi siliyor ve bu şekilde daha kullanışlı oldu. Ve daha benden bi görev daha istendi ve istenen görev ise çizgilerin uçları çarpı işareti olmasıydı ve onuda çizginin kordinatlarını alarak başarılı bir şekilde ekledim.
 
-Bugünkü görevim arayüzde kullanışsız bazı yerler vardı onları daha kullanışlı hale getirme
-Grafiklerde yeniden boyutlandırılmaya izin verilmiyor onu düzelttim
-Bir checkbox ile hizala görevini yapamadım
-3grafiği yanyana gösterme görevinide tamamladım
-Birde otomatik fokuslama görevinide kısmen hallettim
-Kodlarım şu şekilde
 
-ImGui::BeginMainMenuBar();
 
-		if (ImGui::BeginMenu("Agv"))
-		{
-			ImGui::MenuItem("Wheel Angle", "", &this->WheelGraphic->Visibility);
-			ImGui::MenuItem("Speed", "", &this->SpeedGraphic->Visibility);
-			ImGui::MenuItem("Angle", "", &this->AgvAngleGraphic->Visibility);
-			ImGui::MenuItem("Position", "", &this->AgvPositionGraphic->Visibility);
-			ImGui::EndMenu();
-		}	
-		if (ImGui::BeginMenu("Net"))
-		{
-			ImGui::EndMenu();
-		}
+	if (cnt == 2) 
+	{
 
-		ImGui::EndMainMenuBar();
+	const float arrowSize = 10.0f;
+	const ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(point1));
+	const ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(point2));
+	const ImVec2 dir = ImVec2(p2.x - p1.x, p2.y - p1.y);
+	const float len = sqrtf(dir.x * dir.x + dir.y * dir.y);
+	const ImVec2 norm = ImVec2(dir.x / len, dir.y / len);
+	const ImVec2 perp = ImVec2(-norm.y, norm.x);
 
-		if (this-> SpeedGraphic->Visibility)
-		{
-			ImGui::BeginChild("Speed Page", ImVec2(1000, 600), true);
-				this->SpeedGraphic->Visibility = true;
-				this->SpeedPage();
-				ImGui::EndChild();
-		}
-		
-		if (this->WheelGraphic->Visibility)
-		{
-
-		
-			ImGui::SameLine();
-
-			ImGui::BeginChild("Wheel Angle Page", ImVec2(1000, 600), true);
+	//ImPlot::GetPlotDrawList()->AddLine(p1, p2, IM_COL32(255, 0, 0, 255), 3.0f);
+	ImPlot::GetPlotDrawList()->AddLine(
+		ImPlot::PlotToPixels(ImPlotPoint(point1)),
+		ImPlot::PlotToPixels(ImPlotPoint(point2)),
+		IM_COL32(255, 0, 0, 255), 
+		3.0f
+	);
 			
-				this->WheelGraphic->Visibility = true;
-				this->WheelPage();
-				ImGui::EndChild();
-			
-		}
-		
-                if (this->AgvAngleGraphic->Visibility)
-		{
+	const float crossSize = 4.0f;
+	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y + perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y - perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
 
-			ImGui::BeginChild("Agv Angle Page", ImVec2(1000, 600), true);
-			
-				this->AgvAngleGraphic->Visibility = true;
-				this->AgvAngelPage();
-				ImGui::EndChild();	
-		}
+	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y + perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y - perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
 
-		if (this->AgvPositionGraphic->Visibility)
-			{
-			ImGui::SameLine();
+	if (ImGui::IsItemHovered()) {
+		ImGui::BeginTooltip();
+		ImGui::Text("Line Length: %.2f", distance);
+		ImGui::EndTooltip();
+	}
+	}
 
-			ImGui::BeginChild("Agv Position Page", ImVec2(1000, 600), true);
 
-			this->AgvPositionGraphic->Visibility = true;
-			this->AgvPositionPage();
-			ImGui::EndChild();
-			}
-![image](https://user-images.githubusercontent.com/65457096/227555571-b60b1d41-b0db-45ef-bfc5-cda28df9d6c4.png)
-Bu şekilde normalde alt alta geliyordu açılan grafikler bu şekilde güncelledim
+
+![image](https://user-images.githubusercontent.com/65457096/228814796-b85536b4-4a22-4639-a350-49f148d20c2c.png)
+ 
+
+![image](https://user-images.githubusercontent.com/65457096/228814840-439ab581-e2e4-46b6-a964-ca2520ed61a5.png)
+
 
 Bugünkü kazanımlarım
-- ImGui::BeginChild("Wheel Angle Page", ImVec2(1000, 600), true);   yapısını öğrendim
-
-
-
+-	Begintooltip yapısını öğrendim ve uyguladım
 
 
 
