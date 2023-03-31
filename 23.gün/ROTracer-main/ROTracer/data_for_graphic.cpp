@@ -659,19 +659,22 @@ void ROTracer::AgvPositionPage() {
 		//ImPlot::SetupAxisLimits(ImAxis_Y1, this->Agv->Y - 500, this->Agv->Y + 1000, ImGuiCond_Always);
 
 		//ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
-		if (drawLine && ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl)
+		if (drawLine  )
 		{
-			if (cnt == 0)
-			{
-				point1 = ImPlot::GetPlotMousePos();
-				cnt = 1;
+			if (ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl) {
+				
+					point2 = ImPlot::GetPlotMousePos();
+					cnt = 1;
 			}
-			else if (cnt == 1)
+			else
 			{
-				point2 = ImPlot::GetPlotMousePos();
-				cnt = 2;
+				if (cnt == 1)
+				{
+					point1 = ImPlot::GetPlotMousePos();
 
-				//point2 = ImVec2(0.0f, 0.0f);
+					if (ImGui::IsMouseClicked(0))
+						cnt = 2;
+				}
 			}
 
 		}
@@ -682,10 +685,8 @@ void ROTracer::AgvPositionPage() {
 			//cnt = 0;
 		}
 
-		if (cnt == 2)
+		if (cnt > 0)
 		{
-
-
 			radius = sqrt(pow(point1.x - point2.x, 2) + pow(point1.y - point2.y, 2));
 			static double xs[360], ys[360];
 			for (int i = 0; i < 360; ++i)
@@ -695,13 +696,20 @@ void ROTracer::AgvPositionPage() {
 				ys[i] = point2.y + radius * sin(angle);
 			}
 			ImPlot::PlotLine("Circle", xs, ys, 360);
-			//ImPlot::GetPlotDrawList()->AddLine(p1, p2, IM_COL32(255, 0, 0, 255), 3.0f);
+
+
 			ImPlot::GetPlotDrawList()->AddLine(
 				ImPlot::PlotToPixels(ImPlotPoint(point1)),
 				ImPlot::PlotToPixels(ImPlotPoint(point2)),
 				IM_COL32(255, 0, 0, 255),
 				3.0f
 			);
+
+			if (ImGui::IsItemHovered()) {
+				ImGui::BeginTooltip();
+				ImGui::Text("Line Length: %.2f", distance);
+				ImGui::EndTooltip();
+			}
 		}
 
 		if (this->AgvPositionGraphic->AgvFrontPosition.Data.size() > 0) {
