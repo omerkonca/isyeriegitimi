@@ -651,8 +651,7 @@ void ROTracer::AgvPositionPage() {
 		point2 = ImVec2(0.0f, 0.0f);
 		cnt = 0;
 	}
-	//bool drawCircle = false;
-	//ImVec2 center;
+
 	float radius = 0.0f;
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
 
@@ -794,7 +793,7 @@ void ROTracer::AgvPositionPage() {
 				point2 = ImVec2(0.0f, 0.0f);*/
 				cnt = 0;
 			}
-
+		   
 			if (cnt == 2) {
 
 				const float arrowSize = 10.0f;
