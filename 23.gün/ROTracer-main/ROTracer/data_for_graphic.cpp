@@ -694,7 +694,7 @@ void ROTracer::AgvPositionPage() {
 				xs[i] = point2.x + radius * cos(angle);
 				ys[i] = point2.y + radius * sin(angle);
 			}
-			//ImPlot::PlotLine("Circle", xs, ys, 360);
+			ImPlot::PlotLine("Circle", xs, ys, 360);
 		}
 
 		if (this->AgvPositionGraphic->AgvFrontPosition.Data.size() > 0) {
