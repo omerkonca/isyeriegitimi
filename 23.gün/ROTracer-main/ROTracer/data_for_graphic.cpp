@@ -685,6 +685,7 @@ void ROTracer::AgvPositionPage() {
 		if (cnt == 2)
 		{
 
+
 			radius = sqrt(pow(point1.x - point2.x, 2) + pow(point1.y - point2.y, 2));
 			static double xs[360], ys[360];
 			for (int i = 0; i < 360; ++i)
@@ -694,7 +695,13 @@ void ROTracer::AgvPositionPage() {
 				ys[i] = point2.y + radius * sin(angle);
 			}
 			ImPlot::PlotLine("Circle", xs, ys, 360);
-
+			//ImPlot::GetPlotDrawList()->AddLine(p1, p2, IM_COL32(255, 0, 0, 255), 3.0f);
+			ImPlot::GetPlotDrawList()->AddLine(
+				ImPlot::PlotToPixels(ImPlotPoint(point1)),
+				ImPlot::PlotToPixels(ImPlotPoint(point2)),
+				IM_COL32(255, 0, 0, 255),
+				3.0f
+			);
 		}
 
 		if (this->AgvPositionGraphic->AgvFrontPosition.Data.size() > 0) {
