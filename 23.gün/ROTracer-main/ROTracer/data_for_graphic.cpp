@@ -653,14 +653,27 @@ void ROTracer::AgvPositionPage() {
 	}
 
 	float radius = 0.0f;
+
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
 
 		//ImPlot::SetupAxisLimits(ImAxis_X1, this->Agv->X - 500, this->Agv->X + 1000, ImGuiCond_Always);
 		//ImPlot::SetupAxisLimits(ImAxis_Y1, this->Agv->Y - 500, this->Agv->Y + 1000, ImGuiCond_Always);
 
 		//ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
+
+		ImVec2 center = ImVec2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2); // dairenin merkezi
+		
+		if (ImGui::IsMouseDragging(0) && ImGui::GetIO().KeyCtrl)
+		{
+			// fare merkez noktasının etrafında sürüklendiğinde, daireyi yeni konuma taşı
+			ImVec2 mousePos = ImGui::GetMousePos();	
+			float distance = sqrt(pow(mousePos.x - center.x, 2) + pow(mousePos.y - center.y, 2));
+			point2.x = center.x + radius * (mousePos.x - center.x) / distance;
+			point2.y = center.y + radius * (mousePos.y - center.y) / distance;
+		}
 		if (drawLine)
 		{
+			
 			if (ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl) {
 				
 					point2 = ImPlot::GetPlotMousePos();

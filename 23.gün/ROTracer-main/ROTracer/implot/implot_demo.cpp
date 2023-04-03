@@ -1477,7 +1477,6 @@ namespace ImPlot {
             ImPlot::PlotLine("Signal 2", x_data, y_data2, 512);
             ImPlot::PlotLine("Signal 3", x_data, y_data3, 512);
             ImPlot::DragRect(0, &rect.X.Min, &rect.Y.Min, &rect.X.Max, &rect.Y.Max, ImVec4(1, 0, 1, 1), flags);
-
             ImPlot::EndPlot();
         }
         ImDrawList* draw_list = ImGui::GetWindowDrawList();
