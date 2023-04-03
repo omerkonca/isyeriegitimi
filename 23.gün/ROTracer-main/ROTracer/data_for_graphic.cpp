@@ -51,7 +51,7 @@ static inline ImVec2 ImRotate(const ImVec2& v, float cos_a, float sin_a)
 {
 	return ImVec2(v.x * cos_a - v.y * sin_a, v.x * sin_a + v.y * cos_a);
 }*/
-static ImPlotPoint point1, point2, mousePos, center;
+static ImPlotPoint point1, point2, mousePos, center, prevMousePos;
 static bool drawLine = false;
 
 void ROTracer::LoginPage() {
@@ -634,6 +634,7 @@ void ROTracer::AgvPositionPage() {
 	if (this->Agv == NULL) {
 		return;
 	}
+
 	static int cnt = 0;
 	double dx = point2.x - point1.x;
 	double dy = point2.y - point1.y;
@@ -651,7 +652,7 @@ void ROTracer::AgvPositionPage() {
 		point2 = ImVec2(0.0f, 0.0f);
 		cnt = 0;
 	}
-
+	prevMousePos = ImGui::GetMousePos();
 	float radius = 0.0f;
 
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
@@ -661,16 +662,16 @@ void ROTracer::AgvPositionPage() {
 
 		//ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
 
-		ImVec2 center = ImVec2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2); // dairenin merkezi
-		
+		ImVec2 center = ImVec2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2);
+		float radius = sqrt(pow(point1.x - point2.x, 2) + pow(point1.y - point2.y, 2));
 		if (ImGui::IsMouseDragging(0) && ImGui::GetIO().KeyCtrl)
 		{
 			// fare merkez noktasının etrafında sürüklendiğinde, daireyi yeni konuma taşı
-			ImVec2 mousePos = ImGui::GetMousePos();	
-			float distance = sqrt(pow(mousePos.x - center.x, 2) + pow(mousePos.y - center.y, 2));
-			point2.x = center.x + radius * (mousePos.x - center.x) / distance;
-			point2.y = center.y + radius * (mousePos.y - center.y) / distance;
+			ImVec2 mousePos = ImGui::GetMousePos();
+			point2.x = center.x + mousePos.x - prevMousePos.x;
+			point2.y = center.y + mousePos.y - prevMousePos.y;
 		}
+		center = ImVec2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2);
 		if (drawLine)
 		{
 			
@@ -700,6 +701,7 @@ void ROTracer::AgvPositionPage() {
 
 		if (cnt > 0)
 		{
+			center = ImVec2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2);
 
 			radius = sqrt(pow(point1.x - point2.x, 2) + pow(point1.y - point2.y, 2));
 			static double xs[360], ys[360];
