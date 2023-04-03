@@ -1477,8 +1477,13 @@ namespace ImPlot {
             ImPlot::PlotLine("Signal 2", x_data, y_data2, 512);
             ImPlot::PlotLine("Signal 3", x_data, y_data3, 512);
             ImPlot::DragRect(0, &rect.X.Min, &rect.Y.Min, &rect.X.Max, &rect.Y.Max, ImVec4(1, 0, 1, 1), flags);
+
             ImPlot::EndPlot();
         }
+        ImDrawList* draw_list = ImGui::GetWindowDrawList();
+        ImVec2 center(rect.X.Min + (rect.X.Max - rect.X.Min) / 2.0f, rect.Y.Min + (rect.Y.Max - rect.Y.Min) / 2.0f);
+        float radius = (rect.X.Max - rect.X.Min) / 2.0f;
+        draw_list->AddCircle(center, radius, IM_COL32(255, 0, 255, 255), 32, 2.0f);
         if (ImPlot::BeginPlot("##rect", ImVec2(-1, 150), ImPlotFlags_CanvasOnly)) {
             ImPlot::SetupAxes(NULL, NULL, ImPlotAxisFlags_NoDecorations, ImPlotAxisFlags_NoDecorations);
             ImPlot::SetupAxesLimits(rect.X.Min, rect.X.Max, rect.Y.Min, rect.Y.Max, ImGuiCond_Always);

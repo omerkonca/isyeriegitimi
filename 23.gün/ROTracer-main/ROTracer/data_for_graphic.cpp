@@ -659,7 +659,7 @@ void ROTracer::AgvPositionPage() {
 		//ImPlot::SetupAxisLimits(ImAxis_Y1, this->Agv->Y - 500, this->Agv->Y + 1000, ImGuiCond_Always);
 
 		//ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
-		if (drawLine  )
+		if (drawLine)
 		{
 			if (ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl) {
 				
@@ -687,6 +687,7 @@ void ROTracer::AgvPositionPage() {
 
 		if (cnt > 0)
 		{
+
 			radius = sqrt(pow(point1.x - point2.x, 2) + pow(point1.y - point2.y, 2));
 			static double xs[360], ys[360];
 			for (int i = 0; i < 360; ++i)
