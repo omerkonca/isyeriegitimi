@@ -638,6 +638,7 @@ void ROTracer::AgvPositionPage() {
 	double dx = point2.x - point1.x;
 	double dy = point2.y - point1.y;
 	double distance = sqrt(dx * dx + dy * dy);
+	double adistance = sqrt(dx * dx + dy * dy);
 
 	ImGui::InputFloat2("Mouse", new float[2] {(float)point1.x, (float)point1.y});
 	//ImGui::InputFloat("Length ", new float[1] {(float)distance});	
@@ -653,6 +654,7 @@ void ROTracer::AgvPositionPage() {
 	}
 
 	float radius = 0.0f;
+	float aradius = 0.0f;
 
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
 
@@ -661,7 +663,7 @@ void ROTracer::AgvPositionPage() {
 
 		//ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
 
-		ImVec2 center = ImVec2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2);  // dairenin merkezi
+		ImVec2 acenter = ImVec2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2);  // dairenin merkezi
 		
 
 
@@ -671,8 +673,8 @@ void ROTracer::AgvPositionPage() {
 			// fare merkez noktasının etrafında sürüklendiğinde, daireyi yeni konuma taşı
 			ImVec2 mousePos = ImGui::GetMousePos();	
 	
-			point2.x = center.x + radius * (mousePos.x - center.x) / distance;
-			point2.y = center.y + radius * (mousePos.y - center.y) / distance;
+			point2.x = acenter.x + aradius * (mousePos.x - acenter.x) / adistance;
+			point2.y =acenter.y + aradius * (mousePos.y - acenter.y) / adistance;
 		}
 
 		if (drawLine)
