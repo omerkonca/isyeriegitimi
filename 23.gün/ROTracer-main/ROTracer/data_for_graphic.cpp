@@ -662,7 +662,8 @@ void ROTracer::AgvPositionPage() {
 		//ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
 
 		ImVec2 center = ImVec2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2);  // dairenin merkezi
-		ImVec2 originalCenter = ImVec2(center.x, center.y); // dairenin orijinal merkez konumu
+		
+
 
 		
 		if (ImGui::IsMouseDragging(0) && ImGui::GetIO().KeyCtrl)
