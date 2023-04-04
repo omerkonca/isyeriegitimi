@@ -1543,6 +1543,12 @@ void ShowPlotContextMenu(ImPlotPlot& plot) {
             ImFlipFlag(plot.Flags, ImPlotFlags_Crosshairs);
         ImGui::EndMenu();
     }
+    /*bool drawing_enabled = true;
+    if (ImGui::MenuItem("Add Item", NULL, ImHasFlag(plot.Flags, ImPlotFlags_NoInputs))) {
+        drawing_enabled = !drawing_enabled;
+    }*/
+
+
     if (GImPlot->CurrentSubplot != NULL && !ImHasFlag(GImPlot->CurrentPlot->Flags, ImPlotSubplotFlags_NoMenus)) {
         ImGui::Separator();
         if ((ImGui::BeginMenu("Subplots"))) {

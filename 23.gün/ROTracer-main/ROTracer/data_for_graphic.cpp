@@ -654,7 +654,7 @@ void ROTracer::AgvPositionPage() {
 	}
 
 	float radius = 0.0f;
-	float aradius = 0.0f;
+
 
 	if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1, -1), ImPlotFlags_Equal)) {
 
@@ -663,27 +663,17 @@ void ROTracer::AgvPositionPage() {
 
 		//ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
 
-		ImVec2 acenter = ImVec2((point1.x + point2.x) / 2, (point1.y + point2.y) / 2);  // dairenin merkezi
-		
-
 
 		
-		if (ImGui::IsMouseDragging(0) && ImGui::GetIO().KeyCtrl)
-		{
-			// fare merkez noktasının etrafında sürüklendiğinde, daireyi yeni konuma taşı
-			ImVec2 mousePos = ImGui::GetMousePos();	
-	
-			point2.x = acenter.x + aradius * (mousePos.x - acenter.x) / adistance;
-			point2.y =acenter.y + aradius * (mousePos.y - acenter.y) / adistance;
-		}
 
 		if (drawLine)
 		{
-			
+
 			if (ImGui::IsMouseClicked(0) && ImGui::GetIO().KeyCtrl) {
-				
-					point2 = ImPlot::GetPlotMousePos();
-					cnt = 1;
+
+				point2 = ImPlot::GetPlotMousePos();
+				point1 = ImPlot::GetPlotMousePos();
+				cnt = 1;
 			}
 			else
 			{
@@ -706,7 +696,7 @@ void ROTracer::AgvPositionPage() {
 
 		if (cnt > 0)
 		{
-
+		
 			radius = sqrt(pow(point1.x - point2.x, 2) + pow(point1.y - point2.y, 2));
 			static double xs[360], ys[360];
 			for (int i = 0; i < 360; ++i)
@@ -715,8 +705,11 @@ void ROTracer::AgvPositionPage() {
 				xs[i] = point2.x + radius * cos(angle);
 				ys[i] = point2.y + radius * sin(angle);
 			}
+			ImPlot::PushStyleColor(ImPlotCol_Line, ImVec4(1, 0, 0, 1));
 			ImPlot::PlotLine("Circle", xs, ys, 360);
-
+			ImPlot::PopStyleColor();
+			ImPlot::DragPoint(0, &point1.x, &point1.y, ImVec4(1, 0, 0, 1), 4, ImPlotDragToolFlags_None);
+			ImPlot::DragPoint(1, &point2.x, &point2.y, ImVec4(1, 0, 0, 1), 4, ImPlotDragToolFlags_None);
 
 			ImPlot::GetPlotDrawList()->AddLine(
 				ImPlot::PlotToPixels(ImPlotPoint(point1)),
@@ -828,7 +821,7 @@ void ROTracer::AgvPositionPage() {
 				point2 = ImVec2(0.0f, 0.0f);*/
 				cnt = 0;
 			}
-		   
+
 			if (cnt == 2) {
 
 				const float arrowSize = 10.0f;
