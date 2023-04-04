@@ -7,32 +7,32 @@ Bugünkü yapacağım işler, position kısmına anlık olarak veriler x, y, ang
 
 Aşağıda kodlarım ve çalışma şekli 
 
-if (this->SGD->StokingPosition.Data.size() > 0) {
-   float xMin = this->SGD->StokingPosition.Data[0].x - 5000; // x ekseninin minimum değeri
-   float xMax = this->SGD->StokingPosition.Data[0].x + 5000; // x ekseninin maksimum değeri
-   float yMin = this->SGD->StokingPosition.Data[0].y - 5000; // y ekseninin minimum değeri
-   float yMax = this->SGD->StokingPosition.Data[0].y + 5000; // y ekseninin maksimum değeri
-   if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1,0), ImPlotFlags_Equal)) {
-	ImPlot::SetupAxesLimits(xMin, xMax, yMin, yMax);
-	ImPlot::PlotScatter("pos", &this->SGD->StokingPosition.Data[0].x, &this->SGD->StokingPosition.Data[0].y, this->SGD->StokingPosition.Data.size(), 0, 0, 2 * sizeof(int));
-	int lastIndex = this->SGD->StokingPosition.Data.Size - 1;
+	if (this->SGD->StokingPosition.Data.size() > 0) {
+  	 float xMin = this->SGD->StokingPosition.Data[0].x - 5000; // x ekseninin minimum değeri
+  	 float xMax = this->SGD->StokingPosition.Data[0].x + 5000; // x ekseninin maksimum değeri
+ 	  float yMin = this->SGD->StokingPosition.Data[0].y - 5000; // y ekseninin minimum değeri
+ 	  float yMax = this->SGD->StokingPosition.Data[0].y + 5000; // y ekseninin maksimum değeri
+  	 if (ImPlot::BeginPlot("Scatter Plot", ImVec2(-1,0), ImPlotFlags_Equal)) {
+		ImPlot::SetupAxesLimits(xMin, xMax, yMin, yMax);
+		ImPlot::PlotScatter("pos", &this->SGD->StokingPosition.Data[0].x, &this->SGD->StokingPosition.Data[0].y, this->SGD->StokingPosition.Data.size(), 0, 0, 2 * sizeof(int));
+		int lastIndex = this->SGD->StokingPosition.Data.Size - 1;
 
-	//ImPlot::PopStyleVar();
-	float xRange = ImPlot::GetPlotLimits().X.Max - ImPlot::GetPlotLimits().X.Min;
-	float yRange = ImPlot::GetPlotLimits().Y.Max - ImPlot::GetPlotLimits().Y.Min;
-	float r = fminf(xRange, yRange) / 50.0f; // r değerini grafik boyutuna göre ölçeklendirin
+		//ImPlot::PopStyleVar();
+		float xRange = ImPlot::GetPlotLimits().X.Max - ImPlot::GetPlotLimits().X.Min;
+		float yRange = ImPlot::GetPlotLimits().Y.Max - ImPlot::GetPlotLimits().Y.Min;
+		float r = fminf(xRange, yRange) / 50.0f; // r değerini grafik boyutuna göre ölçeklendirin
 
-float x1 = this->SGD->StokingPosition.Data[lastIndex].x;
-float y1 = this->SGD->StokingPosition.Data[lastIndex].y;
+	float x1 = this->SGD->StokingPosition.Data[lastIndex].x;
+	float y1 = this->SGD->StokingPosition.Data[lastIndex].y;
 
-float x_1 = x1 + cos(this->Agv->Angle * PI / 180) * r * 2;
-float y_1 = y1 + sin(this->Agv->Angle * PI / 180) * r * 2;
+	float x_1 = x1 + cos(this->Agv->Angle * PI / 180) * r * 2;
+	float y_1 = y1 + sin(this->Agv->Angle * PI / 180) * r * 2;
+		
+	float x_2 = x1 + cos(fmod(this->Agv->Angle + 120, 360) * PI / 180) * r;
+	float y_2 = y1 + sin(fmod(this->Agv->Angle + 120, 360) * PI / 180) * r;
 
-float x_2 = x1 + cos(fmod(this->Agv->Angle + 120, 360) * PI / 180) * r;
-float y_2 = y1 + sin(fmod(this->Agv->Angle + 120, 360) * PI / 180) * r;
-
-float x_3 = x1 + cos(fmod(this->Agv->Angle + 240, 360) * PI / 180) * r;
-float y_3 = y1 + sin(fmod(this->Agv->Angle + 240, 360) * PI / 180) * r;
+	float x_3 = x1 + cos(fmod(this->Agv->Angle + 240, 360) * PI / 180) * r;
+	float y_3 = y1 + sin(fmod(this->Agv->Angle + 240, 360) * PI / 180) * r;
 
 
 	ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(x_2, y_2));//sol alt 
