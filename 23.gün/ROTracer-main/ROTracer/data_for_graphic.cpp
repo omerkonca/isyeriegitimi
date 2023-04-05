@@ -12,6 +12,11 @@ ROTracer::ROTracer() {
 
 	this->AgvPositionGraphic = new AgvPositionGraphicData();
 
+
+	this->ReceivedRateGraphic = new ReceivedRateData();
+	this->SignalPingSpeedGraphic = new SignalPingSpeedData();
+	this->TransmitededRateGraphic = new TransmitededRateData();
+
 	_loginPageVisibility = true;
 }
 
@@ -145,15 +150,16 @@ void ROTracer::LoginPage() {
 			ImGui::EndMenu();
 		}
 
-		if (ImGui::BeginMenu("Net"))
-		{
-			ImGui::EndMenu();
-		}
-
 		ImGui::EndMainMenuBar();
+
+		
+
+
+
 
 		if (this->SpeedGraphic->Visibility)
 		{
+
 			ImGui::BeginChild("Speed Page", ImVec2(1000, 600), true);
 			this->SpeedGraphic->Visibility = true;
 			this->SpeedPage();
@@ -175,6 +181,8 @@ void ROTracer::LoginPage() {
 			ImGui::EndChild();
 
 		}
+
+
 
 		if (this->AgvAngleGraphic->Visibility)
 		{
@@ -198,84 +206,141 @@ void ROTracer::LoginPage() {
 			ImGui::EndChild();
 		}
 
-		// END MENU
+		/*	if (this->ReceivedRateGraphic->Visibility)
+			{
+				ImGui::SameLine();
 
-		//// Arrange the visibility flags in a vector for easier manipulation
-		//std::vector<bool*> visibilityFlags = { &this->WheelGraphic->Visibility, &this->SpeedGraphic->Visibility,
-		//									   &this->AgvAngleGraphic->Visibility, &this->AgvPositionGraphic->Visibility };
+				ImGui::BeginChild("received Position Page", ImVec2(1000, 600), true);
 
-		//// Calculate the number of columns
-		//const int columns = 3;
-		//int visibleItemCount = 0;
-		//for (const bool* flag : visibilityFlags) {
-		//	if (*flag) visibleItemCount++;
-		//}
-		//const int rows = std::max(1, (visibleItemCount + columns - 1) / columns);
+				this->ReceivedRateGraphic->Visibility = true;
+				this->ReceivedRatePage();
+				ImGui::EndChild();
+			}*/
 
-		//// Calculate the item width and height
-		//const float itemWidth = ImGui::GetWindowWidth() / columns;
-		//const float itemHeight = 30;
-		//bool visibilityFlagNames[] = {};
-		//// Draw the visible items
-		//int itemIndex = 0;
-		//for (int row = 0; row < rows; row++) {
-		//	ImGui::Columns(columns, nullptr, false);
-		//	for (int col = 0; col < columns; col++) {
-		//		if (itemIndex >= visibilityFlags.size()) break;
-		//		if (*visibilityFlags[itemIndex]) {
-		//			ImGui::SetColumnWidth(col, itemWidth);
-		//			ImGui::SetCursorPosX(col * itemWidth);
-		//			ImGui::SetCursorPosY(ImGui::GetCursorPosY() + itemHeight * row);
-		//			if (itemIndex == visibleItemCount - 1 && rows > 1) {
-		//				ImGui::SetNextWindowContentSize(ImVec2(itemWidth, itemHeight));
-		//				ImGui::SetNextWindowPos(ImVec2(ImGui::GetCursorPosX(), ImGui::GetCursorPosY() + itemHeight));
-		//			}
-		//			if (itemIndex == 0) ImGui::BeginChild("##child", ImVec2(0, 0), false);
-		//			ImGui::Text("%s", visibilityFlagNames[itemIndex].c_str());
-		//			if (itemIndex == visibilityFlags.size() - 1) ImGui::EndChild();
-		//			itemIndex++;
-		//		}
-		//	}
-		//	ImGui::Columns(1);
-		//}
-		// END MENU
+			// END MENU
 
-		//if (ImGui::CollapsingHeader("NET"))
-		//{
-		//	ImGui::TableNextColumn();
-		//	ImGui::Text("DeviceMacAddress: %s", this->Net->DeviceMacAddress.c_str());
+			//// Arrange the visibility flags in a vector for easier manipulation
+			//std::vector<bool*> visibilityFlags = { &this->WheelGraphic->Visibility, &this->SpeedGraphic->Visibility,
+			//									   &this->AgvAngleGraphic->Visibility, &this->AgvPositionGraphic->Visibility };
 
-		//	ImGui::TableNextColumn();
-		//	ImGui::Text("SSID: %s", this->Net->SSID.c_str());
-		//	ImGui::TableNextColumn();
-		//	ImGui::Text("Status: %s", this->Net->Status.c_str());
+			//// Calculate the number of columns
+			//const int columns = 3;
+			//int visibleItemCount = 0;
+			//for (const bool* flag : visibilityFlags) {
+			//	if (*flag) visibleItemCount++;
+			//}
+			//const int rows = std::max(1, (visibleItemCount + columns - 1) / columns);
 
-		//	// İlk iki grafiği yan yana sırala
-		//	ImGui::BeginChild("Ping", ImVec2(600, 400), true);
+			//// Calculate the item width and height
+			//const float itemWidth = ImGui::GetWindowWidth() / columns;
+			//const float itemHeight = 30;
+			//bool visibilityFlagNames[] = {};
+			//// Draw the visible items
+			//int itemIndex = 0;
+			//for (int row = 0; row < rows; row++) {
+			//	ImGui::Columns(columns, nullptr, false);
+			//	for (int col = 0; col < columns; col++) {
+			//		if (itemIndex >= visibilityFlags.size()) break;
+			//		if (*visibilityFlags[itemIndex]) {
+			//			ImGui::SetColumnWidth(col, itemWidth);
+			//			ImGui::SetCursorPosX(col * itemWidth);
+			//			ImGui::SetCursorPosY(ImGui::GetCursorPosY() + itemHeight * row);
+			//			if (itemIndex == visibleItemCount - 1 && rows > 1) {
+			//				ImGui::SetNextWindowContentSize(ImVec2(itemWidth, itemHeight));
+			//				ImGui::SetNextWindowPos(ImVec2(ImGui::GetCursorPosX(), ImGui::GetCursorPosY() + itemHeight));
+			//			}
+			//			if (itemIndex == 0) ImGui::BeginChild("##child", ImVec2(0, 0), false);
+			//			ImGui::Text("%s", visibilityFlagNames[itemIndex].c_str());
+			//			if (itemIndex == visibilityFlags.size() - 1) ImGui::EndChild();
+			//			itemIndex++;
+			//		}
+			//	}
+			//	ImGui::Columns(1);
+			//}
+			// END MENU
 
-		//	this->SignalPingSpeedPage();
-		//	ImGui::EndChild();
-		//}
+			//if (ImGui::CollapsingHeader("NET"))
+			//{
+			//	ImGui::TableNextColumn();
+			//	ImGui::Text("DeviceMacAddress: %s", this->Net->DeviceMacAddress.c_str());
+
+			//	ImGui::TableNextColumn();
+			//	ImGui::Text("SSID: %s", this->Net->SSID.c_str());
+			//	ImGui::TableNextColumn();
+			//	ImGui::Text("Status: %s", this->Net->Status.c_str());
+
+			//	 //İlk iki grafiği yan yana sırala
+			//	ImGui::BeginChild("Ping", ImVec2(600, 400), true);
+
+			//	this->ReceivedRateGraphic->Visibility = true;
+			//	this->ReceivedRatePage();
+			//	ImGui::EndChild();
+			//}
 
 
-		//ImGui::SetNextWindowSize(ImVec2(920, 520));
+			/*ImGui::SetNextWindowSize(ImVec2(920, 520));
 
 
-		/*if (this->SpeedGraphic->Visibility) {
-			this->SpeedPage();
+			if (this->SpeedGraphic->Visibility) {
+				this->SpeedPage();
+			}
+
+			if (this->WheelGraphic->Visibility) {
+				this->WheelPage();
+			}
+
+			if (this->AgvAngleGraphic->Visibility) {
+				this->AgvAngelPage();
+			}
+
+			if (this->AgvPositionGraphic->Visibility) {
+				this->AgvPositionPage();
+			} */
+
+		ImGui::BeginMainMenuBar();
+		if (ImGui::BeginMenu("Net"))
+		{
+			ImGui::MenuItem("Signal Ping Speed Graphic", "", &this->SignalPingSpeedGraphic->Visibility);
+
+			ImGui::MenuItem("Transmiteded Rate Graphic", "", &this->TransmitededRateGraphic->Visibility);
+
+			ImGui::MenuItem("Received Rate Graphic", "", &this->ReceivedRateGraphic->Visibility);
+
+			ImGui::EndMenu();
+		}
+		ImGui::EndMainMenuBar();
+
+		if (this->TransmitededRateGraphic->Visibility)
+		{
+			ImGui::SameLine();
+			ImGui::SetNextWindowSize(ImVec2(415, 762), ImGuiCond_Appearing);
+			ImGui::Begin("Style Editor (ImPlot)");
+			this->TransmitededRateGraphic->Visibility = true;
+			this->TransmitededRatePage();
+			ImGui::End();
 		}
 
-		if (this->WheelGraphic->Visibility) {
-			this->WheelPage();
+
+
+		if (this->SignalPingSpeedGraphic->Visibility)
+		{
+			ImGui::SameLine();
+			ImGui::SetNextWindowSize(ImVec2(415, 762), ImGuiCond_Appearing);
+			ImGui::Begin("Style Editor (ImPlot)");
+			this->SignalPingSpeedGraphic->Visibility = true;
+			this->SignalPingSpeedPage();
+			ImGui::End();
 		}
 
-		if (this->AgvAngleGraphic->Visibility) {
-			this->AgvAngelPage();
+		if (this->ReceivedRateGraphic->Visibility)
+		{
+			ImGui::SameLine();
+			ImGui::SetNextWindowSize(ImVec2(415, 762), ImGuiCond_Appearing);
+			ImGui::Begin("Style Editor (ImPlot)");
+			this->ReceivedRateGraphic->Visibility = true;
+			this->ReceivedRatePage();
+			ImGui::End();
 		}
-
-		if (this->AgvPositionGraphic->Visibility) {
-			this->AgvPositionPage();
-		} */
 
 	}
 
@@ -399,6 +464,8 @@ void ROTracer::ZMQDataStreamParser()
 					this->AgvPositionGraphic->AgvAngle = Agv->Angle;
 				}
 
+
+
 			}
 			else if (std::strcmp("net", zmq_topic_data) == 0) {
 				pch = strtok(zmq_message_data, ";");
@@ -431,6 +498,27 @@ void ROTracer::ZMQDataStreamParser()
 
 					//	printf("%s\n", pch);
 					pch = strtok(NULL, ";");
+				}
+				//net kısmı
+
+				if (this->ReceivedRateGraphic->Enabled == true)
+				{
+					this->ReceivedRateGraphic->Time += ImGui::GetIO().DeltaTime;
+					this->ReceivedRateGraphic->StokingReceivedRate.AddPoint(this->ReceivedRateGraphic->Time, this->Net->ReceivedRate);
+				}
+
+				if (this->SignalPingSpeedGraphic->Enabled == true)
+				{
+					this->SignalPingSpeedGraphic->Time += ImGui::GetIO().DeltaTime;
+					this->SignalPingSpeedGraphic->StokingSignal.AddPoint(this->SignalPingSpeedGraphic->Time, this->Net->Signal);
+					this->SignalPingSpeedGraphic->StokingPing.AddPoint(this->SignalPingSpeedGraphic->Time, this->Net->Ping);
+					this->SignalPingSpeedGraphic->StokingWifiSpeed.AddPoint(this->SignalPingSpeedGraphic->Time, this->Net->Speed);
+				}
+
+				if (this->TransmitededRateGraphic->Enabled == true)
+				{
+					this->TransmitededRateGraphic->Time += ImGui::GetIO().DeltaTime;
+					this->TransmitededRateGraphic->StokingTransmitededRate.AddPoint(this->TransmitededRateGraphic->Time, this->Net->TransmitededRate);
 				}
 			}
 			else if (std::strcmp("route", zmq_topic_data) == 0)
@@ -504,30 +592,7 @@ void ROTracer::ZMQDataStreamParser()
 	_isRunning = false;
 
 }
-//ben bezier eğrisi çizmek istiyorum fareyle bir noktadan bir noktaya çektiğim eğrinin uzunluğunu hesaplamak istiyorum nasıl yaparım
-//void Demo_DragBezier() {
-//	static ImVec2 point1, point2, point3; // İki kontrol noktası ve bitiş noktası
-//
-//	if (ImGui::IsMouseClicked(0)) {
-//		point1 = point2 = point3 = ImGui::GetMousePos();
-//	}
-//
-//	if (ImGui::IsMouseDragging(0)) {
-//		point2 = ImGui::GetMousePos();
-//	}
-//
-//	if (ImGui::IsMouseReleased(0)) {
-//		point3 = ImGui::GetMousePos();
-//		ImPlot::GetPlotDrawList()->AddBezierCurve(
-//			ImPlot::PlotToPixels(point1),
-//			ImPlot::PlotToPixels(point2),
-//			ImPlot::PlotToPixels(point3),
-//			ImVec2(0, 0), // kontrol noktası çizmek için bu değerlere sıfır veriyoruz
-//			IM_COL32(255, 0, 0, 255),
-//			2.0f // çizgi kalınlığı
-//		);
-//	}
-//}
+
 
 
 void ROTracer::SpeedPage() {
@@ -664,7 +729,6 @@ void ROTracer::AgvPositionPage() {
 		//ImPlot::SetupAxesLimits(10000, 30000, 30000, 80000);
 
 
-		
 
 		if (drawLine)
 		{
@@ -696,7 +760,7 @@ void ROTracer::AgvPositionPage() {
 
 		if (cnt > 0)
 		{
-		
+
 			radius = sqrt(pow(point1.x - point2.x, 2) + pow(point1.y - point2.y, 2));
 			static double xs[360], ys[360];
 			for (int i = 0; i < 360; ++i)
@@ -874,146 +938,105 @@ void ROTracer::AgvPositionPage() {
 }
 
 void ROTracer::ReceivedRatePage() {
-
-	if (false) {
-
-		if (this->Net == NULL) {
-			return;
-		}
-
-		//ImGui::BulletText("Move your Received Rate to change the data!");
-
-		//ImGui::Checkbox("Pause", &isPauseReceivedRate);     // duraklatma seçenegi 
-
-		//if (!isPauseReceivedRate)      // eger checkbox'a tıklanmazsa (false)  güncel zamanı alıyor  
-		//{
-		//	this->SGD->HistoryReceivedRate = 20.0f;
-		//	this->SGD->TimeReceivedRate += ImGui::GetIO().DeltaTime;
-
-		//	this->SGD->StokingReceivedRate.AddPoint(this->SGD->TimeReceivedRate, this->Net->ReceivedRate);
+	ImGui::SetNextWindowSize(ImVec2(920, 520));
 
 
-		//}
-		//else     // eger checkbox'a tıklanırsa en son zamanı alıyor 
-		//	this->SGD->TimeReceivedRate;
-
-		//ImGui::SliderFloat("History", &this->SGD->HistoryReceivedRate, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanıyor 
-
-
-		//static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
-
-		//if (ImPlot::BeginPlot("##Scrolling", ImVec2(800, 350))) {     // grafik ölçeklendirme 
-		//	ImPlot::SetupAxes("Time [s]", "Received rate  [ ]");
-
-		//	ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->TimeReceivedRate - this->SGD->HistoryReceivedRate, this->SGD->TimeReceivedRate, ImGuiCond_Always);
-		//	ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 3000000);
-
-		//	//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
-		//	ImPlot::PlotLine("received rate", &this->SGD->StokingReceivedRate.Data[0].x, &this->SGD->StokingReceivedRate.Data[0].y, this->SGD->StokingReceivedRate.Data.size(), 0, this->SGD->StokingReceivedRate.Offset, 2 * sizeof(float));
-
-		//	ImPlot::EndPlot();
-		//}
+	if (this->Net == NULL) {
+		return;
 	}
 
+	ImGui::Checkbox("Enabled", &this->ReceivedRateGraphic->Enabled);
+	ImGui::SameLine();
+	ImGui::SliderFloat("History", &this->ReceivedRateGraphic->History, 1, 30, "%.1f s");  // .1f yaparsak milisaniye olarak ayarlanıyor 
 
 
+
+
+
+
+
+	static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
+
+	if (ImPlot::BeginPlot("##Scrollinga")) {     // grafik ölçeklendirme 
+		ImPlot::SetupAxes("Time [s]", "Received rate  [ ]");
+
+		ImPlot::SetupAxisLimits(ImAxis_X1, this->ReceivedRateGraphic->Time - this->ReceivedRateGraphic->History, this->ReceivedRateGraphic->Time, ImGuiCond_Always);
+		ImPlot::SetupAxisLimits(ImAxis_Y1, -500, 2000);
+		if (this->ReceivedRateGraphic->StokingReceivedRate.Data.Size > 0) {
+			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
+			ImPlot::PlotLine("received rate", &this->ReceivedRateGraphic->StokingReceivedRate.Data[0].x, &this->ReceivedRateGraphic->StokingReceivedRate.Data[0].y, this->ReceivedRateGraphic->StokingReceivedRate.Data.size(), 0, this->ReceivedRateGraphic->StokingReceivedRate.Offset, 2 * sizeof(float));
+		}
+		ImPlot::EndPlot();
+	}
 }
+
+
+
+
 
 void ROTracer::SignalPingSpeedPage() {
 
-	if (false) {
+	ImGui::SetNextWindowSize(ImVec2(920, 520));
 
-		if (this->Net == NULL) {
-			return;
-		}
-
-		//ImGui::BulletText("Move your signal,Ping, Speed to change the data!");
-
-		//ImGui::Checkbox("Pause", &isPauseSignalSpeedPing);     // duraklatma seçenegi 
-
-		//if (!isPauseSignalSpeedPing)      // eger checkbox'a týklanmazsa (false)  güncel zamaný alýyor  
-		//{
-		//	this->SGD->HistorySignal = 20.0f;
-		//	this->SGD->TimeSignalSpeedPing += ImGui::GetIO().DeltaTime;
-
-		//	this->SGD->StokingSignal.AddPoint(this->SGD->TimeSignalSpeedPing, this->Net->Signal);
-		//	this->SGD->StokingPing.AddPoint(this->SGD->TimeSignalSpeedPing, this->Net->Ping);
-		//	this->SGD->StokingWifiSpeed.AddPoint(this->SGD->TimeSignalSpeedPing, this->Net->Speed);
-
-
-		//}
-		//else     // eger checkbox'a týklanýrsa en son zamaný alýyor 
-		//	this->SGD->TimeSignalSpeedPing;
-
-
-
-		//ImGui::SliderFloat("History", &this->SGD->HistorySignal, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanýyor 
-
-
-		//static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
-
-		//if (ImPlot::BeginPlot("##Scrolling", ImVec2(500, 250))) {     // grafik ölçeklendirme 
-		//	ImPlot::SetupAxes("Time [s]", "Speed [mm/s]");
-
-		//	ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->TimeSignalSpeedPing - this->SGD->HistorySignal, this->SGD->TimeSignalSpeedPing, ImGuiCond_Always);
-		//	ImPlot::SetupAxisLimits(ImAxis_Y1, -500, 1900);
-
-		//	//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
-		//	ImPlot::PlotLine("Signal", &this->SGD->StokingSignal.Data[0].x, &this->SGD->StokingSignal.Data[0].y, this->SGD->StokingSignal.Data.size(), 0, this->SGD->StokingSignal.Offset, 2 * sizeof(float));
-		//	ImPlot::PlotLine("Ping", &this->SGD->StokingPing.Data[0].x, &this->SGD->StokingPing.Data[0].y, this->SGD->StokingPing.Data.size(), 0, this->SGD->StokingPing.Offset, 2 * sizeof(float));
-		//	ImPlot::PlotLine("Speed", &this->SGD->StokingWifiSpeed.Data[0].x, &this->SGD->StokingWifiSpeed.Data[0].y, this->SGD->StokingWifiSpeed.Data.size(), 0, this->SGD->StokingWifiSpeed.Offset, 2 * sizeof(float));
-		//	// plotline düz cizgili grafik <=> PlotShaded gölgeli grafik  
-		//	ImPlot::EndPlot();
-		//}
+	if (this->Net == NULL) {
+		return;
 	}
 
+	ImGui::Checkbox("Enabled", &this->SignalPingSpeedGraphic->Enabled);
+	ImGui::SameLine();
+	ImGui::SliderFloat("History", &this->SignalPingSpeedGraphic->History, 1, 30, "%.1f s");  // .1f yaparsak milisaniye olarak ayarlanıyor 
 
+	static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
 
+	if (ImPlot::BeginPlot("##Scrollingc")) {     // grafik ölçeklendirme 
+		ImPlot::SetupAxes("Time [s]", "Speed [mm/s]");
 
-
+		ImPlot::SetupAxisLimits(ImAxis_X1, this->SignalPingSpeedGraphic->Time - this->SignalPingSpeedGraphic->History, this->SignalPingSpeedGraphic->Time, ImGuiCond_Always);
+		ImPlot::SetupAxisLimits(ImAxis_Y1, -100, 100);
+		if (this->SignalPingSpeedGraphic->StokingWifiSpeed.Data.Size > 0) {
+			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
+			ImPlot::PlotLine("Signal", &this->SignalPingSpeedGraphic->StokingSignal.Data[0].x, &this->SignalPingSpeedGraphic->StokingSignal.Data[0].y, this->SignalPingSpeedGraphic->StokingSignal.Data.size(), 0, this->SignalPingSpeedGraphic->StokingSignal.Offset, 2 * sizeof(float));
+			ImPlot::PlotLine("Ping", &this->SignalPingSpeedGraphic->StokingPing.Data[0].x, &this->SignalPingSpeedGraphic->StokingPing.Data[0].y, this->SignalPingSpeedGraphic->StokingPing.Data.size(), 0, this->SignalPingSpeedGraphic->StokingPing.Offset, 2 * sizeof(float));
+			ImPlot::PlotLine("Speed", &this->SignalPingSpeedGraphic->StokingWifiSpeed.Data[0].x, &this->SignalPingSpeedGraphic->StokingWifiSpeed.Data[0].y, this->SignalPingSpeedGraphic->StokingWifiSpeed.Data.size(), 0, this->SignalPingSpeedGraphic->StokingWifiSpeed.Offset, 2 * sizeof(float));
+			// plotline düz cizgili grafik <=> PlotShaded gölgeli grafik  
+		}
+		ImPlot::EndPlot();
+	}
 }
 
+
+
+
+
+
+
 void ROTracer::TransmitededRatePage() {
-
-	if (false) {
-
-		if (this->Net == NULL) {
-			return;
-		}
-
-		//ImGui::BulletText("Move your signal to change the data!");
-
-		//ImGui::Checkbox("Pause", &isPauseTransmitededRate);     // duraklatma seçenegi 
-
-		//if (!isPauseTransmitededRate)      // eger checkbox'a tıklanmazsa (false)  güncel zamanı alıyor  
-		//{
-		//	this->SGD->HistoryTransmittededRate = 20.0f;
-		//	this->SGD->TimeTransmittededRate += ImGui::GetIO().DeltaTime;
-
-		//	this->SGD->StokingTransmitededRate.AddPoint(this->SGD->TimeTransmittededRate, this->Net->TransmitededRate);
+	ImGui::SetNextWindowSize(ImVec2(920, 520));
 
 
-		//}
-		//else     // eger checkbox'a tıklanırsa en son zamanı alıyor 
-		//	this->SGD->TimeTransmittededRate;
-
-		//ImGui::SliderFloat("History", &this->SGD->HistoryTransmittededRate, 1, 300, "% 1.f saniye");  // .1f yaparsak milisaniye olarak ayarlanıyor 
-
-
-		//static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
-
-		//if (ImPlot::BeginPlot("##Scrolling", ImVec2(800, 350))) {     // grafik ölçeklendirme 
-		//	ImPlot::SetupAxes("Time [s]", "transmiteded rate  [ ]");
-
-		//	ImPlot::SetupAxisLimits(ImAxis_X1, this->SGD->TimeTransmittededRate - this->SGD->HistoryTransmittededRate, this->SGD->TimeTransmittededRate, ImGuiCond_Always);
-		//	ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 30000000);
-
-		//	//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
-		//	ImPlot::PlotLine("transmiteded rate ", &this->SGD->StokingTransmitededRate.Data[0].x, &this->SGD->StokingTransmitededRate.Data[0].y, this->SGD->StokingTransmitededRate.Data.size(), 0, this->SGD->StokingTransmitededRate.Offset, 2 * sizeof(float));
-
-		//	ImPlot::EndPlot();
-		//}
+	if (this->Net == NULL) {
+		return;
 	}
+
+
+	ImGui::Checkbox("Enabled", &this->TransmitededRateGraphic->Enabled);
+	ImGui::SameLine();
+	ImGui::SliderFloat("History", &this->TransmitededRateGraphic->History, 1, 30, "%.1f s");  // .1f yaparsak milisaniye olarak ayarlanıyor 
+
+	static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
+
+	if (ImPlot::BeginPlot("##Scrollingf" )) {     // grafik ölçeklendirme 
+		ImPlot::SetupAxes("Time [s]", "transmiteded rate  [ ]");
+
+		ImPlot::SetupAxisLimits(ImAxis_X1, this->TransmitededRateGraphic->Time - this->TransmitededRateGraphic->History, this->TransmitededRateGraphic->Time, ImGuiCond_Always);
+		ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 359);
+		if (this->TransmitededRateGraphic->StokingTransmitededRate.Data.Size > 0) {
+			//ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 1.f);
+			ImPlot::PlotLine("transmiteded rate ", &this->TransmitededRateGraphic->StokingTransmitededRate.Data[0].x, &this->TransmitededRateGraphic->StokingTransmitededRate.Data[0].y, this->TransmitededRateGraphic->StokingTransmitededRate.Data.size(), 0, this->TransmitededRateGraphic->StokingTransmitededRate.Offset, 2 * sizeof(float));
+		}
+		ImPlot::EndPlot();
+	}
+
 
 
 }

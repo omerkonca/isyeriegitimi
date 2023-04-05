@@ -139,7 +139,28 @@ public:
 	float AgvAngle;
 };
 
- 
+ //net kýsmý
+class ReceivedRateData :public GraphicData
+{
+public:
+	ScrollingBuffer StokingReceivedRate;
+	
+};
+
+class SignalPingSpeedData :public GraphicData
+{
+public:
+	ScrollingBuffer StokingSignal;
+	ScrollingBuffer StokingPing;
+	ScrollingBuffer StokingWifiSpeed;
+
+};
+
+class TransmitededRateData :public GraphicData
+{
+public:
+	ScrollingBuffer StokingTransmitededRate;
+};
 
 
 class ROTracer
@@ -172,6 +193,12 @@ public:                   //constructor
 	WheelGraphicData *WheelGraphic;
 	AgvAngleGraphicData *AgvAngleGraphic;
 	AgvPositionGraphicData *AgvPositionGraphic;
+
+	//net kýsmý
+	ReceivedRateData* ReceivedRateGraphic;
+	SignalPingSpeedData* SignalPingSpeedGraphic;
+	TransmitededRateData* TransmitededRateGraphic;
+
  
 	char IpAddress[16] = "192.168.2.125";
 	char PortAddress[8] = "5556";
