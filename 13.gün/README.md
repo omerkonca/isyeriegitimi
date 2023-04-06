@@ -1,54 +1,52 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu : Position kısmı revize işlemleri 2 
-Bugün position kısmına devam ediyorum. Dün yazdığım kodlarımı tamamen değiştirdim bugün biraz daha clean code yapısına çevirdim ayrıca begintooltip yapısıda ekledim. Begintooltip yapısının amaci fareyle çizginin üzerine geldiği zaman uzunluğu göstermesi. Ek olarak clear line diye bir buton ekledim ona bastığımız zaman çizgiyi siliyor ve bu şekilde daha kullanışlı oldu. Ve daha benden bi görev daha istendi ve istenen görev ise çizgilerin uçları çarpı işareti olmasıydı ve onuda çizginin kordinatlarını alarak başarılı bir şekilde ekledim.
+## Yapılan Çalışmanın Konusu : Publisher subscriber vs client server kavramlarının araştırılması 
 
-
-
-	if (cnt == 2) 
-	{
-
-	const float arrowSize = 10.0f;
-	const ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(point1));
-	const ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(point2));
-	const ImVec2 dir = ImVec2(p2.x - p1.x, p2.y - p1.y);
-	const float len = sqrtf(dir.x * dir.x + dir.y * dir.y);
-	const ImVec2 norm = ImVec2(dir.x / len, dir.y / len);
-	const ImVec2 perp = ImVec2(-norm.y, norm.x);
-
-	//ImPlot::GetPlotDrawList()->AddLine(p1, p2, IM_COL32(255, 0, 0, 255), 3.0f);
-	ImPlot::GetPlotDrawList()->AddLine(
-		ImPlot::PlotToPixels(ImPlotPoint(point1)),
-		ImPlot::PlotToPixels(ImPlotPoint(point2)),
-		IM_COL32(255, 0, 0, 255), 
-		3.0f
-	);
-			
-	const float crossSize = 4.0f;
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y + perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y - perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y + perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y - perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-
-	if (ImGui::IsItemHovered()) {
-		ImGui::BeginTooltip();
-		ImGui::Text("Line Length: %.2f", distance);
-		ImGui::EndTooltip();
-	}
-	}
-
-
-
-![image](https://user-images.githubusercontent.com/65457096/228814796-b85536b4-4a22-4639-a350-49f148d20c2c.png)
+   Bugünkü araştırma konum abone yayıncı mantığı,bir önceki gün araştırmış olduğum zeromq kütüphanesine entegre edeceğim ve bu mantığı forkliftimizde kullanacağız forklifte kurmuş olduğumuz sunucu yayın açarak bizde düz mantıkla o yayının abonesi olacağız yeni birşey yayınlandığında ilk bizim haberimiz olacak anlık olarak verileri bu şekilde alacağız. Benim görevim ise şuanlık araştırma ilerki günlerde uygulamaya geçeceğim.
+Aşağıdada yayıncı abone mantığını teorik olarak açıklayacağım.
  
+Publisher-Subscriber" ve "Client-Server
+"Publisher-Subscriber" ve "Client-Server" kavramları, bilgisayar bilimleri ve yazılım mühendisliği alanlarında sıklıkla kullanılan terimlerdir.
+"Publisher-Subscriber" (yayımcı-abone) modeli, birçok bağımsız abonenin, bir yayıncı tarafından üretilen mesajları dinlediği bir iletişim modelidir. Bu modelde, yayıncı mesajları oluşturur ve aboneler bu mesajları dinler. Yayıncı, mesajları doğrudan belirli abonelere gönderebileceği gibi, yayıncı tüm abonelere de gönderebilir.
+"Client-Server" (istemci-sunucu) modeli, bir sunucunun bir veya daha fazla istemci tarafından istekleri işlediği bir iletişim modelidir. Bu modelde, istemci, sunucuya bir istek gönderir ve sunucu bu isteği işleyerek istemciye bir yanıt gönderir. Bu modelde, sunucu genellikle bir merkezi otoriteyi temsil ederken, istemciler ise bu merkezi otoritenin hizmetlerinden yararlanan kullanıcılardır.
+İki model arasındaki temel fark, "Publisher-Subscriber" modelinin daha dağıtık bir yapıya sahip olmasıdır. Bu modelde, yayıncı ve aboneler aynı anda çalışabilir ve birbirleriyle doğrudan etkileşimde bulunabilirler. Öte yandan, "Client-Server" modelinde, sunucu ve istemciler birbirlerine doğrudan bağlıdır ve sunucu, istemcilerin isteklerini işleme yeteneğine sahiptir.
 
-![image](https://user-images.githubusercontent.com/65457096/228814840-439ab581-e2e4-46b6-a964-ca2520ed61a5.png)
+Aşağıdada c++ kodunu yazıyorum
+
+
+	#include <iostream>
+
+    int main() {
+        std::cout << "Merhaba Dünya!";
+        return 0;
+    }
+
+
+Bu programın çıktısı, "Merhaba Dünya!" yazısıdır. Yukarıdaki program, "iostream" başlıklı bir kütüphaneyi kullanarak "cout" fonksiyonu aracılığıyla çıktıyı ekrana yazdırır. "int main()" satırı, programın ana fonksiyonunu belirtir ve program çalıştırıldığında bu fonksiyon ilk olarak çağrılır. "return 0;" satırı, programın başarılı bir şekilde sonlandığını belirtir.
 
 
 Bugünkü kazanımlarım
--	Begintooltip yapısını öğrendim ve uyguladım
+-	Publisher subscriber vs client server kavramlarını öğrendim
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
