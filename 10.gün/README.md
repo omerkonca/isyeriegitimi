@@ -1,54 +1,155 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu : Position kısmı revize işlemleri 2 
-Bugün position kısmına devam ediyorum. Dün yazdığım kodlarımı tamamen değiştirdim bugün biraz daha clean code yapısına çevirdim ayrıca begintooltip yapısıda ekledim. Begintooltip yapısının amaci fareyle çizginin üzerine geldiği zaman uzunluğu göstermesi. Ek olarak clear line diye bir buton ekledim ona bastığımız zaman çizgiyi siliyor ve bu şekilde daha kullanışlı oldu. Ve daha benden bi görev daha istendi ve istenen görev ise çizgilerin uçları çarpı işareti olmasıydı ve onuda çizginin kordinatlarını alarak başarılı bir şekilde ekledim.
+## Yapılan Çalışmanın Konusu : Ping ve sinyal değerini veren kodların birleştirilmesi ve kütüphaneye çevirme 
 
+Bugün haftanın ilk günü olduğu için toplantı yaptık ve bana düşen görev ping ve sinyal kodlarını birleştirip kütüphane yapmaktı. Bugün ping veren kod ile sinyal değeri veren kodu birleştirdim. Eş zamanlı şekilde hem sinyal değeri hemde ping atıp çıkan değeri veriyor. Ve yazdığım kodu kütüphaneye çevirdim ve .dll uzantısını koduma ekleyip başka koddan çağırabiliyorum. Ve bu şekilde kütüphane yazmak daha kolay oluyor hem clean kod açısından hemde daha anlaşılır karışıklık olmadan temiz bir koda çevirdim.
 
-
-	if (cnt == 2) 
+	namespace signal_ping_library
 	{
+   	 public class WifiAndPing
+   	 {
+     	   string ip;
+      	  Ping ping;
+      	  WlanClient client;
+      	  Thread thread;
+      	  bool isRunning;
 
-	const float arrowSize = 10.0f;
-	const ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(point1));
-	const ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(point2));
-	const ImVec2 dir = ImVec2(p2.x - p1.x, p2.y - p1.y);
-	const float len = sqrtf(dir.x * dir.x + dir.y * dir.y);
-	const ImVec2 norm = ImVec2(dir.x / len, dir.y / len);
-	const ImVec2 perp = ImVec2(-norm.y, norm.x);
+      	  public WifiAndPing(string ip)
+        {
+            this.ip = ip;
+            ping = new Ping();
+            client = new WlanClient();
+            isRunning = false;
+        }
 
-	//ImPlot::GetPlotDrawList()->AddLine(p1, p2, IM_COL32(255, 0, 0, 255), 3.0f);
-	ImPlot::GetPlotDrawList()->AddLine(
-		ImPlot::PlotToPixels(ImPlotPoint(point1)),
-		ImPlot::PlotToPixels(ImPlotPoint(point2)),
-		IM_COL32(255, 0, 0, 255), 
-		3.0f
-	);
-			
-	const float crossSize = 4.0f;
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y + perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y - perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+        public void Start()
+        {
+            if (!isRunning)
+            {
+                isRunning = true;
+                thread = new Thread(Run);
+                thread.Start();
+                Console.WriteLine("İşlem başlatıldı");
+            }
+            else
+            {
+                Console.WriteLine("İşlem zaten başlatılmış");
+            }
+        }
 
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y + perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y - perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+        public void Stop()
+        {
+            if (isRunning)
+            {
+                isRunning = false;
+                thread.Join();
+                Console.WriteLine("İşlem durduruldu");
+            }
+            else
+            {
+                Console.WriteLine("İşlem zaten durdurulmuş");
+            }
+        }
 
-	if (ImGui::IsItemHovered()) {
-		ImGui::BeginTooltip();
-		ImGui::Text("Line Length: %.2f", distance);
-		ImGui::EndTooltip();
+        static long MeasureWifiBandwidth()
+
+
+        {
+            long bandwidth = 0;
+            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (NetworkInterface networkInterface in interfaces)
+            {
+                if (networkInterface.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 && networkInterface.OperationalStatus == OperationalStatus.Up)
+                {
+                    IPv4InterfaceStatistics statistics = networkInterface.GetIPv4Statistics();
+                    bandwidth = networkInterface.Speed;
+                }
+            }
+            return bandwidth;
+        }
+
+        private void Run()
+        {
+            while (isRunning)
+            {
+                // Sinyal kalitesi ölçümü
+                foreach (WlanClient.WlanInterface wlanIface in client.Interfaces)
+                {
+                    Wlan.WlanBssEntry[] networks = wlanIface.GetNetworkBssList();
+                    foreach (Wlan.WlanBssEntry network in networks)
+                    {
+                        Wlan.Dot11Ssid ssid = network.dot11Ssid;
+                        string networkName = Encoding.ASCII.GetString(ssid.SSID, 0, (int)ssid.SSIDLength);
+
+                        if (networkName.Equals("ROBUTEL_TM"))
+                        {
+                            int signalQuality = (int)network.linkQuality;
+                            Console.WriteLine("Found network with SSID {0} and Signal Quality:%{1}", networkName, signalQuality);
+
+                            // Ping ölçümü
+                            PingReply reply = ping.Send(ip);
+                            if (reply.Status == IPStatus.Success)
+                            {
+                                Console.WriteLine("Ping {0} başarılı! ping :                    {1} ms", ip, reply.RoundtripTime);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Ping {0} başarısız! Status :     {1}", ip, reply.Status);
+                            }
+
+                            Console.WriteLine("WiFi bant genişliği:" + MeasureWifiBandwidth() + "bps:                     " + (MeasureWifiBandwidth() / 8000000) + " MB/s");
+
+                            Thread.Sleep(1000);
+                            break;
+                        }
+       
+
+Bu kodda kütüphaneyi çağırdığım kod
+
+
+	using signal_ping_library;
+
+	class Program
+	{
+    static void Main(string[] args)
+    {
+        string ip = "192.168.68.1"; // ping yapılacak IP adresi
+        var wifiAndPing = new WifiAndPing(ip);
+
+        string command = "";
+        while (command != "exit")
+        {
+            Console.WriteLine("Komut girin (start/stop/exit):");
+            command = Console.ReadLine();
+
+            switch (command)
+            {
+                case "start":
+                    wifiAndPing.Start();
+                    break;
+
+                case "stop":
+                    wifiAndPing.Stop();
+                    break;
+
+                case "exit":
+                    Console.WriteLine("Çıkış yapılıyor...");
+                    break;
+
+                default:
+                    Console.WriteLine("Geçersiz komut.");
+                    break;
+            }
+        }
+    }
 	}
-	}
 
 
-
-![image](https://user-images.githubusercontent.com/65457096/228814796-b85536b4-4a22-4639-a350-49f148d20c2c.png)
- 
-
-![image](https://user-images.githubusercontent.com/65457096/228814840-439ab581-e2e4-46b6-a964-ca2520ed61a5.png)
 
 
 Bugünkü kazanımlarım
--	Begintooltip yapısını öğrendim ve uyguladım
+- Bugün kodları birleştirip eş zamanlı nasıl çalıştırım ve bir kodu kütüphaneye nasıl çeviririm ,onları öğrendim ve uyguladım
 
 
 
