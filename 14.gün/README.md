@@ -1,54 +1,81 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu : Position kısmı revize işlemleri 2 
-Bugün position kısmına devam ediyorum. Dün yazdığım kodlarımı tamamen değiştirdim bugün biraz daha clean code yapısına çevirdim ayrıca begintooltip yapısıda ekledim. Begintooltip yapısının amaci fareyle çizginin üzerine geldiği zaman uzunluğu göstermesi. Ek olarak clear line diye bir buton ekledim ona bastığımız zaman çizgiyi siliyor ve bu şekilde daha kullanışlı oldu. Ve daha benden bi görev daha istendi ve istenen görev ise çizgilerin uçları çarpı işareti olmasıydı ve onuda çizginin kordinatlarını alarak başarılı bir şekilde ekledim.
+## Yapılan Çalışmanın Konusu : Verileri görselleştirme
+
+Bugünkü konumuz forkliften gelen verileri almak benim görevim ise görselleştirmek. Forkliften 7 tane veri geliyor şuan için realtime alıp grafikte gösterebiliyorum. Aşağıda kodunu yazdım x, y, a, ws, rs, wwa, rwa veriler ise bunlar 
 
 
 
-	if (cnt == 2) 
-	{
 
-	const float arrowSize = 10.0f;
-	const ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(point1));
-	const ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(point2));
-	const ImVec2 dir = ImVec2(p2.x - p1.x, p2.y - p1.y);
-	const float len = sqrtf(dir.x * dir.x + dir.y * dir.y);
-	const ImVec2 norm = ImVec2(dir.x / len, dir.y / len);
-	const ImVec2 perp = ImVec2(-norm.y, norm.x);
+  	std::string delimiter = ";";
+    	size_t pos = 0;
+    	std::string token;
+   	 while ((pos = msg.find(delimiter)) != std::string::npos) {
+       	 token = msg.substr(0, pos);
+       	 switch (pos) {
+        	case 0:
+          	  dataa.x = (int)token;
+          	  break;
+        case 1:
+            dataa.y = token;
+            break;
 
-	//ImPlot::GetPlotDrawList()->AddLine(p1, p2, IM_COL32(255, 0, 0, 255), 3.0f);
-	ImPlot::GetPlotDrawList()->AddLine(
-		ImPlot::PlotToPixels(ImPlotPoint(point1)),
-		ImPlot::PlotToPixels(ImPlotPoint(point2)),
-		IM_COL32(255, 0, 0, 255), 
-		3.0f
-	);
-			
-	const float crossSize = 4.0f;
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y + perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y - perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+        case 2:
+            dataa.a = token;
+            break;
+        case 3:
+            dataa.ws = token;
+            break;
 
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y + perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y - perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+        case 4:
+            dataa.rs = token;
+            break;
+        case 5:
+            dataa.wwa = token;
+            break;
 
-	if (ImGui::IsItemHovered()) {
-		ImGui::BeginTooltip();
-		ImGui::Text("Line Length: %.2f", distance);
-		ImGui::EndTooltip();
-	}
-	}
+        case 6:
+            dataa.rwa = token;
+            break;
+        }
 
 
 
-![image](https://user-images.githubusercontent.com/65457096/228814796-b85536b4-4a22-4639-a350-49f148d20c2c.png)
- 
+        msg.erase(0, pos + delimiter.length());
+    }
+class kısmı
 
-![image](https://user-images.githubusercontent.com/65457096/228814840-439ab581-e2e4-46b6-a964-ca2520ed61a5.png)
+
+    
+	class take_data {
+    	public:
+      	  int x;
+      	  int y;
+       	 float a;
+       	 int ws;
+       	 int rs;
+        	float wwa;
+       	 float rwa;
+       	 void yaz() {
+          	  fprintf(stdout, " degerler atandı ");
+        	};
+   	 };
+
+
+	if (ImPlot::BeginPlot("##Scrolling", ImVec2(-1, 150))) {
+       	 ImPlot::SetupAxes(NULL, NULL, flags, flags);
+        ImPlot::SetupAxisLimits(ImAxis_X1, t - history, t, ImGuiCond_Always);
+        ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1);
+        ImPlot::SetNextFillStyle(IMPLOT_AUTO_COL, 0.5f);
+        ImPlot::PlotShaded("Mouse X", &sdata1.Data[0].x, &sdata1.Data[0].y, sdata1.Data.size(), -INFINITY, 0, sdata1.Offset, 2 * sizeof(float));
+        ImPlot::PlotLine("Mouse Y", &sdata2.Data[0].x, &sdata2.Data[0].y, sdata2.Data.size(), 0, sdata2.Offset, 2 * sizeof(float));
+        ImPlot::EndPlot();
+  	  }
 
 
 Bugünkü kazanımlarım
--	Begintooltip yapısını öğrendim ve uyguladım
+- Veri görselleştirmeyi öğrendim
 
 
 
@@ -60,7 +87,24 @@ Bugünkü kazanımlarım
 
 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
