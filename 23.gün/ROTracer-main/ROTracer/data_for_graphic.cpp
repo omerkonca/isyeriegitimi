@@ -152,7 +152,7 @@ void ROTracer::LoginPage() {
 
 		ImGui::EndMainMenuBar();
 
-		
+
 
 
 
@@ -347,7 +347,7 @@ void ROTracer::LoginPage() {
 }
 
 
-//şimdi ben ekranın boyutunu parametre olarak almak istiyorum ve ben açtığım menü item leri ekrana sığdırmak istiyorum mesela 3 tane açtıysam ona göre sığsın yada 5 tane açtıysam ona göre sığsın dinamik bir şekilde
+
 
 void ROTracer::ZMQDataStreamParser()
 {
@@ -949,12 +949,6 @@ void ROTracer::ReceivedRatePage() {
 	ImGui::SameLine();
 	ImGui::SliderFloat("History", &this->ReceivedRateGraphic->History, 1, 30, "%.1f s");  // .1f yaparsak milisaniye olarak ayarlanıyor 
 
-
-
-
-
-
-
 	static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
 
 	if (ImPlot::BeginPlot("##Scrollinga")) {     // grafik ölçeklendirme 
@@ -1025,7 +1019,7 @@ void ROTracer::TransmitededRatePage() {
 
 	static ImPlotAxisFlags flags = ImPlotAxisFlags_NoTickLabels;
 
-	if (ImPlot::BeginPlot("##Scrollingf" )) {     // grafik ölçeklendirme 
+	if (ImPlot::BeginPlot("##Scrollingf")) {     // grafik ölçeklendirme 
 		ImPlot::SetupAxes("Time [s]", "transmiteded rate  [ ]");
 
 		ImPlot::SetupAxisLimits(ImAxis_X1, this->TransmitededRateGraphic->Time - this->TransmitededRateGraphic->History, this->TransmitededRateGraphic->Time, ImGuiCond_Always);
@@ -1036,8 +1030,5 @@ void ROTracer::TransmitededRatePage() {
 		}
 		ImPlot::EndPlot();
 	}
-
-
-
 }
 
