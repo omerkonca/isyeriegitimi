@@ -1,0 +1,8 @@
+﻿{
+  "Settings": {
+    "ROAgvServerUrl": "http://localhost:9000",
+    "ROWebRepositoryUrl": "http://88.255.160.83:6001",
+    "PrivateToken": "68f25b02057642bfa7a3d3b53a9d996f",
+    "RepositoryWatcher": "false"
+  }
+}
