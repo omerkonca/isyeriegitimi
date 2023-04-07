@@ -1,54 +1,44 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu : Position kısmı revize işlemleri 2 
-Bugün position kısmına devam ediyorum. Dün yazdığım kodlarımı tamamen değiştirdim bugün biraz daha clean code yapısına çevirdim ayrıca begintooltip yapısıda ekledim. Begintooltip yapısının amaci fareyle çizginin üzerine geldiği zaman uzunluğu göstermesi. Ek olarak clear line diye bir buton ekledim ona bastığımız zaman çizgiyi siliyor ve bu şekilde daha kullanışlı oldu. Ve daha benden bi görev daha istendi ve istenen görev ise çizgilerin uçları çarpı işareti olmasıydı ve onuda çizginin kordinatlarını alarak başarılı bir şekilde ekledim.
+## Yapılan Çalışmanın Konusu : Arayüz tasarımı
 
+Bugünün çalışmasını planladık bana düşen iş ise dün yarım kalan arayüz tasarımı idi ben de ona devam etmeye başladım ve günüm o şekilde geçti
+ aşağıda yazdığım kodlar göstereceğim
 
+	ImGui::Begin("PAGE", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);  //, &no_collapse
+   
+            // Pencere başlığı ve IP adresi giriş kutusu
+            ImGui::Text("                                                       Enter IP Address");
+            ImGui::Spacing();
 
-	if (cnt == 2) 
-	{
+            ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize(" ", NULL, true).x) / (1, 5));
+            ImGui::InputText(" ", ipAddress, 32, ImGuiInputTextFlags_CharsNoBlank);
 
-	const float arrowSize = 10.0f;
-	const ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(point1));
-	const ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(point2));
-	const ImVec2 dir = ImVec2(p2.x - p1.x, p2.y - p1.y);
-	const float len = sqrtf(dir.x * dir.x + dir.y * dir.y);
-	const ImVec2 norm = ImVec2(dir.x / len, dir.y / len);
-	const ImVec2 perp = ImVec2(-norm.y, norm.x);
+            ImGui::Spacing();
 
-	//ImPlot::GetPlotDrawList()->AddLine(p1, p2, IM_COL32(255, 0, 0, 255), 3.0f);
-	ImPlot::GetPlotDrawList()->AddLine(
-		ImPlot::PlotToPixels(ImPlotPoint(point1)),
-		ImPlot::PlotToPixels(ImPlotPoint(point2)),
-		IM_COL32(255, 0, 0, 255), 
-		3.0f
-	);
-			
-	const float crossSize = 4.0f;
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y + perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y - perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+            // IP adresi girişi ve "Login" düğmesi
+            ImGui::SetCursorPosX((ImGui::GetWindowWidth() - ImGui::CalcTextSize("Login", NULL, true).x) / 2);
 
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y + perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y - perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
+            // IP adresi girişi ve "Login" düğmesi
+            if (ImGui::Button("Login")) {
+                // IP adresi doğrulama
+                std::regex ip_regex("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");
+                if (!std::regex_match(ipAddress, ip_regex)) {
+                    ImGui::OpenPopup("Uyari");
+                }
+                else {
+                    // Login düğmesine tıklandığında, saklanan IP adresi ile diğer sayfaya geçme
+                    std::cout << "Entered IP Address:" << ipAddress << std::endl;
+                    ImGui::OpenPopup("New Page");
+                    page1 = false;
+                }
+            }
 
-	if (ImGui::IsItemHovered()) {
-		ImGui::BeginTooltip();
-		ImGui::Text("Line Length: %.2f", distance);
-		ImGui::EndTooltip();
-	}
-	}
-
-
-
-![image](https://user-images.githubusercontent.com/65457096/228814796-b85536b4-4a22-4639-a350-49f148d20c2c.png)
- 
-
-![image](https://user-images.githubusercontent.com/65457096/228814840-439ab581-e2e4-46b6-a964-ca2520ed61a5.png)
-
+Yazdığım kod bu şekilde bu kodda kullanıcı bi rip adres giriyor ve ip adres kontrol ediliyor yazımı uygunmu diye, uygunsa diğer sayfaya geçiş yapıyor o şekilde çalışıyor.
 
 Bugünkü kazanımlarım
--	Begintooltip yapısını öğrendim ve uyguladım
+- Arayüz tasarımında kendimi geliştirdim
 
 
 
@@ -58,9 +48,6 @@ Bugünkü kazanımlarım
 
 
 
-
-
- 
 
 
 

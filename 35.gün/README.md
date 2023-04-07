@@ -1,31 +1,27 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :  Projeye uygun veri tabanı araştırılması
-Bugünkü görevim, projedeki grafikleştirmeyi bitirdiğimiz için veri tabanı işlemi kaldı ve veri tabanında ufak tefek sıkıntılar olduğu için, bana veri tabanında loglama yapmayı araştırmamı söylediler ve loglama yapmamızın amacı ise bize gelen verileri daha sonrada izlemek istiyor olmamızdan kaynaklı ve buna uygun veri tabanı seçimi yapacağız.
-Ben öncelikle chatgpt ile araştırma yaptım hala bi sonuca varamadım ama az çok fikir sahibi oldum
+## Yapılan Çalışmanın Konusu : Mongodb veri tabanı kullanımı 
 
- ![image](https://user-images.githubusercontent.com/65457096/230352520-c97ed63a-fa79-4663-9e43-3c599190d478.png)
+Bugün, Perşembe günü yaptığımız araştırılmalardan sonra yeni veri tabanına geçmek yerine, elimizdeki mevcut veri tabanıyla devam etme kararı aldık. Şuan yavaş olduğu için geliştirme yapıp şekilde kullanmaya başlayacaz. Mesela log araması yaparken belirli tarih aralığını seçince filtreleme işini çok yavaş yapıyor o kısmı çözmek istiyoruz o şekilde devam edeceğiz.
+Ve günü neler yapacağımız hakkında araştırma yaparak geçirdik.
+
+![image](https://user-images.githubusercontent.com/65457096/230600388-db31ff6b-0b62-4fab-aff8-5e165cc337cd.png)
+
+ 
+
+Yukarıdaki mongodb deki loglama arayüzümüz.
+
+
+ ![image](https://user-images.githubusercontent.com/65457096/230600404-82be9837-8d26-40f1-91fc-bf6d41a1b23a.png)
 
 
 
-
-Burda chatgptye sorarak fikir sahibi oldum
-
-MongoDB, belge tabanlı bir NoSQL veritabanıdır ve yüksek performanslı ve ölçeklenebilir bir çözümdür. MongoDB, JSON formatında verileri depolar ve JavaScript diliyle etkileşim sağlar. Bu nedenle, verileri depolama ve erişim için MongoDB kullanabiliriz.
-
-MongoDB'de veri kaydetmek ve erişmek oldukça kolaydır. İlk olarak, MongoDB'de bir veritabanı ve koleksiyon oluşturmanız gerekecektir. Veritabanı, belgelerinizi gruplamak için kullanabileceğiniz bir alanı temsil ederken, koleksiyonlar, benzer belgeleri gruplandırmak için kullanabileceğiniz bir alanı temsil eder. Koleksiyonlar, birbirine benzeyen belgeleri içerebilir.
-
-Verileri kaydetmek için, MongoDB'de insertOne() veya insertMany() işlevlerini kullanabiliyormuşuz.
+Yukarıdaki de ise belirlli tarihteki logları filtrelememize yarıyor şuan için yavaş filtreleme yapıyor o kısım üzerinde çalışmaya başlayacağız.
 
 
 Bugünkü kazanımlarım
--	 Veritabanı loglaması hakkında bilgiler öğrendim
-
-
-
-
-
+-	mongodb kullanımını öğrendim
 
 
 
