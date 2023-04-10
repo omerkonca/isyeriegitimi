@@ -10,7 +10,7 @@ Bir checkbox ile hizala görevini yapamadım
 Birde otomatik fokuslama görevinide kısmen hallettim
 Kodlarım şu şekilde
 
-ImGui::BeginMainMenuBar();
+	ImGui::BeginMainMenuBar();
 
 		if (ImGui::BeginMenu("Agv"))
 		{
@@ -70,10 +70,11 @@ ImGui::BeginMainMenuBar();
 			ImGui::EndChild();
 			}
 ![image](https://user-images.githubusercontent.com/65457096/227555571-b60b1d41-b0db-45ef-bfc5-cda28df9d6c4.png)
+
 Bu şekilde normalde alt alta geliyordu açılan grafikler bu şekilde güncelledim
 
 Bugünkü kazanımlarım
-- ImGui::BeginChild("Wheel Angle Page", ImVec2(1000, 600), true);   yapısını öğrendim
+-  ImGui::BeginChild("Wheel Angle Page", ImVec2(1000, 600), true);   yapısını öğrendim
 
 
 
