@@ -47,8 +47,18 @@ Aşağıda kodlarım ve çalışma şekli
 
 
 
+Üçgenin hesaplanmasını tahtada bu şekilde yaptım
+
+![image](https://user-images.githubusercontent.com/65457096/230889634-71f1b790-30be-43cd-affb-0a9bdec82daf.png)
+
+grafiğin yazdırması bu şekilde
 
 
+![image](https://user-images.githubusercontent.com/65457096/230889666-7d8cd211-ed17-4502-aa21-80739a1ff223.png)
+
+
+Bugünkü kazanımlarım
+-	Matematiksel işlem ile kod yazarak üçgen çizdirmeyi öğrendim
 
 
  
