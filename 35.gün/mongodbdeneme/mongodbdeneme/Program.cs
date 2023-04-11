@@ -9,7 +9,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        var client = new MongoClient("mongodb://192.168.2.107:27017");
+        var client = new MongoClient("mongodb://192.168.2.102:27017");
         var database = client.GetDatabase("robutel_local_log");
         var collection = database.GetCollection<BsonDocument>("CurrentSpeedLog");
 
