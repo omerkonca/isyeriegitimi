@@ -1,27 +1,45 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu : Mongodb veri tabanı kullanımı 
+## Yapılan Çalışmanın Konusu :  Robo 3t de filtreleme işlemi 
+Bugün yavaşlık sorunun çözümü için, bizim loglamaları çektiğimiz robo 3t uygulamasında filtreleme işlemi yapıp, yavaşlık testi yaptık ve sonuç olarak sorun burdada olmadığını gördük 
 
-Bugün, Perşembe günü yaptığımız araştırılmalardan sonra yeni veri tabanına geçmek yerine, elimizdeki mevcut veri tabanıyla devam etme kararı aldık. Şuan yavaş olduğu için geliştirme yapıp şekilde kullanmaya başlayacaz. Mesela log araması yaparken belirli tarih aralığını seçince filtreleme işini çok yavaş yapıyor o kısmı çözmek istiyoruz o şekilde devam edeceğiz.
-Ve günü neler yapacağımız hakkında araştırma yaparak geçirdik.
 
-![image](https://user-images.githubusercontent.com/65457096/230600388-db31ff6b-0b62-4fab-aff8-5e165cc337cd.png)
+
+Filtreleme kodum
+
+     db.getCollection('ReportLog').find({ Timestamp: { $gte: new Date('2022-01-01'), $lt: new Date('2023-02-01') }})
+
+
+robo3t filtreleme yaptığım yer
 
  
-
-Yukarıdaki mongodb deki loglama arayüzümüz.
-
-
- ![image](https://user-images.githubusercontent.com/65457096/230600404-82be9837-8d26-40f1-91fc-bf6d41a1b23a.png)
+![image](https://user-images.githubusercontent.com/65457096/231389590-f5d71288-87ab-42d5-b85f-44ed0fb7e6f0.png)
 
 
 
-Yukarıdaki de ise belirlli tarihteki logları filtrelememize yarıyor şuan için yavaş filtreleme yapıyor o kısım üzerinde çalışmaya başlayacağız.
 
 
 Bugünkü kazanımlarım
--	mongodb kullanımını öğrendim
+-	robo3t filtrelemeyi öğrendim
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
