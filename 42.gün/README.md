@@ -1,79 +1,28 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu : Log viewer filtreleme işlemi
+## Yapılan Çalışmanın Konusu :  Gelen verileri sayfalandırma
 
-Bugün bana yeni görev verildi görevde şu şekilde biz çektiğimiz logların içinde arama yapmak istiyoruz. Ctrl – F mantığı gibi arama yapan kod yazdım .
+Bugün MongoDB veritabanı kullanarak bir C# uygulaması yazdım. Bu uygulama, bir MongoDB veritabanından belirli bir sayfada görüntülenen belirli sayıda belgeyi getirir ve bu belgeleri bir Windows Forms uygulamasında görüntüler. Ayrıca, belirli bir kelimeyi arayabilen bir arama özelliği de ekledim.
 
-     arananKelime = textBox1.Text;
+Uygulama şöyle çalışıyor: İlk olarak, MongoDB bağlantısı oluşturuluyor ve belirli bir veritabanı ve koleksiyondan belgeler çekiliyor. Ardından, sayfa numarasına ve sayfa boyutuna göre belgeler filtreleniyor ve belirtilen sayfa numarasındaki belgeler görüntüleniyor. Görüntüleme işlemi, bir Windows Forms uygulaması içindeki bir zengin metin kutusu kullanılarak gerçekleştiriliyor. Ayrıca, arama özelliği, belirtilen kelimenin içeriğinde aranarak eşleşen belgeleri vurgular.
 
-            // Önceki aramada bulunan kelimeyi vurgusunu kaldır
-            logArea.SelectionBackColor = Color.White;
-            logArea.SelectionColor = Color.Black;
+Bu uygulamayı geliştirirken, C# programlama dilini ve Windows Forms uygulamalarının nasıl oluşturulduğunu daha iyi anlama fırsatı buldum. Ayrıca, MongoDB veritabanına nasıl bağlanacağımı, belirli belgeleri nasıl filtreleyeceğimi ve bunları bir Windows Forms uygulamasında nasıl görüntüleyeceğimi öğrendim. Bu sayede, bugün edindiğim teorik bilgiyi pratikte uygulama fırsatı buldum.
 
-            int bulunanIndex = logArea.Find(arananKelime, sonIndex + 1, RichTextBoxFinds.None);
-            if (bulunanIndex != -1)
-            {
-                // Bulunan kelimeyi seç ve renklendir
-                logArea.Select(bulunanIndex, arananKelime.Length);
-                logArea.SelectionBackColor = Color.Yellow;
-                logArea.SelectionColor = Color.Red;
+Uygulamam bu şekilde
 
-                // Bulunan kelimeyi görüntüle
-                logArea.ScrollToCaret();
+ ![image](https://user-images.githubusercontent.com/65457096/232488585-b87f242a-254a-42af-8997-88d478326f63.png)
 
-                sonIndex = bulunanIndex;
-            }
-            else
-            {
-                MessageBox.Show("Kelime bulunamadı.");
-                sonIndex = -1;
-            }
-        }
-        private int bulunanSayisi = 0;
-        private void button5_Click(object sender, EventArgs e)
-        {
-            bulunanSayisi = 0;
-
-            foreach (string line in logArea.Lines)
-            {
-                int index = 0;
-                while (index < line.Length)
-                {
-                    index = line.IndexOf(arananKelime, index);
-                    if (index == -1)
-                    {
-                        break;
-                    }
-
-                    bulunanSayisi++;
-                    index += arananKelime.Length;
-                }
-            }
-
-            MessageBox.Show("Toplam " + bulunanSayisi + " adet bulundu.");
-        }
-
-Kod bu şekilde herhangi bir kelimeyi yazınca o kelimeye eş kelime varsa arayıp ekrana getiriyor ve kaç tane varsa say butonuna basıp bütün eşdeğer kelimeleri sayıyor ekrana yazdırıyor
-
-
-
-
-
-
-Bu şekilde 2 buton 1 tane text box
-
-![image](https://user-images.githubusercontent.com/65457096/231780062-bed33bdf-0ee6-4fcf-b9a8-7752d75b2421.png)
-
-
-![image](https://user-images.githubusercontent.com/65457096/231780076-3471979b-de69-4364-8a16-1abeb05630d0.png)
-
-
-![image](https://user-images.githubusercontent.com/65457096/231780095-e96ea8a8-5a30-424a-85c1-c6e0d839ccc4.png)
 
 
 Bugünkü kazanımlarım
--	filtreleme yapmayı öğrendim 
+-	MongoDB veritabanına nasıl bağlanacağımı, belirli belgeleri nasıl filtreleyeceğimi ve bunları bir Windows Forms uygulamasında nasıl görüntüleyeceğimi öğrendim
+
+
+
+
+
+
 
 
 
