@@ -33,7 +33,7 @@
             textBox1 = new TextBox();
             label1 = new Label();
             panel1 = new Panel();
-            richTextBox1 = new RichTextBox();
+            richTextBox3 = new RichTextBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
             button2 = new Button();
             textBox2 = new TextBox();
@@ -42,6 +42,7 @@
             // 
             // button1
             // 
+            button1.Anchor = AnchorStyles.None;
             button1.Location = new Point(30, 206);
             button1.Name = "button1";
             button1.Size = new Size(94, 29);
@@ -52,6 +53,7 @@
             // 
             // textBox1
             // 
+            textBox1.Anchor = AnchorStyles.None;
             textBox1.Location = new Point(30, 113);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(125, 27);
@@ -59,6 +61,7 @@
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.None;
             label1.AutoSize = true;
             label1.Location = new Point(23, 41);
             label1.Name = "label1";
@@ -68,21 +71,20 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(richTextBox1);
+            panel1.Anchor = AnchorStyles.None;
+            panel1.Controls.Add(richTextBox3);
             panel1.Location = new Point(161, 12);
             panel1.Name = "panel1";
-            panel1.Size = new Size(831, 439);
+            panel1.Size = new Size(1825, 996);
             panel1.TabIndex = 4;
             // 
-            // richTextBox1
+            // richTextBox3
             // 
-            richTextBox1.ContextMenuStrip = contextMenuStrip1;
-            richTextBox1.Cursor = Cursors.IBeam;
-            richTextBox1.Location = new Point(0, 0);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(831, 439);
-            richTextBox1.TabIndex = 0;
-            richTextBox1.Text = "";
+            richTextBox3.Location = new Point(0, 0);
+            richTextBox3.Name = "richTextBox3";
+            richTextBox3.Size = new Size(1768, 1031);
+            richTextBox3.TabIndex = 2;
+            richTextBox3.Text = "";
             // 
             // contextMenuStrip1
             // 
@@ -92,6 +94,7 @@
             // 
             // button2
             // 
+            button2.Anchor = AnchorStyles.None;
             button2.Location = new Point(30, 355);
             button2.Name = "button2";
             button2.Size = new Size(94, 29);
@@ -102,6 +105,7 @@
             // 
             // textBox2
             // 
+            textBox2.Anchor = AnchorStyles.None;
             textBox2.Location = new Point(12, 296);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(125, 27);
@@ -111,7 +115,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1046, 529);
+            ClientSize = new Size(1924, 1055);
             Controls.Add(textBox2);
             Controls.Add(button2);
             Controls.Add(panel1);
@@ -133,9 +137,9 @@
         private DataGridView dataGridView1;
         private Label label1;
         private Panel panel1;
-        private RichTextBox richTextBox1;
         private ContextMenuStrip contextMenuStrip1;
         private Button button2;
         private TextBox textBox2;
+        private RichTextBox richTextBox3;
     }
 }

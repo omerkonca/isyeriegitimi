@@ -9,9 +9,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        var client = new MongoClient("mongodb://192.168.2.107:27017");
+        var client = new MongoClient("mongodb://192.168.2.125:27017");
         var database = client.GetDatabase("robutel_local_log");
-        var collection = database.GetCollection<BsonDocument>("CurrentSpeedLog");
+        var collection = database.GetCollection<BsonDocument>("GeneralLog");
 
         var startDate = new DateTime(2023, 4, 1);
         var endDate = new DateTime(2023, 4, 10);
