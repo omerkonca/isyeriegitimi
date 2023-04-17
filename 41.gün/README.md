@@ -1,79 +1,34 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu : Log viewer filtreleme işlemi
+## Yapılan Çalışmanın Konusu :  Ara kısmının düzenlenmesi 
+Bugün arama kısmını değiştridim. Yaptığım işlemler bir Windows Forms uygulamasında bir metin kutusu içinde arama yapmak için kod yazdım. Kullanıcının aramak istediği kelimeyi yazdığı metin kutusundan kelimeyi alıp ardından kelimeyi aradım. Eğer aranan kelime bulunursa, kelime metin kutusunda sarı bir arka plan rengiyle ve kırmızı bir yazı rengiyle vurgulandı ve kelime metin kutusunda görünür hale geldi. Aranan kelime metin kutusunda birden fazla kez bulunursa, kelimenin kaç kez bulunduğunu gösteren bir mesaj kutusu görüntüledim.
 
-Bugün bana yeni görev verildi görevde şu şekilde biz çektiğimiz logların içinde arama yapmak istiyoruz. Ctrl – F mantığı gibi arama yapan kod yazdım .
+Kodda iki düğme vardı: "btn_ara" ve "btn_say". "btn_ara", metin kutusunda kelime aramak için kullanılırken, "btn_say" metin kutusunda kaç kez belirli bir kelimenin bulunduğunu saymak için kullanılıyordu.
 
-     arananKelime = textBox1.Text;
+Ayrıca, kodda "sonIndex" ve "arananKelime" adında iki özel değişken de tanımladım. "sonIndex" değişkeni, en son bulunan kelimenin konumunu tutuyor, böylece bir sonraki arama işlemi, son aramanın sonrasından başlıyor. "arananKelime" değişkeni, metin kutusunda aranacak kelimeyi tutuyor.
 
-            // Önceki aramada bulunan kelimeyi vurgusunu kaldır
-            logArea.SelectionBackColor = Color.White;
-            logArea.SelectionColor = Color.Black;
+Yazdığım kodun işlevselliğini test etmek için, farklı kelime kombinasyonlarını aradım ve sonuçları doğru şekilde aldım. Bu deneyim, Windows Forms uygulamaları geliştirme konusundaki becerilerimi geliştirmeme yardımcı oldu.
 
-            int bulunanIndex = logArea.Find(arananKelime, sonIndex + 1, RichTextBoxFinds.None);
-            if (bulunanIndex != -1)
-            {
-                // Bulunan kelimeyi seç ve renklendir
-                logArea.Select(bulunanIndex, arananKelime.Length);
-                logArea.SelectionBackColor = Color.Yellow;
-                logArea.SelectionColor = Color.Red;
+ ![image](https://user-images.githubusercontent.com/65457096/232028668-46452c23-d5cc-4aee-9282-ef9017eb8d79.png)
 
-                // Bulunan kelimeyi görüntüle
-                logArea.ScrollToCaret();
 
-                sonIndex = bulunanIndex;
-            }
-            else
-            {
-                MessageBox.Show("Kelime bulunamadı.");
-                sonIndex = -1;
-            }
-        }
-        private int bulunanSayisi = 0;
-        private void button5_Click(object sender, EventArgs e)
-        {
-            bulunanSayisi = 0;
-
-            foreach (string line in logArea.Lines)
-            {
-                int index = 0;
-                while (index < line.Length)
-                {
-                    index = line.IndexOf(arananKelime, index);
-                    if (index == -1)
-                    {
-                        break;
-                    }
-
-                    bulunanSayisi++;
-                    index += arananKelime.Length;
-                }
-            }
-
-            MessageBox.Show("Toplam " + bulunanSayisi + " adet bulundu.");
-        }
-
-Kod bu şekilde herhangi bir kelimeyi yazınca o kelimeye eş kelime varsa arayıp ekrana getiriyor ve kaç tane varsa say butonuna basıp bütün eşdeğer kelimeleri sayıyor ekrana yazdırıyor
+![image](https://user-images.githubusercontent.com/65457096/232028679-c98c0a0d-5872-4bc0-865c-aa8c2e867379.png)
 
 
 
 
-
-
-Bu şekilde 2 buton 1 tane text box
-
-![image](https://user-images.githubusercontent.com/65457096/231780062-bed33bdf-0ee6-4fcf-b9a8-7752d75b2421.png)
-
-
-![image](https://user-images.githubusercontent.com/65457096/231780076-3471979b-de69-4364-8a16-1abeb05630d0.png)
-
-
-![image](https://user-images.githubusercontent.com/65457096/231780095-e96ea8a8-5a30-424a-85c1-c6e0d839ccc4.png)
+ 
 
 
 Bugünkü kazanımlarım
--	filtreleme yapmayı öğrendim 
+-	Windows Forms uygulamaları geliştirme konusundaki becerilerimi geliştirmeme yardımcı oldu
+
+
+
+
+
+
 
 
 
