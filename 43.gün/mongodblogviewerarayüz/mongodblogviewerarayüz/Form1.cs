@@ -61,20 +61,44 @@ namespace mongodblogviewerarayüz
         }
 
 
-        private async System.Threading.Tasks.Task DisplayData()
+        private async Task DisplayData()
         {
             var connectionString = "mongodb://192.168.2.125:27017";
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase("robutel_local_log");
             var collection = database.GetCollection<BsonDocument>("GeneralLog");
-            var filter = Builders<BsonDocument>.Filter.Empty;
+            // var filter = Builders<BsonDocument>.Filter.Empty;
+            DateTime startDate = new DateTime(2023, 04, 11, 12, 00, 00);
+            DateTime endDate = new DateTime(2023, 04, 14, 12, 00, 00);
 
-            
+            var filter = Builders<BsonDocument>.Filter.And(
+            Builders<BsonDocument>.Filter.Gte("Timestamp", startDate),
+            Builders<BsonDocument>.Filter.Lte("Timestamp", endDate));
+
+
 
             _totalDocuments = await collection.CountDocumentsAsync(filter);
             _totalPages = (int)Math.Ceiling((double)_totalDocuments / _pageSize);
 
-            var documents = await collection.Find(filter).Skip((_pageNumber - 1) * _pageSize).Limit(_pageSize).ToListAsync();
+
+            // var documents = await collection.Find(filter).Skip((_pageNumber - 1) * _pageSize).Limit(_pageSize).ToListAsync();
+
+            var findOptions = new FindOptions<BsonDocument>();
+
+
+
+
+            _totalDocuments = await collection.CountDocumentsAsync(filter);
+            _totalPages = (int)Math.Ceiling((double)_totalDocuments / _pageSize);
+            findOptions.Limit = _pageSize;
+            findOptions.Skip = (_pageNumber - 1) * _pageSize;
+
+            // var documents = await collection.Find(filter).Skip((_pageNumber - 1) * _pageSize).Limit(_pageSize).ToListAsync();
+
+
+
+            var result = await collection.FindAsync(filter, findOptions);
+            var documents = result.ToList();
 
             richTextBox1.Clear();
 
