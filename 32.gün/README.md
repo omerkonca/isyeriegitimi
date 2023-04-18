@@ -1,54 +1,35 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu : Position kısmı revize işlemleri 2 
-Bugün position kısmına devam ediyorum. Dün yazdığım kodlarımı tamamen değiştirdim bugün biraz daha clean code yapısına çevirdim ayrıca begintooltip yapısıda ekledim. Begintooltip yapısının amaci fareyle çizginin üzerine geldiği zaman uzunluğu göstermesi. Ek olarak clear line diye bir buton ekledim ona bastığımız zaman çizgiyi siliyor ve bu şekilde daha kullanışlı oldu. Ve daha benden bi görev daha istendi ve istenen görev ise çizgilerin uçları çarpı işareti olmasıydı ve onuda çizginin kordinatlarını alarak başarılı bir şekilde ekledim.
+## Yapılan Çalışmanın Konusu :  Daire çizimi revize işlemi
+Bugün çizmiş olduğum daireyi revize etme görevi verildi. Dairede eksik olan kısımlar vardı mesela daireyi istediğimiz şekilde harakat ettiremiyorduk ve rengi çok sadeydi hem rengini değiştirdim hemde Rahat haraket etmesini sağladım. Orta noktaya ve yarı çapın dairenin kenarıyla bağlandığı yere DragPoint method ekledim bu sayede orta noktadan tutarak istediğimiz şekilde harakat ettirebiliyoruz 
+Aşşağıda yazmış olduğum kod ve grafiği gösterdim
+
+ImPlot::DragPoint(0, &point1.x, &point1.y, ImVec4(1, 0, 0, 1), 4, ImPlotDragToolFlags_None);
+
+ImPlot::DragPoint(1, &point2.x, &point2.y, ImVec4(1, 0, 0, 1), 4, ImPlotDragToolFlags_None);
 
 
 
-	if (cnt == 2) 
-	{
+Kodlar bu şekilde nokta şeklinde tıklama alanı oluşturuyor
 
-	const float arrowSize = 10.0f;
-	const ImVec2 p1 = ImPlot::PlotToPixels(ImPlotPoint(point1));
-	const ImVec2 p2 = ImPlot::PlotToPixels(ImPlotPoint(point2));
-	const ImVec2 dir = ImVec2(p2.x - p1.x, p2.y - p1.y);
-	const float len = sqrtf(dir.x * dir.x + dir.y * dir.y);
-	const ImVec2 norm = ImVec2(dir.x / len, dir.y / len);
-	const ImVec2 perp = ImVec2(-norm.y, norm.x);
-
-	//ImPlot::GetPlotDrawList()->AddLine(p1, p2, IM_COL32(255, 0, 0, 255), 3.0f);
-	ImPlot::GetPlotDrawList()->AddLine(
-		ImPlot::PlotToPixels(ImPlotPoint(point1)),
-		ImPlot::PlotToPixels(ImPlotPoint(point2)),
-		IM_COL32(255, 0, 0, 255), 
-		3.0f
-	);
-			
-	const float crossSize = 4.0f;
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y + perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p1.x + perp.x * crossSize, p1.y - perp.y * crossSize), ImVec2(p1.x - perp.x * crossSize, p1.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y + perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y - perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-	ImPlot::GetPlotDrawList()->AddLine(ImVec2(p2.x + perp.x * crossSize, p2.y - perp.y * crossSize), ImVec2(p2.x - perp.x * crossSize, p2.y + perp.y * crossSize), IM_COL32(255, 255, 255, 255), 1.5f);
-
-	if (ImGui::IsItemHovered()) {
-		ImGui::BeginTooltip();
-		ImGui::Text("Line Length: %.2f", distance);
-		ImGui::EndTooltip();
-	}
-	}
+ ![image](https://user-images.githubusercontent.com/65457096/232811999-a2d5b923-8810-4d8f-b46c-d591035293c1.png)
 
 
-
-![image](https://user-images.githubusercontent.com/65457096/228814796-b85536b4-4a22-4639-a350-49f148d20c2c.png)
- 
-
-![image](https://user-images.githubusercontent.com/65457096/228814840-439ab581-e2e4-46b6-a964-ca2520ed61a5.png)
-
+Bu şekilde noktalar oluşturdum
 
 Bugünkü kazanımlarım
--	Begintooltip yapısını öğrendim ve uyguladım
+-	Dragpoint yapısını öğrendim uyguladım
+
+
+
+
+
+
+
+
+
+
 
 
 
