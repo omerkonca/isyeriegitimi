@@ -1,22 +1,36 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :  Gelen verileri sayfalandırma
+## Yapılan Çalışmanın Konusu :  LogViewer revize
 
-Bugün MongoDB veritabanı kullanarak bir C# uygulaması yazdım. Bu uygulama, bir MongoDB veritabanından belirli bir sayfada görüntülenen belirli sayıda belgeyi getirir ve bu belgeleri bir Windows Forms uygulamasında görüntüler. Ayrıca, belirli bir kelimeyi arayabilen bir arama özelliği de ekledim.
+Bugün Günlük iş planımızda, veritabanı loglama uygulamasının geliştirilmesi yer alıyordu. Bu uygulama, kullanıcının veritabanı dosyalarını loglarının incelenmesini, düzenlemesine ve kaydetmesine izin veriyordu.
 
-Uygulama şöyle çalışıyor: İlk olarak, MongoDB bağlantısı oluşturuluyor ve belirli bir veritabanı ve koleksiyondan belgeler çekiliyor. Ardından, sayfa numarasına ve sayfa boyutuna göre belgeler filtreleniyor ve belirtilen sayfa numarasındaki belgeler görüntüleniyor. Görüntüleme işlemi, bir Windows Forms uygulaması içindeki bir zengin metin kutusu kullanılarak gerçekleştiriliyor. Ayrıca, arama özelliği, belirtilen kelimenin içeriğinde aranarak eşleşen belgeleri vurgular.
+Bugün benim sorumluluğumda, uygulamada bulunan arama ve değiştirme özelliklerinin geliştirilmesi vardı. Bunun için C# programlama dilinde RichTextBox sınıfını kullandık.
 
-Bu uygulamayı geliştirirken, C# programlama dilini ve Windows Forms uygulamalarının nasıl oluşturulduğunu daha iyi anlama fırsatı buldum. Ayrıca, MongoDB veritabanına nasıl bağlanacağımı, belirli belgeleri nasıl filtreleyeceğimi ve bunları bir Windows Forms uygulamasında nasıl görüntüleyeceğimi öğrendim. Bu sayede, bugün edindiğim teorik bilgiyi pratikte uygulama fırsatı buldum.
+İlk olarak, arama özelliği için bir "Ara" butonu ekledim. Kullanıcının aramak istediği kelimeyi bir TextBox kontrolüne yazması gerekiyor. TextBox'taki metin, bir değişkene kaydedildi. Daha sonra, "Find" metodu kullanılarak kelimenin bulunduğu index bulundu. Eğer kelime bulunursa, bulunan kelimenin satırını vurgulayarak belirgin hale getirdik. Ayrıca, bulunan kelimeyi de vurgulayarak belirginleştirdik. Bulunan kelime yoksa, kullanıcıya bir mesaj gösterdik.
 
-Uygulamam bu şekilde
+Ayrıca, kelimenin kaç kez geçtiğini sayan bir "Say" butonu ekledim. Bu butona basıldığında, yine "Find" metodu kullanılarak kelimenin kaç kez geçtiği bulundu. Bulunan kelime sayısı, kullanıcıya bir mesaj olarak gösterildi.
 
- ![image](https://user-images.githubusercontent.com/65457096/232488585-b87f242a-254a-42af-8997-88d478326f63.png)
+Son olarak, kullanıcının seçtiği renkle belirginleştirmek için bir "Renk Seç" butonu ekledim. Bu butona tıklandığında, renk seçme işlemini sağlayan bir "ColorDialog" açıldı. Kullanıcı tarafından seçilen renk, seçili metne uygulandı.
+
+Bu çalışma sürecinde, C# programlama dili ve Windows Forms uygulama geliştirme ortamı hakkında daha fazla bilgi edindim. Ayrıca, farklı programlama teknikleri ve yöntemleri hakkında daha fazla pratik yaptım. Staj defterime, bugün yaptığım işlerin yanı sıra karşılaştığım zorluklar, çözüm önerilerim ve öğrendiğim yeni bilgileri de ekledim.
+
+Uygulamam bu şekilde 
+
+ 
+![image](https://user-images.githubusercontent.com/65457096/232807906-10ec121e-3ba0-4be0-8951-784705ec8f7c.png)
+
+
+Bugünkü kazanımmlarım
+-	Windows Forms uygulama geliştirme ortamı hakkında daha fazla bilgi edindim
 
 
 
-Bugünkü kazanımlarım
--	MongoDB veritabanına nasıl bağlanacağımı, belirli belgeleri nasıl filtreleyeceğimi ve bunları bir Windows Forms uygulamasında nasıl görüntüleyeceğimi öğrendim
+
+
+
+
+
 
 
 
