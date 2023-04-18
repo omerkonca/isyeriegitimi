@@ -69,6 +69,8 @@ namespace mongodblogviewerarayüz
             var collection = database.GetCollection<BsonDocument>("GeneralLog");
             var filter = Builders<BsonDocument>.Filter.Empty;
 
+            
+
             _totalDocuments = await collection.CountDocumentsAsync(filter);
             _totalPages = (int)Math.Ceiling((double)_totalDocuments / _pageSize);
 
