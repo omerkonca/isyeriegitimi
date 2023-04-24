@@ -1,28 +1,34 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :  LogViewer revize
+## Yapılan Çalışmanın Konusu :   Mongodb Loglama yavaşlığı sıkıntısı giderilmesi 
 
-Bugün Günlük iş planımızda, veritabanı loglama uygulamasının geliştirilmesi yer alıyordu. Bu uygulama, kullanıcının veritabanı dosyalarını loglarının incelenmesini, düzenlemesine ve kaydetmesine izin veriyordu.
+Bugünkü staj konum, MongoDB yavaşlığı sorunlarına yönelik bir çözüm arayışı oldu. MongoDB yavaşlığı sorunları, genellikle yetersiz dizinleme, büyük veri hacmi, aşırı yüklenme ve yanlış veritabanı tasarımı nedeniyle ortaya çıkabilir.
 
-Bugün benim sorumluluğumda, uygulamada bulunan arama ve değiştirme özelliklerinin geliştirilmesi vardı. Bunun için C# programlama dilinde RichTextBox sınıfını kullandık.
+Bu sorunları ele almak için, öncelikle sorgu performansını etkileyen faktörleri anlamak gerekiyor. Ardından, doğru çözüm yöntemleri uygulanarak MongoDB performansı artırılabilir.
 
-İlk olarak, arama özelliği için bir "Ara" butonu ekledim. Kullanıcının aramak istediği kelimeyi bir TextBox kontrolüne yazması gerekiyor. TextBox'taki metin, bir değişkene kaydedildi. Daha sonra, "Find" metodu kullanılarak kelimenin bulunduğu index bulundu. Eğer kelime bulunursa, bulunan kelimenin satırını vurgulayarak belirgin hale getirdik. Ayrıca, bulunan kelimeyi de vurgulayarak belirginleştirdik. Bulunan kelime yoksa, kullanıcıya bir mesaj gösterdik.
+Bugünkü staj sürecinde, aşağıdaki yöntemler üzerinde çalıştım:
+Dizinleme: MongoDB dizinleri, sorgu performansını artırmak için kullanılan önemli araçlardır. Bu nedenle, yeterli ve doğru dizinleme yapılması, sorgu performansını artırmaya yardımcı olabilir. Örneğin, sık kullanılan alanlar için dizin oluşturmak, sorgu sürelerini azaltabilir.
 
-Ayrıca, kelimenin kaç kez geçtiğini sayan bir "Say" butonu ekledim. Bu butona basıldığında, yine "Find" metodu kullanılarak kelimenin kaç kez geçtiği bulundu. Bulunan kelime sayısı, kullanıcıya bir mesaj olarak gösterildi.
+Veri hacmini azaltma: Büyük veri hacmi, sorgu performansını olumsuz etkileyebilir. Bu nedenle, gereksiz verilerin koleksiyondan kaldırılması veya ayrı bir koleksiyonda saklanması, sorgu performansını artırabilir.
 
-Son olarak, kullanıcının seçtiği renkle belirginleştirmek için bir "Renk Seç" butonu ekledim. Bu butona tıklandığında, renk seçme işlemini sağlayan bir "ColorDialog" açıldı. Kullanıcı tarafından seçilen renk, seçili metne uygulandı.
+Yük azaltma stratejileri: MongoDB, yüksek trafiğe maruz kalan uygulamalar için optimize edilmiştir. Ancak, yoğun yük altındaki bir uygulama, sorgu performansını etkileyebilir. Bu nedenle, yük azaltma stratejileri uygulanarak, uygulama performansı artırılabilir. Örneğin, verilerin önbelleğe alınması veya işlemci gücünün artırılması.
 
-Bu çalışma sürecinde, C# programlama dili ve Windows Forms uygulama geliştirme ortamı hakkında daha fazla bilgi edindim. Ayrıca, farklı programlama teknikleri ve yöntemleri hakkında daha fazla pratik yaptım. Staj defterime, bugün yaptığım işlerin yanı sıra karşılaştığım zorluklar, çözüm önerilerim ve öğrendiğim yeni bilgileri de ekledim.
+Veritabanı tasarımı: MongoDB'nin esnek yapısı, yanlış tasarlanmış bir veritabanı yapısına neden olabilir. Bu da, sorgu performansını etkileyebilir. Veritabanı tasarımının doğru yapılandırılması, sorgu performansını artırmaya yardımcı olabilir
 
-Uygulamam bu şekilde 
+Bugünkü staj sürecinde, yukarıdaki yöntemleri kullanarak, MongoDB performansını artırma üzerine çalıştım. Bu süreçte, özellikle yeterli dizinleme ve veri hacmini azaltma konularına odaklandım. Bu sorunların çözümü için kullanılan yöntemlerin detaylı bir şekilde ele alındığı ve uygulama sürecinde nasıl uygulandığına ilişkin bilgileri öğrendim. Ve sorunun sebebinin indexleme olduğuna karar verdim bu sayede.
 
+Aşağıdaki kodda 1yıllık veri çekiyorum çok hızlı çekiyor sebebi ise okısmın indexlenmiş olmasından kaynaklanıyor
+
+ ![image](https://user-images.githubusercontent.com/65457096/233003458-83759cf1-ab4c-453f-bbcf-3a95d96156aa.png)
+
+
+
+Aşağıdada aynı şekilde ver çekiyorum fakat 4 günlük veri çekiyorum yukarı göre daha yavaş geliyor sebebi ise veritabanının indexleme yapmamış olmasından kaynaklanıyor
  
-![image](https://user-images.githubusercontent.com/65457096/232807906-10ec121e-3ba0-4be0-8951-784705ec8f7c.png)
+![image](https://user-images.githubusercontent.com/65457096/233003483-bbc6ab8d-bda9-4215-8947-713c3b9917ee.png)
 
 
-Bugünkü kazanımmlarım
--	Windows Forms uygulama geliştirme ortamı hakkında daha fazla bilgi edindim
 
 
 
