@@ -1,32 +1,29 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :  Mongodb İndexleme
-Bugünkü staj konum mongodb dizinlemeyi araştırıp ne işe yaradığını nerelerde kullanıldığını öğrenmek.
-MongoDB, verileri hızlı bir şekilde sorgulamak için dizinleme kullanır. Dizinler, belirli bir alanın değerine göre belgeleri gruplandıran özel veri yapılarıdır. Bu, verilerin çok daha hızlı bir şekilde sorgulanmasına olanak tanır.
+## Yapılan Çalışmanın Konusu :   Mongodb İndexleme 2
+Bugünkü staj günümde MongoDB indeksleme işlemini daha detaylı bir şekilde inceledim. MongoDB indeksleme, verilerin daha hızlı erişilebilir olmasını sağlamak için kullanılan bir yöntemdir. Indeksleme işlemi, belirli bir sorgunun daha hızlı yürütülmesini sağlar.
 
-MongoDB, bir koleksiyonda birden fazla dizin oluşturmanıza izin verir. Dizinler, tek bir alan veya birden fazla alanın bir kombinasyonu üzerinde oluşturulabilir. Dizinleme işlemi, bir koleksiyondaki belirli bir alan veya alan kombinasyonu için bir dizin oluşturma işlemidir.
+MongoDB indeksleme işlemi için createIndex() metodunu kullanırız. Bu metodun kullanımı oldukça basittir. Örneğin, db.collection.createIndex( { name: 1 } ) komutunu kullanarak "name" alanı için artan bir indeks oluşturabiliriz. Bu komut, "name" alanı üzerinde artan bir indeks oluşturacak ve bu indeksi kullanarak sorguları daha hızlı yürütebileceğiz.
 
-Dizinleme işlemi, öncelikle bir alanın tüm değerlerini tarar ve benzersiz değerleri saklayarak bir dizin oluşturur. Daha sonra, sorgulama yapılırken, dizin belirli bir değere sahip belgeleri hızlı bir şekilde bulabilir ve getirebilir.
-Dizinler, verilerdeki sorgulama hızını artırırken, aynı zamanda bellek kullanımını artırabilir. Bu nedenle, dizinlerin dikkatli bir şekilde oluşturulması ve yönetilmesi önemlidir.
+MongoDB, indeksler için B-Tree yapısını kullanır. Bu yapının avantajı, verilerin sıralanmış olması ve arama, ekleme ve silme işlemlerinin hızlı bir şekilde yapılabilmesidir.
 
-MongoDB dizinlerinin yönetimi, dizinlerin oluşturulması, güncellenmesi, silinmesi ve izlenmesi gibi çeşitli işlemleri içerir. Aşağıda MongoDB dizinlerinin yönetimi için kullanılabilecek bazı önemli yöntemler açıklanmaktadır:
+Indeksleme işlemi yaparken, hangi alanlar üzerinde indeksleme yapacağımıza dikkat etmemiz gerekiyor. Eğer veri kümemiz çok büyük ise, tüm alanlar için indeksleme yapmak performansı kötü etkileyebilir. Bu yüzden, sadece sık sık kullanılan alanlar için indeksleme yapmak daha etkili olabilir.
 
-Dizin oluşturma: Dizinler, bir koleksiyondaki belirli bir alan veya alan kombinasyonu için oluşturulabilir. Dizinler, createIndex() yöntemi kullanılarak oluşturulabilir. Bu yöntem, bir dizin için alan adı veya adları ve dizin türü gibi parametreleri alır.
+Ayrıca, indeksleme işlemi yaparken hangi sıralamayı kullanacağımız da önemlidir. Örneğin, bir alanı artan veya azalan sıralama ile indekslemek farklı sonuçlar verebilir. Bu yüzden, kullanım senaryomuza göre doğru sıralamayı belirlememiz gerekiyor.
 
-Dizin güncelleme: Dizinler, var olan bir dizini güncellemek veya yeni bir dizin eklemek için güncellenebilir. Dizini güncellemek için, collMod komutu veya updateOne() yöntemi kullanılabilir.
+Indeksleme işlemi, verilerimize yapılan değişikliklere göre otomatik olarak güncellenir. Yani, verilerimize yeni bir belge eklediğimizde veya mevcut bir belgeyi güncellediğimizde, MongoDB indeksi otomatik olarak günceller ve sorgularımızın hızlı kalmasını sağlar.
 
-Dizin silme: Dizinler, dropIndex() yöntemi kullanılarak silinebilir. Bu yöntem, bir koleksiyondan bir dizin siler.
-Dizin istatistikleri: MongoDB, bir dizinin kullanımı hakkında faydalı istatistikler toplar. Bu istatistiklere, collStats() yöntemi kullanılarak erişilebilir.
+MongoDB indeksleme işlemi, verilerimize daha hızlı erişim sağlayarak performansı artıran önemli bir araçtır. Indeksleme işlemini doğru kullanarak, verilerimizin işleme hızını artırabilir ve uygulamalarımızın performansını iyileştirebiliriz.
 
-Dizinlerin yönetimi, bir koleksiyonun performansını etkileyebilir. Dizinler, sorgulama hızını artırırken, aynı zamanda bellek kullanımını da artırır. Bu nedenle, dizinlerin oluşturulması ve yönetimi dikkatli bir şekilde yapılmalıdır. Örneğin, gereksiz dizinlerin silinmesi ve nadiren kullanılan dizinlerin kapatılması, koleksiyonun performansını artırabilir.
+Indeksleme işlemi yaparken dikkat edilmesi gereken diğer bir konu da indeks boyutudur. Eğer indeks boyutu çok büyükse, sorguların hızı düşebilir. Bu yüzden, indeks boyutunu mümkün olduğunca küçük tutmaya çalışmak önemlidir.
 
- 
+MongoDB indeksleme işlemi yaparken, farklı türlerde indeksler de oluşturabiliriz. Örneğin, metin alanları için metin indeksleri veya coğrafi konum verileri için coğrafi indeksler oluşturabiliriz. Bu indeksler, belirli tipte sorguların daha hızlı yürütülmesini sağlar.
 
+Indeksleme işlemi, verilerimizin performansını artırmak için çok önemli bir araçtır. Ancak, indeksleme işlemi yaparken bazı dezavantajları da vardır. Örneğin, indeksleme işlemi bellek kullanımını artırabilir ve verilerimizin güncellenmesi daha yavaş olabilir. Bu nedenle, indeksleme işlemini doğru şekilde kullanarak avantajlarını ve dezavantajlarını dikkate almak önemlidir.
 
-
-
-![image](https://user-images.githubusercontent.com/65457096/233914432-e6528561-962b-4d88-b9bd-ec6c56e117a3.png)
+Bugünkü kazanımlarım 
+-	MongoDB indeksleme işlemini daha detaylı bir şekilde inceledim. Bu işlemi hangi durumlarda ve nasıl kullanabileceğimizi öğrendim. Ayrıca, indeksleme işlemini yaparken nelere dikkat etmemiz gerektiğini ve nasıl optimize edebileceğimizi de öğrendim. 
 
 
 
@@ -36,15 +33,6 @@ Dizinlerin yönetimi, bir koleksiyonun performansını etkileyebilir. Dizinler, 
 
 
 
-
-
-
-
-
-
-
-
- 	
 
 
 
