@@ -1,52 +1,32 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :  LogViewer revize
+## Yapılan Çalışmanın Konusu :  Mongodb İndexleme
+Bugünkü staj konum mongodb dizinlemeyi araştırıp ne işe yaradığını nerelerde kullanıldığını öğrenmek.
+MongoDB, verileri hızlı bir şekilde sorgulamak için dizinleme kullanır. Dizinler, belirli bir alanın değerine göre belgeleri gruplandıran özel veri yapılarıdır. Bu, verilerin çok daha hızlı bir şekilde sorgulanmasına olanak tanır.
 
-Bugün Günlük iş planımızda, veritabanı loglama uygulamasının geliştirilmesi yer alıyordu. Bu uygulama, kullanıcının veritabanı dosyalarını loglarının incelenmesini, düzenlemesine ve kaydetmesine izin veriyordu.
+MongoDB, bir koleksiyonda birden fazla dizin oluşturmanıza izin verir. Dizinler, tek bir alan veya birden fazla alanın bir kombinasyonu üzerinde oluşturulabilir. Dizinleme işlemi, bir koleksiyondaki belirli bir alan veya alan kombinasyonu için bir dizin oluşturma işlemidir.
 
-Bugün benim sorumluluğumda, uygulamada bulunan arama ve değiştirme özelliklerinin geliştirilmesi vardı. Bunun için C# programlama dilinde RichTextBox sınıfını kullandık.
+Dizinleme işlemi, öncelikle bir alanın tüm değerlerini tarar ve benzersiz değerleri saklayarak bir dizin oluşturur. Daha sonra, sorgulama yapılırken, dizin belirli bir değere sahip belgeleri hızlı bir şekilde bulabilir ve getirebilir.
+Dizinler, verilerdeki sorgulama hızını artırırken, aynı zamanda bellek kullanımını artırabilir. Bu nedenle, dizinlerin dikkatli bir şekilde oluşturulması ve yönetilmesi önemlidir.
 
-İlk olarak, arama özelliği için bir "Ara" butonu ekledim. Kullanıcının aramak istediği kelimeyi bir TextBox kontrolüne yazması gerekiyor. TextBox'taki metin, bir değişkene kaydedildi. Daha sonra, "Find" metodu kullanılarak kelimenin bulunduğu index bulundu. Eğer kelime bulunursa, bulunan kelimenin satırını vurgulayarak belirgin hale getirdik. Ayrıca, bulunan kelimeyi de vurgulayarak belirginleştirdik. Bulunan kelime yoksa, kullanıcıya bir mesaj gösterdik.
+MongoDB dizinlerinin yönetimi, dizinlerin oluşturulması, güncellenmesi, silinmesi ve izlenmesi gibi çeşitli işlemleri içerir. Aşağıda MongoDB dizinlerinin yönetimi için kullanılabilecek bazı önemli yöntemler açıklanmaktadır:
 
-Ayrıca, kelimenin kaç kez geçtiğini sayan bir "Say" butonu ekledim. Bu butona basıldığında, yine "Find" metodu kullanılarak kelimenin kaç kez geçtiği bulundu. Bulunan kelime sayısı, kullanıcıya bir mesaj olarak gösterildi.
+Dizin oluşturma: Dizinler, bir koleksiyondaki belirli bir alan veya alan kombinasyonu için oluşturulabilir. Dizinler, createIndex() yöntemi kullanılarak oluşturulabilir. Bu yöntem, bir dizin için alan adı veya adları ve dizin türü gibi parametreleri alır.
 
-Son olarak, kullanıcının seçtiği renkle belirginleştirmek için bir "Renk Seç" butonu ekledim. Bu butona tıklandığında, renk seçme işlemini sağlayan bir "ColorDialog" açıldı. Kullanıcı tarafından seçilen renk, seçili metne uygulandı.
+Dizin güncelleme: Dizinler, var olan bir dizini güncellemek veya yeni bir dizin eklemek için güncellenebilir. Dizini güncellemek için, collMod komutu veya updateOne() yöntemi kullanılabilir.
 
-Bu çalışma sürecinde, C# programlama dili ve Windows Forms uygulama geliştirme ortamı hakkında daha fazla bilgi edindim. Ayrıca, farklı programlama teknikleri ve yöntemleri hakkında daha fazla pratik yaptım. Staj defterime, bugün yaptığım işlerin yanı sıra karşılaştığım zorluklar, çözüm önerilerim ve öğrendiğim yeni bilgileri de ekledim.
+Dizin silme: Dizinler, dropIndex() yöntemi kullanılarak silinebilir. Bu yöntem, bir koleksiyondan bir dizin siler.
+Dizin istatistikleri: MongoDB, bir dizinin kullanımı hakkında faydalı istatistikler toplar. Bu istatistiklere, collStats() yöntemi kullanılarak erişilebilir.
 
-Uygulamam bu şekilde 
+Dizinlerin yönetimi, bir koleksiyonun performansını etkileyebilir. Dizinler, sorgulama hızını artırırken, aynı zamanda bellek kullanımını da artırır. Bu nedenle, dizinlerin oluşturulması ve yönetimi dikkatli bir şekilde yapılmalıdır. Örneğin, gereksiz dizinlerin silinmesi ve nadiren kullanılan dizinlerin kapatılması, koleksiyonun performansını artırabilir.
 
  
-![image](https://user-images.githubusercontent.com/65457096/232807906-10ec121e-3ba0-4be0-8951-784705ec8f7c.png)
-
-
-Bugünkü kazanımmlarım
--	Windows Forms uygulama geliştirme ortamı hakkında daha fazla bilgi edindim
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![image](https://user-images.githubusercontent.com/65457096/233914432-e6528561-962b-4d88-b9bd-ec6c56e117a3.png)
 
 
 
