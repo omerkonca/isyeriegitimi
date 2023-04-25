@@ -1,32 +1,52 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :  Mongodb İndexleme
-Bugünkü staj konum mongodb dizinlemeyi araştırıp ne işe yaradığını nerelerde kullanıldığını öğrenmek.
-MongoDB, verileri hızlı bir şekilde sorgulamak için dizinleme kullanır. Dizinler, belirli bir alanın değerine göre belgeleri gruplandıran özel veri yapılarıdır. Bu, verilerin çok daha hızlı bir şekilde sorgulanmasına olanak tanır.
+## Yapılan Çalışmanın Konusu :  Mongodb projection ve sharding yapısı kullanımı 
 
-MongoDB, bir koleksiyonda birden fazla dizin oluşturmanıza izin verir. Dizinler, tek bir alan veya birden fazla alanın bir kombinasyonu üzerinde oluşturulabilir. Dizinleme işlemi, bir koleksiyondaki belirli bir alan veya alan kombinasyonu için bir dizin oluşturma işlemidir.
+Bugün Yapılan Görevler:
 
-Dizinleme işlemi, öncelikle bir alanın tüm değerlerini tarar ve benzersiz değerleri saklayarak bir dizin oluşturur. Daha sonra, sorgulama yapılırken, dizin belirli bir değere sahip belgeleri hızlı bir şekilde bulabilir ve getirebilir.
-Dizinler, verilerdeki sorgulama hızını artırırken, aynı zamanda bellek kullanımını artırabilir. Bu nedenle, dizinlerin dikkatli bir şekilde oluşturulması ve yönetilmesi önemlidir.
+Veritabanı sorgularını hızlandırmak için yansıtma (projection) kullanarak gereksiz alanları çıkardık.
+Veritabanı sorgularını daha da optimize etmek için indexleme kullanarak sorguların daha hızlı yanıt vermesini sağladık.
+Büyük veri kütleleriyle çalışırken performansı artırmak için sharding kullanarak verileri farklı makinelere dağıttık.
+Sık sık tekrar eden sorguları önbellekleyerek sorgu yanıt süresini azalttık.
 
-MongoDB dizinlerinin yönetimi, dizinlerin oluşturulması, güncellenmesi, silinmesi ve izlenmesi gibi çeşitli işlemleri içerir. Aşağıda MongoDB dizinlerinin yönetimi için kullanılabilecek bazı önemli yöntemler açıklanmaktadır:
+Bugün Öğrenilenler:
 
-Dizin oluşturma: Dizinler, bir koleksiyondaki belirli bir alan veya alan kombinasyonu için oluşturulabilir. Dizinler, createIndex() yöntemi kullanılarak oluşturulabilir. Bu yöntem, bir dizin için alan adı veya adları ve dizin türü gibi parametreleri alır.
+Yansıtma kullanarak veritabanı sorgularını optimize etmek ve gereksiz verileri almamak.
+Indexleme kullanarak sorgu performansını artırmak.
+Sharding kullanarak veri kütlelerini ölçeklendirmek ve performansı artırmak.
+Önbellek kullanarak sorgu performansını artırmak.
+Bugün Karşılaşılan Zorluklar ve Çözümleri:
 
-Dizin güncelleme: Dizinler, var olan bir dizini güncellemek veya yeni bir dizin eklemek için güncellenebilir. Dizini güncellemek için, collMod komutu veya updateOne() yöntemi kullanılabilir.
-
-Dizin silme: Dizinler, dropIndex() yöntemi kullanılarak silinebilir. Bu yöntem, bir koleksiyondan bir dizin siler.
-Dizin istatistikleri: MongoDB, bir dizinin kullanımı hakkında faydalı istatistikler toplar. Bu istatistiklere, collStats() yöntemi kullanılarak erişilebilir.
-
-Dizinlerin yönetimi, bir koleksiyonun performansını etkileyebilir. Dizinler, sorgulama hızını artırırken, aynı zamanda bellek kullanımını da artırır. Bu nedenle, dizinlerin oluşturulması ve yönetimi dikkatli bir şekilde yapılmalıdır. Örneğin, gereksiz dizinlerin silinmesi ve nadiren kullanılan dizinlerin kapatılması, koleksiyonun performansını artırabilir.
-
- 
+Veritabanındaki büyük veri kütleleriyle çalışırken, sorgu performansını artırmak için sharding kullanmak gerekiyordu. Bu zorluğu çözmek için MongoDB dokümantasyonunu inceleyerek ve birkaç deneme yaparak sharding işlemini gerçekleştirdik.
+Önbellekleme kullanımında doğru sonuçları almak için sorguların benzersizliğine ve verilerin ne kadar süre önce önbelleğe alındığına dikkat etmek gerekiyordu. Bu zorluğu çözmek için önbellek yönetimi hakkında dokümantasyonu inceledik ve doğru stratejileri kullanarak bu sorunu çözdük.
 
 
 
 
-![image](https://user-images.githubusercontent.com/65457096/233914432-e6528561-962b-4d88-b9bd-ec6c56e117a3.png)
+     db.DATA_COLLECTION_NAME.find({},{YOUR_FIELD_KEY:BOOLEAN})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
