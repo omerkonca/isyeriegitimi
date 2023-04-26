@@ -3,17 +3,12 @@ C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\mongodbindex.runtimeconfig.json
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\mongodbindex.dll
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\mongodbindex.pdb
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\AWSSDK.Core.dll
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\AWSSDK.SecurityToken.dll
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\DnsClient.dll
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\MongoDB.Bson.dll
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\MongoDB.Driver.dll
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\MongoDB.Driver.Core.dll
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\MongoDB.Libmongocrypt.dll
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\SharpCompress.dll
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\Snappier.dll
-C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\ZstdSharp.dll
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\runtimes\linux\native\libmongocrypt.so
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\runtimes\osx\native\libmongocrypt.dylib
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\runtimes\win\native\mongocrypt.dll
@@ -28,3 +23,6 @@ C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\obj\Debug\net6.0\mongodbindex.pdb
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\obj\Debug\net6.0\mongodbindex.genruntimeconfig.cache
 C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\obj\Debug\net6.0\ref\mongodbindex.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\runtimes\win\native\libzstd.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\runtimes\win\native\snappy32.dll
+C:\Users\omerk\Documents\GitHub\isyeriegitimi\50.gün\mongodbindex\mongodbindex\bin\Debug\net6.0\runtimes\win\native\snappy64.dll

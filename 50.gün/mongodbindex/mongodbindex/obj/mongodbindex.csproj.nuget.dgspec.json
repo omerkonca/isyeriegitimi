@@ -46,11 +46,11 @@
           "dependencies": {
             "MongoDB.Bson": {
               "target": "Package",
-              "version": "[2.19.1, )"
+              "version": "[2.12.5, )"
             },
             "MongoDB.Driver": {
               "target": "Package",
-              "version": "[2.19.1, )"
+              "version": "[2.12.5, )"
             }
           },
           "imports": [

@@ -1,8 +1,5 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using System;
-using System.Text.Json;
-using System.Threading;
 
 namespace mongodbindex
 {
@@ -27,7 +24,7 @@ namespace mongodbindex
 
             var timer = new Timer(async (state) =>
             {
-                var indexKeys = Builders<BsonDocument>.IndexKeys.Text("logMessage");
+                var indexKeys = Builders<BsonDocument>.IndexKeys.Text("_id_");
                 collection.Indexes.CreateOne(new
                                    CreateIndexModel<BsonDocument>(indexKeys));
 
