@@ -1,29 +1,58 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :  Mongodb LogBackup alma
+## Yapılan Çalışmanın Konusu :   Mongodb otomatik indexleme 
 
-Bugün mongo dbde backup almayı öğrendim. Backup almamızdaki asıl amaç hem otomatik bir şekilde index alan algoritma kuracak olmamız hemde var olan verileri kendi bilgisayarıma yedeklemekti ve yedeklediğimiz verileri bu şekilde kullanabilecektik ham verilerle uğraşmak biraz riskli olduğu için bu yolu denedik. Özetle, MongoDB'de otomatik indexleme özelliği, verilerin daha hızlı bir şekilde sorgulanmasına yardımcı olurken, aynı zamanda veritabanının disk alanını da artırabilir. Doğru şekilde yapılandırıldığında, bu özellik sorgularınızın daha hızlı çalışmasına yardımcı olabilir Bugün bu şekilde geçti yarın ise otomatik indexleyen algoritmamızı kuracağız.
+Bugün index i manuel almak yerine belirli bir saat aralığında otomatik bir şekilde yapan c# kodunu yazdım bu sayede manuel bir şekilde indexlemeyle uğraşmaya gerek kalmadı
+
+            var mongoClient = new MongoClient("mongodb://192.168.1.107:27017");
+            var database = mongoClient.GetDatabase("robutel_local_log");
+            var collection = database.GetCollection<BsonDocument>("CurrentSpeedLog");
+
+            var options = new ChangeStreamOptions
+            {
+                FullDocument =
+                           ChangeStreamFullDocumentOption.UpdateLookup
+            };
+            var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument
+                          <BsonDocument>>().Match(change => change.OperationType ==
+                          ChangeStreamOperationType.Insert);
+
+            var changeStream = collection.Watch(pipeline, options);
+
+            var timer = new Timer(async (state) =>
+            {
+                var indexKeys = Builders<BsonDocument>.IndexKeys.Text("_id_");
+                collection.Indexes.CreateOne(new
+                                   CreateIndexModel<BsonDocument>(indexKeys));
+
+                Console.WriteLine($"Logs indexed at {DateTime.Now}");
+            }, null, GetDueTime(), TimeSpan.FromDays(1)); // Her gün 11:00-12:00   
+           // arasında indeksleme işlemini gerçekleştirir.
+            changeStream.ForEachAsync(async change =>
+            {
+                var newLog = change.FullDocument;
+                Console.WriteLine($"New log indexed: {newLog}");
+            });
+            Console.ReadLine();
+        }
+
+        static TimeSpan GetDueTime()
+        {
+            var now = DateTime.Now;
+            var dueTime = new DateTime(now.Year, now.Month, now.Day, 23, 0, 0, DateTimeKind.Local);
+            if (dueTime <= now)
+            {
+                dueTime = dueTime.AddDays(1);
+            }
+            return dueTime - now;
+        } 
 
 
-Bu şekilde yazmış olduğumuz backup alma form uygulaması
-
- ![image](https://user-images.githubusercontent.com/65457096/234492012-0cc08ff3-b463-4d73-98f1-68ecaf29717d.png)
 
 
 
-Bu kısımda backup işlemi
 
- ![image](https://user-images.githubusercontent.com/65457096/234492057-8a205361-2608-4fad-9597-3d4aadf5aa50.png)
-
-
-Backup aldığımız yerde local hostumuzda bu şekilde gözüküyor robutel_local_log şeklinde
-
-![image](https://user-images.githubusercontent.com/65457096/234492117-abf8a96c-24fe-427f-a7a8-4584e006bf7f.png)
-
-
-Bugünkü kazanımlarım
--	Veri  tabanında log kayıtlarını yedeklemeyi öğrendim 
 
 
 
