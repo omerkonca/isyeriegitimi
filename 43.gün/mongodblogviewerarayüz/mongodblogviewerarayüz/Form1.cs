@@ -63,13 +63,13 @@ namespace mongodblogviewerarayüz
 
         private async Task DisplayData()
         {
-            var connectionString = "mongodb://192.168.2.125:27017";
+            var connectionString = "mongodb://192.168.1.109:27017";
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase("robutel_local_log");
-            var collection = database.GetCollection<BsonDocument>("GeneralLog");
+            var collection = database.GetCollection<BsonDocument>("Traffic");
             // var filter = Builders<BsonDocument>.Filter.Empty;
-            DateTime startDate = new DateTime(2023, 04, 11, 12, 00, 00);
-            DateTime endDate = new DateTime(2023, 04, 14, 12, 00, 00);
+            DateTime startDate = new DateTime(2022, 12, 27);
+            DateTime endDate = new DateTime(2023, 04, 27);
 
             var filter = Builders<BsonDocument>.Filter.And(
             Builders<BsonDocument>.Filter.Gte("Timestamp", startDate),
