@@ -1,52 +1,51 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :   Mongodb otomatik indexleme 
+## Yapılan Çalışmanın Konusu :   Mongodb manuel indexleme 
 
-Bugün index i manuel almak yerine belirli bir saat aralığında otomatik bir şekilde yapan c# kodunu yazdım bu sayede manuel bir şekilde indexlemeyle uğraşmaya gerek kalmadı
+Bugün mongodb de manuel şekilde nasıl index yapılır onu öğrendim ve uyguladım
 
-            var mongoClient = new MongoClient("mongodb://192.168.1.107:27017");
-            var database = mongoClient.GetDatabase("robutel_local_log");
-            var collection = database.GetCollection<BsonDocument>("CurrentSpeedLog");
 
-            var options = new ChangeStreamOptions
-            {
-                FullDocument =
-                           ChangeStreamFullDocumentOption.UpdateLookup
-            };
-            var pipeline = new EmptyPipelineDefinition<ChangeStreamDocument
-                          <BsonDocument>>().Match(change => change.OperationType ==
-                          ChangeStreamOperationType.Insert);
 
-            var changeStream = collection.Watch(pipeline, options);
+Kodum bu şekilde
 
-            var timer = new Timer(async (state) =>
-            {
-                var indexKeys = Builders<BsonDocument>.IndexKeys.Text("_id_");
-                collection.Indexes.CreateOne(new
-                                   CreateIndexModel<BsonDocument>(indexKeys));
 
-                Console.WriteLine($"Logs indexed at {DateTime.Now}");
-            }, null, GetDueTime(), TimeSpan.FromDays(1)); // Her gün 11:00-12:00   
-           // arasında indeksleme işlemini gerçekleştirir.
-            changeStream.ForEachAsync(async change =>
-            {
-                var newLog = change.FullDocument;
-                Console.WriteLine($"New log indexed: {newLog}");
-            });
-            Console.ReadLine();
-        }
+            using MongoDB.Bson;
+            using MongoDB.Driver;
 
-        static TimeSpan GetDueTime()
-        {
-            var now = DateTime.Now;
-            var dueTime = new DateTime(now.Year, now.Month, now.Day, 23, 0, 0, DateTimeKind.Local);
-            if (dueTime <= now)
-            {
-                dueTime = dueTime.AddDays(1);
-            }
-            return dueTime - now;
-        } 
+            var client = new MongoClient("mongodb://192.168.1.107:27017");
+            var database = client.GetDatabase("robutel_local_log");
+            var collection = database.GetCollection<BsonDocument>("NavigationLog");
+
+            var indexModel = new CreateIndexModel<BsonDocument>(Builders<BsonDocument>.IndexKeys.Ascending("Timestamp"));
+
+            await collection.Indexes.CreateOneAsync(indexModel);
+
+
+
+veri tabanına bağlanıp daha sonra timestamp adında index oluşturuyor
+
+
+
+ ![image](https://user-images.githubusercontent.com/65457096/234785066-b4f4b99e-59ff-4ad6-9d1c-139e9f5e578f.png)
+
+
+
+
+Bugünkü kazanımlarım
+-	Manuel indexleme yapmayı öğrendim
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
