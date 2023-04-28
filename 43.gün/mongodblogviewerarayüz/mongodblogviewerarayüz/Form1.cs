@@ -17,7 +17,9 @@ namespace mongodblogviewerarayüz
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            await DisplayData();
+            dateTimePicker1.Value = new DateTime(2022, 1, 1);
+            dateTimePicker2.Value = DateTime.Today;
+       
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -42,7 +44,7 @@ namespace mongodblogviewerarayüz
 
         private async void button3_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(textBox1.Text, out int pageNumber))
+            if (int.TryParse(numericUpDown1.Text, out int pageNumber))
             {
                 if (pageNumber > 0 && pageNumber <= _totalPages)
                 {
@@ -63,39 +65,24 @@ namespace mongodblogviewerarayüz
 
         private async Task DisplayData()
         {
+            DateTime startDate = dateTimePicker1.Value.Date;
+            DateTime endDate = dateTimePicker2.Value.Date.AddDays(1);
+
             var connectionString = "mongodb://192.168.1.109:27017";
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase("robutel_local_log");
             var collection = database.GetCollection<BsonDocument>("Traffic");
-            // var filter = Builders<BsonDocument>.Filter.Empty;
-            DateTime startDate = new DateTime(2022, 12, 27);
-            DateTime endDate = new DateTime(2023, 04, 27);
 
             var filter = Builders<BsonDocument>.Filter.And(
-            Builders<BsonDocument>.Filter.Gte("Timestamp", startDate),
-            Builders<BsonDocument>.Filter.Lte("Timestamp", endDate));
-
-
+                Builders<BsonDocument>.Filter.Gte("Timestamp", startDate),
+                Builders<BsonDocument>.Filter.Lte("Timestamp", endDate));
 
             _totalDocuments = await collection.CountDocumentsAsync(filter);
             _totalPages = (int)Math.Ceiling((double)_totalDocuments / _pageSize);
-
-
-            // var documents = await collection.Find(filter).Skip((_pageNumber - 1) * _pageSize).Limit(_pageSize).ToListAsync();
 
             var findOptions = new FindOptions<BsonDocument>();
-
-
-
-
-            _totalDocuments = await collection.CountDocumentsAsync(filter);
-            _totalPages = (int)Math.Ceiling((double)_totalDocuments / _pageSize);
             findOptions.Limit = _pageSize;
             findOptions.Skip = (_pageNumber - 1) * _pageSize;
-
-            // var documents = await collection.Find(filter).Skip((_pageNumber - 1) * _pageSize).Limit(_pageSize).ToListAsync();
-
-
 
             var result = await collection.FindAsync(filter, findOptions);
             var documents = result.ToList();
@@ -119,10 +106,32 @@ namespace mongodblogviewerarayüz
             label1.Text = $"Sayfa {_pageNumber} / {_totalPages}";
             label2.Text = $"Toplam belge sayısı: {_totalDocuments}";
             label3.Text = $"Sayfa başına belge sayısı: {_pageSize}";
-            textBox1.Text = _pageNumber.ToString();
+            numericUpDown1.Text = _pageNumber.ToString();
 
             button1.Enabled = (_pageNumber > 1);
             button2.Enabled = (_pageNumber < _totalPages);
+        }
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimePicker1.Value > dateTimePicker2.Value)
+            {
+                dateTimePicker1.Value = dateTimePicker2.Value.AddDays(-1);
+            }
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimePicker2.Value < dateTimePicker1.Value)
+            {
+                dateTimePicker2.Value = dateTimePicker1.Value.AddDays(1);
+            }
+        }
+
+
+
+        private async void button4_Click_1(object sender, EventArgs e)
+        {
+            await DisplayData();
         }
     }
 }
