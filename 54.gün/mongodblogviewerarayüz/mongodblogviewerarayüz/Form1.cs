@@ -6,7 +6,7 @@ namespace mongodblogviewerarayüz
     public partial class Form1 : Form
     {
         private int _pageNumber = 1;
-        private int _pageSize = 500;
+        private int _pageSize = 50;
         private int _totalPages = 1;
         private long _totalDocuments = 0;
         public Form1()
