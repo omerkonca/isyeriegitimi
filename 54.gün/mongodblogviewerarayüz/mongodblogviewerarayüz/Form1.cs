@@ -1,13 +1,12 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Text.Json;
 
 namespace mongodblogviewerarayüz
 {
     public partial class Form1 : Form
     {
         private int _pageNumber = 1;
-        private int _pageSize = 50;
+        private int _pageSize = 500;
         private int _totalPages = 1;
         private long _totalDocuments = 0;
         public Form1()
@@ -88,10 +87,13 @@ namespace mongodblogviewerarayüz
             var documents = result.ToList();
 
             richTextBox1.Clear();
+            int sayac = 1;
 
             foreach (var document in documents)
             {
+                richTextBox1.AppendText((sayac + (_pageSize * (_pageNumber - 1)) + ". data -> "));
                 richTextBox1.AppendText("Belge ID: " + document["_id"] + "\n");
+                sayac++;
 
                 var fields = document.AsBsonDocument.Elements;
 

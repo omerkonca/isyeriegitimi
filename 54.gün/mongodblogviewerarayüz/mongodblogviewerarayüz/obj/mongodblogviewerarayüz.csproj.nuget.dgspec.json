@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HASAN\\Desktop\\Yeni klasör\\is yeri\\yeni\\mongodblogviewerarayüz\\mongodblogviewerarayüz\\mongodblogviewerarayüz.csproj": {}
+    "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\54.gün\\mongodblogviewerarayüz\\mongodblogviewerarayüz\\mongodblogviewerarayüz.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HASAN\\Desktop\\Yeni klasör\\is yeri\\yeni\\mongodblogviewerarayüz\\mongodblogviewerarayüz\\mongodblogviewerarayüz.csproj": {
+    "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\54.gün\\mongodblogviewerarayüz\\mongodblogviewerarayüz\\mongodblogviewerarayüz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HASAN\\Desktop\\Yeni klasör\\is yeri\\yeni\\mongodblogviewerarayüz\\mongodblogviewerarayüz\\mongodblogviewerarayüz.csproj",
+        "projectUniqueName": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\54.gün\\mongodblogviewerarayüz\\mongodblogviewerarayüz\\mongodblogviewerarayüz.csproj",
         "projectName": "mongodblogviewerarayüz",
-        "projectPath": "C:\\Users\\HASAN\\Desktop\\Yeni klasör\\is yeri\\yeni\\mongodblogviewerarayüz\\mongodblogviewerarayüz\\mongodblogviewerarayüz.csproj",
-        "packagesPath": "C:\\Users\\HASAN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HASAN\\Desktop\\Yeni klasör\\is yeri\\yeni\\mongodblogviewerarayüz\\mongodblogviewerarayüz\\obj\\",
+        "projectPath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\54.gün\\mongodblogviewerarayüz\\mongodblogviewerarayüz\\mongodblogviewerarayüz.csproj",
+        "packagesPath": "C:\\Users\\omerk\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\omerk\\Documents\\GitHub\\isyeriegitimi\\54.gün\\mongodblogviewerarayüz\\mongodblogviewerarayüz\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\HASAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\omerk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
