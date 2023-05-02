@@ -61,7 +61,7 @@ namespace mongodblogviewerarayüz
             }
         }
 
-         
+           
         private async Task DisplayData()
         {
             DateTime startDate = dateTimePicker1.Value.Date;
