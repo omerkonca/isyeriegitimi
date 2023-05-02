@@ -14,7 +14,7 @@ namespace mongodblogviewerarayüz
             InitializeComponent();
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             dateTimePicker1.Value = new DateTime(2022, 1, 1);
             dateTimePicker2.Value = DateTime.Today;
