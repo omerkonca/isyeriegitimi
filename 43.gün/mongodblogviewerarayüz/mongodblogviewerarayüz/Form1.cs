@@ -7,7 +7,7 @@ namespace mongodblogviewerarayüz
     public partial class Form1 : Form
     {
         private int _pageNumber = 1;
-        private int _pageSize = 50;
+        private int _pageSize = 1000;
         private int _totalPages = 1;
         private long _totalDocuments = 0;
         public Form1()
@@ -19,7 +19,7 @@ namespace mongodblogviewerarayüz
         {
             dateTimePicker1.Value = new DateTime(2022, 1, 1);
             dateTimePicker2.Value = DateTime.Today;
-       
+
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -68,10 +68,10 @@ namespace mongodblogviewerarayüz
             DateTime startDate = dateTimePicker1.Value.Date;
             DateTime endDate = dateTimePicker2.Value.Date.AddDays(1);
 
-            var connectionString = "mongodb://192.168.1.109:27017";
+            var connectionString = "mongodb://192.168.1.105:27017";
             var client = new MongoClient(connectionString);
             var database = client.GetDatabase("robutel_local_log");
-            var collection = database.GetCollection<BsonDocument>("Traffic");
+            var collection = database.GetCollection<BsonDocument>("GeneralLog");
 
             var filter = Builders<BsonDocument>.Filter.And(
                 Builders<BsonDocument>.Filter.Gte("Timestamp", startDate),
@@ -132,6 +132,15 @@ namespace mongodblogviewerarayüz
         private async void button4_Click_1(object sender, EventArgs e)
         {
             await DisplayData();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+            label1.Text = "Sayfa";
+            label2.Text = "Toplam belge sayısı:";
+            label3.Text = "Sayfa başına belge sayısı:";
+            numericUpDown1.Value = 0;
         }
     }
 }

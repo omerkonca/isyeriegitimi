@@ -39,6 +39,7 @@
             dateTimePicker2 = new DateTimePicker();
             numericUpDown1 = new NumericUpDown();
             button4 = new Button();
+            button5 = new Button();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             SuspendLayout();
             // 
@@ -60,7 +61,7 @@
             button1.Name = "button1";
             button1.Size = new Size(94, 29);
             button1.TabIndex = 1;
-            button1.Text = "İleri Sayfa";
+            button1.Text = "Geri Sayfa";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -71,7 +72,7 @@
             button2.Name = "button2";
             button2.Size = new Size(94, 29);
             button2.TabIndex = 2;
-            button2.Text = "Geri Sayfa";
+            button2.Text = "İleri Sayfa";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
@@ -140,6 +141,7 @@
             // 
             numericUpDown1.Anchor = AnchorStyles.None;
             numericUpDown1.Location = new Point(931, 56);
+            numericUpDown1.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(150, 27);
             numericUpDown1.TabIndex = 11;
@@ -155,11 +157,23 @@
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click_1;
             // 
+            // button5
+            // 
+            button5.Anchor = AnchorStyles.None;
+            button5.Location = new Point(70, 366);
+            button5.Name = "button5";
+            button5.Size = new Size(94, 29);
+            button5.TabIndex = 13;
+            button5.Text = "Temizle";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1249, 599);
+            Controls.Add(button5);
             Controls.Add(button4);
             Controls.Add(numericUpDown1);
             Controls.Add(dateTimePicker2);
@@ -192,5 +206,6 @@
         private DateTimePicker dateTimePicker2;
         private NumericUpDown numericUpDown1;
         private Button button4;
+        private Button button5;
     }
 }
