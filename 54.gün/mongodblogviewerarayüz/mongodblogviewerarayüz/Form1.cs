@@ -19,7 +19,7 @@ namespace mongodblogviewerarayüz
             dateTimePicker1.Value = new DateTime(2022, 1, 1);
             dateTimePicker2.Value = DateTime.Today;
 
-        }
+        } 
 
         private async void button1_Click(object sender, EventArgs e)
         {
