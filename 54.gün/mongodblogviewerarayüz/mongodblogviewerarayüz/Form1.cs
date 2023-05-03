@@ -13,7 +13,7 @@ namespace mongodblogviewerarayüz
         {
             InitializeComponent();
         }
-
+         
         private void Form1_Load(object sender, EventArgs e)
         {
             dateTimePicker1.Value = new DateTime(2022, 1, 1);
