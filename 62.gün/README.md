@@ -1,25 +1,27 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :   DisplayData Fonksiyonu oluşturma
-Bugün stajda MongoDB veritabanından veri çekme ve filtreleme işlemleri üzerine çalıştım. Kodları inceledikten sonra, DisplayData() adlı bir asenkron metot üzerinde çalıştım. Bu metot, seçilen log kategorisine göre filtreleme yaparak MongoDB'den belgeleri alıyor ve bir metin kutusuna yazdırıyordu.
+## Yapılan Çalışmanın Konusu :    Kodları logviewer’a entegre işlemi
 
-Metotun içindeki kodları okuduktan sonra, filtrelemeler için kullanılan parametrelerin neler olduğunu anladım. Bu parametreler arasında IP adresi, veritabanı adı, başlangıç tarihi, bitiş tarihi, sınırlama değeri, örneklem aralığı ve sıralama seçeneği yer alıyordu.
+Bugün benim mongodb filtreleme için geliştirdiğim herbir filtreyi sayfalara ayıran  kodu logviewera entegre ettim ve orda çalıştırdım bu sayede logviewarda daha hızlı bir şekilde filtreleme yaptım bu sayede hem hız açısından hemde bellek kullanımı açısından avantaj sağladı
 
-Metodun içinde ayrıca, _pageSize, _pageNumber ve _totalDocuments gibi değişkenler de vardı. Bunlar, sayfalama işlemlerinde kullanılıyordu.
 
-Çalıştığım kodlarda, hataları belirlemek ve kullanıcıyı uyarmak için MessageBox kullanımını da fark ettim. Ayrıca, bekleme işlemlerini yönetmek için WaitingBox adlı bir nesne de kullanılmıştı.
-
-Bugünkü staj deneyimim boyunca, MongoDB'den veri çekme ve filtreleme işlemleri üzerine daha fazla bilgi edindim ve bu işlemleri gerçekleştirmek için kullanılan C# kodları hakkında daha fazla bilgi sahibi oldum.
-
-![image](https://user-images.githubusercontent.com/65457096/236386120-1a253f2f-06e7-49b1-a979-f89f718b73ca.png)
-
+![image](https://user-images.githubusercontent.com/65457096/236441524-bb9ad772-de2c-4005-8b5b-1a7df0873e98.png)
 
  
+
+Burdaki kod yapısını logviewera aktardım
+
+ 
+![image](https://user-images.githubusercontent.com/65457096/236441539-01f3bc91-8fb2-4234-97f8-414369145f6b.png)
+
+
+
+Bu şekilde filtreleme işlemini yapıyoruz gelen veri adedini, sayfa sayısını ve sayfada gösterilecek veri adedinide ekrana yazdırıyorum bu sayede daha fonksiyonel oldu.
+
 
 Bugünkü kazanımlarım
--	MongoDB kullanarak veri çekme işlemi yapmayı öğrendim.
-
+-	Algoritma mantığını öğrendim ve uyguladım
 
 
 
@@ -46,7 +48,7 @@ Bugünkü kazanımlarım
 
 
 
-Tarih : 29/05/ 2023
+Tarih : 30/05/ 2023
 
  
 
