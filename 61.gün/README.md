@@ -1,56 +1,32 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :    Filtrelemeyle İlgili Düzenleme 
-Bugün, geçen gün yaptığım kodu gösterdim. Ancak, yaptığım şekilde istenilen tarih aralığındaki tüm verileri çektiğini ve büyük veri setleri için bekleme süresini arttıracağını öğrendim. Bu nedenle, tarihe göre sürekli olarak filtreleme yapacak şekilde değiştirmem istendi.
+## Yapılan Çalışmanın Konusu :   DisplayData Fonksiyonu oluşturma
+Bugün stajda MongoDB veritabanından veri çekme ve filtreleme işlemleri üzerine çalıştım. Kodları inceledikten sonra, DisplayData() adlı bir asenkron metot üzerinde çalıştım. Bu metot, seçilen log kategorisine göre filtreleme yaparak MongoDB'den belgeleri alıyor ve bir metin kutusuna yazdırıyordu.
 
-Konu üzerinde araştırma yaparak, ilk veri sayfasındaki son verinin tarih değişkenine ulaşabildiğimi fark ettim. Ancak, sonraki süreçte yeni başlangıç ve bitiş tarihlerini verirken sorun yaşıyorum. Özellikle ileri sayfalarda ileri gitme kısmını mantıken hallettim gibi görünüyor, ancak geri gitme kısmını henüz çözemedim.
+Metotun içindeki kodları okuduktan sonra, filtrelemeler için kullanılan parametrelerin neler olduğunu anladım. Bu parametreler arasında IP adresi, veritabanı adı, başlangıç tarihi, bitiş tarihi, sınırlama değeri, örneklem aralığı ve sıralama seçeneği yer alıyordu.
+
+Metodun içinde ayrıca, _pageSize, _pageNumber ve _totalDocuments gibi değişkenler de vardı. Bunlar, sayfalama işlemlerinde kullanılıyordu.
+
+Çalıştığım kodlarda, hataları belirlemek ve kullanıcıyı uyarmak için MessageBox kullanımını da fark ettim. Ayrıca, bekleme işlemlerini yönetmek için WaitingBox adlı bir nesne de kullanılmıştı.
+
+Bugünkü staj deneyimim boyunca, MongoDB'den veri çekme ve filtreleme işlemleri üzerine daha fazla bilgi edindim ve bu işlemleri gerçekleştirmek için kullanılan C# kodları hakkında daha fazla bilgi sahibi oldum.
+
+![image](https://user-images.githubusercontent.com/65457096/236386120-1a253f2f-06e7-49b1-a979-f89f718b73ca.png)
 
 
-    while (true){   //sonsuz döngü ile klavye üzerinden sürekli sorgu yapabiliyorum.
-
-      if (Console.ReadKey(true).Key == ConsoleKey.F)
-        {
-         filter = Builders<BsonDocument>.Filter.And(
-         Builders<BsonDocument>.Filter.Gte("Timestamp", midDate),
-         Builders<BsonDocument>.Filter.Lte("Timestamp", endDate));
-         c = (int)await collection.CountAsync(filter);
-                             
-        Task.Run(async () =>
-          {
-         var findOptions = new FindOptions<BsonDocument>();
-         findOptions.Limit = limit;
-         Result = await collection.FindAsync(filter);
-         var a=Result.ToList();
-         var d = a[limit - 1].GetValue("Timestamp");
-         midDate = ((DateTime)d);
-         Console.WriteLine(a);}).Wait();
-         sayac++;
-
-      }
-      else if (Console.ReadKey(true).Key == ConsoleKey.B){
-          filter = Builders<BsonDocument>.Filter.And(
-          Builders<BsonDocument>.Filter.Gte("Timestamp", startDate),
-          Builders<BsonDocument>.Filter.Lte("Timestamp", midDate));
-          c = (int)await collection.CountAsync(filter);
-          Task.Run(async () =>
-               {
-                  //  var findOptions = new FindOptions<BsonDocument>();
-                  //  findOptions.Limit = limit;
-                  //  Result = await collection.FindAsync(filter);
-                  //  var a = Result.ToList();
-                  //  midDate = ((DateTime)a[0].GetValue("Timestamp"));
-                }).Wait();
-                sayac--;
-      }
-      else // burda f ve b den başka bir şeye basarsa programdan çıkıyor .
-      {
-      break;
-      }
-
+ 
 
 Bugünkü kazanımlarım
--	Findoptions yapısını öğrendim
+-	MongoDB kullanarak veri çekme işlemi yapmayı öğrendim.
+
+
+
+
+
+
+
+
 
 
 
@@ -70,7 +46,7 @@ Bugünkü kazanımlarım
 
 
 
-Tarih : 26/05/ 2023
+Tarih : 29/05/ 2023
 
  
 
