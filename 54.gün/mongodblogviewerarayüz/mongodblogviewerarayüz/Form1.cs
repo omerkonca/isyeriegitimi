@@ -88,7 +88,7 @@ namespace mongodblogviewerarayüz
 
             richTextBox1.Clear();
             int sayac = 1;
-
+             
             foreach (var document in documents)
             {
                 richTextBox1.AppendText((sayac + (_pageSize * (_pageNumber - 1)) + ". data -> "));
