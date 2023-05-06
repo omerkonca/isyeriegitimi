@@ -1,5 +1,5 @@
 # Eğitim İşyerii
- 
+  
 ## Bu repoda işyeri eğitiminde unutulmayanlar kurduğum yazılımları paylaşacağım
 
 ## Firmanın adı ROBUTEL
