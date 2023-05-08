@@ -1,4 +1,4 @@
-# Eğitim İşyerii
+# İŞYERİ EĞİTİMİ
   
 ## Bu repoda işyeri eğitiminde unutulmayanlar kurduğum yazılımları paylaşacağım
  
