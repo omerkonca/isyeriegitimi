@@ -51,7 +51,7 @@ AGV'ler, operasyonel verimliliği artırmak, iş güvenliğini iyileştirmek ve 
 Bu proje [MIT Lisansı](LICENSE.txt) altında lisanslanmıştır. Detaylı bilgi için lisans dosyasını inceleyebilirsiniz.
 
 
-
+-------------------------------------------------------------
                                                 ANA SAYFA
 
 ![image](https://user-images.githubusercontent.com/65457096/225313555-3801f0de-7fd9-41a5-906d-9d28fcfe7f28.png)
