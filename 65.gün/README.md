@@ -1,69 +1,82 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :    Kodları clean koda çevirme 2
+## Yapılan Çalışmanın Konusu :    Logviewer backend revize işlemi
+Bugünkü stajımda logviewerın optimizasyonunu yaptım eksikleri ve fazlalıkları tespit ettim tespit ettim ve düzenleme işlemi yaptım. Kodda bazı yerler gereksizdi ve sürekli döngüde dönüyor belleği yoruyordu onları da düzelttim ve günüm bu şekilde geçti.
+
+butona bastığımız kısım burda çağırdığımız yerler aynı şekilde displaydede çağırıyoz gerekisz kısımları temizledim
+
+ 
+![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/9886d831-7510-4c3e-a3e9-2b473cf099e8)
 
 
-Bugünkü stajımdada kodlarımı clean koda çevirmeye devam ettim
+Buda viewlog kısmı
 
-![image](https://user-images.githubusercontent.com/65457096/237008888-2c4c265b-53e7-4f22-85b2-f1845cfca327.png)
+
+ ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/c12671a6-508a-47fb-a40b-34cd3974c97d)
+ 
+ 
+Burda display datada fazlalıklar sürekli döngüde çağırılıyor ve gereksiz bir şekilde belleği yoruyordu 
+ 
+![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/1eee1611-3ce7-493d-ab3f-40134423ed76)
+
+
+Bu kısımda sildim belleği yoran kısmı
+
+ ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/9404f8f5-494c-4179-b639-95d805c0c14b)
+
+
+Bugünkü kazanımlarım
+-	Kodda debug ve revize işlemlerini öğrendim uyguladım
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  
 
 
-Bu şekilde yorum satırları ekledim
-
-![image](https://user-images.githubusercontent.com/65457096/237008903-f5b7c3d2-a0a1-440d-a50d-df940224388e.png)
-
-
- 
-
-
-
-
-
-Performansını arttırdım
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-Tarih : 01/06/ 2023
+Tarih : 02/06/ 2023
 
  
 
