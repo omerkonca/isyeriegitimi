@@ -104,7 +104,7 @@ namespace mongodblogviewerarayüz
 
                 richTextBox1.AppendText("\n");
             }
-
+             
             label1.Text = $"Sayfa {_pageNumber} / {_totalPages}";
             label2.Text = $"Toplam belge sayısı: {_totalDocuments}";
             label3.Text = $"Sayfa başına belge sayısı: {_pageSize}";
