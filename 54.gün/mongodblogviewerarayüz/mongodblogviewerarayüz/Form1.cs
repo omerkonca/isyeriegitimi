@@ -87,7 +87,7 @@ namespace mongodblogviewerarayüz
             var documents = result.ToList();
 
             richTextBox1.Clear();
-            int sayac = 1;
+            int sayac = 1; 
              
             foreach (var document in documents)
             {
