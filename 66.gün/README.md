@@ -1,33 +1,88 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :    Logviewer backend revize işlemi
-Bugünkü stajımda logviewerın optimizasyonunu yaptım eksikleri ve fazlalıkları tespit ettim tespit ettim ve düzenleme işlemi yaptım. Kodda bazı yerler gereksizdi ve sürekli döngüde dönüyor belleği yoruyordu onları da düzelttim ve günüm bu şekilde geçti.
+## Yapılan Çalışmanın Konusu :  Logviewer backend kısmındaki sorunların araştırılması
 
-butona bastığımız kısım burda çağırdığımız yerler aynı şekilde displaydede çağırıyoz gerekisz kısımları temizledim
+Bugün staj günümde logviewerda daki sayfalar arası geçiş yaptığımızda sürekli aynı veriler geliyordu çözümünü araştırarak geçti günüm ve sorunu çözdüm çözümü ise şu şekilde yapacağım bitane fonksiyon oluşturup ileri geri butonlarında o fonksiyonun sürekli dönmesini sağlayacağım
+
+Bu şekilde 1.sayfadayım veriler
+
+  ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/bd3be48d-fa9f-4983-af4f-54688273782f)
+
+
+
+
+
+
+Bu şekilde 2.sayfaya geçiyoum veriler yine aynı
+
+ ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/fd17a21d-97b0-43e6-8545-f6eb79429da4)
+
+
+
+Kodumda bu şekilde
+
+         logArea.Clear();
+     
+
+            foreach (var document in logDocuments)
+            {
+
+                var fields = document.AsBsonDocument.Elements;
+
+                foreach (var field in fields)
+                {
+                    logArea.AppendText(field.Name + ": " + field.Value + "\n");
+                }
+
+                logArea.AppendText("\n");
+            }
+
+            lbl_sayfa.Text = $"Sayfa {_pageNumber} / {_totalPages}";
+            lbl_top_veri.Text = $"Toplam veri: {_totalDocuments}";
+            lbl_sayfa_veri_adedi.Text = $"Sayfa veri adedi: {_pageSize}";
+            numeric_git.Text = _pageNumber.ToString();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  
-![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/9886d831-7510-4c3e-a3e9-2b473cf099e8)
-
-
-Buda viewlog kısmı
-
-
- ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/c12671a6-508a-47fb-a40b-34cd3974c97d)
- 
- 
-Burda display datada fazlalıklar sürekli döngüde çağırılıyor ve gereksiz bir şekilde belleği yoruyordu 
- 
-![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/1eee1611-3ce7-493d-ab3f-40134423ed76)
-
-
-Bu kısımda sildim belleği yoran kısmı
-
- ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/9404f8f5-494c-4179-b639-95d805c0c14b)
-
-
-Bugünkü kazanımlarım
--	Kodda debug ve revize işlemlerini öğrendim uyguladım
 
 
 
@@ -36,47 +91,7 @@ Bugünkü kazanımlarım
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-Tarih : 02/06/ 2023
+Tarih : 05/06/ 2023
 
  
 

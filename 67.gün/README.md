@@ -1,33 +1,40 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :    Logviewer backend revize işlemi
-Bugünkü stajımda logviewerın optimizasyonunu yaptım eksikleri ve fazlalıkları tespit ettim tespit ettim ve düzenleme işlemi yaptım. Kodda bazı yerler gereksizdi ve sürekli döngüde dönüyor belleği yoruyordu onları da düzelttim ve günüm bu şekilde geçti.
+## Yapılan Çalışmanın Konusu :    Logviewer backend kısmındaki sorunların çözümü 
 
-butona bastığımız kısım burda çağırdığımız yerler aynı şekilde displaydede çağırıyoz gerekisz kısımları temizledim
+Bugün dün araştırmış olduğum sorunları çözdüm. Çözümü ise şu şekilde yaptım ayrı bir fonksiyon oluşturdum bütün yaptığım işlemleri oraya attım ve orada çağırma işlemi yaptım ve ileri geri bastığım tuşlarıda oraya ekledim ve bu şekilde sorunları çözdüm
+
+
+Bu 1. Sayfa 
+
+![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/7eb25b37-9aaa-4e57-88e1-d49c0e35af42)
 
  
-![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/9886d831-7510-4c3e-a3e9-2b473cf099e8)
 
+Buda 2. Sayfa 
 
-Buda viewlog kısmı
+![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/2ec08ebc-8c68-43e2-b8c3-03d69f9c0a6d)
 
-
- ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/c12671a6-508a-47fb-a40b-34cd3974c97d)
  
- 
-Burda display datada fazlalıklar sürekli döngüde çağırılıyor ve gereksiz bir şekilde belleği yoruyordu 
- 
-![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/1eee1611-3ce7-493d-ab3f-40134423ed76)
 
 
-Bu kısımda sildim belleği yoran kısmı
+Bu şekilde her sayfada yeni veriler geliyor
 
- ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/9404f8f5-494c-4179-b639-95d805c0c14b)
+
+ ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/bc972a75-8abb-4643-9619-e81f346abf78)
+
+
+
+Oluşturdğum fonsiyonda bu şekilde
 
 
 Bugünkü kazanımlarım
--	Kodda debug ve revize işlemlerini öğrendim uyguladım
+-	Fonksiyon yapısnı daha iyi anladım
+
+
+
+
 
 
 
@@ -76,7 +83,7 @@ Bugünkü kazanımlarım
 
 
 
-Tarih : 02/06/ 2023
+Tarih : 06/06/ 2023
 
  
 
