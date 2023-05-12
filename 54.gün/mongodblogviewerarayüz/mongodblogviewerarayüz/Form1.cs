@@ -96,7 +96,7 @@ namespace mongodblogviewerarayüz
                 sayac++;
 
                 var fields = document.AsBsonDocument.Elements;
-
+                 
                 foreach (var field in fields)
                 {
                     richTextBox1.AppendText(field.Name + ": " + field.Value + "\n");
