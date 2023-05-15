@@ -99,7 +99,7 @@ Bugünkü kazanımlarım
 
 
 
-Tarih : 06/06/ 2023
+Tarih : 07/06/ 2023
 
  
 
