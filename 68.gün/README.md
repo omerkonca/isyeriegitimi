@@ -7,7 +7,7 @@ Bugünkü staj konum logviewrdaki hataların çözümüydü. Bugünkü hatamız 
 
 Bu kodu ekleyerek sorunun önüne geçtim
 
-   _totalDocuments = await collection.CountDocumentsAsync(filter);
+    _totalDocuments = await collection.CountDocumentsAsync(filter);
                 _totalPages = (int)Math.Ceiling((double)_totalDocuments / _pageSize);
 
                 // lastpagedatacount => son sayfadaki veri adedi
