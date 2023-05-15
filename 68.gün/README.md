@@ -1,36 +1,52 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :    Logviewer backend kısmındaki sorunların çözümü 
+## Yapılan Çalışmanın Konusu :    Logviewer limit işlemindeki hataların çözümü 
 
-Bugün dün araştırmış olduğum sorunları çözdüm. Çözümü ise şu şekilde yaptım ayrı bir fonksiyon oluşturdum bütün yaptığım işlemleri oraya attım ve orada çağırma işlemi yaptım ve ileri geri bastığım tuşlarıda oraya ekledim ve bu şekilde sorunları çözdüm
+Bugünkü staj konum logviewrdaki hataların çözümüydü. Bugünkü hatamız limit kısmının çalışmamasıydı limit değerini aktif hale getirip gelen değerleri de ona göre düzenledim.
+
+Bu kodu ekleyerek sorunun önüne geçtim
+
+    _totalDocuments = await collection.CountDocumentsAsync(filter);
+                _totalPages = (int)Math.Ceiling((double)_totalDocuments / _pageSize);
+
+                // lastpagedatacount => son sayfadaki veri adedi
+                if (limit > 0)
+                {
+                    var lastpagedatacount = limit % _pageSize;
+                    if (lastpagedatacount != 0)
+                    {
+                        _totalPages = (limit / _pageSize) + 1;
+                    }
+                    _totalDocuments = limit;
+
+                    if (_pageNumber == _totalPages)
+                    {
+                        _pageSize = lastpagedatacount;
+                    }
+                }
+
+Burda limit değerini giriyoruz
+
+ ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/617c0704-108a-4c26-8cc7-dc48bfac0f8c)
 
 
-Bu 1. Sayfa 
 
-![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/7eb25b37-9aaa-4e57-88e1-d49c0e35af42)
-
+Burda da girilen limit değerine göre bize sayfalama yapıyor
  
-
-Buda 2. Sayfa 
-
-![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/2ec08ebc-8c68-43e2-b8c3-03d69f9c0a6d)
-
- 
+![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/25058c9a-cf12-45b0-9244-881967cf6724)
 
 
-Bu şekilde her sayfada yeni veriler geliyor
-
-
- ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/bc972a75-8abb-4643-9619-e81f346abf78)
-
-
-
-Oluşturdğum fonsiyonda bu şekilde
 
 
 Bugünkü kazanımlarım
--	Fonksiyon yapısnı daha iyi anladım
+-	Algoritmik düşünmemi geliştridim
+
+
+
+
+
+
 
 
 
@@ -83,7 +99,7 @@ Bugünkü kazanımlarım
 
 
 
-Tarih : 06/06/ 2023
+Tarih : 07/06/ 2023
 
  
 
