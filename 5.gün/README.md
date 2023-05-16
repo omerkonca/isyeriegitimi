@@ -1,37 +1,21 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :    Logviewer backend kısmındaki sorunların çözümü 
+## Yapılan Çalışmanın Konusu :     İmgui ve İmport kütüphanelerini örneklerle pekiştirme 
+Öğrenmiş olduğum imgui ve import kütüphaneleriyle grafik çizdim ve bu sayede pekişmiş oldu
 
-Bugün dün araştırmış olduğum sorunları çözdüm. Çözümü ise şu şekilde yaptım ayrı bir fonksiyon oluşturdum bütün yaptığım işlemleri oraya attım ve orada çağırma işlemi yaptım ve ileri geri bastığım tuşlarıda oraya ekledim ve bu şekilde sorunları çözdüm
-
-
-Bu 1. Sayfa 
-
-![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/7eb25b37-9aaa-4e57-88e1-d49c0e35af42)
-
- 
-
-Buda 2. Sayfa 
-
-![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/2ec08ebc-8c68-43e2-b8c3-03d69f9c0a6d)
-
- 
+ ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/b09d770a-7ac7-4705-88eb-2a373c8a4af6)
 
 
-Bu şekilde her sayfada yeni veriler geliyor
+![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/727678a5-53bc-4c11-850c-2a6881c96804)
 
-
- ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/bc972a75-8abb-4643-9619-e81f346abf78)
 
 
 
-Oluşturdğum fonsiyonda bu şekilde
-
+ 
 
 Bugünkü kazanımlarım
--	Fonksiyon yapısnı daha iyi anladım
-
+-	imgui ve import kütüphanelerini öğrenip grafik çizfim
 
 
 
@@ -83,7 +67,7 @@ Bugünkü kazanımlarım
 
 
 
-Tarih : 06/06/ 2023
+Tarih : 10 /03/ 2023
 
  
 
