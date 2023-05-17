@@ -1,46 +1,95 @@
 # İşyeri Eğitimi
 
 
-## Yapılan Çalışmanın Konusu :    Logviewer limit işlemindeki hataların çözümü 
+## Yapılan Çalışmanın Konusu :   Evrak işleri ve Genel Değerlendirme
 
-Bugünkü staj konum logviewrdaki hataların çözümüydü. Bugünkü hatamız limit kısmının çalışmamasıydı limit değerini aktif hale getirip gelen değerleri de ona göre düzenledim.
+Stajım boyunca yaptığım çalışmalarla ilgili genel bir değerlendirme yapmak isterim. Staj boyunca öğrendiğim ve uyguladığım konular oldukça geniş kapsamlıydı. Başlangıçta, ImGui ve ImPlot kütüphaneleri hakkında araştırmalar yaptım ve bu kütüphaneleri kullanarak örnekler üzerinde çalıştım. Ayrıca, OpenGL kütüphanesiyle ilgili temel kavramları öğrendim ve öğrendiklerimi uygulama fırsatı buldum.
 
-Bu kodu ekleyerek sorunun önüne geçtim
+Staj boyunca öğrendiğim bir diğer konu da MongoDB veritabanı entegrasyonuydu. MongoDB veritabanını C++ programlama diliyle entegre etme konusunda çalışmalar yaptım ve bu veritabanı üzerinde filtreleme, indeksleme ve yedekleme işlemlerini öğrendim.
 
-    _totalDocuments = await collection.CountDocumentsAsync(filter);
-                _totalPages = (int)Math.Ceiling((double)_totalDocuments / _pageSize);
+Ayrıca, HTTP istekleri ve RESTful API kullanarak veri aktarımı konuları hakkında araştırmalar yaptım. Windows WiFi sinyal kalitesi ölçme ve IP adresine ping atarak veri aktarım hızını hesaplama konuları da stajım boyunca öğrendiğim konular arasında yer alıyor.
 
-                // lastpagedatacount => son sayfadaki veri adedi
-                if (limit > 0)
-                {
-                    var lastpagedatacount = limit % _pageSize;
-                    if (lastpagedatacount != 0)
-                    {
-                        _totalPages = (limit / _pageSize) + 1;
-                    }
-                    _totalDocuments = limit;
+Gelen verileri parse etme, grafikleştirme, arayüz tasarımı, sayfalama ve loglama konularında da çalışmalar yaptım. Position kısmında mouse ile çizgi çizerek uzunluk ölçme, daire çizimi, filtreleme ve bellek kullanımı konularında revizyonlar yaptım.
 
-                    if (_pageNumber == _totalPages)
-                    {
-                        _pageSize = lastpagedatacount;
-                    }
-                }
-
-Burda limit değerini giriyoruz
-
- ![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/617c0704-108a-4c26-8cc7-dc48bfac0f8c)
+Son olarak, yazılım kalitesi ve test konuları hakkında araştırmalar yaptım ve öğrendiklerimi uyguladım. Tüm bu çalışmalar boyunca, öğrendiğim konuları en iyi şekilde uygulamak için elimden gelenin en iyisini yaptım ve staj boyunca çok şey öğrendim. Bu deneyim bana çok şey kattı ve gelecekteki kariyerim için büyük bir adım oldu.
 
 
 
-Burda da girilen limit değerine göre bize sayfalama yapıyor
+### Kazanımlarım
+
+Özetle staj boyunca yaptığım çalışmalar sayesinde birçok kazanım elde ettim. Öncelikle, programlama diline daha hakim hale geldim ve öğrendiğim kodlama tekniklerini uygulama fırsatı buldum. Ayrıca, birçok farklı kütüphane ve araç kullanarak öğrendiklerimi pekiştirdim. Ve kendime ait bir kütüphane yaptım.
+
+Özellikle, ImGui ve ImPlot kütüphanelerini kullanarak grafik oluşturma ve verileri görselleştirme konusunda önemli bir deneyim kazandım. Bu kütüphaneleri kullanarak verileri grafiksel olarak temsil etmeyi ve grafikleri daha anlaşılır hale getirmeyi öğrendim.
+
+Ayrıca, MongoDB veritabanı ile çalışma fırsatım oldu ve verileri filtreleme, sorgulama ve hız testi yapma konularında tecrübe edindim. LogViewer aracıyla da verileri daha rahat bir şekilde gözlemleme ve analiz etme becerisi kazandım.
+
+Proje sürecinde ekip çalışması yaparak, takım arkadaşlarımla iletişim kurma, iş bölümü yapma ve koordinasyon sağlama konularında da kendimi geliştirdim. Ayrıca, yazılım kalitesi ve test kavramları hakkında farkındalık kazandım ve bu konularda daha bilinçli olmayı öğrendim.
+
+Genel olarak, staj boyunca edindiğim deneyimler sayesinde kendimi daha fazla geliştirdim ve mesleki olarak yeni beceriler kazandım. Bu süreçte öğrendiklerimle gelecekteki çalışmalarımda daha başarılı olacağıma inanıyorum.
+
+Sevgiler…
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
-![image](https://github.com/omerkonca/isyeriegitimi/assets/65457096/25058c9a-cf12-45b0-9244-881967cf6724)
-
-
-
-
-Bugünkü kazanımlarım
--	Algoritmik düşünmemi geliştridim
 
 
 
@@ -49,57 +98,7 @@ Bugünkü kazanımlarım
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-Tarih : 07/06/ 2023
+Tarih : 09/06/ 2023
 
  
 
