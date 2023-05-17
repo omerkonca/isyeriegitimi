@@ -4,7 +4,7 @@ Bu repo, ROBUTEL adlı firmada gerçekleştirdiğim işyeri eğitiminde yaptıkl
 
 ## Proje 1: Otonom Forklift
 
-### Proje Açıklaması  
+### Proje Açıklaması   
 
 Bu proje, otonom bir forkliftin geliştirilmesini hedefleyen bir proje olup, C++ ve C# programlama dilleri kullanılarak geliştirilmiştir. Forklift, çevresini algılamak için sensörler kullanır ve belirli bir hedefe doğru otomatik olarak hareket edebilir. Proje kapsamında yapılan çalışmalar, sensör entegrasyonu, yol planlaması, veri görselleştirme, log tutma ve hareket kontrolü gibi konuları içermektedir.
 
