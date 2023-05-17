@@ -109,7 +109,7 @@ namespace mongodblogviewerarayüz
             label2.Text = $"Toplam belge sayısı: {_totalDocuments}";
             label3.Text = $"Sayfa başına belge sayısı: {_pageSize}";
             numericUpDown1.Text = _pageNumber.ToString();
-             
+              
             button1.Enabled = (_pageNumber > 1);
             button2.Enabled = (_pageNumber < _totalPages);
         }
