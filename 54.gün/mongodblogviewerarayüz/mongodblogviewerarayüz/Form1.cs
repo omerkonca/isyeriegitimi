@@ -118,7 +118,7 @@ namespace mongodblogviewerarayüz
             if (dateTimePicker1.Value > dateTimePicker2.Value)
             {
                 dateTimePicker1.Value = dateTimePicker2.Value.AddDays(-1);
-            }
+            } 
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
