@@ -126,7 +126,7 @@ namespace mongodblogviewerarayüz
             if (dateTimePicker2.Value < dateTimePicker1.Value)
             {
                 dateTimePicker2.Value = dateTimePicker1.Value.AddDays(1);
-            }
+            } 
         }
 
          
