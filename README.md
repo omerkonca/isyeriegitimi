@@ -45,6 +45,29 @@ AGV'ler, operasyonel verimliliği artırmak, iş güvenliğini iyileştirmek ve 
 - C++
 - MongoDB (veritabanı yönetimi için)
 
+## Genel Değerlendirme
+Stajım boyunca yaptığım çalışmalarla ilgili genel bir değerlendirme yapmak isterim. Staj boyunca öğrendiğim ve uyguladığım konular oldukça geniş kapsamlıydı. Başlangıçta, ImGui ve ImPlot kütüphaneleri hakkında araştırmalar yaptım ve bu kütüphaneleri kullanarak örnekler üzerinde çalıştım. Ayrıca, OpenGL kütüphanesiyle ilgili temel kavramları öğrendim ve öğrendiklerimi uygulama fırsatı buldum.
+
+Staj boyunca öğrendiğim bir diğer konu da MongoDB veritabanı entegrasyonuydu. MongoDB veritabanını C++ programlama diliyle entegre etme konusunda çalışmalar yaptım ve bu veritabanı üzerinde filtreleme, indeksleme ve yedekleme işlemlerini öğrendim.
+
+Ayrıca, HTTP istekleri ve RESTful API kullanarak veri aktarımı konuları hakkında araştırmalar yaptım. Windows WiFi sinyal kalitesi ölçme ve IP adresine ping atarak veri aktarım hızını hesaplama konuları da stajım boyunca öğrendiğim konular arasında yer alıyor.
+
+Gelen verileri parse etme, grafikleştirme, arayüz tasarımı, sayfalama ve loglama konularında da çalışmalar yaptım. Position kısmında mouse ile çizgi çizerek uzunluk ölçme, daire çizimi, filtreleme ve bellek kullanımı konularında revizyonlar yaptım.
+
+Son olarak, yazılım kalitesi ve test konuları hakkında araştırmalar yaptım ve öğrendiklerimi uyguladım. Tüm bu çalışmalar boyunca, öğrendiğim konuları en iyi şekilde uygulamak için elimden gelenin en iyisini yaptım ve staj boyunca çok şey öğrendim. Bu deneyim bana çok şey kattı ve gelecekteki kariyerim için büyük bir adım oldu.
+
+Kazanımlarım
+Özetle staj boyunca yaptığım çalışmalar sayesinde birçok kazanım elde ettim. Öncelikle, programlama diline daha hakim hale geldim ve öğrendiğim kodlama tekniklerini uygulama fırsatı buldum. Ayrıca, birçok farklı kütüphane ve araç kullanarak öğrendiklerimi pekiştirdim. Ve kendime ait bir kütüphane yaptım.
+
+Özellikle, ImGui ve ImPlot kütüphanelerini kullanarak grafik oluşturma ve verileri görselleştirme konusunda önemli bir deneyim kazandım. Bu kütüphaneleri kullanarak verileri grafiksel olarak temsil etmeyi ve grafikleri daha anlaşılır hale getirmeyi öğrendim.
+
+Ayrıca, MongoDB veritabanı ile çalışma fırsatım oldu ve verileri filtreleme, sorgulama ve hız testi yapma konularında tecrübe edindim. LogViewer aracıyla da verileri daha rahat bir şekilde gözlemleme ve analiz etme becerisi kazandım.
+
+Proje sürecinde ekip çalışması yaparak, takım arkadaşlarımla iletişim kurma, iş bölümü yapma ve koordinasyon sağlama konularında da kendimi geliştirdim. Ayrıca, yazılım kalitesi ve test kavramları hakkında farkındalık kazandım ve bu konularda daha bilinçli olmayı öğrendim.
+
+Genel olarak, staj boyunca edindiğim deneyimler sayesinde kendimi daha fazla geliştirdim ve mesleki olarak yeni beceriler kazandım. Bu süreçte öğrendiklerimle gelecekteki çalışmalarımda daha başarılı olacağıma inanıyorum.
+
+Sevgiler…
 
 ## Lisans
 
