@@ -1,6 +1,6 @@
 # İşyeri Eğitimi
 
-
+ 
 ## Yapılan Çalışmanın Konusu :   Evrak işleri ve Genel Değerlendirme
 
 Stajım boyunca yaptığım çalışmalarla ilgili genel bir değerlendirme yapmak isterim. Staj boyunca öğrendiğim ve uyguladığım konular oldukça geniş kapsamlıydı. Başlangıçta, ImGui ve ImPlot kütüphaneleri hakkında araştırmalar yaptım ve bu kütüphaneleri kullanarak örnekler üzerinde çalıştım. Ayrıca, OpenGL kütüphanesiyle ilgili temel kavramları öğrendim ve öğrendiklerimi uygulama fırsatı buldum.

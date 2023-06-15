@@ -1,6 +1,6 @@
 # İşyeri Eğitimi
 
-
+ 
 ## Yapılan Çalışmanın Konusu :    Yazılımda kalite ve test kavramlarının araştırılması
 
 
