@@ -1,5 +1,5 @@
 # İşyeri Eğitimi    
-   
+    
 Bu repo, ROBUTEL adlı firmada gerçekleştirdiğim işyeri eğitiminde yaptıklarımı ve kurduğum yazılımları paylaşmak amacıyla oluşturulmuştur.
  
 ## Proje 1: Otonom Forklift
